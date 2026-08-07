@@ -1,0 +1,5 @@
+private/
+*.pdf
+!sip-cards-sample.pdf
+.DS_Store
+

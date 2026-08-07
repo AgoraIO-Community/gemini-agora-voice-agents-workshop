@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720">
+  <rect width="720" height="720" rx="48" fill="#ffffff"/>
+  <rect x="42" y="42" width="636" height="636" rx="30" fill="#f5f3f4" stroke="#d0cecd" stroke-width="6" stroke-dasharray="14 14"/>
+  <text x="360" y="310" text-anchor="middle" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#0a0a0a">Discord QR</text>
+  <text x="360" y="365" text-anchor="middle" font-family="system-ui, sans-serif" font-size="25" fill="#5a5a5a">Add the invite URL, then run</text>
+  <text x="360" y="410" text-anchor="middle" font-family="ui-monospace, monospace" font-size="22" fill="#08488a">generate-discord-qr.py</text>
+</svg>
