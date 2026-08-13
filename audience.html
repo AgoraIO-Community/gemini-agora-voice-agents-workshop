@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Opening audience view…</title>
+</head>
+<body>
+  <p>Opening the workshop audience view… <a id="audienceLink" href="index.html?view=audience">Continue</a></p>
+  <script>
+    (function () {
+      "use strict";
+      var destination = new URL("/index.html", window.location.href);
+      new URLSearchParams(window.location.search).forEach(function (value, key) {
+        destination.searchParams.set(key, value);
+      });
+      destination.searchParams.set("view", "audience");
+      destination.hash = window.location.hash;
+      document.getElementById("audienceLink").href = destination.href;
+      window.location.replace(destination.href);
+    }());
+  </script>
+</body>
+</html>

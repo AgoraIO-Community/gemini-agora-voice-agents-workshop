@@ -979,24 +979,31 @@
       letter-spacing: 0;
       text-transform: none;
     }
+    .telephony-claim-button,
+    .telephony-claim-unavailable {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: none;
+    }
+    .telephony-claim-button { border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); text-decoration: none; }
+    .telephony-claim-button:hover { filter: brightness(1.04); }
+    .telephony-claim-button:disabled { cursor: progress; opacity: .68; }
+    .telephony-claim-button[hidden] { display: none; }
+    .telephony-claim-unavailable { border: 1px dashed var(--input); background: color-mix(in srgb, var(--panel) 82%, var(--bg-soft)); color: var(--muted); }
+    .telephony-claim-unavailable[hidden] { display: none; }
     .telephony-field-wide { grid-column: 1 / -1; }
     .telephony-shared-label { display: flex; align-items: center; gap: 9px; grid-column: 1 / -1; margin-top: 2px; color: var(--accent); font-size: 10px; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
     .telephony-shared-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
     .telephony-password-wrap { position: relative; }
-    .telephony-password-wrap input { padding-right: 124px; }
-    .telephony-password-toggle {
-      position: absolute;
-      top: 50%;
-      right: 7px;
-      min-height: 32px;
-      padding: 5px 10px;
-      border-radius: 8px;
-      transform: translateY(-50%);
-      font-size: 11px;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-    .telephony-password-toggle:disabled { cursor: not-allowed; opacity: .45; }
     .telephony-protocols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .telephony-protocol {
       display: grid;
@@ -1012,6 +1019,27 @@
     }
     .telephony-protocol.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
     .telephony-form-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; }
+    [data-slide-id="add-telephone-number"] { gap: 6px; }
+    [data-slide-id="add-telephone-number"] h2 { max-width: 920px; font-size: clamp(30px, 3.5vw, 48px); }
+    [data-slide-id="add-telephone-number"] .microcopy { font-size: 12px; line-height: 1.4; }
+    [data-slide-id="add-telephone-number"] .telephony-form { padding: 12px 16px; }
+    [data-slide-id="add-telephone-number"] .telephony-form-head { padding-bottom: 6px; }
+    [data-slide-id="add-telephone-number"] .telephony-form-head strong { font-size: 16px; }
+    [data-slide-id="add-telephone-number"] .telephony-fields { gap: 5px 12px; margin-top: 8px; }
+    [data-slide-id="add-telephone-number"] .telephony-field { gap: 3px; font-size: 10px; }
+    [data-slide-id="add-telephone-number"] .telephony-field input,
+    [data-slide-id="add-telephone-number"] .telephony-claim-button,
+    [data-slide-id="add-telephone-number"] .telephony-claim-unavailable { min-height: 32px; padding: 5px 9px; font-size: 12px; }
+    [data-slide-id="add-telephone-number"] .telephony-protocol { min-height: 30px; }
+    [data-slide-id="add-telephone-number"] .telephony-form-footer { margin-top: 8px; }
+    [data-slide-id="add-telephone-number"] .telephony-form-footer .status-chip { min-height: 26px; padding: 3px 8px; font-size: 10px; }
+    [data-slide-id="add-telephone-number"] .telephony-form-footer .primary-button { min-height: 32px; padding-block: 5px; }
+    [data-slide-id="add-telephone-number"] input[readonly],
+    [data-slide-id="add-telephone-number"] .telephony-protocols { cursor: copy; }
+    [data-slide-id="add-telephone-number"] input[readonly]:hover,
+    [data-slide-id="add-telephone-number"] input[readonly]:focus-visible,
+    [data-slide-id="add-telephone-number"] .telephony-protocols:hover .telephony-protocol.active,
+    [data-slide-id="add-telephone-number"] .telephony-protocols:focus-visible .telephony-protocol.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
     .campaign-ui {
       display: grid;
@@ -1148,15 +1176,16 @@
       line-height: 1.5;
       white-space: pre-wrap;
     }
-    .workspace-launch-slide {
+    .workspace-launch-slide,
+    .command-highlight-slide {
       isolation: isolate;
       overflow: hidden;
       background:
         radial-gradient(circle at 80% 18%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 32%),
         radial-gradient(circle at 14% 88%, rgba(0, 194, 255, .1), transparent 34%);
     }
-    .workspace-launch-slide::before {
-      content: ">_";
+    .workspace-launch-slide::before,
+    .command-highlight-slide::before {
       position: absolute;
       z-index: -1;
       right: clamp(28px, 7vw, 110px);
@@ -1169,6 +1198,8 @@
       line-height: .75;
       pointer-events: none;
     }
+    .workspace-launch-slide::before { content: ">_"; }
+    .command-highlight-slide::before { content: ">"; }
     .workspace-launch-copy { width: min(1120px, 100%); }
     .workspace-launch-copy h2 { max-width: none; margin-bottom: clamp(24px, 5vh, 54px); font-size: clamp(58px, 8.5vw, 128px); line-height: .88; letter-spacing: -.06em; }
     .workspace-terminal { width: min(1120px, 100%); border-color: color-mix(in srgb, var(--accent) 42%, rgba(255,255,255,.18)); box-shadow: 0 32px 90px rgba(0,0,0,.4), 0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent); }
@@ -1187,6 +1218,9 @@
     .workspace-command-line { display: flex; align-items: center; min-width: 0; gap: 18px; }
     .workspace-command-prompt { flex: 0 0 auto; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: clamp(26px, 3vw, 42px); font-weight: 900; }
     .workspace-terminal pre { font-size: clamp(22px, 2.9vw, 40px); font-weight: 720; line-height: 1.35; }
+    .install-cli-terminal .terminal-body { overflow-x: auto; }
+    .install-cli-terminal .workspace-command-line { min-width: max-content; }
+    .install-cli-terminal pre { overflow: visible; font-size: clamp(11px, 1.65vw, 22px); white-space: pre; }
     .workspace-command { clip-path: inset(0 100% 0 0); }
     .slide.active .workspace-command { animation: workspace-command-reveal 1.05s steps(18, end) .28s forwards; }
     .workspace-command-cursor { width: 3px; height: 1.05em; flex: 0 0 auto; background: var(--accent); opacity: 0; }
@@ -1232,7 +1266,7 @@
 
     .file-tree {
       display: grid;
-      grid-template-columns: minmax(360px, .85fr) 1.35fr;
+      grid-template-columns: minmax(360px, .80fr) 1.35fr;
       min-height: 430px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -1258,6 +1292,13 @@
     .acceptance { display: grid; gap: 10px; }
     .acceptance-item { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card-glass); color: var(--muted); font-size: 13px; line-height: 1.4; }
     .acceptance-item::before { content: "✓"; margin-right: 8px; color: var(--success); font-weight: 900; }
+    .build-prompt-slide { align-content: start; padding-top: clamp(88px, 11vh, 112px); }
+    .build-prompt-slide .prompt-layout { grid-template-columns: minmax(0, 1fr) minmax(230px, 280px); gap: 14px; align-items: start; }
+    .build-prompt-slide .prompt-card { height: min(390px, 48vh); min-height: 320px; padding: 18px; }
+    .build-prompt-slide .prompt-card pre { padding-right: 58px; font-size: clamp(11px, .95vw, 14px); line-height: 1.45; }
+    .build-prompt-slide .acceptance { grid-auto-rows: max-content; align-content: start; justify-items: start; gap: 8px; }
+    .build-prompt-slide .acceptance-item { width: fit-content; max-width: 100%; padding: 9px 11px; font-size: 12px; line-height: 1.25; }
+    .build-prompt-slide .acceptance .secondary-button { min-height: 36px; padding: 7px 12px; }
 
     .agent-screen {
       display: grid;
@@ -1318,6 +1359,56 @@
     }
     .footer-title { max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .footer-spacer { flex: 1; }
+    .terminal-environment-hint {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      min-height: 27px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+    body.view-audience.terminal-slide-active .terminal-environment-hint { display: inline-flex; }
+    .terminal-environment-hint:hover { border-color: var(--accent); color: var(--ink); }
+    .terminal-environment-hint kbd { min-width: 19px; padding: 2px 5px; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); color: var(--accent); font-size: 9px; font-weight: 900; text-align: center; }
+    .session-controls { display: inline-flex; align-items: center; gap: 7px; }
+    .session-status { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: var(--muted); font: inherit; white-space: nowrap; }
+    body.view-host .session-status { cursor: pointer; }
+    .session-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+    .session-controls[data-connection="connecting"] .session-status::before,
+    .session-controls[data-connection="reconnecting"] .session-status::before { background: var(--warning); }
+    .session-controls[data-connection="connected"] .session-status::before { background: var(--success); box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 14%, transparent); }
+    .session-controls[data-connection="error"] .session-status::before { background: var(--danger); }
+    .session-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 27px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-soft);
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .session-button:hover { border-color: var(--accent); }
+    .session-button:disabled { cursor: default; opacity: .72; }
+    body.view-audience.session-started:not(.archive-open) .session-controls[data-connection="connected"] .session-status { display: none; }
+    body.view-audience.session-started .session-controls[data-connection="connected"] .session-button::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 14%, transparent);
+    }
+    body.view-audience.session-started .session-controls[data-connection="connected"] .session-button[aria-pressed="false"]::before { background: var(--warning); box-shadow: none; }
     .utility-keys { display: inline-flex; align-items: center; gap: 2px; }
     .utility-key {
       width: 24px;
@@ -1418,7 +1509,7 @@
     .host-overlay-header .theme-button { font-size: 17px; }
     .host-control-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
       gap: 10px;
     }
     .host-overlay .setting { gap: 5px; min-width: 0; }
@@ -1460,7 +1551,7 @@
     }
     .host-sip-config {
       display: grid;
-      grid-template-columns: .9fr .75fr .72fr .76fr 1fr .58fr .82fr 1fr;
+      grid-template-columns: .9fr .85fr 1.25fr .85fr .72fr .76fr 1fr .58fr .82fr 1fr;
       gap: 10px;
       align-items: end;
       margin-top: 12px;
@@ -1470,6 +1561,10 @@
     .host-sip-intro { align-self: center; min-width: 0; }
     .host-sip-intro strong { display: block; margin-bottom: 3px; font-size: 13px; }
     .host-sip-intro span { display: block; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .host-sip-config[data-sip-mode="manual"] [data-sip-claim-only],
+    .host-sip-config[data-sip-mode="claim"] [data-sip-manual-only] { display: none; }
+    #sipModeInput { min-width: 176px; }
+    #sipClaimHostEmailInput { min-width: 210px; }
     .host-campaign-config,
     .host-model-config {
       margin-top: 12px;
@@ -1585,6 +1680,15 @@
       box-shadow: var(--shadow-float);
     }
     dialog::backdrop { background: rgba(0,0,0,.48); backdrop-filter: blur(4px); }
+    .sip-claim-dialog { width: min(500px, 92vw); padding: 0; }
+    .sip-claim-form { display: grid; gap: 18px; padding: 24px; }
+    .sip-claim-form .drawer-header { margin-bottom: 0; }
+    .sip-claim-copy { margin: -8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .sip-claim-form label { display: grid; gap: 7px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .sip-claim-form input { min-height: 46px; padding: 10px 12px; border: 1px solid var(--input); border-radius: 10px; background: var(--panel-soft); color: var(--ink); font-size: 15px; }
+    .sip-claim-error { min-height: 18px; margin: -6px 0 0; color: var(--danger); font-size: 12px; }
+    .sip-claim-actions { display: flex; justify-content: flex-end; gap: 9px; }
+    .sip-claim-privacy { margin: -8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
     .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
     .help-grid p { display: flex; justify-content: space-between; margin: 0; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
     kbd { min-width: 28px; padding: 3px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; background: var(--panel-soft); color: var(--ink); text-align: center; }
@@ -1610,6 +1714,50 @@
     .toast.show { opacity: 1; transform: translateY(0); }
     .speaker-notes { display: none; }
 
+    /* Host and audience views share this exact deck; only host chrome is hidden. */
+    body.view-audience [data-host-only] { display: none !important; }
+    body.view-audience .footer-title { max-width: 70vw; }
+    .host-auth { display: none; }
+    body.view-host:not(.host-authenticated) .host-auth {
+      position: fixed;
+      z-index: 120;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+    }
+    .host-auth-card { width: min(420px, 100%); padding: 30px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: var(--shadow-float); }
+    .host-auth-logo { width: 100px; height: auto; margin-bottom: 26px; }
+    .host-auth h1 { margin: 8px 0 10px; font-size: 34px; letter-spacing: -.04em; }
+    .host-auth-copy { margin: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .host-auth-form { display: grid; gap: 10px; }
+    .host-auth-form label { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .host-auth-form input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--input); color: var(--ink); }
+    .host-auth-form button { min-height: 42px; border: 0; border-radius: 9px; background: var(--accent); color: var(--accent-ink); font-weight: 850; }
+    .host-auth-error { min-height: 18px; margin: 2px 0 0; color: var(--danger); font-size: 12px; }
+    .audience-waiting { display: none; }
+    body.view-audience:not(.session-started):not(.archive-open) .audience-waiting {
+      position: fixed;
+      z-index: 24;
+      inset: 0 0 42px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: linear-gradient(180deg, var(--bg), var(--bg-soft));
+      text-align: center;
+    }
+    .audience-waiting-card { width: min(620px, 100%); }
+    .audience-waiting-logo { width: 116px; height: auto; margin-bottom: 30px; }
+    .audience-waiting h1 { margin: 10px 0 16px; font-size: clamp(36px, 6vw, 68px); line-height: .98; letter-spacing: -.055em; }
+    .audience-waiting p { max-width: 520px; margin: 0 auto; color: var(--muted); font-size: clamp(15px, 1.7vw, 19px); line-height: 1.55; }
+    .audience-last-workshop { display: grid; grid-template-columns: 1fr auto; gap: 7px 18px; align-items: center; width: min(480px, 100%); margin: 28px auto 0; padding: 17px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); text-align: left; box-shadow: var(--shadow-soft); }
+    .audience-last-workshop[hidden] { display: none; }
+    .audience-last-workshop-label { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .audience-last-workshop-summary { font-size: 15px; line-height: 1.35; }
+    .audience-last-workshop-meta { color: var(--muted); font-size: 11px; }
+    .audience-last-workshop-button { grid-column: 2; grid-row: 1 / span 3; min-height: 38px; padding: 0 14px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 850; white-space: nowrap; }
+
     @media (max-width: 900px) {
       .grid, .grid.two, .grid.four, .grid.seven, .template-picker, .ship-grid { grid-template-columns: 1fr 1fr; }
       .flow { grid-template-columns: 1fr; }
@@ -1620,7 +1768,7 @@
       .agent-summary { border-left: 0; border-top: 1px solid var(--line); }
       .campaign-ui, .csv-workshop-layout, .prompt-layout, .qr-layout, .architecture, .campaign-builder-grid { grid-template-columns: 1fr; }
       .arch-arrow { transform: rotate(90deg); }
-      .host-control-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .host-control-grid { grid-template-columns: 2fr 1fr; }
       .host-sip-config { grid-template-columns: 1fr 1fr 1fr; }
       .host-sip-intro { grid-column: 1 / -1; }
       .host-campaign-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1642,6 +1790,7 @@
       .telephony-form-footer { align-items: stretch; flex-direction: column; }
       .help-grid { grid-template-columns: 1fr; }
       .footer-title { display: none; }
+      .session-status { display: none; }
       .connection-annotations { top: 8px; right: 8px; bottom: auto; left: auto; justify-content: flex-end; }
       .host-control-grid { grid-template-columns: 1fr 1fr; }
       .host-sip-config { grid-template-columns: 1fr; }
@@ -1689,8 +1838,38 @@
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
   </header>
 
+  <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
+    <div class="audience-waiting-card">
+      <img class="audience-waiting-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora">
+      <p class="eyebrow">Workshop audience</p>
+      <h1 id="audienceWaitingTitle">The session hasn’t started yet.</h1>
+      <p id="audienceWaitingMessage">You’re in the right place. Keep this page open and the workshop will appear automatically when the host connects.</p>
+      <div id="lastWorkshopPanel" class="audience-last-workshop" hidden>
+        <span class="audience-last-workshop-label">Your last workshop</span>
+        <strong id="lastWorkshopSummary" class="audience-last-workshop-summary"></strong>
+        <span id="lastWorkshopMeta" class="audience-last-workshop-meta"></span>
+        <button id="viewLastWorkshopButton" class="audience-last-workshop-button" type="button">View presentation</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hostAuth" class="host-auth" aria-labelledby="hostAuthTitle">
+    <div class="host-auth-card">
+      <img class="host-auth-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora">
+      <p class="eyebrow">Presenter access</p>
+      <h1 id="hostAuthTitle">Open the host view</h1>
+      <p class="host-auth-copy">Enter the workshop password to control today’s presentation.</p>
+      <form id="hostAuthForm" class="host-auth-form">
+        <label for="hostPasswordInput">Workshop password</label>
+        <input id="hostPasswordInput" type="password" autocomplete="current-password" required autofocus>
+        <button id="hostAuthButton" type="submit">Continue as host</button>
+        <p id="hostAuthError" class="host-auth-error" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
   <main id="deck" class="deck" aria-live="polite">
-    <section class="slide front-slide" data-title="Welcome" data-section="Welcome" data-cue="5:30">
+    <section class="slide front-slide" data-slide-id="welcome" data-title="Welcome" data-section="Welcome" data-cue="5:30">
       <img id="frontEventImage" class="front-event-image" src="assets/sanfrancisco-event-thumb.jpg" alt="San Francisco skyline and Bay Bridge">
       <div class="front-shade" aria-hidden="true"></div>
       <div class="front-content">
@@ -1713,7 +1892,7 @@
       </div>
     </section>
 
-    <section class="slide centered" data-title="One, two, three" data-section="Welcome" data-cue="5:47">
+    <section class="slide centered" data-slide-id="one-two-three" data-title="One, two, three" data-section="Welcome" data-cue="5:47">
       <p class="eyebrow">Your build promise</p>
       <div class="number-story auto-reveal">
         <div class="number-line"><strong>1</strong><span>One workshop.</span></div>
@@ -1726,7 +1905,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Three agents" data-section="Welcome" data-cue="5:49">
+    <section class="slide" data-slide-id="three-agents" data-title="Three agents" data-section="Welcome" data-cue="5:49">
       <p class="eyebrow">A build-first master class</p>
       <h2>From nothing to a <span class="accent">custom voice agent.</span></h2>
       <div class="grid">
@@ -1740,7 +1919,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="What is Agora?" data-section="How Agora works" data-cue="5:51">
+    <section class="slide" data-slide-id="what-is-agora" data-title="What is Agora?" data-section="How Agora works" data-cue="5:51">
       <p class="eyebrow">What is Agora?</p>
       <h2>The realtime platform connecting <span class="accent">people, devices, and AI.</span></h2>
       <div class="grid">
@@ -1760,7 +1939,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Mental model: Channels" data-section="How Agora works" data-cue="5:55">
+    <section class="slide" data-slide-id="channels" data-title="Mental model: Channels" data-section="How Agora works" data-cue="5:55">
       <div class="concept-banner">
         <p class="eyebrow">Developer mental model</p>
         <div class="concept-sequence" aria-label="Three-part developer mental model">
@@ -1793,7 +1972,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Mental model: Agents" data-section="How Agora works" data-cue="5:57">
+    <section class="slide" data-slide-id="agents" data-title="Mental model: Agents" data-section="How Agora works" data-cue="5:57">
       <div class="concept-banner">
         <p class="eyebrow">Developer mental model</p>
         <div class="concept-sequence" aria-label="Three-part developer mental model">
@@ -1812,7 +1991,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Mental model: Lifecycle" data-section="How Agora works" data-cue="5:59">
+    <section class="slide" data-slide-id="agent-lifecycle" data-title="Mental model: Lifecycle" data-section="How Agora works" data-cue="5:59">
       <div class="concept-banner">
         <p class="eyebrow">Developer mental model</p>
         <div class="concept-sequence" aria-label="Three-part developer mental model">
@@ -1834,7 +2013,7 @@
       </div>
     </section>
 
-    <section class="slide centered" data-title="Open Agora" data-section="Hands-on setup" data-cue="6:00">
+    <section class="slide centered" data-slide-id="open-agora" data-title="Open Agora" data-section="Hands-on setup" data-cue="6:00">
       <p class="eyebrow">Hands-on starts now</p>
       <h2>Create your account—or <span class="accent">sign in.</span></h2>
       <p class="lede">Use your individual Agora account for everything you build tonight. Keep the Console tab open when you arrive.</p>
@@ -1868,7 +2047,7 @@
       </div>
     </section>
 
-    <section class="slide centered" data-title="Hands-on begins" data-section="Agent Studio" data-cue="6:03">
+    <section class="slide centered" data-slide-id="studio-hands-on" data-title="Hands-on begins" data-section="Agent Studio" data-cue="6:03">
       <p class="eyebrow">One method · every Studio scenario</p>
       <h2>The voice AI scenario changes. <span class="accent">The build path stays the same.</span></h2>
       <div id="workshopJourney" class="workshop-journey" data-stage="1">
@@ -1900,7 +2079,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Choose a template" data-section="Agent Studio" data-cue="6:05" data-studio-controls="true">
+    <section class="slide" data-slide-id="choose-template" data-title="Choose a template" data-section="Agent Studio" data-cue="6:05" data-studio-controls="true">
       <p class="eyebrow">Step 1 · Choose a template</p>
       <h2>Start with a working pattern. <span class="accent">Make it yours.</span></h2>
       <div class="template-picker" role="list" aria-label="Agent Studio templates">
@@ -1920,7 +2099,7 @@
       </div>
     </section>
 
-    <section class="slide compact" data-title="Customize the prompt" data-section="Agent Studio" data-cue="6:12" data-studio-controls="true">
+    <section class="slide compact" data-slide-id="customize-prompt" data-title="Customize the prompt" data-section="Agent Studio" data-cue="6:12" data-studio-controls="true">
       <p class="eyebrow">Step 2 · Customize and personalize</p>
       <h2>Write the prompt once. <span class="accent">Fill the details per contact.</span></h2>
       <div class="grid two">
@@ -1945,20 +2124,20 @@
       </div>
     </section>
 
-    <section class="slide compact" data-title="Add your telephone number" data-section="Agent Studio" data-cue="6:29" data-studio-controls="true">
+    <section class="slide compact" data-slide-id="add-telephone-number" data-title="Add your telephone number" data-section="Agent Studio" data-cue="6:29" data-studio-controls="true">
       <p class="eyebrow">Step 3 · Add a telephone number</p>
       <h2>Add your assigned number to the <span class="accent">shared event SIP trunk.</span></h2>
-      <p class="microcopy">Add a SIP trunk phone number for inbound and outbound call routing. Your paper card contains only your unique phone number.</p>
+      <p class="microcopy">Claim one temporary number, then add it to the shared SIP trunk for inbound and outbound call routing.</p>
       <div class="telephony-form">
         <div class="telephony-form-head"><div><span class="field-label">Agent Studio · Phone Number Details</span><strong>Add Phone Number</strong></div></div>
         <div class="telephony-fields">
-          <label class="telephony-field">Phone Number <span class="telephony-source">From your paper card</span><input id="slideSipPhone" type="text" readonly aria-label="Example assigned phone number"></label>
-          <label class="telephony-field">Vendor<input id="slideSipProvider" type="text" readonly aria-label="Event SIP trunk provider"></label>
-          <label class="telephony-field">Display Name<input id="slideSipDisplayName" type="text" readonly aria-label="Event SIP display name"></label>
-          <label class="telephony-field">SIP Trunk Address<input id="slideSipServer" type="text" readonly aria-label="Event SIP trunk address"></label>
-          <label class="telephony-field telephony-field-wide">Transport Protocol<span class="telephony-protocols" aria-label="Selected SIP transport protocol"><span class="telephony-protocol" data-sip-transport="tcp">TCP</span><span class="telephony-protocol" data-sip-transport="udp">UDP</span><span class="telephony-protocol" data-sip-transport="tls">TLS</span></span></label>
-          <label class="telephony-field">SIP Trunk Username<input id="slideSipUsername" type="text" readonly aria-label="Event SIP trunk username"></label>
-          <label class="telephony-field">SIP Trunk Password<div class="telephony-password-wrap"><input id="slideSipPassword" type="password" readonly aria-label="Event SIP trunk password"><button id="revealSipPassword" class="secondary-button telephony-password-toggle" type="button" aria-pressed="false">Reveal password</button></div></label>
+          <div class="telephony-field">Phone Number <span class="telephony-source">One per attendee</span><input id="slideSipPhone" type="text" readonly aria-label="Assigned phone number" title="Click to copy" hidden><button id="slideSipClaimButton" class="telephony-claim-button" type="button" hidden>Claim your phone number</button><span id="slideSipClaimUnavailable" class="telephony-claim-unavailable">Waiting for the host’s claim event</span></div>
+          <label class="telephony-field">Vendor<input id="slideSipProvider" type="text" readonly aria-label="Event SIP trunk provider" title="Click to copy"></label>
+          <label class="telephony-field">Display Name<input id="slideSipDisplayName" type="text" readonly aria-label="Event SIP display name" title="Click to copy"></label>
+          <label class="telephony-field">SIP Trunk Address<input id="slideSipServer" type="text" readonly aria-label="Event SIP trunk address" title="Click to copy"></label>
+          <label class="telephony-field telephony-field-wide">Transport Protocol<span id="slideSipTransport" class="telephony-protocols" role="button" tabindex="0" aria-label="Copy selected SIP transport protocol" title="Click to copy"><span class="telephony-protocol" data-sip-transport="tcp">TCP</span><span class="telephony-protocol" data-sip-transport="udp">UDP</span><span class="telephony-protocol" data-sip-transport="tls">TLS</span></span></label>
+          <label class="telephony-field">SIP Trunk Username<input id="slideSipUsername" type="text" readonly aria-label="Event SIP trunk username" title="Click to copy"></label>
+          <label class="telephony-field">SIP Trunk Password<div class="telephony-password-wrap"><input id="slideSipPassword" type="password" readonly aria-label="Event SIP trunk password" title="Click to reveal and copy"></div></label>
         </div>
         <div class="telephony-form-footer">
           <div class="meta-row"><span id="sipConfigStatus" class="status-chip warning">Demo trunk details</span><span class="status-chip">Unique phone number</span><span class="status-chip">Revoked after event</span></div>
@@ -1966,14 +2145,14 @@
         </div>
       </div>
       <div class="speaker-notes">
-        <p>Before the session, press <strong>H</strong> and configure the event-wide SIP provider, trunk address, transport protocol, username, and password. Those shared values populate this slide and stay on this device. Until the connection details are complete, the slide intentionally shows labeled demo trunk details.</p>
-        <p>Pause while support staff distribute one phone-number card per attendee. In Agent Studio, have attendees open <strong>Phone numbers</strong>, choose <strong>Add a telephone number</strong>, enter the unique number from their card, then copy the shared trunk details shown here.</p>
-        <p>The password stays masked until you choose <strong>Reveal password</strong>. Reveal it only when the room is ready, then hide it again before leaving this slide.</p>
-        <p>Keep a checkout list connecting each attendee to their number. Plan for 50 registered numbers: 40 attendees, replacements, and presenter/support reserves. Revoke the number pool and shared trunk credentials after the event.</p>
+        <p>Before the session, press <strong>H</strong> and choose either <strong>Email claim API</strong> with the workshop event name or <strong>Manual details</strong> with a phone number and SIP vendor fields. Live values are excluded from saved audience decks.</p>
+        <p>In claim mode, each attendee selects <strong>Claim your phone number</strong> and enters their own email. The returned number and SIP credentials appear only in that attendee’s current tab. In Agent Studio, they open <strong>Phone numbers</strong>, choose <strong>Add a telephone number</strong>, then copy the values shown here.</p>
+        <p>Click the password field to reveal and copy it. It automatically masks again when the webpage or tab loses focus.</p>
+        <p>Keep the allocator limited to the event pool. Plan for 50 registered numbers: 40 attendees, replacements, and presenter/support reserves. Disable claims and revoke the number pool and shared trunk credentials after the event.</p>
       </div>
     </section>
 
-    <section class="slide" data-title="Prepare the contact list" data-section="Agent Studio" data-cue="6:36" data-studio-controls="true">
+    <section class="slide" data-slide-id="prepare-contact-list" data-title="Prepare the contact list" data-section="Agent Studio" data-cue="6:36" data-studio-controls="true">
       <p class="eyebrow">Step 4A · Create Contacts List</p>
       <h2>One CSV row becomes one <span class="accent">personalized call.</span></h2>
       <div class="csv-workshop-layout">
@@ -2002,7 +2181,7 @@
       </div>
     </section>
 
-    <section class="slide compact" data-title="Configure the campaign" data-section="Agent Studio" data-cue="6:40" data-studio-controls="true">
+    <section class="slide compact" data-slide-id="configure-campaign" data-title="Configure the campaign" data-section="Agent Studio" data-cue="6:40" data-studio-controls="true">
       <p class="eyebrow">Step 4B · Create New Campaign</p>
       <h2>Connect the agent, source number, timing, and <span class="accent">call safeguards.</span></h2>
       <div class="campaign-builder">
@@ -2062,7 +2241,7 @@
       </div>
     </section>
 
-    <section class="slide centered" data-title="Your phone rings" data-section="Agent Studio" data-cue="6:44" data-studio-controls="true">
+    <section class="slide centered" data-slide-id="phone-rings" data-title="Your phone rings" data-section="Agent Studio" data-cue="6:44" data-studio-controls="true">
       <p class="eyebrow">Step 5 · Make a call</p>
       <h2>Your first Voice AI agent is <span class="accent">calling you.</span></h2>
       <div id="callUi" class="call-ui">
@@ -2082,7 +2261,7 @@
       </div>
     </section>
 
-    <section class="slide compact" data-title="Two code paths" data-section="Code workshop" data-cue="6:47" data-technical="true">
+    <section class="slide compact" data-slide-id="two-code-paths" data-title="Two code paths" data-section="Code workshop" data-cue="6:47" data-technical="true">
       <p class="eyebrow">Agents 02 + 03 · code</p>
       <h2>Two code paths. <span class="accent">Two different jobs.</span></h2>
       <div class="shared-workspace-strip">
@@ -2102,19 +2281,17 @@
             <button class="code-stage-button" type="button" data-code-scope="cli" data-code-stage="2"><span class="code-stage-number">02</span><span><strong>Scaffold quickstart</strong></span></button>
             <button class="code-stage-button" type="button" data-code-scope="cli" data-code-stage="3"><span class="code-stage-number">03</span><span><strong>Run the baseline</strong></span></button>
             <button class="code-stage-button" type="button" data-code-scope="cli" data-code-stage="4"><span class="code-stage-number">04</span><span><strong>Inspect the agent</strong></span></button>
-            <button class="code-stage-button" type="button" data-code-scope="cli" data-code-stage="5"><span class="code-stage-number">05</span><span><strong>Managed keys + BYOK</strong></span></button>
           </nav>
         </article>
         <article id="skillsPathCard" class="code-path-card skills-path">
           <span class="code-path-label">Path B · Agent 03</span>
           <h3>Agora Skills: build the product</h3>
-          <p>Give a coding agent Agora-specific guidance and create a separate custom website SDR.</p>
+          <p>Guide a coding agent to build a custom website SDR.</p>
           <nav id="skillsStageRail" class="code-stage-rail skills-code-rail" aria-label="Agora Skills path">
-            <button class="code-stage-button active" type="button" data-code-scope="skills" data-code-stage="1" aria-current="step"><span class="code-stage-number">01</span><span><strong>Return to root</strong></span></button>
-            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="2"><span class="code-stage-number">02</span><span><strong>Install Agora Skills</strong></span></button>
-            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="3"><span class="code-stage-number">03</span><span><strong>Give the product brief</strong></span></button>
-            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="4"><span class="code-stage-number">04</span><span><strong>Run locally</strong></span></button>
-            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="5"><span class="code-stage-number">05</span><span><strong>Talk to your SDR</strong></span></button>
+            <button class="code-stage-button active" type="button" data-code-scope="skills" data-code-stage="1" aria-current="step"><span class="code-stage-number">01</span><span><strong>Install Agora Skills</strong></span></button>
+            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="2"><span class="code-stage-number">02</span><span><strong>Give the product brief</strong></span></button>
+            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="3"><span class="code-stage-number">03</span><span><strong>Run locally</strong></span></button>
+            <button class="code-stage-button" type="button" data-code-scope="skills" data-code-stage="4"><span class="code-stage-number">04</span><span><strong>Talk to your SDR</strong></span></button>
           </nav>
         </article>
       </div>
@@ -2124,35 +2301,20 @@
       </div>
     </section>
 
-    <section class="slide workspace-launch-slide" data-title="Open your terminal" data-section="Agent 02 · Setup" data-cue="6:49" data-technical="true">
-      <div class="workspace-launch-copy">
-        <p class="eyebrow">Agent 02 · Setup</p>
-        <h2>Open your terminal.</h2>
-      </div>
-      <div class="terminal workspace-terminal">
+    <section class="slide command-highlight-slide" data-slide-id="install-cli" data-title="Install the Agora CLI" data-section="Agora CLI" data-cue="6:51" data-technical="true">
+      <p class="eyebrow">Install once</p>
+      <h2>Open your terminal and <span class="accent">install the CLI.</span></h2>
+      <div class="terminal workspace-terminal install-cli-terminal">
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-title">Terminal</span></div>
         <div class="terminal-body">
-          <button class="copy-button" type="button" data-copy-target="rootCommand">Copy</button>
-          <div class="workspace-command-line"><span class="workspace-command-prompt" aria-hidden="true">$</span><pre id="rootCommand" class="workspace-command">mkdir agora_agents_workshop &amp;&amp; cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden="true"></span></div>
+          <button class="copy-button" type="button" data-copy-target="cliInstallCommand">Copy</button>
+          <div class="workspace-command-line"><span class="workspace-command-prompt" aria-hidden="true">&gt;</span><pre id="cliInstallCommand" class="workspace-command">curl -fsSL https://dl.agora.io/cli/install.sh | sh</pre><span class="workspace-command-cursor" aria-hidden="true"></span></div>
         </div>
-      </div>
-      <div class="speaker-notes">
-        <p>Type this command on screen. Pause until every attendee reaches the new workshop directory.</p>
-        <p>The CLI creates <strong>agent-quickstart</strong> inside this directory. The Skills section returns here later to create <strong>website-sdr</strong>.</p>
-      </div>
-    </section>
-
-    <section class="slide" data-title="Install the Agora CLI" data-section="Agora CLI" data-cue="6:51" data-technical="true">
-      <p class="eyebrow">Install once</p>
-      <h2>Bring Agora project workflows into <span class="accent">your terminal.</span></h2>
-      <div class="terminal">
-        <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-title">Terminal</span></div>
-        <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="cliInstallCommand">Copy</button><pre id="cliInstallCommand">curl -fsSL https://dl.agora.io/cli/install.sh | sh</pre></div>
       </div>
       <div class="meta-row">
         <span class="meta-chip mono">agora version</span>
         <span class="meta-chip mono">agora doctor</span>
-        <a class="meta-chip" href="https://github.com/AgoraIO/cli" target="_blank" rel="noreferrer">Windows and other install paths ↗</a>
+        <a class="meta-chip" href="https://agoraio.github.io/cli/install.html" target="_blank" rel="noreferrer">Windows and other install paths ↗</a>
       </div>
       <div class="speaker-notes">
         <p>Show only one installation command. Attendees were asked to install in advance; use this slide for anyone catching up.</p>
@@ -2160,12 +2322,15 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Authenticate the CLI" data-section="Agora CLI" data-cue="6:53" data-technical="true">
+    <section class="slide" data-slide-id="authenticate-cli" data-title="Authenticate the CLI" data-section="Agora CLI" data-cue="6:53" data-technical="true">
       <p class="eyebrow">Connect your individual Agora account</p>
       <h2>Authenticate once. <span class="accent">Keep every project isolated.</span></h2>
-      <div class="terminal">
+      <div class="terminal workspace-terminal">
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-title">Terminal</span></div>
-        <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="loginCommand">Copy</button><pre id="loginCommand">agora login</pre></div>
+        <div class="terminal-body">
+          <button class="copy-button" type="button" data-copy-target="loginCommand">Copy</button>
+          <div class="workspace-command-line"><span class="workspace-command-prompt" aria-hidden="true">&gt;</span><pre id="loginCommand" class="workspace-command">agora login</pre><span class="workspace-command-cursor" aria-hidden="true"></span></div>
+        </div>
       </div>
       <div class="grid two">
         <article class="card"><span class="card-number">Browser handoff</span><h3>Sign in to Agora</h3><p>The CLI opens the account authorization flow and returns you to the terminal.</p></article>
@@ -2176,7 +2341,26 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Initialize the quickstart" data-section="Agora CLI" data-cue="6:54" data-technical="true">
+    <section class="slide workspace-launch-slide" data-slide-id="open-terminal" data-title="Create the project folder" data-section="Agent 02 · Setup" data-cue="6:54" data-technical="true">
+      <div class="workspace-launch-copy">
+        <p class="eyebrow">Agent 02 · Setup</p>
+        <h2>Create the project folder.</h2>
+      </div>
+      <div class="terminal workspace-terminal">
+        <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-title">Terminal</span></div>
+        <div class="terminal-body">
+          <button class="copy-button" type="button" data-copy-target="rootCommand">Copy</button>
+          <div class="workspace-command-line"><span class="workspace-command-prompt" aria-hidden="true">$</span><pre id="rootCommand" class="workspace-command">mkdir agora_agents_workshop &amp;&amp;
+cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden="true"></span></div>
+        </div>
+      </div>
+      <div class="speaker-notes">
+        <p>Type this command on screen. Pause until every attendee reaches the new workshop directory.</p>
+        <p>The CLI creates <strong>agent-quickstart</strong> inside this directory. The Skills section returns here later to create <strong>website-sdr</strong>.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-slide-id="initialize-quickstart" data-title="Initialize the quickstart" data-section="Agora CLI" data-cue="6:55" data-technical="true">
       <p class="eyebrow">Selected track · <span data-track-field="label"></span></p>
       <h2>Ask the CLI for the <span class="accent">official quickstart.</span></h2>
       <div class="terminal">
@@ -2190,7 +2374,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Run the untouched quickstart" data-section="Agora CLI" data-cue="7:00" data-technical="true">
+    <section class="slide" data-slide-id="run-quickstart" data-title="Run the untouched quickstart" data-section="Agora CLI" data-cue="7:00" data-technical="true">
       <p class="eyebrow">No customization yet</p>
       <h2>Install. Run. <span class="accent">Prove the baseline.</span></h2>
       <div class="command-steps quickstart-steps" role="tablist" aria-label="Quickstart commands">
@@ -2204,12 +2388,12 @@
         <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="quickstartCommand">Copy</button><pre id="quickstartCommand" class="quickstart-command"></pre></div>
       </div>
       <div class="speaker-notes">
-        <p>Walk through the selected starter’s setup and development commands. Python requires <strong>bun run setup</strong> or <strong>pnpm run setup</strong>; Next.js uses <strong>bun install</strong> or <strong>pnpm install</strong>.</p>
+        <p>Walk through the selected starter’s setup and development commands. Python uses <strong>bun install</strong> and <strong>bun run dev</strong>; TypeScript uses <strong>pnpm install</strong> and <strong>pnpm run dev</strong>; Go uses <strong>make setup</strong> and <strong>make rdev</strong>.</p>
         <p>Go includes an extra environment-write step in the repository instructions. Confirm it during the clean-machine rehearsal. Only one command is shown at a time.</p>
       </div>
     </section>
 
-    <section class="slide compact" data-title="Open the agent file" data-section="Inside an Agora Agent" data-cue="7:07" data-technical="true">
+    <section class="slide compact" data-slide-id="open-agent-file" data-title="Open the agent file" data-section="Inside an Agora Agent" data-cue="7:07" data-technical="true">
       <p class="eyebrow">Before Skills · understand the structure</p>
       <h2>This file turns configuration into a <span class="accent">realtime participant.</span></h2>
       <div class="file-tree">
@@ -2222,7 +2406,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="The agent definition" data-section="Inside an Agora Agent" data-cue="7:12" data-technical="true">
+    <section class="slide" data-slide-id="agent-definition" data-title="The agent definition" data-section="Inside an Agora Agent" data-cue="7:12" data-technical="true">
       <p class="eyebrow">Five ideas to recognize</p>
       <h2>The language changes. <span class="accent">The architecture stays familiar.</span></h2>
       <div class="grid four">
@@ -2237,7 +2421,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Install the Agent SDK" data-section="Inside an Agora Agent" data-cue="7:14" data-technical="true">
+    <section class="slide" data-slide-id="install-agent-sdk" data-title="Install the Agent SDK" data-section="Inside an Agora Agent" data-cue="7:14" data-technical="true">
       <p class="eyebrow">SDK for · <span id="sdkPreviewLabel"></span></p>
       <h2>The SDK command changes. <span class="accent">The agent lifecycle does not.</span></h2>
       <div id="sdkTrackSteps" class="command-steps quickstart-steps" role="tablist" aria-label="Agent SDK languages">
@@ -2259,7 +2443,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Managed keys and BYOK" data-section="Inside an Agora Agent" data-cue="7:15" data-technical="true">
+    <section class="slide" data-slide-id="managed-keys-byok" data-title="Managed keys and BYOK" data-section="Inside an Agora Agent" data-cue="7:15" data-technical="true">
       <p class="eyebrow">Model credentials</p>
       <h2>Move fast with managed keys. <span class="accent">Bring your own when you need control.</span></h2>
       <div class="grid model-credential-grid">
@@ -2278,7 +2462,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Return to the workshop root" data-section="Agora Skills" data-cue="7:17" data-technical="true">
+    <section class="slide" data-slide-id="return-workshop-root" data-title="Return to the workshop root" data-section="Agora Skills" data-cue="7:17" data-technical="true">
       <p class="eyebrow">Keep the projects separate</p>
       <h2>Leave the quickstart intact. <span class="accent">Build beside it.</span></h2>
       <div class="terminal">
@@ -2292,7 +2476,7 @@
       <div class="speaker-notes"><p>Confirm the terminal prompt is back at <strong>agora_agents_workshop</strong> before installing Skills.</p></div>
     </section>
 
-    <section class="slide" data-title="Install Agora Skills" data-section="Agora Skills" data-cue="7:18" data-technical="true">
+    <section class="slide" data-slide-id="install-agora-skills" data-title="Install Agora Skills" data-section="Agora Skills" data-cue="7:18" data-technical="true">
       <p class="eyebrow">Agent 03 · install intelligence at the project root</p>
       <h2>Give your coding agent <span class="accent">Agora-specific judgment.</span></h2>
       <div class="terminal">
@@ -2309,7 +2493,7 @@
       </div>
     </section>
 
-    <section class="slide compact" data-title="The build prompt" data-section="Agora Skills" data-cue="7:22" data-technical="true">
+    <section class="slide compact build-prompt-slide" data-slide-id="build-prompt" data-title="The build prompt" data-section="Agora Skills" data-cue="7:22" data-technical="true">
       <p class="eyebrow">One concise brief · shared with everyone</p>
       <h2>Describe the product. <span class="accent">Let the Skills guide the implementation.</span></h2>
       <div class="prompt-layout">
@@ -2329,7 +2513,7 @@
       </div>
     </section>
 
-    <section class="slide centered" data-title="Let the agent build" data-section="Agora Skills" data-cue="7:25" data-technical="true">
+    <section class="slide centered" data-slide-id="let-agent-build" data-title="Let the agent build" data-section="Agora Skills" data-cue="7:25" data-technical="true">
       <p class="eyebrow">Create from the workshop root</p>
       <h2>Your coding agent reads the Skills and creates <span class="accent mono">website-sdr/</span>.</h2>
       <div class="flow" style="width:min(1120px,100%); text-align:left;">
@@ -2345,7 +2529,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Run website-sdr" data-section="Agora Skills" data-cue="7:34" data-technical="true">
+    <section class="slide" data-slide-id="run-website-sdr" data-title="Run website-sdr" data-section="Agora Skills" data-cue="7:34" data-technical="true">
       <p class="eyebrow">Install and run the generated product</p>
       <h2>One more local install. <span class="accent">One custom agent.</span></h2>
       <div class="command-steps quickstart-steps" role="tablist" aria-label="Website SDR commands">
@@ -2357,14 +2541,14 @@
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span id="sdrCommandLabel" class="terminal-title">Terminal</span></div>
         <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="sdrCommand">Copy</button><pre id="sdrCommand" class="quickstart-command"></pre></div>
       </div>
-      <div class="meta-row"><span class="status-chip">Package manager · <strong data-package-field="label"></strong></span><span class="status-chip success">Finish line · local conversation</span></div>
+      <div class="meta-row"><span class="status-chip">Project tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Finish line · local conversation</span></div>
       <div class="speaker-notes">
-        <p>Walk through dependency installation and the development command. The package selector changes every applicable command between pnpm and Bun.</p>
+        <p>Walk through dependency installation and the development command. Tooling follows the selected track automatically: Bun for Python, pnpm for TypeScript, and Make for Go.</p>
         <p>If the coding agent generated different run instructions for the selected language, follow the project’s verified README and update this configuration before the event.</p>
       </div>
     </section>
 
-    <section class="slide compact" data-title="Speak with your SDR" data-section="Agora Skills" data-cue="7:39" data-technical="true">
+    <section class="slide compact" data-slide-id="speak-with-sdr" data-title="Speak with your SDR" data-section="Agora Skills" data-cue="7:39" data-technical="true">
       <p class="eyebrow">Agent 03 · payoff</p>
       <div class="agent-screen">
         <div class="agent-hero">
@@ -2390,7 +2574,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Optional finish steps" data-section="Keep building" data-cue="7:45" data-technical="true">
+    <section class="slide" data-slide-id="optional-finish" data-title="Optional finish steps" data-section="Keep building" data-cue="7:45" data-technical="true">
       <p class="eyebrow">Local success is the finish line</p>
       <h2>Want to share it? <span class="accent">Pick one optional next step.</span></h2>
       <div class="ship-grid">
@@ -2405,7 +2589,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Build clinic" data-section="Build clinic" data-cue="7:47">
+    <section class="slide" data-slide-id="build-clinic" data-title="Build clinic" data-section="Build clinic" data-cue="7:47">
       <p class="eyebrow">Open support <span class="timing-fragment">through 8:15</span></p>
       <h2>Finish your agent. Test your idea. <span class="accent">Ask the specific question.</span></h2>
       <div class="grid">
@@ -2419,7 +2603,7 @@
       </div>
     </section>
 
-    <section class="slide" data-title="Join the community" data-section="Close" data-cue="8:15">
+    <section class="slide" data-slide-id="join-community" data-title="Join the community" data-section="Close" data-cue="8:15">
       <div class="qr-layout">
         <div>
           <p class="eyebrow">Keep building with Agora</p>
@@ -2447,16 +2631,23 @@
     <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
     <span id="footerTitle" class="footer-title">Welcome</span>
     <span class="footer-spacer"></span>
-    <span class="utility-keys" aria-label="Presenter controls">
+    <button id="terminalEnvironmentHint" class="terminal-environment-hint" type="button" title="Switch the terminal environment (O)">
+      <strong id="audienceTerminalEnvironmentLabel">Mac terminal</strong><span>·</span><kbd>O</kbd><span>to switch</span>
+    </button>
+    <span id="sessionControls" class="session-controls" data-connection="idle" aria-live="polite">
+      <button id="sessionStatus" class="session-status" type="button">Connecting…</button>
+      <button id="followHostButton" class="session-button" type="button" aria-pressed="true" hidden>Following host</button>
+    </span>
+    <span class="utility-keys" data-host-only aria-label="Presenter controls">
       <button id="hostButton" class="utility-key" type="button" aria-label="Open host controls" title="Host controls (H)">H</button>
       <button id="notesButton" class="utility-key" type="button" aria-label="Toggle presenter notes" title="Presenter notes (N)">N</button>
       <button id="helpButton" class="utility-key" type="button" aria-label="Show keyboard help" title="Keyboard help (?)">?</button>
     </span>
-    <span id="cue">5:30</span>
+    <span id="cue" data-host-only>5:30</span>
     <span id="counter">1 / 1</span>
   </footer>
 
-  <aside id="hostDrawer" class="host-overlay" aria-label="Host controls" aria-hidden="true">
+  <aside id="hostDrawer" class="host-overlay" data-host-only aria-label="Host controls" aria-hidden="true">
     <div class="host-overlay-top">
       <div class="host-overlay-header">
         <div class="host-overlay-title"><p class="eyebrow">Available on every slide</p><h2>Host controls</h2></div>
@@ -2468,7 +2659,6 @@
       <div class="host-control-grid">
         <div class="setting"><label for="templateSelect">Agent Studio template</label><select id="templateSelect"><option value="blank">Blank Template</option><option value="appointment">Appointment Reminder</option><option value="nps">NPS Survey</option><option value="payment">Payment Reminder</option><option value="ivr">Interactive Voice Response</option><option value="ecommerce">Customer service for e-commerce</option><option value="sales">Sales / Lead qualification</option></select></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="python">Python · default</option><option value="nextjs">TypeScript</option><option value="go">Go</option></select></div>
-        <div class="setting"><label for="packageSelect">Package manager</label><select id="packageSelect"><option value="pnpm">pnpm</option><option value="bun">Bun · default</option></select></div>
       </div>
       <details class="host-model-config">
         <summary>Model credentials · Slide 25 <span>Managed or BYOK</span></summary>
@@ -2488,15 +2678,18 @@
         </div>
         <p class="host-model-note">Provider selection only. Keep API keys and other secrets in the project environment—never in this presentation. Custom LLM uses the same API key, base URL, and model parameters.</p>
       </details>
-      <div class="host-sip-config">
-        <div class="host-sip-intro"><strong>Event-wide SIP trunk</strong><span>Configure once. Slide 12 shares these values with every attendee; their paper card needs only a phone number.</span></div>
-        <div class="setting"><label for="sipPhoneInput">Phone number</label><input id="sipPhoneInput" type="text" autocomplete="off" placeholder="+15550102"></div>
-        <div class="setting"><label for="sipProviderInput">Vendor</label><input id="sipProviderInput" type="text" autocomplete="off" placeholder="SIP Trunk"></div>
-        <div class="setting"><label for="sipDisplayNameInput">Display name</label><input id="sipDisplayNameInput" type="text" autocomplete="off" placeholder="Support inbound"></div>
-        <div class="setting"><label for="sipServerInput">SIP server / trunk</label><input id="sipServerInput" type="text" autocomplete="off" placeholder="sip.example.com"></div>
-        <div class="setting"><label for="sipTransportInput">Transport</label><select id="sipTransportInput"><option value="tcp">TCP</option><option value="udp">UDP</option><option value="tls">TLS</option></select></div>
-        <div class="setting"><label for="sipUsernameInput">SIP username</label><input id="sipUsernameInput" type="text" autocomplete="off" placeholder="workshop-user"></div>
-        <div class="setting"><label for="sipPasswordInput">SIP password</label><input id="sipPasswordInput" type="password" autocomplete="new-password" placeholder="Enter event password"></div>
+      <div id="hostSipConfig" class="host-sip-config" data-sip-mode="claim">
+        <div class="host-sip-intro"><strong>Workshop phone setup</strong><span>Use the email claim API for unique attendee assignments, or enter one set of values manually.</span></div>
+        <div class="setting"><label for="sipModeInput">Setup method</label><select id="sipModeInput"><option value="claim">Email claim API</option><option value="manual">Manual details</option></select></div>
+        <div class="setting" data-sip-claim-only><label for="sipClaimEventNameInput">Claim event name</label><input id="sipClaimEventNameInput" type="text" autocomplete="off" maxlength="64" placeholder="SFWRKSHP26"></div>
+        <div class="setting" data-sip-claim-only><label for="sipClaimHostEmailInput">Host claim email</label><input id="sipClaimHostEmailInput" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="host@example.com"></div>
+        <div class="setting" data-sip-manual-only><label for="sipPhoneInput">Phone number</label><input id="sipPhoneInput" type="tel" autocomplete="off" placeholder="+14155550123"></div>
+        <div class="setting" data-sip-manual-only><label for="sipProviderInput">Vendor</label><input id="sipProviderInput" type="text" autocomplete="off" placeholder="SIP Trunk"></div>
+        <div class="setting" data-sip-manual-only><label for="sipDisplayNameInput">Display name</label><input id="sipDisplayNameInput" type="text" autocomplete="off" placeholder="Support inbound"></div>
+        <div class="setting" data-sip-manual-only><label for="sipServerInput">SIP server / trunk</label><input id="sipServerInput" type="text" autocomplete="off" placeholder="sip.example.com"></div>
+        <div class="setting" data-sip-manual-only><label for="sipTransportInput">Transport</label><select id="sipTransportInput"><option value="tcp">TCP</option><option value="udp">UDP</option><option value="tls">TLS</option></select></div>
+        <div class="setting" data-sip-manual-only><label for="sipUsernameInput">SIP username</label><input id="sipUsernameInput" type="text" autocomplete="off" placeholder="workshop-user"></div>
+        <div class="setting" data-sip-manual-only><label for="sipPasswordInput">SIP password</label><input id="sipPasswordInput" type="password" autocomplete="new-password" placeholder="Enter event password"></div>
       </div>
       <details class="host-campaign-config">
         <summary>Campaign screen · Slide 14 <span>Live controls</span></summary>
@@ -2525,7 +2718,7 @@
       </details>
     </div>
     <div class="host-overlay-bottom">
-      <div class="host-overlay-shortcuts"><strong>Shortcuts:</strong> H controls · N notes · T timings · ← → slides · F full screen · ? help. Selections stay on this device.</div>
+      <div class="host-overlay-shortcuts"><strong>Shortcuts:</strong> H controls · N notes · T timings · O terminal OS · ← → slides · F full screen · ? help. Selections stay on this device.</div>
       <div class="host-overlay-actions">
         <button id="resetButton" class="secondary-button" type="button">Reset defaults</button>
         <button class="primary-button" type="button" data-close-drawer="hostDrawer">Done</button>
@@ -2533,7 +2726,7 @@
     </div>
   </aside>
 
-  <aside id="notesDrawer" class="drawer" aria-label="Presenter notes" aria-hidden="true">
+  <aside id="notesDrawer" class="drawer" data-host-only aria-label="Presenter notes" aria-hidden="true">
     <div class="drawer-header"><div><p class="eyebrow">Current slide</p><h2>Presenter notes</h2></div><button class="icon-button" type="button" data-close-drawer="notesDrawer" aria-label="Close presenter notes">×</button></div>
     <div id="notesContent" class="notes-content"></div>
   </aside>
@@ -2542,10 +2735,22 @@
     <div class="drawer-header"><div><p class="eyebrow">Presentation controls</p><h2>Keyboard shortcuts</h2></div><button class="icon-button" type="button" id="helpClose" aria-label="Close help">×</button></div>
     <div class="help-grid">
       <p><span>Next slide</span><kbd>→</kbd></p><p><span>Previous slide</span><kbd>←</kbd></p>
-      <p><span>Host controls</span><kbd>H</kbd></p><p><span>Presenter notes</span><kbd>N</kbd></p>
-      <p><span>Full screen</span><kbd>F</kbd></p><p><span>Toggle slide timings</span><kbd>T</kbd></p>
+      <p data-host-only><span>Host controls</span><kbd>H</kbd></p><p data-host-only><span>Presenter notes</span><kbd>N</kbd></p>
+      <p><span>Full screen</span><kbd>F</kbd></p><p data-host-only><span>Toggle slide timings</span><kbd>T</kbd></p>
+      <p><span>Terminal OS</span><kbd>O</kbd></p>
       <p><span>Help</span><kbd>?</kbd></p><p><span>Close panel</span><kbd>Esc</kbd></p>
     </div>
+  </dialog>
+
+  <dialog id="sipClaimDialog" class="sip-claim-dialog">
+    <form id="sipClaimForm" class="sip-claim-form">
+      <div class="drawer-header"><div><p class="eyebrow">Workshop phone number</p><h2>Claim your number</h2></div><button id="sipClaimClose" class="icon-button" type="button" aria-label="Close phone number claim">×</button></div>
+      <p class="sip-claim-copy">Enter the email you registered with for this workshop. Your assigned number and SIP details will appear on slide 13.</p>
+      <label for="sipClaimEmail">Email address<input id="sipClaimEmail" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="attendee@example.com"></label>
+      <p id="sipClaimError" class="sip-claim-error" role="alert"></p>
+      <p class="sip-claim-privacy">Your email and returned SIP credentials are used for this claim only and are not saved in the presentation archive or browser storage.</p>
+      <div class="sip-claim-actions"><button id="sipClaimCancel" class="secondary-button" type="button">Cancel</button><button id="sipClaimSubmit" class="primary-button" type="submit">Claim number</button></div>
+    </form>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>
@@ -2553,6 +2758,12 @@
   <script>
     (function () {
       "use strict";
+
+      var VIEW_MODE = new URLSearchParams(window.location.search).get("view") === "host" ? "host" : "audience";
+      var isAudience = VIEW_MODE === "audience";
+      document.body.classList.add("view-" + VIEW_MODE);
+      document.documentElement.setAttribute("data-view", VIEW_MODE);
+      if (isAudience) document.title = "Audience · Agora Voice AI Workshop";
 
       var EVENTS = {
         sf: {
@@ -2656,7 +2867,7 @@
           tree: "agent-quickstart/\n├── server/\n│   └── src/\n│       └── agent.py  ← agent definition\n├── client/\n├── .env.example\n└── README.md",
           code: "from agora_agent import Area, AsyncAgora\nfrom agora_agent.agentkit import Agent as AgoraAgent\nfrom agora_agent.agentkit.vendors import DeepgramSTT, MiniMaxTTS, OpenAI\n\nself.client = AsyncAgora(\n    area=Area.US,\n    app_id=self.app_id,\n    app_certificate=self.app_certificate,\n)\n\n# Agora-managed STT, LLM, and TTS\nllm = OpenAI(model=\"gpt-4o-mini\", greeting_message=self.greeting)\nstt = DeepgramSTT(model=\"nova-3\", language=\"en\")\ntts = MiniMaxTTS(model=\"speech-2.8-turbo\")\n\nagora_agent = AgoraAgent(\n    client=self.client,\n    instructions=FINANCIAL_SERVICES_PROMPT,\n    greeting=self.greeting,\n    turn_detection={...},\n    parameters={\"audio_scenario\": \"chorus\", \"data_channel\": \"rtm\"},\n).with_stt(stt).with_llm(llm).with_tts(tts)\n\nsession = agora_agent.create_async_session(\n    channel=channel_name,\n    agent_uid=str(agent_uid),\n    remote_uids=[str(user_uid)],\n)\nagent_id = await session.start()\nawait session.stop()",
           highlightLines: [2, 11, 16, 18, 22, 24, 29, 30],
-          setup: "bun run setup",
+          setup: "bun install",
           env: "",
           run: "bun run dev",
           sdkInstall: "pip install agora-agents",
@@ -2668,11 +2879,12 @@
           label: "TypeScript",
           init: "agora init agent-quickstart --template nextjs",
           starterNote: "A web-focused path for teams that want the interface and agent workflow in a TypeScript project.",
-          tree: "agora-cartesia/\n├── app/\n│   ├── api/\n│   │   ├── chat/completions/route.ts\n│   │   ├── generate-agora-token/route.ts\n│   │   ├── invite-agent/route.ts  ← start agent\n│   │   └── stop-conversation/route.ts  ← stop agent\n│   ├── layout.tsx\n│   └── page.tsx\n├── components/\n│   └── ConversationComponent.tsx\n├── lib/\n│   ├── agora.ts\n│   └── conversation.ts\n├── env.local.example\n└── package.json",
-          code: "// Simplified shape - open app/api/invite-agent/route.ts\nimport { Agent, AgoraClient } from \"agora-agents\";\n\n// 1. Create the Agora client.\n// 2. Define STT, LLM messages, greeting, and TTS.\n// 3. Create a session for the Channel and users.\n// 4. Start it, retain the agent ID, then stop it.",
+          tree: "agent-quickstart/\n├── app/\n│   └── api/\n│       ├── invite-agent/\n│       │   └── route.ts  ← agent + models\n│       └── stop-conversation/\n│           └── route.ts\n├── components/\n├── lib/\n├── .env.example\n└── package.json",
+          code: "import {\n  Agent, DeepgramSTT, MiniMaxTTS, OpenAI,\n} from 'agora-agents';\n\n// Agora-managed STT, LLM, and TTS\nconst agent = new Agent({\n  client, instructions: ADA_PROMPT, greeting: GREETING,\n})\n  .withStt(new DeepgramSTT({\n    model: 'nova-3', language: 'en',\n  }))\n  .withLlm(new OpenAI({ model: 'gpt-4o-mini' }))\n  .withTts(new MiniMaxTTS({\n    model: 'speech_2_6_turbo',\n    voiceId: 'English_captivating_female1',\n  }));",
+          highlightLines: [2, 5, 9, 12, 13],
           setup: "pnpm install",
           env: "",
-          run: "pnpm dev",
+          run: "pnpm run dev",
           sdkInstall: "npm install agora-agents",
           port: "3000",
           buildDetail: "Use Next.js and TypeScript for the website and the Agora voice-agent integration.",
@@ -2682,11 +2894,12 @@
           label: "Go",
           init: "agora init agent-quickstart --template go",
           starterNote: "A service-oriented path for teams building their realtime backend in Go.",
-          tree: "agent-quickstart/\n├── server/\n│   └── ...  ← agent service\n├── client/\n├── .env.example\n├── go.mod\n└── Makefile",
-          code: "// Simplified shape - follow the generated Go service\nimport \"github.com/AgoraIO/agora-agents-go/v2/agentkit\"\n\n// 1. Create the Agora client.\n// 2. Define STT, LLM messages, greeting, and TTS.\n// 3. Create the Channel session.\n// 4. Start it, retain the agent ID, then stop it.",
+          tree: "agent-quickstart/\n├── server/\n│   ├── agent.go  ← agent + models\n│   ├── main.go\n│   └── go.mod\n├── client/\n├── .env.example\n└── Makefile",
+          code: "// server/agent.go · Agora-managed models\nagent := agentkit.NewAgent(\n  client, agentkit.WithInstructions(adaPrompt),\n).\n  WithStt(vendors.NewDeepgramSTT(vendors.DeepgramSTTOptions{\n    Model: \"nova-3\", Language: \"en\",\n  })).\n  WithLlm(vendors.NewOpenAI(vendors.OpenAIOptions{\n    Model: \"gpt-4o-mini\",\n  })).\n  WithTts(vendors.NewMiniMaxTTS(vendors.MiniMaxTTSOptions{\n    Model: \"speech_2_6_turbo\",\n    VoiceID: \"English_captivating_female1\",\n  }))",
+          highlightLines: [1, 5, 8, 11],
           setup: "make setup",
           env: "agora project env write server/.env.local --with-secrets",
-          run: "make dev",
+          run: "make rdev",
           sdkInstall: "go get github.com/AgoraIO/agora-agents-go/v2@v2.2.0",
           port: "3000",
           buildDetail: "Use Go for the Agora agent service and a simple browser client for the local website experience.",
@@ -2696,8 +2909,14 @@
 
       var PACKAGES = {
         pnpm: { label: "pnpm", install: "pnpm install", run: "pnpm run dev" },
-        bun: { label: "Bun", install: "bun install", run: "bun run dev" }
+        bun: { label: "Bun", install: "bun install", run: "bun run dev" },
+        make: { label: "Make", install: "make setup", run: "make rdev" }
       };
+      var PACKAGE_MANAGER_BY_TRACK = { python: "bun", nextjs: "pnpm", go: "make" };
+
+      function packageManagerForTrack(track) {
+        return PACKAGE_MANAGER_BY_TRACK[track] || PACKAGE_MANAGER_BY_TRACK.python;
+      }
 
       var TERMINAL_ENVIRONMENTS = {
         mac: { label: "Mac", title: "Terminal" },
@@ -2735,9 +2954,12 @@
         ttsProvider: "managed",
         theme: "auto",
         terminalEnvironment: "mac",
-        sipPhone: "+15550102",
+        sipMode: "claim",
+        sipClaimEventName: "",
+        sipClaimHostEmail: "",
+        sipPhone: "",
         sipProvider: "SIP Trunk",
-        sipDisplayName: "Support inbound",
+        sipDisplayName: "Agora Demo Number",
         sipServer: "",
         sipTransport: "tcp",
         sipUsername: "",
@@ -2761,32 +2983,53 @@
         campaignTransfer: false,
         campaignPostCallExtraction: false
       };
+      var SHARED_CONFIG_KEYS = [
+        "city", "template", "track", "packageManager", "sttProvider", "llmProvider", "ttsProvider",
+        "theme", "terminalEnvironment", "sipMode", "sipClaimEventName", "sipPhone", "sipProvider", "sipDisplayName", "sipServer",
+        "sipTransport", "sipUsername", "sipPassword", "campaignName", "campaignAgent", "campaignLaunch",
+        "campaignTimezone", "campaignCallWindow", "campaignCallDelay", "campaignConcurrency",
+        "campaignMaxCall", "campaignRing", "campaignSilence", "campaignStoreTranscripts",
+        "campaignCallRecording", "campaignVoicemail", "campaignEndHangup", "campaignSilenceHangup",
+        "campaignFaxHangup", "campaignTransfer", "campaignPostCallExtraction"
+      ];
+      var SHARED_CONFIG_ENUMS = {
+        city: Object.keys(EVENTS),
+        template: Object.keys(TEMPLATES),
+        track: Object.keys(TRACKS),
+        packageManager: Object.keys(PACKAGES),
+        sttProvider: Object.keys(MODEL_PROVIDERS.stt),
+        llmProvider: Object.keys(MODEL_PROVIDERS.llm),
+        ttsProvider: Object.keys(MODEL_PROVIDERS.tts),
+        theme: ["auto", "light", "dark"],
+        terminalEnvironment: Object.keys(TERMINAL_ENVIRONMENTS),
+        sipMode: ["claim", "manual"],
+        sipTransport: ["tcp", "udp", "tls"]
+      };
       function savedBoolean(key, fallback) {
         var value = localStorage.getItem(key);
         return value == null ? fallback : value === "true";
       }
-      var savedTrack = localStorage.getItem("agora-v2-track") || DEFAULTS.track;
-      var savedPackageManager = localStorage.getItem("agora-v2-package");
-      if (!localStorage.getItem("agora-v2-python-bun-default-v1")) {
-        if (savedTrack === "python" && savedPackageManager === "pnpm") {
-          savedPackageManager = "bun";
-          localStorage.setItem("agora-v2-package", "bun");
-        }
-        localStorage.setItem("agora-v2-python-bun-default-v1", "1");
+      function savedSipDisplayName() {
+        var value = localStorage.getItem("agora-v2-sip-display-name");
+        return !value || value === "Support inbound" ? DEFAULTS.sipDisplayName : value;
       }
+      var savedTrack = localStorage.getItem("agora-v2-track") || DEFAULTS.track;
       var state = {
         city: localStorage.getItem("agora-v2-city") || DEFAULTS.city,
         template: localStorage.getItem("agora-v2-template") || DEFAULTS.template,
         track: savedTrack,
-        packageManager: savedPackageManager || DEFAULTS.packageManager,
+        packageManager: packageManagerForTrack(savedTrack),
         sttProvider: localStorage.getItem("agora-v2-stt-provider") || DEFAULTS.sttProvider,
         llmProvider: localStorage.getItem("agora-v2-llm-provider") || DEFAULTS.llmProvider,
         ttsProvider: localStorage.getItem("agora-v2-tts-provider") || DEFAULTS.ttsProvider,
         theme: localStorage.getItem("agora-v2-theme") || DEFAULTS.theme,
         terminalEnvironment: localStorage.getItem("agora-v2-terminal-environment") || DEFAULTS.terminalEnvironment,
+        sipMode: localStorage.getItem("agora-v2-sip-mode") || DEFAULTS.sipMode,
+        sipClaimEventName: localStorage.getItem("agora-v2-sip-claim-event-name") || DEFAULTS.sipClaimEventName,
+        sipClaimHostEmail: isAudience ? DEFAULTS.sipClaimHostEmail : (sessionStorage.getItem("agora-v2-sip-claim-host-email") || DEFAULTS.sipClaimHostEmail),
         sipPhone: localStorage.getItem("agora-v2-sip-phone") || DEFAULTS.sipPhone,
         sipProvider: localStorage.getItem("agora-v2-sip-provider") || DEFAULTS.sipProvider,
-        sipDisplayName: localStorage.getItem("agora-v2-sip-display-name") || DEFAULTS.sipDisplayName,
+        sipDisplayName: savedSipDisplayName(),
         sipServer: localStorage.getItem("agora-v2-sip-server") || DEFAULTS.sipServer,
         sipTransport: localStorage.getItem("agora-v2-sip-transport") || DEFAULTS.sipTransport,
         sipUsername: localStorage.getItem("agora-v2-sip-username") || DEFAULTS.sipUsername,
@@ -2816,31 +3059,86 @@
         sdrStep: "enter",
         sdkPreviewTrack: savedTrack
       };
+      var audienceTerminalEnvironmentOverride = isAudience
+        ? localStorage.getItem("agora-v2-audience-terminal-environment")
+        : null;
+      if (!Object.prototype.hasOwnProperty.call(TERMINAL_ENVIRONMENTS, audienceTerminalEnvironmentOverride)) {
+        audienceTerminalEnvironmentOverride = null;
+      } else {
+        state.terminalEnvironment = audienceTerminalEnvironmentOverride;
+      }
 
+      var prepareContactListSlide = document.querySelector('[data-slide-id="prepare-contact-list"]');
+      var addTelephoneNumberSlide = document.querySelector('[data-slide-id="add-telephone-number"]');
+      if (prepareContactListSlide && addTelephoneNumberSlide) {
+        prepareContactListSlide.parentNode.insertBefore(prepareContactListSlide, addTelephoneNumberSlide);
+      }
       var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
-      var initial = parseInt(location.hash.replace("#slide-", ""), 10);
-      var current = Number.isFinite(initial) ? Math.max(0, Math.min(slides.length - 1, initial - 1)) : 0;
+      var slideIndexById = slides.reduce(function (index, slide, slideIndex) {
+        index[slide.getAttribute("data-slide-id")] = slideIndex;
+        return index;
+      }, {});
+      var audienceHashEnabled = !isAudience;
+      var initialHash = isAudience ? "" : decodeURIComponent(location.hash.replace(/^#slide-/, ""));
+      var legacyInitial = parseInt(initialHash, 10);
+      var current = Object.prototype.hasOwnProperty.call(slideIndexById, initialHash)
+        ? slideIndexById[initialHash]
+        : (Number.isFinite(legacyInitial) ? Math.max(0, Math.min(slides.length - 1, legacyInitial - 1)) : 0);
       var previous = current;
       var toastTimer = null;
       var commandAnimationTimer = null;
       var sdkAnimationTimer = null;
+      var stateChangeQueued = false;
+      var claimedSipAssignment = null;
 
       var hostDrawer = document.getElementById("hostDrawer");
       var notesDrawer = document.getElementById("notesDrawer");
       var notesContent = document.getElementById("notesContent");
       var helpDialog = document.getElementById("helpDialog");
+      var sipClaimDialog = document.getElementById("sipClaimDialog");
       var toast = document.getElementById("toast");
 
+      function getWorkshopSnapshot() {
+        var config = {};
+        SHARED_CONFIG_KEYS.forEach(function (key) { config[key] = state[key]; });
+        if (state.sipMode === "claim") {
+          config.sipPhone = "";
+          config.sipProvider = DEFAULTS.sipProvider;
+          config.sipDisplayName = DEFAULTS.sipDisplayName;
+          config.sipServer = "";
+          config.sipTransport = DEFAULTS.sipTransport;
+          config.sipUsername = "";
+          config.sipPassword = "";
+        }
+        return {
+          version: 1,
+          slideId: slides[current].getAttribute("data-slide-id"),
+          config: config
+        };
+      }
+
+      function scheduleHostStateChange() {
+        if (isAudience || stateChangeQueued) return;
+        stateChangeQueued = true;
+        window.queueMicrotask(function () {
+          stateChangeQueued = false;
+          window.dispatchEvent(new CustomEvent("workshop:statechange", { detail: getWorkshopSnapshot() }));
+        });
+      }
+
       function persist() {
+        if (isAudience) return;
         localStorage.setItem("agora-v2-city", state.city);
         localStorage.setItem("agora-v2-template", state.template);
         localStorage.setItem("agora-v2-track", state.track);
-        localStorage.setItem("agora-v2-package", state.packageManager);
         localStorage.setItem("agora-v2-stt-provider", state.sttProvider);
         localStorage.setItem("agora-v2-llm-provider", state.llmProvider);
         localStorage.setItem("agora-v2-tts-provider", state.ttsProvider);
         localStorage.setItem("agora-v2-theme", state.theme);
         localStorage.setItem("agora-v2-terminal-environment", state.terminalEnvironment);
+        localStorage.setItem("agora-v2-sip-mode", state.sipMode);
+        localStorage.setItem("agora-v2-sip-claim-event-name", state.sipClaimEventName);
+        if (state.sipClaimHostEmail) sessionStorage.setItem("agora-v2-sip-claim-host-email", state.sipClaimHostEmail); else sessionStorage.removeItem("agora-v2-sip-claim-host-email");
         localStorage.setItem("agora-v2-sip-phone", state.sipPhone);
         localStorage.setItem("agora-v2-sip-provider", state.sipProvider);
         localStorage.setItem("agora-v2-sip-display-name", state.sipDisplayName);
@@ -2867,6 +3165,7 @@
         localStorage.setItem("agora-v2-campaign-transfer", String(state.campaignTransfer));
         localStorage.setItem("agora-v2-campaign-post-call-extraction", String(state.campaignPostCallExtraction));
         localStorage.setItem("agora-v2-workshop-stage", String(state.workshopStage));
+        scheduleHostStateChange();
       }
 
       function showToast(message) {
@@ -2889,6 +3188,10 @@
       }
 
       function renderSipTrunk() {
+        document.getElementById("hostSipConfig").setAttribute("data-sip-mode", state.sipMode);
+        document.getElementById("sipModeInput").value = state.sipMode;
+        document.getElementById("sipClaimEventNameInput").value = state.sipClaimEventName;
+        document.getElementById("sipClaimHostEmailInput").value = state.sipClaimHostEmail;
         document.getElementById("sipPhoneInput").value = state.sipPhone;
         document.getElementById("sipProviderInput").value = state.sipProvider;
         document.getElementById("sipDisplayNameInput").value = state.sipDisplayName;
@@ -2896,33 +3199,54 @@
         document.getElementById("sipTransportInput").value = state.sipTransport;
         document.getElementById("sipUsernameInput").value = state.sipUsername;
         document.getElementById("sipPasswordInput").value = state.sipPassword;
-        var configured = Boolean(state.sipPhone.trim() && state.sipProvider.trim() && state.sipDisplayName.trim() && state.sipServer.trim() && state.sipUsername.trim() && state.sipPassword.trim());
-        var hasHostDetails = Boolean(state.sipPhone.trim() !== DEFAULTS.sipPhone || state.sipProvider.trim() !== DEFAULTS.sipProvider || state.sipDisplayName.trim() !== DEFAULTS.sipDisplayName || state.sipServer.trim() || state.sipUsername.trim() || state.sipPassword.trim());
-        var values = {
-          phone: state.sipPhone.trim() || DEFAULTS.sipPhone,
-          provider: state.sipProvider.trim() || "SIP Trunk",
-          displayName: state.sipDisplayName.trim() || DEFAULTS.sipDisplayName,
-          server: state.sipServer.trim() || "sip.example.com",
-          transport: state.sipTransport || "tcp",
-          username: state.sipUsername.trim() || "event-shared-user",
-          password: state.sipPassword || "temporary-event-password"
+        var isClaimMode = state.sipMode === "claim";
+        var assignment = isClaimMode ? claimedSipAssignment : null;
+        var claimReady = Boolean(state.sipClaimEventName.trim());
+        var values = assignment ? {
+          phone: assignment.phoneNumber,
+          provider: assignment.sip.provider,
+          displayName: assignment.sip.displayName,
+          server: assignment.sip.server,
+          transport: assignment.sip.transport,
+          credentialsRequired: assignment.sip.credentialsRequired !== false,
+          username: assignment.sip.username || (assignment.sip.credentialsRequired === false ? "Not required · FQDN" : ""),
+          password: assignment.sip.password || (assignment.sip.credentialsRequired === false ? "Not required · FQDN" : "")
+        } : {
+          phone: state.sipPhone.trim(),
+          provider: isClaimMode ? "" : (state.sipProvider.trim() || "SIP Trunk"),
+          displayName: isClaimMode ? "" : (state.sipDisplayName.trim() || DEFAULTS.sipDisplayName),
+          server: isClaimMode ? "" : (state.sipServer.trim() || "sip.example.com"),
+          transport: isClaimMode ? "" : (state.sipTransport || "tcp"),
+          credentialsRequired: true,
+          username: isClaimMode ? "" : (state.sipUsername.trim() || "event-shared-user"),
+          password: isClaimMode ? "" : (state.sipPassword || "temporary-event-password")
         };
-        document.getElementById("slideSipPhone").value = values.phone;
+        var configured = isClaimMode
+          ? Boolean(assignment)
+          : Boolean(state.sipPhone.trim() && state.sipProvider.trim() && state.sipDisplayName.trim() && state.sipServer.trim() && state.sipUsername.trim() && state.sipPassword.trim());
+        var hasManualDetails = Boolean(state.sipPhone.trim() || state.sipProvider.trim() !== DEFAULTS.sipProvider || state.sipDisplayName.trim() !== DEFAULTS.sipDisplayName || state.sipServer.trim() || state.sipUsername.trim() || state.sipPassword.trim());
+        var claimButton = document.getElementById("slideSipClaimButton");
+        var claimUnavailable = document.getElementById("slideSipClaimUnavailable");
+        var phone = document.getElementById("slideSipPhone");
+        phone.value = values.phone;
+        phone.hidden = !values.phone;
+        claimButton.hidden = !isClaimMode || !claimReady || Boolean(assignment);
+        claimUnavailable.hidden = !isClaimMode || claimReady || Boolean(assignment);
         document.getElementById("slideSipProvider").value = values.provider;
         document.getElementById("slideSipDisplayName").value = values.displayName;
         document.getElementById("slideSipServer").value = values.server;
         document.getElementById("slideSipUsername").value = values.username;
         var password = document.getElementById("slideSipPassword");
-        var toggle = document.getElementById("revealSipPassword");
         var status = document.getElementById("sipConfigStatus");
         password.value = values.password;
-        password.type = state.sipPasswordVisible ? "text" : "password";
-        toggle.textContent = state.sipPasswordVisible ? "Hide password" : "Reveal password";
-        toggle.setAttribute("aria-pressed", String(state.sipPasswordVisible));
+        password.type = values.credentialsRequired === false || (state.sipPasswordVisible && values.password) ? "text" : "password";
+        password.title = values.credentialsRequired === false ? "No password is required for this FQDN connection" : (values.password ? "Click to reveal and copy" : "SIP password appears after a successful claim");
         document.querySelectorAll("[data-sip-transport]").forEach(function (option) {
           option.classList.toggle("active", option.getAttribute("data-sip-transport") === values.transport);
         });
-        status.textContent = configured ? "Event trunk configured" : (hasHostDetails ? "Host details updating live" : "Demo trunk details");
+        status.textContent = isClaimMode
+          ? (assignment ? "Number claimed" : (claimReady ? "Claim your number to continue" : "Claim event not configured"))
+          : (configured ? "Manual SIP configured" : (hasManualDetails ? "Manual details incomplete" : "Demo trunk details"));
         status.classList.toggle("success", configured);
         status.classList.toggle("warning", !configured);
       }
@@ -2958,10 +3282,13 @@
 
       function renderCampaign() {
         var template = TEMPLATES[state.template];
+        var activePhone = state.sipMode === "claim" && claimedSipAssignment
+          ? claimedSipAssignment.phoneNumber
+          : state.sipPhone.trim();
         var values = {
           name: state.campaignName.trim() || template.campaignName,
           agent: state.campaignAgent.trim() || template.name,
-          phone: state.sipPhone.trim() || DEFAULTS.sipPhone,
+          phone: activePhone || "Your claimed number",
           launch: state.campaignLaunch || DEFAULTS.campaignLaunch,
           timezone: state.campaignTimezone.trim() || DEFAULTS.campaignTimezone,
           callWindow: state.campaignCallWindow.trim() || DEFAULTS.campaignCallWindow,
@@ -3075,7 +3402,7 @@
           "- Integrate Agora AI Noise Suppression on the browser microphone track using Agora's documented agora-extension-ai-denoiser extension. Serve its required Wasm assets correctly, check entitlement and browser compatibility, and fall back gracefully when unsupported. Do not treat noise suppression as a system-prompt instruction.",
           modelConfigurationRequirement(),
           "- Keep secrets server-side and provide a safe .env.example.",
-          "- Include clear local setup and run instructions using " + PACKAGES[state.packageManager].label + " for web dependencies.",
+          "- Include clear local setup and run instructions using " + PACKAGES[state.packageManager].label + ".",
           "- Add an optional quick-deploy path for " + track.durableProvider + ", but treat local execution as the required finish line.",
           "",
           "Acceptance criteria:",
@@ -3105,6 +3432,7 @@
 
       function renderTrack() {
         var track = TRACKS[state.track];
+        state.packageManager = packageManagerForTrack(state.track);
         var pkg = PACKAGES[state.packageManager];
         Object.keys(track).forEach(function (key) {
           if (typeof track[key] === "string") setText('[data-track-field="' + key + '"]', track[key]);
@@ -3116,7 +3444,6 @@
         renderAgentCode(track);
         document.getElementById("buildPrompt").textContent = buildPrompt();
         document.getElementById("trackSelect").value = state.track;
-        document.getElementById("packageSelect").value = state.packageManager;
         var envStep = document.getElementById("quickstartEnvStep");
         envStep.style.display = track.env ? "inline-flex" : "none";
         document.getElementById("quickstartRunStep").textContent = track.env ? "4 · Run" : "3 · Run";
@@ -3131,13 +3458,8 @@
         var pkg = PACKAGES[state.packageManager];
         if (step === "enter") return scope === "quickstart" ? "cd agent-quickstart" : "cd website-sdr";
         if (scope === "quickstart") {
-          if (step === "install") {
-            if (state.track === "python") return state.packageManager + " run setup";
-            if (state.track === "nextjs") return pkg.install;
-            return TRACKS[state.track].setup;
-          }
+          if (step === "install") return TRACKS[state.track].setup;
           if (step === "env") return TRACKS[state.track].env;
-          if (state.track === "python" || state.track === "nextjs") return pkg.run;
           return TRACKS[state.track].run;
         }
         if (step === "install") return pkg.install;
@@ -3305,6 +3627,10 @@
         var environment = TERMINAL_ENVIRONMENTS[state.terminalEnvironment] || TERMINAL_ENVIRONMENTS.mac;
         document.querySelectorAll(".terminal-title").forEach(function (title) { title.textContent = environment.title; });
         document.getElementById("terminalEnvironmentLabel").textContent = environment.label;
+        document.getElementById("audienceTerminalEnvironmentLabel").textContent = environment.label + " terminal";
+        var hint = document.getElementById("terminalEnvironmentHint");
+        hint.title = "Current terminal: " + environment.label + ". Activate or press O to switch.";
+        hint.setAttribute("aria-label", "Current terminal environment: " + environment.label + ". Activate or press O to switch environment.");
         var button = document.getElementById("terminalEnvironmentButton");
         button.title = "Terminal environment: " + environment.label;
         button.setAttribute("aria-label", "Terminal environment: " + environment.label + ". Activate to switch environment.");
@@ -3325,10 +3651,11 @@
       }
 
       function workshopStageForSlide(index) {
-        if (index >= 14) return 5;
-        if (index >= 12) return 4;
-        if (index >= 11) return 3;
-        if (index >= 10) return 2;
+        var slideId = slides[index].getAttribute("data-slide-id");
+        if (slideId === "phone-rings") return 5;
+        if (slideId === "prepare-contact-list" || slideId === "configure-campaign") return 4;
+        if (slideId === "add-telephone-number") return 3;
+        if (slideId === "customize-prompt") return 2;
         return 1;
       }
 
@@ -3343,22 +3670,20 @@
 
       function codeStageForSlide(scope, index) {
         if (scope === "cli") {
-          if (index >= 24) return 5;
           if (index >= 21) return 4;
           if (index >= 20) return 3;
           if (index >= 19) return 2;
           return 1;
         }
-        if (index >= 30) return 5;
-        if (index >= 29) return 4;
-        if (index >= 27) return 3;
-        if (index >= 26) return 2;
+        if (index >= 30) return 4;
+        if (index >= 29) return 3;
+        if (index >= 27) return 2;
         return 1;
       }
 
       function renderCodeStageMenus() {
         ["cli", "skills"].forEach(function (scope) {
-          var inScope = scope === "cli" ? current >= 17 && current <= 24 : current >= 25 && current <= 30;
+          var inScope = scope === "cli" ? current >= 16 && current <= 23 : current >= 25 && current <= 30;
           var activeStage = inScope ? codeStageForSlide(scope, current) : 1;
           document.querySelectorAll('[data-code-scope="' + scope + '"]').forEach(function (button) {
             var active = parseInt(button.getAttribute("data-code-stage"), 10) === activeStage;
@@ -3373,7 +3698,7 @@
         var skillsRail = document.getElementById("skillsStageRail");
         var cliHome = document.getElementById("cliPathCard");
         var skillsHome = document.getElementById("skillsPathCard");
-        var cliActive = current >= 17 && current <= 24;
+        var cliActive = current >= 16 && current <= 23;
         var skillsActive = current >= 25 && current <= 30;
         if (cliActive && cliRail.parentElement !== document.body) document.body.appendChild(cliRail);
         if (!cliActive && cliRail.parentElement !== cliHome) cliHome.appendChild(cliRail);
@@ -3400,11 +3725,13 @@
         var slide = slides[current];
         if (current !== 11) state.sipPasswordVisible = false;
         document.body.classList.toggle("front-slide-active", current === 0);
+        document.body.classList.toggle("terminal-slide-active", Boolean(slide.querySelector(".terminal")));
         document.getElementById("footerTitle").textContent = slide.getAttribute("data-title");
         document.getElementById("cue").textContent = slide.getAttribute("data-cue") || "";
         document.getElementById("counter").textContent = (current + 1) + " / " + slides.length;
         document.getElementById("progressFill").style.width = ((current + 1) / slides.length * 100) + "%";
-        history.replaceState(null, "", "#slide-" + (current + 1));
+        var slideHash = "#slide-" + slide.getAttribute("data-slide-id");
+        history.replaceState(null, "", audienceHashEnabled ? slideHash : location.pathname + location.search);
         if (current === 8) state.workshopStage = 1;
         if (current >= 9 && current <= 14) state.workshopStage = workshopStageForSlide(current);
         renderWorkshopStage();
@@ -3447,6 +3774,50 @@
         });
       }
 
+      function goToSlideId(slideId, animateMenu) {
+        if (!Object.prototype.hasOwnProperty.call(slideIndexById, slideId)) return false;
+        goToSlide(slideIndexById[slideId], animateMenu);
+        return true;
+      }
+
+      function setAudienceHashEnabled(enabled) {
+        if (!isAudience) return;
+        audienceHashEnabled = Boolean(enabled);
+        var slideHash = "#slide-" + slides[current].getAttribute("data-slide-id");
+        history.replaceState(null, "", audienceHashEnabled ? slideHash : location.pathname + location.search);
+      }
+
+      function applyWorkshopSnapshot(snapshot) {
+        if (!isAudience || !snapshot || snapshot.version !== 1 || !snapshot.config) return false;
+        var previousClaimContext = state.sipMode + ":" + state.sipClaimEventName;
+        SHARED_CONFIG_KEYS.forEach(function (key) {
+          if (!Object.prototype.hasOwnProperty.call(snapshot.config, key)) return;
+          if (key === "terminalEnvironment" && audienceTerminalEnvironmentOverride) return;
+          var value = snapshot.config[key];
+          if (typeof value !== typeof DEFAULTS[key]) return;
+          if (SHARED_CONFIG_ENUMS[key] && SHARED_CONFIG_ENUMS[key].indexOf(value) === -1) return;
+          state[key] = value;
+        });
+        if (previousClaimContext !== state.sipMode + ":" + state.sipClaimEventName) {
+          claimedSipAssignment = null;
+          state.sipPasswordVisible = false;
+        }
+        if (Object.prototype.hasOwnProperty.call(slideIndexById, snapshot.slideId)) {
+          previous = current;
+          current = slideIndexById[snapshot.slideId];
+        }
+        renderAll();
+        return true;
+      }
+
+      function applyArchivedWorkshopSnapshot(snapshot) {
+        if (!isAudience || !snapshot || snapshot.version !== 1 || !snapshot.config) return false;
+        SHARED_CONFIG_KEYS.forEach(function (key) { state[key] = DEFAULTS[key]; });
+        claimedSipAssignment = null;
+        state.sipPasswordVisible = false;
+        return applyWorkshopSnapshot(snapshot);
+      }
+
       function go(delta) {
         var next = Math.max(0, Math.min(slides.length - 1, current + delta));
         var crossesStudioStart = (current === 8 && next === 9) || (current === 9 && next === 8);
@@ -3470,6 +3841,19 @@
         navigator.clipboard.writeText(text).then(function () { showToast(label || "Copied"); }).catch(function () { showToast("Copy failed — select the text manually"); });
       }
 
+      function cycleTerminalEnvironment() {
+        if (!slides[current].querySelector(".terminal")) return false;
+        var environments = Object.keys(TERMINAL_ENVIRONMENTS);
+        state.terminalEnvironment = environments[(environments.indexOf(state.terminalEnvironment) + 1) % environments.length];
+        if (isAudience) {
+          audienceTerminalEnvironmentOverride = state.terminalEnvironment;
+          localStorage.setItem("agora-v2-audience-terminal-environment", state.terminalEnvironment);
+        }
+        renderAll();
+        showToast("Terminal: " + TERMINAL_ENVIRONMENTS[state.terminalEnvironment].label);
+        return true;
+      }
+
       function renderAll() {
         persist();
         renderTheme();
@@ -3491,22 +3875,90 @@
         showToast("Event switched to " + EVENTS[state.city].shortName);
       });
       document.getElementById("terminalEnvironmentButton").addEventListener("click", function () {
-        var environments = ["mac", "linux", "pc"];
-        state.terminalEnvironment = environments[(environments.indexOf(state.terminalEnvironment) + 1) % environments.length];
-        renderAll();
-        showToast("Terminal: " + TERMINAL_ENVIRONMENTS[state.terminalEnvironment].label);
+        cycleTerminalEnvironment();
+      });
+      document.getElementById("terminalEnvironmentHint").addEventListener("click", function () {
+        cycleTerminalEnvironment();
       });
       document.getElementById("hostButton").addEventListener("click", function () { toggleDrawer(hostDrawer); });
       document.getElementById("notesButton").addEventListener("click", function () { toggleDrawer(notesDrawer); });
       document.getElementById("helpButton").addEventListener("click", function () { helpDialog.showModal(); });
       document.getElementById("helpClose").addEventListener("click", function () { helpDialog.close(); });
+      function validClaimEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+      }
+      async function requestPhoneClaim(email) {
+        var response = await fetch("/api/phone-number-claim", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email: email, eventName: state.sipClaimEventName })
+        });
+        var payload = await response.json().catch(function () { return {}; });
+        if (!response.ok || !payload.data) throw new Error(payload.error || "Unable to claim a phone number");
+        claimedSipAssignment = payload.data;
+        state.sipPasswordVisible = false;
+        renderSipTrunk();
+        renderCampaign();
+        showToast("Phone number claimed");
+      }
+      document.getElementById("slideSipClaimButton").addEventListener("click", async function () {
+        if (state.sipMode !== "claim" || !state.sipClaimEventName.trim()) return;
+        if (!isAudience && validClaimEmail(state.sipClaimHostEmail)) {
+          var claimButton = this;
+          claimButton.disabled = true;
+          claimButton.textContent = "Claiming…";
+          try {
+            await requestPhoneClaim(state.sipClaimHostEmail);
+          } catch (error) {
+            showToast(error && error.message ? error.message : "Unable to claim a phone number");
+          } finally {
+            claimButton.disabled = false;
+            claimButton.textContent = "Claim your phone number";
+          }
+          return;
+        }
+        document.getElementById("sipClaimEmail").value = "";
+        document.getElementById("sipClaimError").textContent = "";
+        sipClaimDialog.showModal();
+        window.setTimeout(function () { document.getElementById("sipClaimEmail").focus(); }, 0);
+      });
+      function closeSipClaimDialog() {
+        if (sipClaimDialog.open) sipClaimDialog.close();
+      }
+      document.getElementById("sipClaimClose").addEventListener("click", closeSipClaimDialog);
+      document.getElementById("sipClaimCancel").addEventListener("click", closeSipClaimDialog);
+      document.getElementById("sipClaimForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        var emailInput = document.getElementById("sipClaimEmail");
+        var errorNode = document.getElementById("sipClaimError");
+        var submitButton = document.getElementById("sipClaimSubmit");
+        if (!emailInput.reportValidity()) return;
+        errorNode.textContent = "";
+        submitButton.disabled = true;
+        submitButton.textContent = "Claiming…";
+        try {
+          await requestPhoneClaim(emailInput.value);
+          emailInput.value = "";
+          closeSipClaimDialog();
+        } catch (error) {
+          errorNode.textContent = error && error.message ? error.message : "Unable to claim a phone number";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Claim number";
+        }
+      });
       document.querySelector(".nav-zone.prev").addEventListener("click", function () { go(-1); });
       document.querySelector(".nav-zone.next").addEventListener("click", function () { go(1); });
       document.querySelectorAll("[data-close-drawer]").forEach(function (button) {
         button.addEventListener("click", function () { toggleDrawer(document.getElementById(button.getAttribute("data-close-drawer")), false); });
       });
       document.querySelectorAll("[data-template-choice]").forEach(function (button) {
-        button.addEventListener("click", function () { state.template = button.getAttribute("data-template-choice"); renderAll(); });
+        if (isAudience) button.setAttribute("aria-disabled", "true");
+        button.addEventListener("click", function () {
+          if (isAudience) return;
+          state.template = button.getAttribute("data-template-choice");
+          renderAll();
+        });
       });
       document.querySelectorAll("[data-command-scope]").forEach(function (button) {
         button.addEventListener("click", function () {
@@ -3526,7 +3978,7 @@
       document.querySelectorAll("[data-workshop-stage]").forEach(function (button) {
         button.addEventListener("click", function () {
           var stageNumber = parseInt(button.getAttribute("data-workshop-stage"), 10);
-          var slideTargets = { 1: 9, 2: 10, 3: 11, 4: 12, 5: 14 };
+        var slideTargets = { 1: 9, 2: 10, 3: 12, 4: 11, 5: 14 };
           goToSlide(slideTargets[stageNumber], current === 8 && stageNumber === 1);
         });
       });
@@ -3536,8 +3988,8 @@
           var scope = button.getAttribute("data-code-scope");
           var stageNumber = parseInt(button.getAttribute("data-code-stage"), 10);
           var slideTargets = scope === "cli"
-            ? { 1: 17, 2: 19, 3: 20, 4: 21, 5: 24 }
-            : { 1: 25, 2: 26, 3: 27, 4: 29, 5: 30 };
+            ? { 1: 16, 2: 19, 3: 20, 4: 21 }
+            : { 1: 26, 2: 27, 3: 29, 4: 30 };
           goToSlide(slideTargets[stageNumber], false);
         });
       });
@@ -3549,8 +4001,11 @@
       });
 
       document.getElementById("templateSelect").addEventListener("change", function (event) { state.template = event.target.value; renderAll(); });
-      document.getElementById("trackSelect").addEventListener("change", function (event) { state.track = event.target.value; if (state.track === "python") state.packageManager = "bun"; renderAll(); });
-      document.getElementById("packageSelect").addEventListener("change", function (event) { state.packageManager = event.target.value; renderAll(); });
+      document.getElementById("trackSelect").addEventListener("change", function (event) {
+        state.track = event.target.value;
+        state.packageManager = packageManagerForTrack(state.track);
+        renderAll();
+      });
       [
         { id: "sttProviderSelect", key: "sttProvider" },
         { id: "llmProviderSelect", key: "llmProvider" },
@@ -3567,7 +4022,17 @@
         renderAll();
         showToast("Theme: " + ({ auto: "System", light: "Light", dark: "Dark" }[state.theme]));
       });
+      document.getElementById("sipModeInput").addEventListener("change", function (event) {
+        state.sipMode = event.target.value;
+        claimedSipAssignment = null;
+        state.sipPasswordVisible = false;
+        persist();
+        renderSipTrunk();
+        renderCampaign();
+      });
       [
+        { id: "sipClaimEventNameInput", key: "sipClaimEventName" },
+        { id: "sipClaimHostEmailInput", key: "sipClaimHostEmail" },
         { id: "sipPhoneInput", key: "sipPhone" },
         { id: "sipProviderInput", key: "sipProvider" },
         { id: "sipDisplayNameInput", key: "sipDisplayName" },
@@ -3578,6 +4043,7 @@
       ].forEach(function (field) {
         document.getElementById(field.id).addEventListener("input", function (event) {
           state[field.key] = event.target.value;
+          if (field.key === "sipClaimEventName") claimedSipAssignment = null;
           if (field.key === "sipPassword" && !state.sipPassword) state.sipPasswordVisible = false;
           persist();
           renderSipTrunk();
@@ -3618,12 +4084,45 @@
           renderCampaign();
         });
       });
-      document.getElementById("revealSipPassword").addEventListener("click", function () {
-        state.sipPasswordVisible = !state.sipPasswordVisible;
+      [
+        { id: "slideSipPhone", label: "Phone number copied" },
+        { id: "slideSipProvider", label: "SIP vendor copied" },
+        { id: "slideSipDisplayName", label: "Display name copied" },
+        { id: "slideSipServer", label: "SIP trunk address copied" },
+        { id: "slideSipUsername", label: "SIP username copied" }
+      ].forEach(function (field) {
+        document.getElementById(field.id).addEventListener("click", function () {
+          if (this.value) copyText(this.value, field.label);
+        });
+      });
+      function copySipTransport() {
+        var activeTransport = document.querySelector("#slideSipTransport .telephony-protocol.active");
+        if (activeTransport) copyText(activeTransport.textContent, "SIP transport copied");
+      }
+      document.getElementById("slideSipTransport").addEventListener("click", copySipTransport);
+      document.getElementById("slideSipTransport").addEventListener("keydown", function (event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        copySipTransport();
+      });
+      document.getElementById("slideSipPassword").addEventListener("click", function () {
+        if (!this.value) return;
+        state.sipPasswordVisible = true;
         renderSipTrunk();
+        copyText(this.value, "SIP password copied");
+      });
+      function obscureSipPassword() {
+        if (!state.sipPasswordVisible) return;
+        state.sipPasswordVisible = false;
+        renderSipTrunk();
+      }
+      window.addEventListener("blur", obscureSipPassword);
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) obscureSipPassword();
       });
       document.getElementById("resetButton").addEventListener("click", function () {
         Object.keys(DEFAULTS).forEach(function (key) { state[key] = DEFAULTS[key]; });
+        claimedSipAssignment = null;
         state.sipPasswordVisible = false;
         state.showTimings = false; state.workshopStage = 1;
         renderAll(); showToast("Workshop defaults restored");
@@ -3934,13 +4433,14 @@
         if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return;
         if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") { event.preventDefault(); go(1); }
         else if (event.key === "ArrowLeft" || event.key === "PageUp") { event.preventDefault(); go(-1); }
-        else if (event.key.toLowerCase() === "h") { event.preventDefault(); toggleDrawer(hostDrawer); }
-        else if (event.key.toLowerCase() === "n") { event.preventDefault(); toggleDrawer(notesDrawer); }
+        else if (event.key.toLowerCase() === "o") { event.preventDefault(); cycleTerminalEnvironment(); }
+        else if (!isAudience && event.key.toLowerCase() === "h") { event.preventDefault(); toggleDrawer(hostDrawer); }
+        else if (!isAudience && event.key.toLowerCase() === "n") { event.preventDefault(); toggleDrawer(notesDrawer); }
         else if (event.key.toLowerCase() === "f") {
           event.preventDefault();
           if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function () {}); else document.exitFullscreen();
         }
-        else if (event.key.toLowerCase() === "t") {
+        else if (!isAudience && event.key.toLowerCase() === "t") {
           event.preventDefault();
           state.showTimings = !state.showTimings;
           renderTimings();
@@ -3950,9 +4450,21 @@
         else if (event.key === "Escape") { toggleDrawer(hostDrawer, false); toggleDrawer(notesDrawer, false); }
       });
 
+      window.workshopPresentation = Object.freeze({
+        version: 1,
+        mode: VIEW_MODE,
+        stateChangeEvent: "workshop:statechange",
+        getSnapshot: getWorkshopSnapshot,
+        applySnapshot: applyWorkshopSnapshot,
+        applyArchivedSnapshot: applyArchivedWorkshopSnapshot,
+        goToSlideId: goToSlideId,
+        setAudienceHashEnabled: setAudienceHashEnabled
+      });
+
       renderAll();
       initGlobalConnectionGraphic();
     }());
   </script>
+  <script src="assets/workshop-session.js" defer></script>
 </body>
 </html>

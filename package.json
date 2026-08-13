@@ -1,0 +1,19 @@
+{
+  "name": "studio-agents-cli-workshop",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && node --env-file=.env.local scripts/dev.mjs",
+    "test": "vitest run",
+    "verify": "npm run build && npm test"
+  },
+  "dependencies": {
+    "agora-rtm": "^2.2.3",
+    "agora-token": "^2.0.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "vitest": "^3.2.0"
+  }
+}

@@ -1,10 +1,34 @@
 # Agora Voice AI Workshop - V2 presentation
 
-This is a static, Vercel-ready presentation website. The workshop runs from `index.html`; no application build is required.
+This is a static-first, Vercel-ready presentation website. The host and audience share one canonical HTML deck; a small browser bundle adds Agora Signaling, and one serverless function mints short-lived RTM tokens.
+
+## Local setup
+
+The repository is bound to the existing Agora `Testing` project in `.agora/project.json`. Use Agora CLI to refresh the ignored local environment, then install and run:
+
+```sh
+agora project use Testing
+agora project env write .env.local --project Testing --template standard
+npm install
+npm run dev
+```
+
+The host route requires the password `AgoraWorkshop2026` by default. `WORKSHOP_HOST_KEY` can override that committed development password in the deployment environment. The accepted password stays in the presenter’s browser tab and is never placed in the URL.
 
 ## Presenting
 
-Open `index.html` through a local web server or the deployed Vercel URL.
+Participants open the root URL. The audience automatically derives the local calendar date, such as `2026-08-12`, and connects to the RTM message channel with that exact name.
+
+The presenter opens `/host`, enters the workshop password, and then connects as the trusted host for the same channel. Presenter controls remain covered until authentication succeeds.
+
+If two workshops share a date or device dates disagree, override the channel in both URLs:
+
+```text
+Audience: /?channel=sf-rehearsal
+Host:     /host?channel=sf-rehearsal
+```
+
+Overrides are normalized to lowercase URL-safe names; spaces become hyphens. Names must start with a letter or number, contain only letters, numbers, `_`, and `-`, and be no longer than 48 characters. An invalid override is never allowed to silently fall back to the date channel.
 
 - Arrow keys, Space, Page Up, and Page Down move through slides.
 - `H` opens host controls from any slide.
@@ -14,12 +38,39 @@ Open `index.html` through a local web server or the deployed Vercel URL.
 - `?` shows all shortcuts.
 - The city bubble displays only the current city and switches when clicked.
 
+## Audience view
+
+Participants normally use `/`, or `/?channel=...` when the host supplies an override. Their browser resolves the channel, reuses a browser-scoped string UID from local storage, subscribes with messages and presence, and requests the current snapshot. The server validates the audience-only UID format and mints every reload or renewal token for that exact subject. Before the first trusted host snapshot arrives, a dedicated waiting screen explains that the session has not started without exposing signaling details. The deck appears automatically when the authenticated host connects. `/audience` remains as a compatibility alias.
+
+- Host controls, presenter notes, timing cues, and their keyboard shortcuts are unavailable.
+- Slides, links, copy/download actions, and visual content come from the same `index.html` used by the host.
+- Every slide has a stable `data-slide-id`; URLs such as `#slide-install-cli` keep working if slides are reordered.
+- While following, host-controlled navigation is locked but links, copy buttons, and downloads remain usable.
+- **Following host** switches to independent browsing; **Return to live** applies the newest host snapshot.
+- Late arrivals request the current snapshot, and host presence events provide an additional recovery path.
+- After the first trusted host snapshot, the audience browser saves a safe local copy of the workshop choices. On a later visit with no active host, the waiting screen still shows the inactive session and offers **View presentation** for the last workshop.
+
+The presentation exposes a transport-neutral API at `window.workshopPresentation`. `src/signaling.js` publishes host snapshots from `workshop:statechange` and dispatches validated remote snapshots to the audience view. Email-claim snapshots contain only the claim mode and event name. Manual mode shares the host-entered phone and SIP fields, including the password, with the live audience; those operational values are never added to saved audience decks.
+
+The saved audience copy records the channel, venue, template, code track, its derived project tooling, model-provider selections, theme, and terminal environment. It does not retain SIP settings, campaign data, credentials, or secrets. Audience fragments such as `#slide-install-cli` are cleared while waiting or following the host. Opening the saved copy starts at the welcome slide, enables slide fragments and independent navigation, and continues checking for a live session.
+
+## Verification
+
+```sh
+npm run verify
+agora project feature status rtm
+```
+
+The tests mock the Agora SDK boundary and cover local-date session validation, RTM login-before-subscribe, message and presence subscription, trusted-host filtering, late joins, login failure, token renewal, cleanup order, token subject identity, environment password overrides, and the committed fallback password.
+
+The selected `Testing` project currently reports token enforcement as disabled in Agora Console. The app still uses server-generated tokens and never exposes the App Certificate, but token enforcement must be enabled on the project before treating a public deployment as authenticated.
+
 Host choices are stored only in that browser:
 
 - San Francisco or New York
 - One Agent Studio template for the room
 - Python, Next.js, or Go
-- pnpm or Bun for the Skills-generated web project
+- Track-derived tooling: Bun for Python, pnpm for TypeScript, or Make for Go
 - Light, dark, or system theme
 
 Python and Bun are the defaults.
@@ -36,21 +87,21 @@ python3 scripts/generate-discord-qr.py workshop-config.json discord-qr.svg
 
 This requires the Python `reportlab` package. Scan the generated QR from a second device before publishing.
 
-### Workshop phone-number cards
+### Workshop phone-number claims
 
-Each attendee card contains only one temporary phone number. Configure the shared event SIP server, username, and password in the presentation's host controls; do not add those shared credentials to the card JSON. The project ignores the entire `private/` directory.
+Slide 13 supports two host-selected setup methods:
 
-1. Copy `private.example/sip-numbers.example.json` to `private/sip-numbers.json`.
-2. Replace the examples with the temporary workshop phone numbers.
-3. Generate the print file for plain white paper:
+- **Email claim API**: enter the allocator’s event name, such as `SFWRKSHP26`, in host controls. The optional host claim email lets the presenter claim directly without the overlay; it stays in session storage and is not signaled. Each attendee still enters their own email so they receive their unique phone number and SIP details.
+- **Manual details**: enter a phone number plus the SIP vendor, display name, server, transport, username, and password in host controls. These values are shared over the trusted live signaling session.
+
+Configure the allocator token only on the server:
 
 ```sh
-python3 scripts/generate-sip-cards.py private/sip-numbers.json private/sip-cards.pdf --cut-guides
+PHONE_CLAIM_API_URL=https://carrot-seven.vercel.app/api/event-number-claims
+PHONE_CLAIM_API_TOKEN=replace-with-the-allocator-token
 ```
 
-For pre-perforated 3.5 x 2 inch business-card stock, omit `--cut-guides`.
-
-The sample PDF uses fake phone numbers and demonstrates the exact ten-card US Letter layout. Plan for 50 real numbers per workshop, distribute cards at check-in, and revoke the number pool and shared trunk credentials after the event.
+The browser posts only `{ email, eventName }` to `/api/phone-number-claim`; the server adds authorization and returns an allowlisted response. FQDN connections use `sip_subdomain` as the trunk address and show that username/password credentials are not required. Attendee emails and returned SIP assignments remain in memory for the current tab only. Neither setup method’s operational values are retained in the audience’s saved workshop copy. Test the flow from a participant device before doors open, limit the allocator to the event pool, and disable claims before revoking the pool and trunk credentials after the event.
 
 ## Deployment
 
@@ -69,11 +120,11 @@ The provider links in the deck currently open the provider's deployment entry po
 
 ## Clean-machine rehearsal
 
-Rehearse the selected Studio template, code track, package manager, and venue network end to end.
+Rehearse the selected Studio template, code track, derived tooling, and venue network end to end. Python uses Bun, TypeScript uses pnpm, and Go uses Make.
 
 1. Confirm the Studio template labels and dynamic-variable behavior.
 2. Upload a one-row CSV with `phone_number` first and E.164 data.
-3. Configure the shared event SIP trunk in the host controls, test one temporary number, launch a campaign, and verify the full revocation procedure.
+3. Configure the claim event name (or manual SIP details) in host controls, claim one temporary number from a participant device, launch a campaign, and verify the full shutdown and revocation procedure.
 4. Run `agora quickstart list` and confirm `python`, `nextjs`, and `go` remain current template IDs.
 5. Run the selected quickstart from a clean machine.
 6. For Go, verify whether the explicit environment-write step is still required.

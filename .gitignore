@@ -2,4 +2,10 @@ private/
 *.pdf
 !sip-cards-sample.pdf
 .DS_Store
-
+.env
+.env.*
+!.env.example
+node_modules/
+assets/workshop-session.js
+assets/workshop-session.js.map
+coverage/
