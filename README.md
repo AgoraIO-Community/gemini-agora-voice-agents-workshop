@@ -67,6 +67,7 @@ The selected `Testing` project currently reports token enforcement as disabled i
 
 Host choices are stored only in that browser:
 
+- Venue Wi-Fi name and session-only password for the projected opening slide
 - San Francisco or New York
 - One Agent Studio template for the room
 - Python, Next.js, or Go

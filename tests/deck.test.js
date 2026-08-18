@@ -31,4 +31,15 @@ describe("workshop deck structure", () => {
     expect(html).toContain('{ 1: "install-cli", 2: "initialize-quickstart", 3: "run-quickstart"');
     expect(html).not.toMatch(/slideTargets\s*=\s*\{\s*1:\s*\d/);
   });
+
+  it("keeps configurable venue Wi-Fi details host-only", () => {
+    expect(html).toContain('id="wifiNameInput"');
+    expect(html).toContain('id="wifiPasswordInput"');
+    expect(html).toContain('id="frontWifiDetails"');
+    expect(html).toContain('sessionStorage.getItem("agora-v2-wifi-password")');
+
+    const sharedKeys = html.slice(html.indexOf("var SHARED_CONFIG_KEYS"), html.indexOf("var SHARED_CONFIG_ENUMS"));
+    expect(sharedKeys).not.toContain("wifiName");
+    expect(sharedKeys).not.toContain("wifiPassword");
+  });
 });

@@ -24,6 +24,7 @@ Before the host connects, participants see a waiting screen confirming that they
 
 Press `H` from any slide and select:
 
+- Venue Wi-Fi name and password for the projected opening slide
 - Event city
 - One Studio template for the whole room
 - Python, Next.js, or Go

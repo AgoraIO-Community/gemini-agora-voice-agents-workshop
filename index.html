@@ -260,21 +260,39 @@
     .front-join-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      min-height: 44px;
-      padding: 9px 15px;
-      border: 1px solid rgba(73, 216, 243, .58);
-      border-radius: 10px;
-      background: rgba(3, 21, 35, .58);
+      gap: 13px;
+      min-height: 62px;
+      padding: 13px 20px;
+      border: 2px solid rgba(73, 216, 243, .72);
+      border-radius: 12px;
+      background: rgba(3, 21, 35, .76);
       color: #fff;
-      font-size: clamp(16px, 1.5vw, 21px);
-      font-weight: 800;
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 850;
       text-decoration: none;
       box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
       backdrop-filter: blur(10px);
     }
-    .front-join-link span { color: #49d8f3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .front-join-link span { color: #49d8f3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 900; }
     .front-join-link:hover { border-color: #49d8f3; background: rgba(3, 34, 53, .78); }
+    .front-access { display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px; }
+    .front-wifi {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(170px, auto));
+      align-items: center;
+      gap: 8px 24px;
+      min-height: 62px;
+      padding: 10px 18px;
+      border: 2px solid rgba(255, 255, 255, .34);
+      border-radius: 12px;
+      background: rgba(3, 21, 35, .76);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+      backdrop-filter: blur(10px);
+    }
+    .front-wifi[hidden] { display: none; }
+    .front-wifi-item { display: grid; gap: 2px; min-width: 0; }
+    .front-wifi-item span { color: rgba(255, 255, 255, .72); font-size: 11px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .front-wifi-item strong { overflow-wrap: anywhere; color: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(17px, 1.55vw, 22px); line-height: 1.2; }
 
     .platform-video {
       position: relative;
@@ -1661,12 +1679,14 @@
     }
     #sipModeInput,
     #sipClaimHostEmailInput { min-width: 0; }
+    .host-network-config,
     .host-campaign-config,
     .host-model-config {
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid var(--line);
     }
+    .host-network-config > summary,
     .host-campaign-config > summary,
     .host-model-config > summary {
       display: flex;
@@ -1683,14 +1703,20 @@
       cursor: pointer;
       list-style: none;
     }
+    .host-network-config > summary::-webkit-details-marker,
     .host-campaign-config > summary::-webkit-details-marker,
     .host-model-config > summary::-webkit-details-marker { display: none; }
+    .host-network-config > summary::before,
     .host-campaign-config > summary::before,
     .host-model-config > summary::before { content: "+"; color: var(--accent); font-size: 17px; line-height: 1; }
+    .host-network-config[open] > summary::before,
     .host-campaign-config[open] > summary::before,
     .host-model-config[open] > summary::before { content: "−"; }
+    .host-network-config > summary span,
     .host-campaign-config > summary span,
     .host-model-config > summary span { margin-left: auto; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .host-network-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .host-network-note { margin: 8px 2px 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .host-model-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1901,6 +1927,7 @@
       .host-sip-config,
       .host-sip-config[data-sip-mode="claim"] { grid-template-columns: 1fr; }
       .host-sip-intro { grid-column: auto; }
+      .host-network-grid { grid-template-columns: 1fr; }
       .host-campaign-grid { grid-template-columns: 1fr 1fr; }
       .host-model-grid { grid-template-columns: 1fr; }
       .host-campaign-grid .wide { grid-column: 1 / -1; }
@@ -1913,6 +1940,8 @@
       .workshop-stage-card { min-height: 84px; }
       .concept-banner { align-items: flex-start; flex-direction: column; }
       .concept-sequence { width: 100%; flex-wrap: wrap; }
+      .front-access, .front-wifi { width: 100%; }
+      .front-wifi { grid-template-columns: 1fr; }
       .cascade-shell-header { align-items: flex-start; flex-direction: column; gap: 5px; }
       .cascade-return { align-items: flex-start; flex-wrap: wrap; }
       .shared-workspace-strip { align-items: stretch; flex-direction: column; }
@@ -1994,11 +2023,18 @@
           <span class="front-divider" aria-hidden="true">◆</span>
           <span>Doors 5:30 · Workshop 5:45</span>
         </div>
-        <a class="front-join-link" data-host-only href="https://bit.ly/4xxH6Uf" target="_blank" rel="noreferrer">Join the workshop <span>bit.ly/4xxH6Uf</span></a>
+        <div class="front-access" data-host-only>
+          <a class="front-join-link" href="https://bit.ly/4xxH6Uf" target="_blank" rel="noreferrer">Join the workshop <span>bit.ly/4xxH6Uf</span></a>
+          <div id="frontWifiDetails" class="front-wifi" hidden>
+            <div class="front-wifi-item"><span>Venue Wi-Fi</span><strong id="frontWifiName"></strong></div>
+            <div class="front-wifi-item"><span>Password</span><strong id="frontWifiPassword"></strong></div>
+          </div>
+        </div>
         <p class="front-hold">Get connected. We’ll begin shortly.</p>
       </div>
       <div class="speaker-notes">
         <p>Leave this slide up as doors open at 5:30. Support staff help attendees connect to Wi-Fi and confirm they have a laptop, headphones, and a modern browser.</p>
+        <p>Before doors open, press <strong>H</strong>, expand <strong>Venue Wi-Fi</strong>, and confirm the projected network name and password.</p>
         <p>Direct attendees to <strong>bit.ly/4xxH6Uf</strong> to open the audience view.</p>
         <p>Encourage attendees to finish Agora account verification now if they did not complete it from the reminder email.</p>
       </div>
@@ -2820,6 +2856,14 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         <div class="setting"><label for="templateSelect">Agent Studio template</label><select id="templateSelect"><option value="blank">Blank Template</option><option value="appointment">Appointment Reminder</option><option value="nps">NPS Survey</option><option value="payment">Payment Reminder</option><option value="ivr">Interactive Voice Response</option><option value="ecommerce">Customer service for e-commerce</option><option value="sales">Sales / Lead qualification</option></select></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="python">Python · default</option><option value="nextjs">TypeScript</option><option value="go">Go</option></select></div>
       </div>
+      <details class="host-network-config">
+        <summary>Venue Wi-Fi <span>Opening slide · host only</span></summary>
+        <div class="host-network-grid">
+          <div class="setting"><label for="wifiNameInput">Wi-Fi name</label><input id="wifiNameInput" type="text" autocomplete="off" placeholder="Venue network"></div>
+          <div class="setting"><label for="wifiPasswordInput">Wi-Fi password</label><input id="wifiPasswordInput" type="text" autocomplete="off" placeholder="Network password"></div>
+        </div>
+        <p class="host-network-note">Shown only on the projected host opening slide. These values are not sent through signaling or included in saved audience decks.</p>
+      </details>
       <details class="host-model-config">
         <summary>Model credentials · Slide 26 <span>Managed or BYOK</span></summary>
         <div class="host-model-grid">
@@ -3114,6 +3158,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         ttsProvider: "managed",
         theme: "auto",
         terminalEnvironment: "mac",
+        wifiName: "",
+        wifiPassword: "",
         sipMode: "claim",
         sipClaimEventName: "",
         sipClaimHostEmail: "",
@@ -3184,6 +3230,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         ttsProvider: localStorage.getItem("agora-v2-tts-provider") || DEFAULTS.ttsProvider,
         theme: localStorage.getItem("agora-v2-theme") || DEFAULTS.theme,
         terminalEnvironment: localStorage.getItem("agora-v2-terminal-environment") || DEFAULTS.terminalEnvironment,
+        wifiName: isAudience ? DEFAULTS.wifiName : (localStorage.getItem("agora-v2-wifi-name") || DEFAULTS.wifiName),
+        wifiPassword: isAudience ? DEFAULTS.wifiPassword : (sessionStorage.getItem("agora-v2-wifi-password") || DEFAULTS.wifiPassword),
         sipMode: localStorage.getItem("agora-v2-sip-mode") || DEFAULTS.sipMode,
         sipClaimEventName: localStorage.getItem("agora-v2-sip-claim-event-name") || DEFAULTS.sipClaimEventName,
         sipClaimHostEmail: isAudience ? DEFAULTS.sipClaimHostEmail : (sessionStorage.getItem("agora-v2-sip-claim-host-email") || DEFAULTS.sipClaimHostEmail),
@@ -3296,6 +3344,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         localStorage.setItem("agora-v2-tts-provider", state.ttsProvider);
         localStorage.setItem("agora-v2-theme", state.theme);
         localStorage.setItem("agora-v2-terminal-environment", state.terminalEnvironment);
+        localStorage.setItem("agora-v2-wifi-name", state.wifiName);
+        if (state.wifiPassword) sessionStorage.setItem("agora-v2-wifi-password", state.wifiPassword); else sessionStorage.removeItem("agora-v2-wifi-password");
         localStorage.setItem("agora-v2-sip-mode", state.sipMode);
         localStorage.setItem("agora-v2-sip-claim-event-name", state.sipClaimEventName);
         if (state.sipClaimHostEmail) sessionStorage.setItem("agora-v2-sip-claim-host-email", state.sipClaimHostEmail); else sessionStorage.removeItem("agora-v2-sip-claim-host-email");
@@ -3345,6 +3395,16 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         var frontEventImage = document.getElementById("frontEventImage");
         frontEventImage.src = data.image;
         frontEventImage.alt = data.imageAlt;
+      }
+
+      function renderWifiDetails() {
+        var wifiName = state.wifiName.trim();
+        var wifiPassword = state.wifiPassword.trim();
+        document.getElementById("wifiNameInput").value = state.wifiName;
+        document.getElementById("wifiPasswordInput").value = state.wifiPassword;
+        document.getElementById("frontWifiName").textContent = wifiName || "Not provided";
+        document.getElementById("frontWifiPassword").textContent = wifiPassword || "Not provided";
+        document.getElementById("frontWifiDetails").hidden = !wifiName && !wifiPassword;
       }
 
       function renderSipTrunk() {
@@ -4031,6 +4091,7 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         renderTheme();
         renderTimings();
         renderCity();
+        renderWifiDetails();
         renderSipTrunk();
         renderTemplate();
         renderCampaign();
@@ -4193,6 +4254,16 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         state.theme = modes[(modes.indexOf(state.theme) + 1) % modes.length];
         renderAll();
         showToast("Theme: " + ({ auto: "System", light: "Light", dark: "Dark" }[state.theme]));
+      });
+      [
+        { id: "wifiNameInput", key: "wifiName" },
+        { id: "wifiPasswordInput", key: "wifiPassword" }
+      ].forEach(function (field) {
+        document.getElementById(field.id).addEventListener("input", function (event) {
+          state[field.key] = event.target.value;
+          persist();
+          renderWifiDetails();
+        });
       });
       document.getElementById("sipModeInput").addEventListener("change", function (event) {
         state.sipMode = event.target.value;
