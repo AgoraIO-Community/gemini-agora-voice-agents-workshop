@@ -89,7 +89,7 @@ This requires the Python `reportlab` package. Scan the generated QR from a secon
 
 ### Workshop phone-number claims
 
-Slide 13 supports two host-selected setup methods:
+Slide 14 supports two host-selected setup methods:
 
 - **Email claim API**: enter the allocator’s event name, such as `SFWRKSHP26`, in host controls. The optional host claim email lets the presenter claim directly without the overlay; it stays in session storage and is not signaled. Each attendee still enters their own email so they receive their unique phone number and SIP details.
 - **Manual details**: enter a phone number plus the SIP vendor, display name, server, transport, username, and password in host controls. These values are shared over the trusted live signaling session.

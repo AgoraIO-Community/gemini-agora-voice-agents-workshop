@@ -257,6 +257,24 @@
       color: rgba(255, 255, 255, .68);
       font-size: 14px;
     }
+    .front-join-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 9px 15px;
+      border: 1px solid rgba(73, 216, 243, .58);
+      border-radius: 10px;
+      background: rgba(3, 21, 35, .58);
+      color: #fff;
+      font-size: clamp(16px, 1.5vw, 21px);
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+      backdrop-filter: blur(10px);
+    }
+    .front-join-link span { color: #49d8f3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .front-join-link:hover { border-color: #49d8f3; background: rgba(3, 34, 53, .78); }
 
     .platform-video {
       position: relative;
@@ -805,6 +823,81 @@
     .arch-node p { margin: 8px 0 0; color: var(--muted); line-height: 1.45; }
     .arch-arrow { color: var(--accent); font-size: 30px; font-weight: 900; text-align: center; }
 
+    .cascade-slide { --cascade-audio: #14c9ee; --cascade-text: #a982ff; gap: 11px; }
+    .cascade-slide h2 { max-width: 1050px; font-size: clamp(32px, 3.7vw, 52px); line-height: .98; }
+    .cascade-slide > .lede { max-width: 1120px; font-size: clamp(16px, 1.45vw, 20px); line-height: 1.35; }
+    .cascade-shell {
+      width: min(1120px, 100%);
+      padding: clamp(16px, 1.8vw, 22px);
+      border: 1px solid color-mix(in srgb, var(--cascade-audio) 50%, var(--line));
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(20, 201, 238, .15), transparent 32%),
+        radial-gradient(circle at 82% 100%, rgba(169, 130, 255, .14), transparent 34%),
+        linear-gradient(145deg, #061725, #030a12);
+      box-shadow: var(--shadow-float);
+      color: #f7fbff;
+    }
+    .cascade-shell-header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 15px; }
+    .cascade-sdrtn-label { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; letter-spacing: -.01em; }
+    .cascade-sdrtn-label::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--cascade-audio); box-shadow: 0 0 18px var(--cascade-audio); }
+    .cascade-shell-header small { color: rgba(231, 243, 252, .62); font-size: 11px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .cascade-pipeline {
+      display: grid;
+      grid-template-columns: minmax(150px, 1.05fr) minmax(72px, .48fr) minmax(150px, 1fr) minmax(72px, .48fr) minmax(150px, 1fr) minmax(72px, .48fr) minmax(150px, 1fr);
+      align-items: stretch;
+      gap: 10px;
+    }
+    .cascade-node {
+      position: relative;
+      min-width: 0;
+      min-height: 156px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 14px;
+      background: rgba(8, 25, 39, .84);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 14px 30px rgba(0, 0, 0, .2);
+    }
+    .cascade-node.device { border-color: rgba(20, 201, 238, .52); background: rgba(6, 35, 51, .88); }
+    .cascade-node.llm { border-color: rgba(169, 130, 255, .55); }
+    .cascade-node-type { display: block; margin-bottom: 12px; color: rgba(231, 243, 252, .56); font-size: 9px; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .cascade-node strong { display: block; margin-bottom: 6px; font-size: clamp(20px, 2vw, 27px); line-height: 1; }
+    .cascade-node p { margin: 0; color: rgba(231, 243, 252, .68); font-size: 11px; line-height: 1.35; }
+    .cascade-node-result { position: absolute; inset: auto 14px 10px; color: var(--cascade-audio); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; font-weight: 800; }
+    .cascade-node.llm .cascade-node-result { color: var(--cascade-text); }
+    .cascade-connector { position: relative; display: grid; align-content: center; justify-items: center; min-width: 0; color: var(--cascade-text); }
+    .cascade-connector.audio { color: var(--cascade-audio); }
+    .cascade-connector-line { position: relative; width: 100%; height: 2px; background: currentColor; box-shadow: 0 0 12px color-mix(in srgb, currentColor 72%, transparent); }
+    .cascade-connector-line::before { content: ""; position: absolute; right: -1px; top: 50%; width: 9px; height: 9px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: translateY(-50%) rotate(45deg); }
+    .cascade-connector-line::after { content: ""; position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 13px currentColor; }
+    .slide.active .cascade-connector-line::after { animation: cascade-forward 2.4s ease-in-out infinite; }
+    .cascade-connector-label { position: absolute; top: calc(50% - 30px); width: 100%; color: currentColor; font-size: 9px; font-weight: 850; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+    .cascade-return {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 42px;
+      margin: 11px 0 0;
+      padding: 7px 14px;
+      overflow: hidden;
+      border: 1px solid rgba(20, 201, 238, .4);
+      border-radius: 12px;
+      background: rgba(20, 201, 238, .08);
+      color: var(--cascade-audio);
+    }
+    .cascade-return-arrow { font-size: 24px; font-weight: 900; line-height: 1; }
+    .cascade-return strong { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .cascade-return span:last-child { color: rgba(231, 243, 252, .66); font-size: 11px; }
+    .cascade-return::after { content: ""; position: absolute; right: 16px; width: 8px; height: 8px; border-radius: 50%; background: var(--cascade-audio); box-shadow: 0 0 13px var(--cascade-audio); }
+    .slide.active .cascade-return::after { animation: cascade-return 3.1s ease-in-out infinite; }
+    .cascade-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .cascade-legend span { display: inline-flex; align-items: center; gap: 7px; color: rgba(231, 243, 252, .62); font-size: 10px; font-weight: 750; }
+    .cascade-legend span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cascade-text); }
+    .cascade-legend span:first-child::before { background: var(--cascade-audio); }
+    @keyframes cascade-forward { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 8px); opacity: 0; } }
+    @keyframes cascade-return { 0% { right: 16px; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { right: calc(100% - 24px); opacity: 0; } }
+
     .connection-graphic {
       position: relative;
       width: 100%;
@@ -1340,7 +1433,7 @@
 
     .qr-layout { display: grid; grid-template-columns: 1fr minmax(280px, 390px); gap: clamp(30px, 6vw, 84px); align-items: center; }
     .qr-card { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--shadow-float); }
-    .qr-card img { display: block; width: 100%; aspect-ratio: 1; }
+    .qr-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; image-rendering: pixelated; }
 
     .footer {
       position: fixed;
@@ -1563,8 +1656,11 @@
     .host-sip-intro span { display: block; color: var(--muted); font-size: 11px; line-height: 1.35; }
     .host-sip-config[data-sip-mode="manual"] [data-sip-claim-only],
     .host-sip-config[data-sip-mode="claim"] [data-sip-manual-only] { display: none; }
-    #sipModeInput { min-width: 176px; }
-    #sipClaimHostEmailInput { min-width: 210px; }
+    .host-sip-config[data-sip-mode="claim"] {
+      grid-template-columns: minmax(170px, .8fr) minmax(190px, .9fr) minmax(210px, 1fr) minmax(260px, 1.25fr);
+    }
+    #sipModeInput,
+    #sipClaimHostEmailInput { min-width: 0; }
     .host-campaign-config,
     .host-model-config {
       margin-top: 12px;
@@ -1768,8 +1864,17 @@
       .agent-summary { border-left: 0; border-top: 1px solid var(--line); }
       .campaign-ui, .csv-workshop-layout, .prompt-layout, .qr-layout, .architecture, .campaign-builder-grid { grid-template-columns: 1fr; }
       .arch-arrow { transform: rotate(90deg); }
+      .cascade-pipeline { grid-template-columns: 1fr; }
+      .cascade-node { min-height: 126px; }
+      .cascade-connector { min-height: 44px; }
+      .cascade-connector-line { width: 2px; height: 100%; }
+      .cascade-connector-line::before { right: auto; top: auto; bottom: -1px; left: 50%; transform: translateX(-50%) rotate(135deg); }
+      .cascade-connector-line::after { top: 0; left: -3px; }
+      .slide.active .cascade-connector-line::after { animation: cascade-forward-vertical 2.4s ease-in-out infinite; }
+      .cascade-connector-label { top: 50%; left: calc(50% + 14px); width: auto; transform: translateY(-50%); white-space: nowrap; }
       .host-control-grid { grid-template-columns: 2fr 1fr; }
       .host-sip-config { grid-template-columns: 1fr 1fr 1fr; }
+      .host-sip-config[data-sip-mode="claim"] { grid-template-columns: 1fr 1fr; }
       .host-sip-intro { grid-column: 1 / -1; }
       .host-campaign-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .host-model-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1793,7 +1898,8 @@
       .session-status { display: none; }
       .connection-annotations { top: 8px; right: 8px; bottom: auto; left: auto; justify-content: flex-end; }
       .host-control-grid { grid-template-columns: 1fr 1fr; }
-      .host-sip-config { grid-template-columns: 1fr; }
+      .host-sip-config,
+      .host-sip-config[data-sip-mode="claim"] { grid-template-columns: 1fr; }
       .host-sip-intro { grid-column: auto; }
       .host-campaign-grid { grid-template-columns: 1fr 1fr; }
       .host-model-grid { grid-template-columns: 1fr; }
@@ -1807,6 +1913,8 @@
       .workshop-stage-card { min-height: 84px; }
       .concept-banner { align-items: flex-start; flex-direction: column; }
       .concept-sequence { width: 100%; flex-wrap: wrap; }
+      .cascade-shell-header { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .cascade-return { align-items: flex-start; flex-wrap: wrap; }
       .shared-workspace-strip { align-items: stretch; flex-direction: column; }
       .workspace-command-line { align-items: flex-start; gap: 10px; }
       .workspace-terminal .terminal-body { padding: 30px 20px; }
@@ -1823,6 +1931,8 @@
       .slide.active .quickstart-steps .choice-button.active::after,
       .quickstart-command.is-swapping { animation: none; }
     }
+
+    @keyframes cascade-forward-vertical { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: calc(100% - 8px); opacity: 0; } }
 
     @media print {
       body { overflow: visible; background: #fff; }
@@ -1884,10 +1994,12 @@
           <span class="front-divider" aria-hidden="true">◆</span>
           <span>Doors 5:30 · Workshop 5:45</span>
         </div>
+        <a class="front-join-link" data-host-only href="https://bit.ly/4xxH6Uf" target="_blank" rel="noreferrer">Join the workshop <span>bit.ly/4xxH6Uf</span></a>
         <p class="front-hold">Get connected. We’ll begin shortly.</p>
       </div>
       <div class="speaker-notes">
         <p>Leave this slide up as doors open at 5:30. Support staff help attendees connect to Wi-Fi and confirm they have a laptop, headphones, and a modern browser.</p>
+        <p>Direct attendees to <strong>bit.ly/4xxH6Uf</strong> to open the audience view.</p>
         <p>Encourage attendees to finish Agora account verification now if they did not complete it from the reminder email.</p>
       </div>
     </section>
@@ -1972,7 +2084,55 @@
       </div>
     </section>
 
-    <section class="slide" data-slide-id="agents" data-title="Mental model: Agents" data-section="How Agora works" data-cue="5:57">
+    <section class="slide compact cascade-slide" data-slide-id="conversational-ai-pipeline" data-title="The cascading voice pipeline" data-section="How Agora works" data-cue="5:57">
+      <p class="eyebrow">Agora Conversational AI Engine</p>
+      <h2>Speech becomes intelligence—and returns as <span class="accent">realtime voice.</span></h2>
+      <div class="cascade-shell" role="img" aria-label="Cascading voice AI pipeline on Agora SDRTN. A user device sends an audio stream to ASR. ASR sends transcript text to the LLM. The LLM sends response text to TTS. TTS publishes a synthesized audio stream back to the user.">
+        <div class="cascade-shell-header">
+          <strong class="cascade-sdrtn-label">Agora SDRTN®</strong>
+          <small>One managed realtime conversation path</small>
+        </div>
+        <div class="cascade-pipeline" aria-hidden="true">
+          <article class="cascade-node device">
+            <span class="cascade-node-type">Realtime participant</span>
+            <strong>User device</strong>
+            <p>Microphone publishes speech into the Agora Channel.</p>
+            <span class="cascade-node-result">MIC IN · SPEAKER OUT</span>
+          </article>
+          <div class="cascade-connector audio"><span class="cascade-connector-label">Audio stream</span><span class="cascade-connector-line"></span></div>
+          <article class="cascade-node asr">
+            <span class="cascade-node-type">Speech recognition</span>
+            <strong>ASR</strong>
+            <p>Understands the incoming speech as it arrives.</p>
+            <span class="cascade-node-result">AUDIO → TEXT</span>
+          </article>
+          <div class="cascade-connector"><span class="cascade-connector-label">Transcript text</span><span class="cascade-connector-line"></span></div>
+          <article class="cascade-node llm">
+            <span class="cascade-node-type">Language intelligence</span>
+            <strong>LLM</strong>
+            <p>Reasons over context and generates the response.</p>
+            <span class="cascade-node-result">UNDERSTAND → RESPOND</span>
+          </article>
+          <div class="cascade-connector"><span class="cascade-connector-label">Response text</span><span class="cascade-connector-line"></span></div>
+          <article class="cascade-node tts">
+            <span class="cascade-node-type">Voice synthesis</span>
+            <strong>TTS</strong>
+            <p>Turns the generated response into natural speech.</p>
+            <span class="cascade-node-result">TEXT → AUDIO</span>
+          </article>
+        </div>
+        <div class="cascade-return" aria-hidden="true"><span class="cascade-return-arrow">←</span><strong>Synthesized audio stream</strong><span>TTS publishes speech back through the Agora Channel to the user.</span></div>
+        <div class="cascade-legend" aria-hidden="true"><span>Realtime audio on SDRTN</span><span>Text handoff inside the cascade</span></div>
+      </div>
+      <p class="lede">The engine subscribes, transcribes, reasons, synthesizes, and publishes—while Agora keeps the conversation moving in realtime.</p>
+      <div class="speaker-notes">
+        <p>Follow the top row from left to right: the user publishes microphone audio to the Channel; the Conversational AI Engine subscribes to it; ASR produces transcript text; the LLM produces response text; and TTS synthesizes the response.</p>
+        <p>Then follow the cyan return path from right to left: the agent publishes synthesized audio back into the same Agora Channel, and the user hears it on their device.</p>
+        <p>Emphasize the boundary: SDRTN carries the realtime media path while Agora orchestrates the cascading ASR, LLM, and TTS stages as one live conversation. This is why turn detection, interruption, and latency across every stage affect how natural the agent feels.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-slide-id="agents" data-title="Mental model: Agents" data-section="How Agora works" data-cue="5:58">
       <div class="concept-banner">
         <p class="eyebrow">Developer mental model</p>
         <div class="concept-sequence" aria-label="Three-part developer mental model">
@@ -2615,7 +2775,7 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
           </div>
           <p id="discordStatus" class="microcopy" style="margin-top:20px">The production invite QR is configured before each deployment.</p>
         </div>
-        <div class="qr-card"><img src="discord-qr.svg" alt="Discord live-events invite QR code"></div>
+        <div class="qr-card"><img src="discord-qr-code.svg" alt="Discord live-events invite QR code"></div>
       </div>
       <div class="speaker-notes">
         <p>Leave this slide visible through the close. The same global invite is used across all events so live-event attendees can receive the extra badge.</p>
@@ -2661,7 +2821,7 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="python">Python · default</option><option value="nextjs">TypeScript</option><option value="go">Go</option></select></div>
       </div>
       <details class="host-model-config">
-        <summary>Model credentials · Slide 25 <span>Managed or BYOK</span></summary>
+        <summary>Model credentials · Slide 26 <span>Managed or BYOK</span></summary>
         <div class="host-model-grid">
           <div class="setting"><label for="sttProviderSelect">Speech-to-text</label><select id="sttProviderSelect">
             <option value="managed">Agora managed keys · default</option>
@@ -2692,7 +2852,7 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         <div class="setting" data-sip-manual-only><label for="sipPasswordInput">SIP password</label><input id="sipPasswordInput" type="password" autocomplete="new-password" placeholder="Enter event password"></div>
       </div>
       <details class="host-campaign-config">
-        <summary>Campaign screen · Slide 14 <span>Live controls</span></summary>
+        <summary>Campaign screen · Slide 15 <span>Live controls</span></summary>
         <div class="host-campaign-grid">
           <div class="setting wide"><label for="campaignNameInput">Campaign name</label><input id="campaignNameInput" type="text" autocomplete="off" placeholder="Uses the selected template"></div>
           <div class="setting wide"><label for="campaignAgentInput">AI agent</label><input id="campaignAgentInput" type="text" autocomplete="off" placeholder="Uses the selected template"></div>
@@ -2745,7 +2905,7 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
   <dialog id="sipClaimDialog" class="sip-claim-dialog">
     <form id="sipClaimForm" class="sip-claim-form">
       <div class="drawer-header"><div><p class="eyebrow">Workshop phone number</p><h2>Claim your number</h2></div><button id="sipClaimClose" class="icon-button" type="button" aria-label="Close phone number claim">×</button></div>
-      <p class="sip-claim-copy">Enter the email you registered with for this workshop. Your assigned number and SIP details will appear on slide 13.</p>
+      <p class="sip-claim-copy">Enter the email you registered with for this workshop. Your assigned number and SIP details will appear on slide 14.</p>
       <label for="sipClaimEmail">Email address<input id="sipClaimEmail" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="attendee@example.com"></label>
       <p id="sipClaimError" class="sip-claim-error" role="alert"></p>
       <p class="sip-claim-privacy">Your email and returned SIP credentials are used for this claim only and are not saved in the presentation archive or browser storage.</p>
@@ -3659,31 +3819,42 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         return 1;
       }
 
+      function currentSlideId() {
+        return slides[current].getAttribute("data-slide-id");
+      }
+
+      function currentSlideInRange(firstSlideId, lastSlideId) {
+        return current >= slideIndexById[firstSlideId] && current <= slideIndexById[lastSlideId];
+      }
+
       function syncWorkshopStageMenu() {
         var journey = document.getElementById("workshopJourney");
         var rail = document.querySelector(".workshop-stage-rail");
-        var shouldDock = current >= 9 && current <= 14;
+        var shouldDock = currentSlideInRange("choose-template", "phone-rings");
         if (shouldDock && rail.parentElement !== document.body) document.body.appendChild(rail);
         if (!shouldDock && rail.parentElement !== journey) journey.appendChild(rail);
         rail.classList.toggle("workshop-stage-menu", shouldDock);
       }
 
       function codeStageForSlide(scope, index) {
+        var slideId = slides[index].getAttribute("data-slide-id");
         if (scope === "cli") {
-          if (index >= 21) return 4;
-          if (index >= 20) return 3;
-          if (index >= 19) return 2;
+          if (["open-agent-file", "agent-definition", "install-agent-sdk"].indexOf(slideId) !== -1) return 4;
+          if (slideId === "run-quickstart") return 3;
+          if (slideId === "initialize-quickstart") return 2;
           return 1;
         }
-        if (index >= 30) return 4;
-        if (index >= 29) return 3;
-        if (index >= 27) return 2;
+        if (slideId === "speak-with-sdr") return 4;
+        if (slideId === "run-website-sdr") return 3;
+        if (["build-prompt", "let-agent-build"].indexOf(slideId) !== -1) return 2;
         return 1;
       }
 
       function renderCodeStageMenus() {
         ["cli", "skills"].forEach(function (scope) {
-          var inScope = scope === "cli" ? current >= 16 && current <= 23 : current >= 25 && current <= 30;
+          var inScope = scope === "cli"
+            ? currentSlideInRange("install-cli", "install-agent-sdk")
+            : currentSlideInRange("return-workshop-root", "speak-with-sdr");
           var activeStage = inScope ? codeStageForSlide(scope, current) : 1;
           document.querySelectorAll('[data-code-scope="' + scope + '"]').forEach(function (button) {
             var active = parseInt(button.getAttribute("data-code-stage"), 10) === activeStage;
@@ -3698,8 +3869,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         var skillsRail = document.getElementById("skillsStageRail");
         var cliHome = document.getElementById("cliPathCard");
         var skillsHome = document.getElementById("skillsPathCard");
-        var cliActive = current >= 16 && current <= 23;
-        var skillsActive = current >= 25 && current <= 30;
+        var cliActive = currentSlideInRange("install-cli", "install-agent-sdk");
+        var skillsActive = currentSlideInRange("return-workshop-root", "speak-with-sdr");
         if (cliActive && cliRail.parentElement !== document.body) document.body.appendChild(cliRail);
         if (!cliActive && cliRail.parentElement !== cliHome) cliHome.appendChild(cliRail);
         if (skillsActive && skillsRail.parentElement !== document.body) document.body.appendChild(skillsRail);
@@ -3732,8 +3903,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
         document.getElementById("progressFill").style.width = ((current + 1) / slides.length * 100) + "%";
         var slideHash = "#slide-" + slide.getAttribute("data-slide-id");
         history.replaceState(null, "", audienceHashEnabled ? slideHash : location.pathname + location.search);
-        if (current === 8) state.workshopStage = 1;
-        if (current >= 9 && current <= 14) state.workshopStage = workshopStageForSlide(current);
+        if (currentSlideId() === "studio-hands-on") state.workshopStage = 1;
+        if (currentSlideInRange("choose-template", "phone-rings")) state.workshopStage = workshopStageForSlide(current);
         renderWorkshopStage();
         syncWorkshopStageMenu();
         renderCodeStageMenus();
@@ -3820,7 +3991,8 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
 
       function go(delta) {
         var next = Math.max(0, Math.min(slides.length - 1, current + delta));
-        var crossesStudioStart = (current === 8 && next === 9) || (current === 9 && next === 8);
+        var crossesStudioStart = (currentSlideId() === "studio-hands-on" && slides[next].getAttribute("data-slide-id") === "choose-template")
+          || (currentSlideId() === "choose-template" && slides[next].getAttribute("data-slide-id") === "studio-hands-on");
         goToSlide(next, crossesStudioStart);
       }
 
@@ -3978,19 +4150,19 @@ cd agora_agents_workshop</pre><span class="workspace-command-cursor" aria-hidden
       document.querySelectorAll("[data-workshop-stage]").forEach(function (button) {
         button.addEventListener("click", function () {
           var stageNumber = parseInt(button.getAttribute("data-workshop-stage"), 10);
-        var slideTargets = { 1: 9, 2: 10, 3: 12, 4: 11, 5: 14 };
-          goToSlide(slideTargets[stageNumber], current === 8 && stageNumber === 1);
+          var slideTargets = { 1: "choose-template", 2: "customize-prompt", 3: "add-telephone-number", 4: "prepare-contact-list", 5: "phone-rings" };
+          goToSlideId(slideTargets[stageNumber], currentSlideId() === "studio-hands-on" && stageNumber === 1);
         });
       });
-      document.getElementById("workspaceStartButton").addEventListener("click", function () { goToSlide(16, false); });
+      document.getElementById("workspaceStartButton").addEventListener("click", function () { goToSlideId("install-cli", false); });
       document.querySelectorAll("[data-code-scope]").forEach(function (button) {
         button.addEventListener("click", function () {
           var scope = button.getAttribute("data-code-scope");
           var stageNumber = parseInt(button.getAttribute("data-code-stage"), 10);
           var slideTargets = scope === "cli"
-            ? { 1: 16, 2: 19, 3: 20, 4: 21 }
-            : { 1: 26, 2: 27, 3: 29, 4: 30 };
-          goToSlide(slideTargets[stageNumber], false);
+            ? { 1: "install-cli", 2: "initialize-quickstart", 3: "run-quickstart", 4: "open-agent-file" }
+            : { 1: "install-agora-skills", 2: "build-prompt", 3: "run-website-sdr", 4: "speak-with-sdr" };
+          goToSlideId(slideTargets[stageNumber], false);
         });
       });
       document.querySelectorAll("[data-copy-target]").forEach(function (button) {

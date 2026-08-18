@@ -31,7 +31,7 @@ Press `H` from any slide and select:
 - Presentation theme (cycle System, Light, and Dark with the icon button)
 - The phone allocator event name and server-only `PHONE_CLAIM_API_TOKEN`, or one complete manual phone/SIP assignment
 
-In host controls, choose **Email claim API**, enter the event name, and optionally enter the presenter’s email to bypass the claim overlay on the host view. That email remains in the host tab and is not signaled. Attendees still enter their own emails for unique assignments. Alternatively, choose **Manual details** and enter the phone/SIP fields. The API bearer token stays in the server environment and never enters signaling or browser code. API responses remain only in each attendee’s current tab. Manual values travel in the live trusted snapshot, while all phone and SIP details are excluded from saved audience decks. On slide 13, reveal the password only when attendees are ready to enter it, then hide it before continuing.
+In host controls, choose **Email claim API**, enter the event name, and optionally enter the presenter’s email to bypass the claim overlay on the host view. That email remains in the host tab and is not signaled. Attendees still enter their own emails for unique assignments. Alternatively, choose **Manual details** and enter the phone/SIP fields. The API bearer token stays in the server environment and never enters signaling or browser code. API responses remain only in each attendee’s current tab. Manual values travel in the live trusted snapshot, while all phone and SIP details are excluded from saved audience decks. On slide 14, reveal the password only when attendees are ready to enter it, then hide it before continuing.
 
 Press `N` for the current slide's speaker notes.
 
