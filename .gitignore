@@ -18,3 +18,4 @@ coverage/
 
 # Claude Code worktrees
 .claude/worktrees/
+.env*

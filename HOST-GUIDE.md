@@ -12,7 +12,7 @@ The stream opens with a short welcome and the Google DeepMind segment on Gemini 
 | 1–3 | Agora foundation: platform, cascaded loop, native loop, side-by-side code, pick an architecture | `what-is-agora` → `two-architectures` | Agora |
 | 3–6 | Recipes as quickstarts: CLI, `agora init --recipe`, run steps | `install-cli` → `run-recipe` | Agora |
 | 6–10 | Live demo: cascaded, then Gemini Live | `live-demo` | Agora |
-| 10–46 | Discussion (full-duplex primary, Flash for cascaded backup), then Q&A from chat for the last 8 minutes | `community-discussion` | Both |
+| 10–46 | Q&A from Discord chat; full-duplex and Flash-for-cascaded as starters while questions come in | `qa` | Both |
 | 46–48 | Close: recording, recipes, podcast, event channel | `close` | Agora host |
 
 ## Before the stream
@@ -55,5 +55,5 @@ Architecture and track sync to the audience view. Press `N` for the current slid
 
 - Live call fails: play the recorded happy path for that demo and continue.
 - CLI blocked: skip to `compare-code`; the recipe commands are in the audience view for viewers to copy later.
-- Google segment runs over: skip `install-cli` and the backup discussion topic.
-- Discussion runs short: bring multimodal realtime (screen + voice) forward from the channel topics.
+- Google segment runs over: skip `install-cli` and the second Q&A starter.
+- Questions run dry: bring multimodal realtime (screen + voice) forward from the channel topics.

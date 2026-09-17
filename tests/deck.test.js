@@ -5,14 +5,22 @@ const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const slideIds = [...html.matchAll(/<section class="slide[^"]*" data-slide-id="([^"]+)"/g)].map((m) => m[1]);
 
 describe("livestream deck structure", () => {
-  it("follows the Agora segment: welcome, foundation, CLI recipes, demo, discussion, close", () => {
+  it("follows the Agora segment: welcome, foundation, CLI recipes, demo, Q&A, close", () => {
     expect(slideIds).toEqual([
       "welcome", "run-of-show",
       "what-is-agora", "conversational-ai-pipeline", "mllm-pipeline", "compare-code", "two-architectures",
       "install-cli", "init-recipe", "run-recipe",
       "live-demo",
-      "community-discussion", "close"
+      "qa", "close"
     ]);
+  });
+
+  it("opens with an agenda that ends on Q&A and matches the slide order", () => {
+    const slide = html.slice(html.indexOf('data-slide-id="run-of-show"'), html.indexOf('data-slide-id="what-is-agora"'));
+    const steps = [...slide.matchAll(/<li class="agenda-item[^"]*">.*?<strong>(.*?)<\/strong>/g)].map((m) => m[1]);
+    expect(steps).toEqual(["About Agora", "Voice &amp; Conversational AI architectures", "Using Gemini with Agora Conversational AI", "Live demos", "Q&amp;A"]);
+    expect(slide).toContain('class="agenda-item qa"');
+    expect(slide).not.toMatch(/podcast/i);
   });
 
   it("labels the cascade with the Gemini stages and a generic TTS", () => {
