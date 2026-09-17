@@ -2,19 +2,15 @@ export const WORKSHOP_ARCHIVE_KEY = "agora-workshop-last-session-v1";
 
 const ARCHIVE_VERSION = 1;
 const SAFE_CONFIG_KEYS = Object.freeze([
-  "city",
-  "template",
+  "architecture",
   "track",
   "packageManager",
-  "sttProvider",
-  "llmProvider",
-  "ttsProvider",
   "theme",
   "terminalEnvironment"
 ]);
 
 const LABELS = Object.freeze({
-  city: { sf: "San Francisco", nyc: "New York" },
+  architecture: { cascaded: "Cascaded", mllm: "Gemini Live" },
   track: { python: "Python", nextjs: "Next.js", go: "Go" },
   packageManager: { pnpm: "pnpm", bun: "Bun", make: "Make" }
 });
@@ -33,7 +29,7 @@ export function createWorkshopArchive(sessionId, snapshot, savedAt = new Date())
   for (const key of SAFE_CONFIG_KEYS) {
     if (typeof snapshot.config[key] === "string") config[key] = snapshot.config[key];
   }
-  if (!config.city || !config.track || !PACKAGE_MANAGER_BY_TRACK[config.track]) return null;
+  if (!LABELS.architecture[config.architecture] || !config.track || !PACKAGE_MANAGER_BY_TRACK[config.track]) return null;
   config.packageManager = PACKAGE_MANAGER_BY_TRACK[config.track];
 
   return {
@@ -80,7 +76,7 @@ export function loadWorkshopArchive(storage) {
 export function workshopArchiveSummary(archive) {
   const config = archive?.snapshot?.config || {};
   return [
-    LABELS.city[config.city] || config.city,
+    LABELS.architecture[config.architecture] || config.architecture,
     LABELS.track[config.track] || config.track,
     LABELS.packageManager[config.packageManager] || config.packageManager
   ].filter(Boolean).join(" · ");

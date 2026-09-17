@@ -1,73 +1,59 @@
 # Host guide
 
-## Event timing
+## Run of show
 
-| Time | Segment | Required outcome |
-| --- | --- | --- |
-| 5:30 | Doors and setup | Wi-Fi connected, accounts verified, headphones ready, phone-number claim flow verified |
-| 5:45-5:50 | Welcome | Set the one/two/three build promise |
-| 5:50-6:00 | Agora foundation | Attendees understand SDRTN, Channels, configuration, start/stop, and webhooks |
-| 6:00-6:45 | Agent Studio | One selected template, dynamic variables, Contacts CSV, temporary SIP number, one-recipient campaign, live call |
-| 6:45-7:18 | Agora CLI and agent structure | Untouched quickstart runs; attendees recognize the Agent SDK, definition, lifecycle, managed keys, and BYOK |
-| 7:18-7:45 | Agora Skills | Project-local Skills install; `website-sdr` is generated, installed, run, and tested by voice |
-| 7:45-8:15 | Build clinic | Individualized Studio, CLI, and Skills support; optional tunnel/deploy |
-| 8:15-8:20 | Close | Discord badge, sample repository, community, next monthly workshop |
-| 8:30-9:00 | Cleanup | Revoke number pool, stop tunnels and demos, clear venue |
+Thursday, September 17 · 9–10 am PDT (12–1 pm EDT) · Agora Discord stage. Recorded. A podcast taping with the same speakers follows the live hour.
 
-## Host configuration
+The stream opens with a short welcome and the Google DeepMind segment on Gemini 3.5 Transcribe (about 15 minutes total). **This deck starts when Google hands back.** Times below are from that handoff.
 
-Participants open the root workshop URL. The presenter opens `/host` and enters the default password `AgoraWorkshop2026`; presenter controls remain covered until authentication succeeds. Both views use the local date as the Agora RTM channel, for example `2026-08-12`.
+| Min | Segment | Slides | Owner |
+| --- | --- | --- | --- |
+| 0–1 | Thank Google, framing, slide-follow link | `welcome`, `run-of-show` | Agora |
+| 1–3 | Agora foundation: platform, cascaded loop, native loop, side-by-side code, pick an architecture | `what-is-agora` → `two-architectures` | Agora |
+| 3–6 | Recipes as quickstarts: CLI, `agora init --recipe`, run steps | `install-cli` → `run-recipe` | Agora |
+| 6–10 | Live demo: cascaded, then Gemini Live | `live-demo` | Agora |
+| 10–46 | Discussion (full-duplex primary, Flash for cascaded backup), then Q&A from chat for the last 8 minutes | `community-discussion` | Both |
+| 46–48 | Close: recording, recipes, podcast, event channel | `close` | Agora host |
 
-For same-day conflicts or mismatched device dates, add the same override to both URLs: `/host?channel=sf-rehearsal` for the presenter and `/?channel=sf-rehearsal` for participants.
+## Before the stream
 
-Before the host connects, participants see a waiting screen confirming that they are in the right place. Once the first host snapshot arrives, the deck appears automatically. They can choose **Following host** to browse independently and **Return to live** to catch up. Links and copy/download actions remain available while slide navigation is host-controlled.
+- Both demo apps running from pre-initialized copies: `gemini-voice-agent` (cascaded) and `gemini-live-agent` (Gemini Live). Fallback recordings ready for each.
+- `agora upgrade` done on the presenter machine; `agora login` already completed so it is mentioned, not run.
+- Press `H`: select **Architecture · A · Cascaded** and **Code track · TypeScript**. The pipeline slide maps directly to the cascaded TypeScript code.
+- Post the slide-follow link and both repository links in the event channel.
+- Confirm the Gemini model names with the Google speaker so the deck matches their segment; the deck labels the ASR stage "Gemini 3.5 Transcribe Live" and the LLM "Gemini 3.6 Flash".
+- Have the deck open on `welcome` before the Google segment ends.
 
-Press `H` from any slide and select:
+## Host controls
 
-- Venue Wi-Fi name and password for the projected opening slide
-- Event city
-- One Studio template for the whole room
-- Python, Next.js, or Go
-- Track-derived tooling: Bun for Python, pnpm for TypeScript, or Make for Go
-- Presentation theme (cycle System, Light, and Dark with the icon button)
-- The phone allocator event name and server-only `PHONE_CLAIM_API_TOKEN`, or one complete manual phone/SIP assignment
+Participants open the root URL. The presenter opens `/host` and enters the default password `AgoraWorkshop2026`. Both views use the local date as the RTM channel, for example `2026-09-17`; add `?channel=gemini-rehearsal` to both URLs for rehearsals.
 
-In host controls, choose **Email claim API**, enter the event name, and optionally enter the presenter’s email to bypass the claim overlay on the host view. That email remains in the host tab and is not signaled. Attendees still enter their own emails for unique assignments. Alternatively, choose **Manual details** and enter the phone/SIP fields. The API bearer token stays in the server environment and never enters signaling or browser code. API responses remain only in each attendee’s current tab. Manual values travel in the live trusted snapshot, while all phone and SIP details are excluded from saved audience decks. On slide 14, reveal the password only when attendees are ready to enter it, then hide it before continuing.
+Press `H` from any slide to change:
 
-Press `N` for the current slide's speaker notes.
+- Architecture — also selectable by clicking a card on the two-architectures slide or the toggle on the init slide
+- Code track — TypeScript, Python, or Go
+- Theme and terminal label
 
-## Staffing
+Architecture and track sync to the audience view. Press `N` for the current slide’s notes.
 
-### San Francisco
+## During the Agora segment
 
-- Hosts: Hermes and Mason
-- Support: Bien, Yi, and possibly K2
-
-### New York
-
-- Host: Hermes
-- Support: Bryce and Aleksey
-
-During hands-on sections, assign separate Studio and code/Skills support owners. Questions are welcome throughout; stage instruction should continue while support resolves individual blockers.
+1. `compare-code`: the two loops in code. Left is three vendors, right is one `GeminiLive`. Everything else is identical.
+2. `two-architectures`: pick cascaded; optionally run `agora recipes list` live to show the catalog. Mention `primaryPrompt` in one sentence for the coding-agent crowd.
+3. `install-cli`: one slide; install and login are already done on the presenter machine.
+4. `init-recipe`: type the cascaded init command live. Do not wait for it to finish; the demo apps are already running.
+5. `run-recipe`: step through the four commands (enter, install, Google key, run). Init already wrote the Agora credentials. Never show the environment file.
+6. `live-demo`: cascaded first — one question to Ada, point at the transcript and latency panel. Then Gemini Live — same question, switch to extended thinking, show the slider.
 
 ## Hard boundaries
 
-- Use individual attendee Agora projects.
-- Use managed keys for hands-on work; demonstrate BYOK without revealing a secret.
-- Keep the first CLI quickstart untouched.
-- Skills create `website-sdr` as a separate sibling project.
-- The attendee SDR simulates lead submission through its system prompt; it does not persist or transmit lead data.
-- A presenter may demonstrate a separately hosted real MCP or custom-LLM integration.
-- Local voice success is required. Tunnel and cloud deployments are optional.
-- AI Noise Suppression is a client audio integration, not a system-prompt instruction. Keep headphones as the dependable room recommendation.
-- Never commit or deploy SIP connection details. Project the shared password only during the guided entry step, and do not allow it to be photographed.
-- Disable the claim event, then revoke every temporary number and the shared trunk credentials after the event.
+- No Gemini Live demo without Agora in the loop.
+- Never show or paste a Google API key or Agora App Certificate on stream.
+- Roadmap questions that need a long answer go to the event channel or the podcast, not the live Q&A.
 
 ## Recovery
 
-- Studio blocked: use the presenter's prepared account to demonstrate the remaining call path.
-- Quickstart blocked: run `agora project doctor --deep`; keep the room moving while a code-support owner helps.
-- Skills blocked: confirm the command ran at `agora_agents_workshop`, project/workspace scope was selected, and the coding-agent session was refreshed.
-- Room too noisy: switch from simultaneous testing to two waves and require headphones.
-- Tunnel blocked: skip it. Local voice success is already the finish line.
-- Time slipping: protect the Studio phone call, untouched CLI quickstart, code-structure walkthrough, and one working website SDR.
+- Live call fails: play the recorded happy path for that demo and continue.
+- CLI blocked: skip to `compare-code`; the recipe commands are in the audience view for viewers to copy later.
+- Google segment runs over: skip `install-cli` and the backup discussion topic.
+- Discussion runs short: bring multimodal realtime (screen + voice) forward from the channel topics.

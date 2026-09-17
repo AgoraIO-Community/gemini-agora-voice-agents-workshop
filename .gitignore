@@ -1,6 +1,5 @@
 private/
 *.pdf
-!sip-cards-sample.pdf
 .DS_Store
 .vercel/
 *.log
@@ -16,3 +15,6 @@ assets/workshop-session.js
 assets/workshop-session.js.map
 coverage/
 .vercel
+
+# Claude Code worktrees
+.claude/worktrees/
