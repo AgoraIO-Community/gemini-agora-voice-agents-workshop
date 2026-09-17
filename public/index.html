@@ -2467,7 +2467,6 @@
           <p>The same demo the host is running. Pick <strong>A · Cascaded</strong> or <strong>B · Gemini Live</strong>, allow your microphone, and talk to Ada. Come back to this slide any time, including after the Q&amp;A.</p>
           <div class="meta-row">
             <a class="primary-button demo-invite-button" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open the demo ↗</a>
-            <span class="meta-chip mono" data-demo-field="url"></span>
           </div>
         </article>
       </div>
@@ -2915,8 +2914,6 @@
 
       function renderDemo() {
         var publicUrl = demoUrl();
-        var label = publicUrl.host + publicUrl.pathname;
-        setText('[data-demo-field="url"]', label);
         document.querySelectorAll("[data-demo-link]").forEach(function (node) {
           node.href = isAudience ? publicUrl.href : demoUrl({ architecture: state.architecture }).href;
         });
