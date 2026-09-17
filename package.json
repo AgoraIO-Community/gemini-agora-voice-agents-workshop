@@ -9,12 +9,12 @@
   "scripts": {
     "build:deck": "node scripts/build.mjs",
     "dev": "pnpm run build:deck && next dev --webpack",
-    "build": "pnpm run build:deck && next build",
+    "build": "pnpm run build:deck && next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "verify": "pnpm run build:deck && pnpm run typecheck && pnpm test && next build"
+    "verify": "pnpm run build:deck && pnpm run typecheck && pnpm test && next build --webpack"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.4",
