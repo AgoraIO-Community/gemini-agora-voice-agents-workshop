@@ -135,6 +135,38 @@
       transition: opacity .18s ease, visibility .18s ease;
     }
     body.front-slide-active .brand { visibility: hidden; opacity: 0; }
+    .topbar { justify-content: space-between; }
+    .join-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 34px;
+      padding: 6px 8px 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel) 84%, transparent);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .04em;
+      text-decoration: none;
+      box-shadow: var(--shadow-float);
+      backdrop-filter: blur(12px);
+      pointer-events: auto;
+      transition: opacity .18s ease, visibility .18s ease, border-color .16s ease;
+    }
+    .join-pill:hover, .join-pill:focus-visible { border-color: var(--accent); }
+    .join-pill-url {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+    body.front-slide-active .join-pill { visibility: hidden; opacity: 0; }
     .brand-logo { display: block; width: 86px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .2)); }
     .pill-button,
     .icon-button,
@@ -2133,6 +2165,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
+    <a class="join-pill" href="https://bit.ly/3VfqCSU" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><span class="join-pill-label">Follow along</span><span class="join-pill-url" data-event-field="joinLabel">bit.ly/3VfqCSU</span></a>
   </header>
 
   <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
