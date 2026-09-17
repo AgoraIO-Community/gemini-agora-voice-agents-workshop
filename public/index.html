@@ -604,12 +604,11 @@
     .shared-workspace-strip p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
     .shared-workspace-strip strong { font-size: 17px; }
     .demo-slide { gap: 12px; }
-    .demo-slide h2 { margin-bottom: 0; }
-    .demo-embed { display: grid; grid-template-rows: auto 1fr; min-height: 0; flex: 1; width: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #101010; box-shadow: var(--shadow); }
-    .demo-embed-bar { display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); background: var(--card-glass); color: var(--muted); font-size: 12px; }
-    .demo-embed-bar .code-path-label { margin-bottom: 0; }
-    .demo-embed-url { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .demo-embed iframe { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; background: #101010; }
+    .demo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; width: 100%; }
+    .demo-head h2 { margin-bottom: 0; }
+    .demo-open { flex-shrink: 0; margin-top: 6px; text-decoration: none; }
+    .demo-embed { flex: 1; min-height: 0; width: 100%; }
+    .demo-embed iframe { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; border-radius: 14px; background: #101010; }
     .demo-invite { display: grid; place-items: center; flex: 1; width: 100%; }
     .demo-invite-card { width: min(640px, 100%); }
     .demo-invite-card p { color: var(--muted); }
@@ -2418,14 +2417,14 @@
     </section>
 
     <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:06">
-      <p class="eyebrow">Conversational AI + Gemini</p>
-      <h2>One agent, built two ways. <span class="accent">Talk to Ada.</span></h2>
-      <div class="demo-embed" data-host-only>
-        <div class="demo-embed-bar">
-          <span class="code-path-label" data-demo-field="architectureTitle"></span>
-          <span class="mono demo-embed-url" data-demo-field="url"></span>
-          <a class="meta-chip" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open in a new tab ↗</a>
+      <div class="demo-head">
+        <div>
+          <p class="eyebrow">Live demo</p>
+          <h2>Talk to <span class="accent">Ada.</span></h2>
         </div>
+        <a class="meta-chip demo-open" data-host-only data-demo-link target="_blank" rel="noreferrer" href="/demo">Open in a new tab ↗</a>
+      </div>
+      <div class="demo-embed" data-host-only>
         <iframe id="demoFrame" title="Live voice agent demo" allow="microphone; autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
       <div class="demo-invite" data-audience-only>
@@ -2893,7 +2892,6 @@
         var publicUrl = demoUrl();
         var label = publicUrl.host + publicUrl.pathname;
         setText('[data-demo-field="url"]', label);
-        setText('[data-demo-field="architectureTitle"]', ARCHITECTURES[state.architecture].title);
         document.querySelectorAll("[data-demo-link]").forEach(function (node) {
           node.href = isAudience ? publicUrl.href : demoUrl({ architecture: state.architecture }).href;
         });

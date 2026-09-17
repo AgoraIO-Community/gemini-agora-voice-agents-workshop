@@ -81,7 +81,7 @@ describe("livestream deck structure", () => {
 
   it("embeds the demo for the host only and gives the audience a self-service link", () => {
     const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="qa"'));
-    expect(slide).toMatch(/<div class="demo-embed" data-host-only>[\s\S]*<iframe id="demoFrame"[^>]*allow="microphone; autoplay"/);
+    expect(slide).toMatch(/<div class="demo-embed" data-host-only>\s*<iframe id="demoFrame"[^>]*allow="microphone; autoplay"/);
     expect(slide).not.toMatch(/<iframe[^>]*\ssrc=/);
     expect(slide).toMatch(/<div class="demo-invite" data-audience-only>/);
     expect(slide).toContain('data-demo-link target="_blank"');
