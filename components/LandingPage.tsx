@@ -217,7 +217,7 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
   };
 
   return (
-    <div className="relative flex h-dvh min-h-screen flex-col overflow-hidden bg-background text-foreground">
+    <div className={`relative flex h-dvh min-h-screen flex-col bg-background text-foreground ${showConversation ? 'overflow-hidden' : 'overflow-y-auto'}`}>
       {/* Hero shell: either shows the pre-call CTA or swaps in the live conversation experience. */}
       <div
         className={`flex min-h-0 flex-1 flex-col ${
@@ -230,7 +230,7 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
           className={`z-10 flex min-h-0 flex-1 flex-col ${
             showConversation
               ? 'h-full w-full max-w-none items-stretch gap-0 px-0 text-left'
-              : 'w-full max-w-none items-center justify-center px-4 text-center'
+              : 'w-full max-w-none items-center justify-start px-4 py-6 text-center'
           }`}
         >
           {!showConversation ? (
