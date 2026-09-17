@@ -251,12 +251,6 @@
       font-size: clamp(14px, 1.35vw, 19px);
       font-weight: 650;
     }
-    .front-divider { color: #49d8f3; }
-    .front-hold {
-      margin: 0;
-      color: rgba(255, 255, 255, .68);
-      font-size: 14px;
-    }
     .front-join-link {
       display: inline-flex;
       align-items: center;
@@ -2059,8 +2053,13 @@
     }
 
     /* Livestream additions */
-    .front-brand { display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 14px; background: #fff; box-shadow: var(--shadow-float); }
-    .front-brand img { display: block; width: auto; height: clamp(28px, 3.6vw, 44px); }
+    /* Size both wordmarks from a shared x-height, then align their x-height centres.
+       Agora's SVG viewBox (343 tall) has the x-height at 0–204 with no top padding;
+       the Google DeepMind PNG (240 tall) has it at 87–159 with ~48px padding above and below. */
+    .front-brand { --brand-x: clamp(13px, 1.7vw, 21px); display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 14px; background: #fff; box-shadow: var(--shadow-float); }
+    .front-brand img { display: block; width: auto; }
+    .front-brand img[alt="Agora"] { height: calc(var(--brand-x) * 1.68); translate: 0 calc(var(--brand-x) * .38); }
+    .front-brand img[alt="Google DeepMind"] { height: calc(var(--brand-x) * 3.33); }
     .front-brand-x { color: #5a5a5a; font-size: clamp(20px, 2.4vw, 30px); font-weight: 300; }
     .brand-pill { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 12px; background: #fff; box-shadow: var(--shadow); }
     .brand-pill img { display: block; width: auto; height: clamp(22px, 2.4vw, 32px); }
@@ -2136,13 +2135,10 @@
         </div>
         <div class="front-meta">
           <span data-event-field="date">Thursday · September 17, 2026</span>
-          <span class="front-divider" aria-hidden="true">◆</span>
-          <span data-event-field="time">9–10 am PDT · 12–1 pm EDT</span>
         </div>
         <div class="front-access" data-host-only>
           <a class="front-join-link" href="https://bit.ly/4xxH6Uf" target="_blank" rel="noreferrer">Follow the slides <span data-event-field="joinLabel">bit.ly/4xxH6Uf</span></a>
         </div>
-        <p class="front-hold" data-event-field="hold">Recorded · A podcast episode tapes right after the live hour.</p>
       </div>
       <div class="speaker-notes">
         <p>This deck starts when Google DeepMind hands back. Have it on this slide before their segment ends.</p>
@@ -2512,9 +2508,7 @@
       var EVENT = {
         kicker: "Agora Discord Livestream",
         date: "Thursday · September 17, 2026",
-        time: "9–10 am PDT · 12–1 pm EDT",
-        joinLabel: "bit.ly/4xxH6Uf",
-        hold: "Recorded · A podcast episode tapes right after the live hour."
+        joinLabel: "bit.ly/4xxH6Uf"
       };
 
       var ARCHITECTURES = {
