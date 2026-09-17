@@ -38,7 +38,7 @@ export function QuickstartPreCallCard({
       }}
     >
       <h1 className="text-[28px] font-medium leading-[1.2] text-white">
-        Talk to Ada
+        Say hello to Ada
       </h1>
       <p className="mt-[14px] text-sm font-medium leading-6 text-muted-foreground">
         One voice agent on Agora, built two ways with Gemini. Pick one, then start talking.
