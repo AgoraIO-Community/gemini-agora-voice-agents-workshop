@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createTokenResponse } from "../api/rtm-token.js";
+import { createTokenResponse } from "../src/rtm-token.js";
 
 const env = {
   AGORA_APP_ID: "a".repeat(32),

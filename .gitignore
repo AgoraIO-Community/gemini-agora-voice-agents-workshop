@@ -11,11 +11,13 @@ pnpm-debug.log*
 .env.*
 !.env.example
 node_modules/
-assets/workshop-session.js
-assets/workshop-session.js.map
+public/assets/workshop-session.js
+public/assets/workshop-session.js.map
 coverage/
 .vercel
 
 # Claude Code worktrees
 .claude/worktrees/
-.env*
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo

@@ -17,7 +17,7 @@ The stream opens with a short welcome and the Google DeepMind segment on Gemini 
 
 ## Before the stream
 
-- Both demo apps running from pre-initialized copies: `gemini-voice-agent` (cascaded) and `gemini-live-agent` (Gemini Live). Fallback recordings ready for each.
+- The demo is built into the deck: the live-demo slide embeds `/demo` for the host and shows a self-service link to the audience. Fallback recordings ready for each architecture.
 - `agora upgrade` done on the presenter machine; `agora login` already completed so it is mentioned, not run.
 - Press `H`: select **Architecture · A · Cascaded** and **Code track · TypeScript**. The pipeline slide maps directly to the cascaded TypeScript code.
 - Post the slide-follow link and both repository links in the event channel.
@@ -41,9 +41,9 @@ Architecture and track sync to the audience view. Press `N` for the current slid
 1. `compare-code`: the two loops in code. Left is three vendors, right is one `GeminiLive`. Everything else is identical.
 2. `two-architectures`: pick cascaded; optionally run `agora recipes list` live to show the catalog. Mention `primaryPrompt` in one sentence for the coding-agent crowd.
 3. `install-cli`: one slide; install and login are already done on the presenter machine.
-4. `init-recipe`: type the cascaded init command live. Do not wait for it to finish; the demo apps are already running.
+4. `init-recipe`: type the cascaded init command live. Do not wait for it to finish; the demo is built into the next slides.
 5. `run-recipe`: step through the four commands (enter, install, Google key, run). Init already wrote the Agora credentials. Never show the environment file.
-6. `live-demo`: cascaded first — one question to Ada, point at the transcript and latency panel. Then Gemini Live — same question, switch to extended thinking, show the slider.
+6. `live-demo`: the demo loads in the slide for you only. Cascaded first — one question to Ada, point at the transcript and latency panel. Press H, switch to B · Gemini Live (the frame reloads) — same question, switch to extended thinking, show the slider. Remind chat the demo link is on their screen.
 
 ## Hard boundaries
 

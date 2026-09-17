@@ -27,13 +27,25 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Pages hosts the static deck only (slides + audience view). The live
+      # demo and the host view need the Next.js server and run on Vercel.
       - name: Stage site assets
         run: |
+          pnpm run build:deck
           rm -rf _site
-          mkdir -p _site/assets
-          cp index.html _site/
-          cp discord-qr.svg _site/
-          cp -R assets/. _site/assets/
+          cp -R public _site
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

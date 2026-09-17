@@ -1,6 +1,9 @@
 # Agora × Gemini Discord Livestream — presentation
 
-This is a static-first, Vercel-ready presentation website for the *Build Voice Agents with Gemini + Agora* livestream. The host and audience share one canonical HTML deck; a small browser bundle adds Agora Signaling so Discord viewers can follow the slides in sync, and one serverless function mints short-lived RTM tokens.
+This is the presentation website and live demo for the *Build Voice Agents with Gemini + Agora* livestream, packaged as one Next.js app:
+
+- **The deck** (`public/index.html`) is a static page the host and audience share. A small browser bundle adds Agora Signaling so Discord viewers follow the slides in sync; `/api/rtm-token` mints their short-lived RTM tokens.
+- **The demo** (`/demo`) is one voice-agent UI with an architecture switch: **A · Cascaded** (Gemini ASR → Gemini 3.6 Flash → TTS) or **B · Gemini Live** (native multimodal, with the extended-thinking model and thinking-level slider). `/api/invite-agent` builds whichever agent is asked for; the UI and API are merged from the two official recipes, `gemini-agora-voice-agents-nextjs` and `agora-gemini-mllm-nextjs`.
 
 ## Local setup
 
@@ -9,9 +12,11 @@ The repository is bound to the existing Agora `Testing` project in `.agora/proje
 ```sh
 agora project use Testing
 agora project env write .env.local --project Testing --template standard
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
+
+`.env.example` lists every variable. The deck needs the Agora App ID and Certificate; the demo also needs `NEXT_GOOGLE_API_KEY`. Both the `AGORA_*` names the CLI writes and the `NEXT_*` names from the recipes are accepted.
 
 The host route requires the password `AgoraWorkshop2026` by default. `WORKSHOP_HOST_KEY` can override that committed development password in the deployment environment. The accepted password stays in the presenter’s browser tab and is never placed in the URL.
 
@@ -66,14 +71,23 @@ Viewers use `/`, or `/?channel=...` when the host supplies an override. Before t
 - **Following host** switches to independent browsing; **Return to live** applies the newest host snapshot.
 - After the first host snapshot, the browser saves a safe local copy of the architecture, track, theme, and terminal choices so the deck can be reopened later with no host present. No credentials are ever included.
 
+## Live demo
+
+The live-demo slide behaves differently per view:
+
+- **Host:** the slide embeds `/demo?embed=1` in a frame that follows the architecture selected in the **H** panel. Switching architecture reloads the frame. Nothing loads until the slide is shown, and the frame unloads when the host moves on.
+- **Audience:** the slide shows a self-service card with the public `/demo` link. Nothing starts on a viewer's device until they open it, so they can come back to that slide after the Q&A and try both architectures themselves.
+
+Every demo session runs an agent on the Agora project's credentials with a 30-second idle timeout and a one-hour cap. Open `/demo` directly on any device to try it outside the deck.
+
 ## Verification
 
 ```sh
-npm run verify
+pnpm verify
 agora project feature status rtm
 ```
 
-The tests mock the Agora SDK boundary and cover local-date session validation, RTM login-before-subscribe, message and presence subscription, trusted-host filtering, late joins, token renewal, the archived audience snapshot, and the deck structure (slide order, recipe slugs, shared-state keys).
+The tests mock the Agora SDK boundary and cover local-date session validation, RTM login-before-subscribe, message and presence subscription, trusted-host filtering, late joins, token renewal, the archived audience snapshot, the deck structure (slide order, recipe slugs, shared-state keys, syntax highlighting, the host/audience split on the demo slide), and the demo's request validation.
 
 The selected `Testing` project currently reports token enforcement as disabled in Agora Console. Enable it before treating a public deployment as authenticated.
 
@@ -87,17 +101,17 @@ python3 scripts/generate-discord-qr.py workshop-config.json discord-qr.svg
 
 The run slide has no separate Agora env step: `agora init --recipe` writes the Agora credentials for all six Gemini recipes. If you clone manually instead, run `agora quickstart env write .` (Next.js) or `agora project env write server/.env.local` (Python/Go) before adding the Google key.
 
-Update the slide-follow short link on the welcome slide (`EVENT.joinLabel` and the `front-join-link` href in `index.html`).
+Update the slide-follow short link on the welcome slide (`EVENT.joinLabel` and the `front-join-link` href in `public/index.html`).
 
 ## Deployment
 
-Import this directory as a new Vercel project or run the Vercel CLI from this directory. `vercel.json` supplies the static-site settings and basic response headers.
+The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-agents-workshop`; pushes to `main` deploy automatically. Set `NEXT_PUBLIC_AGORA_APP_ID`, `NEXT_AGORA_APP_CERTIFICATE`, `NEXT_GOOGLE_API_KEY`, and `WORKSHOP_HOST_KEY` in the project's environment. The GitHub Pages workflow publishes the static deck only (no host view, no demo).
 
 ## Rehearsal
 
 1. Run `agora upgrade` and confirm `agora recipes list` shows all six Gemini voice recipes.
 2. Run `agora init gemini-voice-agent --recipe gemini-agora-voice-agents-nextjs` on a clean machine and confirm it writes `.env.local` with the Agora values (verified 2026-09-16 against the live catalog).
-3. Start both demo apps (`gemini-voice-agent` and `gemini-live-agent`) before the stream and record a three-minute happy-path fallback for each.
+3. Open `/host`, go to the live-demo slide, and run one conversation per architecture from the embedded demo. Record a three-minute happy-path fallback for each.
 4. Confirm the Gemini model names on the pipeline slide match the Google DeepMind segment that precedes this deck.
 5. Route the demo audio into the Discord stage and check levels with headphones on.
 6. Scan the Discord QR from iOS and Android.

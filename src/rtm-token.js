@@ -18,8 +18,8 @@ export function createTokenResponse({ sessionId, role, hostKey, userId: requeste
   if (!normalized) return { status: 400, body: { error: "Invalid workshop session" } };
   if (role !== "host" && role !== "audience") return { status: 400, body: { error: "Invalid workshop role" } };
 
-  const appId = env.AGORA_APP_ID;
-  const appCertificate = env.AGORA_APP_CERTIFICATE;
+  const appId = env.NEXT_PUBLIC_AGORA_APP_ID || env.AGORA_APP_ID;
+  const appCertificate = env.NEXT_AGORA_APP_CERTIFICATE || env.AGORA_APP_CERTIFICATE;
   if (!appId || !appCertificate) return { status: 503, body: { error: "Agora environment is not configured" } };
 
   if (role === "host") {
@@ -47,15 +47,4 @@ export function createTokenResponse({ sessionId, role, hostKey, userId: requeste
       expiresIn: TOKEN_TTL_SECONDS
     }
   };
-}
-
-export default async function handler(request, response) {
-  response.setHeader("cache-control", "no-store");
-  if (request.method !== "POST") {
-    response.setHeader("allow", "POST");
-    return response.status(405).json({ error: "Method not allowed" });
-  }
-
-  const result = createTokenResponse(request.body || {});
-  return response.status(result.status).json(result.body);
 }

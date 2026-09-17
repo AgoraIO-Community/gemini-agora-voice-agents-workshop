@@ -603,6 +603,17 @@
     }
     .shared-workspace-strip p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
     .shared-workspace-strip strong { font-size: 17px; }
+    .demo-slide { gap: 12px; }
+    .demo-slide h2 { margin-bottom: 0; }
+    .demo-embed { display: grid; grid-template-rows: auto 1fr; min-height: 0; flex: 1; width: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #101010; box-shadow: var(--shadow); }
+    .demo-embed-bar { display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); background: var(--card-glass); color: var(--muted); font-size: 12px; }
+    .demo-embed-bar .code-path-label { margin-bottom: 0; }
+    .demo-embed-url { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .demo-embed iframe { display: block; width: 100%; height: 100%; min-height: 420px; border: 0; background: #101010; }
+    .demo-invite { display: grid; place-items: center; flex: 1; width: 100%; }
+    .demo-invite-card { width: min(640px, 100%); }
+    .demo-invite-card p { color: var(--muted); }
+    .demo-invite-button { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 18px; border-radius: 999px; font-weight: 800; text-decoration: none; }
     .code-paths-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .code-path-card {
       --path-color: var(--accent);
@@ -1941,6 +1952,7 @@
 
     /* Host and audience views share this exact deck; only host chrome is hidden. */
     body.view-audience [data-host-only] { display: none !important; }
+    body.view-host [data-audience-only] { display: none !important; }
     body.view-audience .footer-title { max-width: 70vw; }
     .host-auth { display: none; }
     body.view-host:not(.host-authenticated) .host-auth {
@@ -2405,28 +2417,33 @@
       </div>
     </section>
 
-    <section class="slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:06">
+    <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:06">
       <p class="eyebrow">Conversational AI + Gemini</p>
-      <h2>Two recipes. <span class="accent">Two live conversations.</span></h2>
-      <div class="code-paths-overview">
-        <article class="code-path-card">
-          <span class="code-path-label">Demo 1 · Cascaded</span>
-          <h3 class="mono" data-recipe-field="cascadedDir"></h3>
-          <p>Watch the live transcript and the per-stage latency panel: Gemini ASR, Gemini 3.6 Flash, TTS.</p>
-          <div class="meta-row"><span class="meta-chip mono" data-recipe-field="cascadedUrl"></span></div>
-        </article>
-        <article class="code-path-card mllm-path">
-          <span class="code-path-label">Demo 2 · Native multimodal</span>
-          <h3 class="mono" data-recipe-field="mllmDir"></h3>
-          <p>Same conversation through Gemini 3.8 Live. Switch to the extended-thinking model and move the thinking-level slider.</p>
-          <div class="meta-row"><span class="meta-chip mono" data-recipe-field="mllmUrl"></span></div>
+      <h2>One agent, built two ways. <span class="accent">Talk to Ada.</span></h2>
+      <div class="demo-embed" data-host-only>
+        <div class="demo-embed-bar">
+          <span class="code-path-label" data-demo-field="architectureTitle"></span>
+          <span class="mono demo-embed-url" data-demo-field="url"></span>
+          <a class="meta-chip" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open in a new tab ↗</a>
+        </div>
+        <iframe id="demoFrame" title="Live voice agent demo" allow="microphone; autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div class="demo-invite" data-audience-only>
+        <article class="card demo-invite-card">
+          <span class="card-number">Self-service</span>
+          <h3>Try it yourself, on your device</h3>
+          <p>The same demo the host is running. Pick <strong>A · Cascaded</strong> or <strong>B · Gemini Live</strong>, allow your microphone, and talk to Ada. Come back to this slide any time, including after the Q&amp;A.</p>
+          <div class="meta-row">
+            <a class="primary-button demo-invite-button" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open the demo ↗</a>
+            <span class="meta-chip mono" data-demo-field="url"></span>
+          </div>
         </article>
       </div>
       <div class="speaker-notes">
-        <p><strong>Before starting:</strong> headphones on, Discord audio routed to the stream. Both apps are already running before the stream.</p>
-        <p>Cascaded first (about two minutes): start the conversation, ask Ada one question, point at the transcript and latency panel.</p>
-        <p>Then Gemini Live (about two minutes): same question, then switch to extended thinking and show the slider.</p>
-        <p>Paste both repository links into chat when the demo starts (they are on the architectures slide). <strong>Fallback:</strong> if either call fails, play the three-minute recorded happy path and keep moving.</p>
+        <p><strong>Before starting:</strong> headphones on, Discord audio routed to the stream. The demo loads in this slide for you only; viewers get a self-service link and nothing starts on their side.</p>
+        <p>Cascaded first (about two minutes): press <strong>Start Conversation</strong>, ask Ada one question, point at the transcript and the per-stage latency panel.</p>
+        <p>Then press <strong>H</strong> and switch to <strong>B · Gemini Live</strong>: the frame reloads with that architecture. Same question, then switch to extended thinking and show the slider.</p>
+        <p>Tell chat the demo link is on their screen and stays live after the stream. <strong>Fallback:</strong> if a call fails, open the demo in a new tab or play the recorded happy path and keep moving.</p>
       </div>
     </section>
 
@@ -2858,6 +2875,36 @@
         });
       }
 
+      // Live demo: the host's frame follows the selected architecture and only
+      // loads while this slide is showing; the audience gets a plain link so
+      // nothing starts on their devices until they choose to open it.
+      var DEMO_PATH = "/demo";
+      var demoFrame = document.getElementById("demoFrame");
+      var demoFrameLoaded = "";
+
+      function demoUrl(options) {
+        var url = new URL(DEMO_PATH, window.location.href);
+        if (options && options.architecture) url.searchParams.set("architecture", options.architecture);
+        if (options && options.embed) url.searchParams.set("embed", "1");
+        return url;
+      }
+
+      function renderDemo() {
+        var publicUrl = demoUrl();
+        var label = publicUrl.host + publicUrl.pathname;
+        setText('[data-demo-field="url"]', label);
+        setText('[data-demo-field="architectureTitle"]', ARCHITECTURES[state.architecture].title);
+        document.querySelectorAll("[data-demo-link]").forEach(function (node) {
+          node.href = isAudience ? publicUrl.href : demoUrl({ architecture: state.architecture }).href;
+        });
+        if (!demoFrame || isAudience) return;
+        var onDemoSlide = slides[current] && slides[current].getAttribute("data-slide-id") === "live-demo";
+        var wanted = onDemoSlide ? demoUrl({ architecture: state.architecture, embed: true }).href : "";
+        if (wanted === demoFrameLoaded) return;
+        demoFrameLoaded = wanted;
+        if (wanted) demoFrame.src = wanted; else demoFrame.removeAttribute("src");
+      }
+
       function renderRecipe() {
         state.packageManager = packageManagerForTrack(state.track);
         var architecture = ARCHITECTURES[state.architecture];
@@ -2874,8 +2921,6 @@
         setText('[data-recipe-field="mllmFile"]', mllm.file);
         setText('[data-recipe-field="cascadedDir"]', ARCHITECTURES.cascaded.dir + "/");
         setText('[data-recipe-field="mllmDir"]', ARCHITECTURES.mllm.dir + "/");
-        setText('[data-recipe-field="cascadedUrl"]', cascaded.url);
-        setText('[data-recipe-field="mllmUrl"]', mllm.url);
         var links = {
           recipe: recipeUrl(selected.slug), github: selected.repo,
           cascadedRecipe: recipeUrl(cascaded.slug), cascadedGithub: cascaded.repo,
@@ -2887,6 +2932,7 @@
         document.getElementById("initCommand").textContent = initCommandFor(state.architecture, state.track);
         renderAgentCode("cascadedCode", cascaded, TRACKS[state.track].language);
         renderAgentCode("mllmCode", mllm, TRACKS[state.track].language);
+        renderDemo();
         document.getElementById("architectureSelect").value = state.architecture;
         document.getElementById("trackSelect").value = state.track;
         document.querySelectorAll("[data-architecture-choice]").forEach(function (button) {
@@ -3012,6 +3058,7 @@
         persist();
         renderNotes();
         syncCommandAnimation();
+        renderDemo();
         previous = current;
       }
 

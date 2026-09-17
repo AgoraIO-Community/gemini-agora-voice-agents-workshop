@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const html = readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
 const slideIds = [...html.matchAll(/<section class="slide[^"]*" data-slide-id="([^"]+)"/g)].map((m) => m[1]);
 
 describe("livestream deck structure", () => {
@@ -77,6 +77,17 @@ describe("livestream deck structure", () => {
     const defined = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
     for (const scope of ["quickstart"]) { referenced.add(`${scope}Command`); referenced.add(`${scope}CommandLabel`); }
     expect([...referenced].filter((id) => !defined.has(id))).toEqual([]);
+  });
+
+  it("embeds the demo for the host only and gives the audience a self-service link", () => {
+    const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="qa"'));
+    expect(slide).toMatch(/<div class="demo-embed" data-host-only>[\s\S]*<iframe id="demoFrame"[^>]*allow="microphone; autoplay"/);
+    expect(slide).not.toMatch(/<iframe[^>]*\ssrc=/);
+    expect(slide).toMatch(/<div class="demo-invite" data-audience-only>/);
+    expect(slide).toContain('data-demo-link target="_blank"');
+    expect(html).toContain("body.view-host [data-audience-only] { display: none !important; }");
+    expect(html).toContain('demoUrl({ architecture: state.architecture, embed: true })');
+    expect(html).toContain('if (!demoFrame || isAudience) return;');
   });
 
   it("renders both agent implementations side by side", () => {
