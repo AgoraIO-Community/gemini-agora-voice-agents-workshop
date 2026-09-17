@@ -105,7 +105,7 @@ Update the slide-follow short link on the welcome slide (`EVENT.joinLabel` and t
 
 ## Deployment
 
-The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-agents-workshop`; pushes to `main` deploy automatically. Set `NEXT_PUBLIC_AGORA_APP_ID`, `NEXT_AGORA_APP_CERTIFICATE`, `NEXT_GOOGLE_API_KEY`, and `WORKSHOP_HOST_KEY` in the project's environment. The GitHub Pages workflow publishes the static deck only (no host view, no demo).
+The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-agents-workshop`; pushes to `main` deploy automatically. Set `NEXT_PUBLIC_AGORA_APP_ID`, `NEXT_AGORA_APP_CERTIFICATE`, `NEXT_GOOGLE_API_KEY`, and `WORKSHOP_HOST_KEY` in the project's environment.
 
 ## Rehearsal
 
