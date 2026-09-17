@@ -79,12 +79,13 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
   const [error, setError] = useState<string | null>(null);
   const [agoraData, setAgoraData] = useState<AgoraTokenData | null>(null);
   const [rtmClient, setRtmClient] = useState<RTMClient | null>(null);
-  const [agentJoinError, setAgentJoinError] = useState(false);
+  // Server-side reason when /api/invite-agent fails; the browser session still renders.
+  const [agentJoinError, setAgentJoinError] = useState<string | null>(null);
 
   const handleStartConversation = async () => {
     setIsLoading(true);
     setError(null);
-    setAgentJoinError(false);
+    setAgentJoinError(null);
 
     try {
       // 1. Fetch RTC token + channel
@@ -117,14 +118,16 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
         })
           .then(async (res) => {
             if (!res.ok) {
-              setAgentJoinError(true);
+              const detail = await res.json().then((data) => data?.error).catch(() => null);
+              console.error('Agent invite failed:', res.status, detail);
+              setAgentJoinError(typeof detail === 'string' ? detail : `HTTP ${res.status}`);
               return null;
             }
             return res.json() as Promise<AgentResponse>;
           })
           .catch((err) => {
             console.error('Failed to start conversation with agent:', err);
-            setAgentJoinError(true);
+            setAgentJoinError(err instanceof Error ? err.message : 'Network error');
             return null;
           }),
 
@@ -249,9 +252,8 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
             <>
               {/* Non-fatal invite warning: the browser session can still render even if agent start failed. */}
               {agentJoinError && (
-                <div className="p-3 bg-destructive/10 rounded-md text-destructive text-sm max-w-sm">
-                  Failed to connect with AI agent. The conversation may not work
-                  as expected.
+                <div className="max-w-xl rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+                  <strong className="font-semibold">The agent could not join.</strong> {agentJoinError}
                 </div>
               )}
               {/* Browser-only conversation mount: RTC provider, error boundary, and lazy-loaded call UI. */}
