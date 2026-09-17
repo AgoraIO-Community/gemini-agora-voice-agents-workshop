@@ -13,7 +13,7 @@ The stream opens with a short welcome and the Google DeepMind segment on Gemini 
 | 3–6 | Recipes as quickstarts: CLI, `agora init --recipe`, run steps | `install-cli` → `run-recipe` | Agora |
 | 6–10 | Live demo: cascaded, then Gemini Live | `live-demo` | Agora |
 | 10–46 | Q&A from Discord chat; full-duplex and Flash-for-cascaded as starters while questions come in | `qa` | Both |
-| 46–48 | Close: recording, recipes, podcast, event channel | `close` | Agora host |
+| 46–48 | Close: thank you, recording, recipes, event channel | `close` | Agora host |
 
 ## Before the stream
 

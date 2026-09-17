@@ -135,6 +135,38 @@
       transition: opacity .18s ease, visibility .18s ease;
     }
     body.front-slide-active .brand { visibility: hidden; opacity: 0; }
+    .topbar { justify-content: space-between; }
+    .join-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 34px;
+      padding: 6px 8px 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel) 84%, transparent);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .04em;
+      text-decoration: none;
+      box-shadow: var(--shadow-float);
+      backdrop-filter: blur(12px);
+      pointer-events: auto;
+      transition: opacity .18s ease, visibility .18s ease, border-color .16s ease;
+    }
+    .join-pill:hover, .join-pill:focus-visible { border-color: var(--accent); }
+    .join-pill-url {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+    body.front-slide-active .join-pill { visibility: hidden; opacity: 0; }
     .brand-logo { display: block; width: 86px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .2)); }
     .pill-button,
     .icon-button,
@@ -2133,6 +2165,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
+    <a class="join-pill" href="https://bit.ly/3VfqCSU" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><span class="join-pill-label">Follow along</span><span class="join-pill-url" data-event-field="joinLabel">bit.ly/3VfqCSU</span></a>
   </header>
 
   <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
@@ -2217,7 +2250,6 @@
         <article class="card"><span class="card-number">Conversational AI</span><h3>Agents become realtime participants</h3><p>Agora orchestrates voice agents that can join a Channel, listen, reason, speak, and respond on demand.</p></article>
       </div>
       <p class="platform-proof">Powering <strong>1 Trillion minutes</strong> of live voice and video streams per year.</p>
-      <p class="lede">You build the experience. <span class="accent">Agora carries the live conversation.</span></p>
       <div class="speaker-notes">
         <p>Thirty seconds. Channels are the shared space, SD-RTN delivers the media, and the Conversational AI Engine brings Gemini into that space as a participant.</p>
       </div>
@@ -2421,7 +2453,7 @@
       <div class="demo-head">
         <div>
           <p class="eyebrow">Live demo</p>
-          <h2>Talk to <span class="accent">Ada.</span></h2>
+          <h2>Try out Gemini <span class="accent">with Agora Agents.</span></h2>
         </div>
         <a class="meta-chip demo-open" data-host-only data-demo-link target="_blank" rel="noreferrer" href="/demo">Open in a new tab ↗</a>
       </div>
@@ -2435,7 +2467,6 @@
           <p>The same demo the host is running. Pick <strong>A · Cascaded</strong> or <strong>B · Gemini Live</strong>, allow your microphone, and talk to Ada. Come back to this slide any time, including after the Q&amp;A.</p>
           <div class="meta-row">
             <a class="primary-button demo-invite-button" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open the demo ↗</a>
-            <span class="meta-chip mono" data-demo-field="url"></span>
           </div>
         </article>
       </div>
@@ -2447,38 +2478,30 @@
       </div>
     </section>
 
-    <section class="slide" data-slide-id="qa" data-title="Q&amp;A" data-section="Q&amp;A" data-cue="0:10">
-      <p class="eyebrow">Q&amp;A <span class="timing-fragment">0:10 – 0:46</span></p>
-      <h2>Your questions. <span class="accent">Ask in Discord chat.</span></h2>
-      <p class="lede">Anything from the Gemini segment, the Agora demos, or realtime voice in general. The host reads them out; both teams answer. While questions come in, two starters:</p>
-      <div class="grid two">
-        <article class="card selected"><span class="card-number">01 · Starter</span><h3>Full-duplex interaction</h3><p>Back-channeling for both sides, moving beyond turn detection toward continuous input and output with micro-turns, and how function calling fits a live conversation.</p></article>
-        <article class="card"><span class="card-number">02 · Starter</span><h3>What Flash means for cascaded voice</h3><p>Gemini 3.6 Flash at hundreds of tokens per second: does faster inference change the balance between cascaded pipelines and end-to-end speech-to-speech?</p></article>
+    <section class="slide centered" data-slide-id="qa" data-title="Q&amp;A" data-section="Q&amp;A" data-cue="0:10">
+      <div>
+        <p class="eyebrow">Q&amp;A <span class="timing-fragment">0:10 – 0:46</span></p>
+        <h2>Your questions. <span class="accent">Ask in Discord chat.</span></h2>
+        <p class="lede">Anything from the Gemini segment, the Agora demos, or realtime voice in general. The host reads them out; both teams answer.</p>
       </div>
-      <div class="meta-row"><span class="status-chip success">Post questions in the event channel chat</span><span class="status-chip">Longer roadmap answers → event channel thread after the hour</span></div>
-      <div class="meta-row"><span class="status-chip">In the event channel after the hour</span><span class="meta-chip">Audio understanding · hot words, noise, whisper, speaker ID</span><span class="meta-chip">Multimodal realtime · screen + live voice</span></div>
       <div class="speaker-notes">
-        <p>Open with the first starter to give chat time to post. Pick the second only if questions are slow; the channel topics become threads after the hour.</p>
-        <p>Read each question aloud before answering so the recording makes sense. Alternate between the Google speaker and Agora where a question fits both. Leave two minutes for the close.</p>
+        <p>Read each question aloud before answering so the recording makes sense. Alternate between the Google speaker and Agora where a question fits both.</p>
+        <p>If chat is slow, seed it: full-duplex interaction and back-channeling, or what Gemini 3.6 Flash's speed means for cascaded versus end-to-end speech. Leave two minutes for the close.</p>
       </div>
     </section>
 
-    <section class="slide" data-slide-id="close" data-title="Keep building" data-section="Close" data-cue="0:46">
-      <div class="qr-layout">
-        <div>
-          <p class="eyebrow">Keep building with Agora + Gemini</p>
-          <h2>The recording, the recipes, <span class="accent">and the podcast.</span></h2>
-          <p class="lede">Both recipe repositories are linked in chat. The recording and transcript publish this week; the podcast episode follows.</p>
-          <div class="meta-row" style="margin-top:24px">
-            <span class="status-chip success">recipes.agora.io</span>
-            <span class="status-chip">Event channel open Sept 17–18</span>
-          </div>
-          <p id="discordStatus" class="microcopy" style="margin-top:20px">The Discord invite QR is configured before each deployment.</p>
+    <section class="slide centered" data-slide-id="close" data-title="Thank you" data-section="Close" data-cue="0:46">
+      <div>
+        <p class="eyebrow">Agora × Google DeepMind</p>
+        <h2>Thank you <span class="accent">for joining.</span></h2>
+        <p class="lede">Both recipe repositories are linked in chat, and the recording publishes this week. Keep the questions coming in the event channel.</p>
+        <div class="meta-row" style="margin-top:24px; justify-content:center">
+          <span class="status-chip success">recipes.agora.io</span>
+          <span class="status-chip">Event channel open Sept 17–18</span>
         </div>
-        <div class="qr-card"><img src="discord-qr-code.svg" alt="Discord invite QR code"></div>
       </div>
       <div class="speaker-notes">
-        <p>Thank the Google speaker. Remind chat the hour was recorded and a podcast tapes next. Point to recipes.agora.io and the event channel, which stays open for follow-up questions.</p>
+        <p>Thank the Google speaker and everyone in chat. Remind them the hour was recorded. Point to recipes.agora.io and the event channel, which stays open for follow-up questions.</p>
       </div>
     </section>
   </main>
@@ -2891,8 +2914,6 @@
 
       function renderDemo() {
         var publicUrl = demoUrl();
-        var label = publicUrl.host + publicUrl.pathname;
-        setText('[data-demo-field="url"]', label);
         document.querySelectorAll("[data-demo-link]").forEach(function (node) {
           node.href = isAudience ? publicUrl.href : demoUrl({ architecture: state.architecture }).href;
         });
