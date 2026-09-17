@@ -13,7 +13,7 @@ export function ModelChoice({ model, onModelChange, thinkingLevel, onThinkingLev
 }) {
   return <div className="mt-6 w-full text-left">
     <span className="text-sm font-medium text-white">Choose a Gemini model</span>
-    <div className="mt-2 grid grid-cols-2 gap-2" role="group" aria-label="Gemini model">
+    <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2" role="group" aria-label="Gemini model">
       {([DEMO_MODELS.live, DEMO_MODELS.extendedThinking] as DemoModel[]).map(choice =>
         <button key={choice} type="button" disabled={disabled} aria-pressed={model === choice}
           onClick={() => onModelChange(choice)}

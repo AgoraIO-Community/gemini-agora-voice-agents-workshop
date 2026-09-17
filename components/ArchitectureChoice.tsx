@@ -11,7 +11,7 @@ export function ArchitectureChoice({ architecture, onArchitectureChange, disable
   return (
     <div className="mt-6 w-full text-left">
       <span className="text-sm font-medium text-white">Choose how the agent is built</span>
-      <div className="mt-2 grid grid-cols-2 gap-2" role="group" aria-label="Agent architecture">
+      <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2" role="group" aria-label="Agent architecture">
         {ARCHITECTURE_IDS.map((id) => {
           const choice = ARCHITECTURES[id];
           const active = architecture === id;
