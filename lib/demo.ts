@@ -10,7 +10,7 @@ export const ARCHITECTURES = {
     blurb: 'Three stages chained in one session: speech in, text through Flash, speech back out. Per-stage latency shows in the metrics panel.',
     stages: [
       { key: 'stt', label: 'Gemini ASR', metricTypes: ['stt', 'asr'] },
-      { key: 'llm', label: 'Gemini LLM', metricTypes: ['llm'] },
+      { key: 'llm', label: 'Gemini 3.6 Flash', metricTypes: ['llm'] },
       { key: 'tts', label: 'MiniMax TTS', metricTypes: ['tts'] },
     ],
   },
