@@ -2624,14 +2624,14 @@
 
     <section class="slide compact" data-slide-id="customize-recipe" data-title="Add Gemini Live to the same app" data-section="Build both architectures" data-cue="0:55" data-technical="true">
       <div class="customize-instructions">
-      <p class="eyebrow">One project · <span data-track-field="label"></span></p>
+      <p class="eyebrow">Existing project</p>
       <h2>Add Gemini Live. <span class="accent">Keep the same app.</span></h2>
       <p class="lede">Save your working baseline, then open this project in your coding assistant. Install Agora Skills, then copy the prompt into your assistant.</p>
       <div class="terminal"><div class="terminal-bar"><span class="terminal-title">Inside gemini-voice-agent</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="skillsCommand">Copy</button><pre id="skillsCommand">npx skills add agoraio/skills</pre></div></div>
       <div class="meta-row"><a class="meta-chip" data-recipe-link="cascadedRecipe" href="#" target="_blank" rel="noreferrer">Cascaded source ↗</a><a class="meta-chip" data-recipe-link="mllmRecipe" href="#" target="_blank" rel="noreferrer">Gemini Live source ↗</a></div>
       </div>
       <div class="prompt-card customize-prompt"><div class="customize-prompt-header"><strong>Build prompt</strong><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button></div><pre id="customizePrompt"></pre></div>
-      <div class="speaker-notes"><p><strong>Show:</strong> commit the working cascaded baseline, install Skills in this project, and give the assistant the language-specific prompt. <strong>Say:</strong> use the native recipe as a reference; add its GeminiLive provider to our existing app instead of creating another app. Preserve the voice UI, channel, transcript, credentials, and start/stop lifecycle.</p><p><strong>Checkpoint:</strong> one app offers both architectures. Stop the active conversation before switching, retain the matching server session for cleanup, and validate the requested architecture server-side. Keep Google credentials server-side. <strong>Return:</strong> compare with the combined live demo, then test both paths locally.</p></div>
+      <div class="speaker-notes"><p><strong>Show:</strong> commit the working cascaded baseline, install Skills in this project, and give the assistant the project-aware prompt. <strong>Say:</strong> use the native recipe as a reference; add its GeminiLive provider to our existing app instead of creating another app. Preserve the voice UI, channel, transcript, credentials, and start/stop lifecycle.</p><p><strong>Checkpoint:</strong> one app offers both architectures. Stop the active conversation before switching, retain the matching server session for cleanup, and validate the requested architecture server-side. Keep Google credentials server-side. <strong>Return:</strong> compare with the combined live demo, then test both paths locally.</p></div>
     </section>
 
     <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="1:10">
@@ -2915,12 +2915,9 @@
         return "agora init " + ARCHITECTURES[architecture].dir + " --recipe " + recipeFor(architecture, track).slug;
       }
 
-      function combinedAppPromptFor(track) {
-        var baseline = recipeFor("cascaded", track);
-        var native = recipeFor("mllm", track);
-        return "Use Agora Skills to extend this working " + TRACKS[track].label + " app with both voice architectures.\n"
-          + "Cascaded reference: " + recipeUrl(baseline.slug) + "\n"
-          + "Native reference: " + recipeUrl(native.slug) + "\n"
+      function combinedAppPromptFor() {
+        return "Use Agora Skills to extend the existing Agora Gemini voice agent with both voice architectures. Infer the language, framework, and tooling from the current project.\n"
+          + "Find the matching Gemini Live recipe at https://recipes.agora.io/?q=gemini#recipes and use it as a reference.\n"
           + "Keep the cascaded baseline working. Add GeminiLive from the native recipe to this same app, UI, Agora channel, transcript, and start/stop lifecycle; do not create a second app. Add a Cascaded / Gemini Live switch before connecting. Stop the active session before switching; retain the matching server session for cleanup. Validate architecture server-side and keep Google keys server-side. Run the app and verify a real conversation, interruption, stop, and restart in BOTH modes.";
       }
 

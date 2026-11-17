@@ -13,10 +13,11 @@ const context = {
 runInNewContext(recipeCode + "\n" + commandCode, context);
 
 describe("one app with both architectures", () => {
-  it.each(["nextjs", "python", "go"])("uses matching %s recipes in the combined-app prompt", track => {
+  it.each(["nextjs", "python", "go"])("infers the project language regardless of the %s slide selection", track => {
     const prompt = context.combinedAppPromptFor(track);
-    expect(prompt).toContain(`https://recipes.agora.io/recipes/gemini-agora-voice-agents-${track}`);
-    expect(prompt).toContain(`https://recipes.agora.io/recipes/agora-gemini-mllm-${track}`);
+    expect(prompt).toContain("Infer the language, framework, and tooling from the current project");
+    expect(prompt).toBe(context.combinedAppPromptFor("nextjs"));
+    expect(prompt).not.toMatch(/TypeScript|Python|Next.js/);
     expect(prompt).toContain("do not create a second app");
     expect(prompt).toContain("Stop the active session before switching");
     expect(prompt).toContain("BOTH modes");
