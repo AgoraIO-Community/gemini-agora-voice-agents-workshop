@@ -1,9 +1,9 @@
-# Agora × Gemini Discord Livestream — presentation
+# Agora × Gemini — in-person workshop
 
-This is the presentation website and live demo for the *Build Voice Agents with Gemini + Agora* livestream, packaged as one Next.js app:
+This is the presentation website and live demo for the *Build Voice Agents with Gemini + Agora* in-person workshop, packaged as one Next.js app:
 
-- **The deck** (`public/index.html`) is a static page the host and audience share. A small browser bundle adds Agora Signaling so Discord viewers follow the slides in sync; `/api/rtm-token` mints their short-lived RTM tokens.
-- **The demo** (`/demo`) is one voice-agent UI with an architecture switch: **A · Cascaded** (Gemini ASR → Gemini 3.6 Flash → TTS) or **B · Gemini Live** (native multimodal, with the extended-thinking model and thinking-level slider). `/api/invite-agent` builds whichever agent is asked for; the UI and API are merged from the two official recipes, `gemini-agora-voice-agents-nextjs` and `agora-gemini-mllm-nextjs`.
+- **The deck** (`public/index.html`) is a static page the host and audience share. A small browser bundle adds Agora Signaling so attendees follow the slides in sync; `/api/rtm-token` mints their short-lived RTM tokens.
+- **The demo** (`/demo`) is one voice-agent UI with an architecture switch: **A · Cascaded** (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or **B · Gemini Live** (native multimodal, with the extended-thinking model and thinking-level slider). `/api/invite-agent` builds whichever agent is asked for; the UI and API are merged from the two official recipes, `gemini-agora-voice-agents-nextjs` and `agora-gemini-mllm-nextjs`.
 
 ## Local setup
 
@@ -47,7 +47,7 @@ Overrides are normalized to lowercase URL-safe names; spaces become hyphens. Nam
 
 Press `H` and select:
 
-- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 3.6 Flash → Agora-managed TTS) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide also selects this when a card is clicked.
+- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide also selects this when a card is clicked.
 - **Code track** — TypeScript (default), Python, or Go.
 - Light, dark, or system theme.
 
@@ -59,13 +59,14 @@ Architecture and track drive the `agora init --recipe` command, the run steps, t
 | Python | `gemini-agora-voice-agents-python` | `agora-gemini-mllm-python` |
 | Go | `gemini-agora-voice-agents-go` | `agora-gemini-mllm-go` |
 
-The recipe data lives in the `RECIPES` object in `index.html`. Update it there if a recipe README changes its setup or run commands.
+The recipe data lives in the `RECIPES` object in `public/index.html`. Update it there if a recipe README changes its setup or run commands.
 
 ## Audience view
 
 Viewers use `/`, or `/?channel=...` when the host supplies an override. Before the first trusted host snapshot arrives, a waiting screen explains that the session has not started. The deck appears automatically when the authenticated host connects. `/audience` remains as a compatibility alias.
 
 - Host controls, presenter notes, timing cues, and their shortcuts are unavailable.
+- The audience language selector defaults to TypeScript and offers Python and Go. It stores the choice locally, applies it to recipe commands and code, and keeps it through slide changes, host snapshots, and reloads. It does not change the presenter’s language.
 - Slides, links, and copy actions come from the same `index.html` used by the host.
 - Every slide has a stable `data-slide-id`; URLs such as `#slide-compare-code` keep working if slides are reordered.
 - **Following host** switches to independent browsing; **Return to live** applies the newest host snapshot.
@@ -91,17 +92,19 @@ The tests mock the Agora SDK boundary and cover local-date session validation, R
 
 The selected `Testing` project currently reports token enforcement as disabled in Agora Console. Enable it before treating a public deployment as authenticated.
 
-## Required configuration before publishing
+## Workshop join link and QR
 
-Create the Discord event invite, copy `workshop-config.example.json` to a local configuration file, insert the real HTTPS invite, and generate the replacement QR:
+The header keeps the audience join link and a QR code visible on every slide, including the welcome, demo, and closing slides. Configure the new Bitly link in `workshop-join.json` (`{"joinUrl":"https://bit.ly/your-link"}`), or set `WORKSHOP_JOIN_URL` for the build. Rebuild to generate `public/workshop-join-qr.svg` for printing or sharing. The committed configuration currently uses `https://gemini-agora-voice-agents-workshop.vercel.app/` until the new Bitly link is available. If `joinUrl` is empty, the deck uses the current deployment’s audience URL. Rehearsal channel overrides are preserved in the direct join link and QR.
 
-```sh
-python3 scripts/generate-discord-qr.py workshop-config.json discord-qr.svg
-```
+The run slide has no separate Agora env step: `agora init --recipe` writes the Agora credentials. When cloning manually, follow the selected recipe README’s environment setup instead. Add the Google key to `.env.local` for TypeScript or `server/.env.local` for Python/Go, and keep it server-side.
 
-The run slide has no separate Agora env step: `agora init --recipe` writes the Agora credentials for all six Gemini recipes. If you clone manually instead, run `agora quickstart env write .` (Next.js) or `agora project env write server/.env.local` (Python/Go) before adding the Google key.
+## In-person flow
 
-Update the slide-follow short link on the welcome slide (`EVENT.joinLabel` and the `front-join-link` href in `public/index.html`).
+The deck adapts the setup checkpoints, CLI recipe discovery, Skills customization, and build clinic from `1_studio-agents-cli-workshop`. It keeps the Gemini workshop’s cascaded/native comparison and embedded demo. See [HOST-GUIDE.md](HOST-GUIDE.md) for a suggested 90-minute run of show and presenter handoffs. The schedule is relative; no venue or event date is assumed.
+
+Start at the [Gemini catalog](https://recipes.agora.io/?q=gemini#recipes), inspect the selected recipe with `agora recipes show <slug>`, initialize it, and get an untouched local conversation working. Then install Agora Skills in a separate project copy and adapt one use case. Local voice success is the finish line; deployment is optional.
+
+Recipe setup commands and condensed agent excerpts were checked against all six official repository READMEs and agent sources on November 17, 2026. The cascaded recipes now use Gemini TTS preview (`gemini-3.8-flash-tts`) with the same server-side Google API key. The linked repositories contain complete runnable implementations; slide excerpts omit app plumbing and helpers.
 
 ## Deployment
 
@@ -109,16 +112,20 @@ The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-ag
 
 ## Rehearsal
 
-1. Run `agora upgrade` and confirm `agora recipes list` shows all six Gemini voice recipes.
-2. Run `agora init gemini-voice-agent --recipe gemini-agora-voice-agents-nextjs` on a clean machine and confirm it writes `.env.local` with the Agora values (verified 2026-09-16 against the live catalog).
-3. Open `/host`, go to the live-demo slide, and run one conversation per architecture from the embedded demo. Record a three-minute happy-path fallback for each.
-4. Confirm the Gemini model names on the pipeline slide match the Google DeepMind segment that precedes this deck.
-5. Route the demo audio into the Discord stage and check levels with headphones on.
-6. Scan the Discord QR from iOS and Android.
+1. Run `agora upgrade`; open the Gemini catalog and confirm the six recipe slugs and prerequisites.
+2. Initialize the TypeScript cascaded recipe in a clean folder and test setup, Google-key configuration, and a local conversation. Rehearse Python and Go commands when supporting those tracks.
+3. Open `/host` and an audience browser on the same channel. Choose Python or Go in the audience view, advance slides, change the host track, and reload; the attendee’s language must stay selected.
+4. Scan the join QR from the welcome, code, demo, and closing slides. Verify the new short link reaches this workshop’s audience view. Test a late join while the presenter is already on a later slide.
+5. Run both embedded demo architectures with headphones. Prepare a short fallback recording, account setup help, and separate CLI/build support owners.
+6. Rehearse the Skills install and one custom conversation. Test the projector layout and mobile audience view; protect time for the build clinic.
 
 ## First-party command references
 
 - [Agora CLI](https://github.com/AgoraIO/cli)
-- [Agora recipes](https://recipes.agora.io)
+- [Gemini recipes](https://recipes.agora.io/?q=gemini#recipes)
 - [Voice Agent quickstart](https://docs.agora.io/en/ai/get-started/quickstart)
 - [Start and stop an agent](https://docs.agora.io/en/ai/build/start-stop-agent)
+
+## Preserved online version
+
+The pre-workshop online deck is preserved at commit `4b7489b` on [`archive/online-workshop-2026-11-17`](https://github.com/AgoraIO-Community/gemini-agora-voice-agents-workshop/tree/archive/online-workshop-2026-11-17). The in-person version stays on `main` and deploys to the existing Gemini workshop Vercel project. The separate studio workshop is unchanged.

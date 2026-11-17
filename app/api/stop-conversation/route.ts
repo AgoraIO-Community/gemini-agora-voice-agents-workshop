@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { AgoraClient, Area, createPreviewRoute, generateConvoAIToken, PreviewFeatures } from 'agora-agents';
+import { AgoraClient, Area, generateConvoAIToken } from 'agora-agents';
 import type { StopConversationRequest } from '@/types/conversation';
 import { requireAgoraCredentials } from '@/lib/env';
 import { parseArchitecture } from '@/lib/demo';
+import { demoAgentClient } from '@/lib/demo-agents';
 
 function isAgentAlreadyStoppingOrStopped(error: unknown): boolean {
   if (!error || typeof error !== 'object') return false;
@@ -25,8 +26,7 @@ function isAgentAlreadyStoppingOrStopped(error: unknown): boolean {
 }
 
 // Stateless stop: serverless instances don't share memory, so the agent is
-// stopped by id. Gemini Live agents live behind the preview route and must be
-// stopped through the same host and gate they were started with.
+// stopped by id through the same route and gate used at start.
 export async function POST(request: Request) {
   try {
     const body: StopConversationRequest = await request.json();
@@ -42,9 +42,7 @@ export async function POST(request: Request) {
 
     const token = generateConvoAIToken({ appId, appCertificate, channelName: 'stop', uid: 0 });
     const requestOptions = { headers: { Authorization: `agora token=${token}` } };
-    const agents = architecture === 'mllm'
-      ? createPreviewRoute(client, [PreviewFeatures.GeminiLive]).agents
-      : client.agents;
+    const agents = demoAgentClient(client, architecture);
 
     try {
       await agents.stop({ appid: appId, agentId: agent_id }, requestOptions);

@@ -1,59 +1,64 @@
 # Host guide
 
-## Run of show
+## Suggested in-person run of show
 
-Thursday, September 17 · 9–10 am PDT (12–1 pm EDT) · Agora Discord stage. Recorded. A podcast taping with the same speakers follows the live hour.
+This is a 90-minute hands-on workshop. Adjust the relative times to the event; no date or venue is embedded. Open the welcome slide before doors and keep the join link and QR visible for late arrivals.
 
-The stream opens with a short welcome and the Google DeepMind segment on Gemini 3.5 Transcribe (about 15 minutes total). **This deck starts when Google hands back.** Times below are from that handoff.
+| Minutes | Segment | Checkpoint |
+| --- | --- | --- |
+| 0–8 | Welcome, agenda, room setup | Audience view joined, accounts ready, headphones on |
+| 8–20 | Agora and the two Gemini architectures | Attendees choose cascaded or native and recognize the session lifecycle |
+| 20–35 | CLI login and Gemini recipe discovery | Each attendee identifies their recipe slug and runtime prerequisites |
+| 35–55 | Initialize and run the recipe | An untouched local app starts a real voice conversation |
+| 55–65 | Compare demos and inspect the code | Identify the provider configuration and start/stop lifecycle |
+| 65–75 | Agora Skills and a custom use case | Separate working copy, project-scoped Skills, one concrete conversation to build |
+| 75–88 | Local testing, build clinic, Q&A | Demonstrate one working conversation and improve one thing |
+| 88–90 | Close | Stop active sessions and servers; share catalog and community |
 
-| Min | Segment | Slides | Owner |
-| --- | --- | --- | --- |
-| 0–1 | Thank Google, framing, slide-follow link | `welcome`, `run-of-show` | Agora |
-| 1–3 | Agora foundation: platform, cascaded loop, native loop, side-by-side code, pick an architecture | `what-is-agora` → `two-architectures` | Agora |
-| 3–6 | Recipes as quickstarts: CLI, `agora init --recipe`, run steps | `install-cli` → `run-recipe` | Agora |
-| 6–10 | Live demo: cascaded, then Gemini Live | `live-demo` | Agora |
-| 10–46 | Q&A from Discord chat; full-duplex and Flash-for-cascaded as starters while questions come in | `qa` | Both |
-| 46–48 | Close: thank you, recording, recipes, event channel | `close` | Agora host |
+## Before attendees arrive
 
-## Before the stream
+- Rehearse the [Gemini recipe catalog](https://recipes.agora.io/?q=gemini#recipes), the exact CLI commands, and a fresh TypeScript cascaded initialization. TypeScript is the default; Python and Go remain supported.
+- Prepare your Agora and Google accounts, a working recipe checkout, the embedded demo, terminal, editor, and coding assistant. Keep environment files and credentials off the projector.
+- Confirm Node.js 22+ and pnpm for TypeScript, Python 3.10+ and Bun for Python, or Go 1.23+, pnpm, and Make for Go. Each recipe README is the source of truth.
+- Have a short fallback recording for both architectures. Check projector audio and headphones.
+- Configure the new Bitly link using `workshop-join.json` or `WORKSHOP_JOIN_URL`, rebuild, and scan the generated QR. The persistent header appears on every slide. Rehearsals with `?channel=...` use that same channel in the join QR.
+- Assign a helper to account/CLI setup and another to code/Skills questions when possible. Display venue Wi-Fi separately before starting.
 
-- The demo is built into the deck: the live-demo slide embeds `/demo` for the host and shows a self-service link to the audience. Fallback recordings ready for each architecture.
-- `agora upgrade` done on the presenter machine; `agora login` already completed so it is mentioned, not run.
-- Press `H`: select **Architecture · A · Cascaded** and **Code track · TypeScript**. The pipeline slide maps directly to the cascaded TypeScript code.
-- Post the slide-follow link and both repository links in the event channel.
-- Confirm the Gemini model names with the Google speaker so the deck matches their segment; the deck labels the ASR stage "Gemini 3.5 Transcribe Live" and the LLM "Gemini 3.6 Flash".
-- Have the deck open on `welcome` before the Google segment ends.
+## Host and audience controls
 
-## Host controls
+Participants open the root workshop URL. The presenter opens `/host` and enters the workshop password. Both views derive the local date as the live channel; for rehearsals or concurrent events, use the same explicit channel in both URLs, for example `/host?channel=gemini-rehearsal` and `/?channel=gemini-rehearsal`.
 
-Participants open the root URL. The presenter opens `/host` and enters the default password `AgoraWorkshop2026`. Both views use the local date as the RTM channel, for example `2026-09-17`; add `?channel=gemini-rehearsal` to both URLs for rehearsals.
+Press **H** to choose the architecture, presenter code track, theme, and terminal label. Press **N** for speaker notes. Notes use Show, Say, Checkpoint, and Return handoffs for the key desktop demonstrations. Press **T** for relative timing cues.
 
-Press `H` from any slide to change:
+Audience members select TypeScript, Python, or Go in their own view. TypeScript is the initial default. Their browser remembers the choice locally across slides and reloads; a presenter track change does not replace it. The host still controls the shared architecture and slide. **Following host** lets attendees browse independently; **Return to live** catches up. Late arrivals receive the current slide after the trusted host connects.
 
-- Architecture — also selectable by clicking a card on the two-architectures slide or the toggle on the init slide
-- Code track — TypeScript, Python, or Go
-- Theme and terminal label
+## Desktop demonstration handoffs
 
-Architecture and track sync to the audience view. Press `N` for the current slide’s notes.
+| Slide | Show and say | Checkpoint and return |
+| --- | --- | --- |
+| `room-setup` | Agora Console, Google AI Studio, recipe prerequisites | Accounts and headphones ready; return to Agora introduction |
+| `install-cli` | Official installation docs, then `agora login` | Authenticated terminal; return to recipe discovery |
+| `discover-recipes` | Filtered Gemini catalog, selected recipe’s **Implementation guide**, **Source on GitHub**, and **Prompt & CLI** panel, `agora recipes list --type ai`, `agora recipes show <slug>` | Attendees know architecture, slug, language; return to initialization |
+| `init-recipe` | Copy and run the selected recipe’s generated command | Initialization completes; return to run steps |
+| `run-recipe` | Enter folder, install, configure Google key privately, run | Local browser conversation succeeds before customization |
+| `live-demo` | Cascaded and native conversations; transcript and latency | Identify the architectural difference; return to customization |
+| `customize-recipe` | Separate working copy, `npx skills add agoraio/skills`, short use-case prompt | Project-scoped Skills loaded; return to test slide |
+| `test-your-agent` | One concrete conversation and its actual outcome | Fix one issue; stop the conversation afterward |
 
-## During the Agora segment
+## Recipe details and boundaries
 
-1. `compare-code`: the two loops in code. Left is three vendors, right is one `GeminiLive`. Everything else is identical.
-2. `two-architectures`: pick cascaded; optionally run `agora recipes list` live to show the catalog. Mention `primaryPrompt` in one sentence for the coding-agent crowd.
-3. `install-cli`: one slide; install and login are already done on the presenter machine.
-4. `init-recipe`: type the cascaded init command live. Do not wait for it to finish; the demo is built into the next slides.
-5. `run-recipe`: step through the four commands (enter, install, Google key, run). Init already wrote the Agora credentials. Never show the environment file.
-6. `live-demo`: the demo loads in the slide for you only. Cascaded first — one question to Ada, point at the transcript and latency panel. Press H, switch to B · Gemini Live (the frame reloads) — same question, switch to extended thinking, show the slider. Remind chat the demo link is on their screen.
-
-## Hard boundaries
-
-- No Gemini Live demo without Agora in the loop.
-- Never show or paste a Google API key or Agora App Certificate on stream.
-- Roadmap questions that need a long answer go to the event channel or the podcast, not the live Q&A.
+- Use individual attendee Agora projects and Google keys. Gemini recipe stages use the server-side Google API key; do not suggest Agora-managed keys replace it.
+- The current cascaded recipes use GeminiSTT → Gemini 3.6 Flash → Gemini 3.8 Flash TTS preview. Native recipes use Gemini Live. The condensed code comparison omits application setup; use linked source files for full implementation.
+- `recipes list` and `recipes show` are read-only. `init --recipe` creates a project from the selected recipe. The selected language determines the matching Gemini recipe, whose README determines runtime and commands.
+- Keep the first working recipe unchanged. Customize a separate copy with Agora Skills. If a generated app simulates an action, say so explicitly.
+- A local voice conversation is required; tunnels and deployment are optional. Test in two waves if the room is noisy.
+- Never leave a conversation running while switching architectures, closing the workshop, or packing up.
 
 ## Recovery
 
-- Live call fails: play the recorded happy path for that demo and continue.
-- CLI blocked: skip to `compare-code`; the recipe commands are in the audience view for viewers to copy later.
-- Google segment runs over: skip `install-cli` and the second Q&A starter.
-- Questions run dry: bring multimodal realtime (screen + voice) forward from the channel topics.
+- CLI blocked: use `agora doctor`, check login, project access, recipe slug, and runtime prerequisites. Have a helper work with the attendee while the room continues.
+- Recipe blocked: consult its README and environment example. Check that the Google key can access the chosen Gemini model; do not display the key.
+- Live demo fails: open `/demo` in a new tab or play the prepared fallback, then continue the local build.
+- Skills blocked: check the workspace and selected installation scope, then refresh the coding-assistant session.
+- Late arrival: point to the persistent join QR and language selector. Pair them with a helper for accounts and initialization.
+- Time slipping: protect the untouched recipe, one local conversation, and build-clinic time. Skip optional deployment and extra demo variations.

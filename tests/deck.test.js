@@ -4,13 +4,13 @@ import { describe, expect, it } from "vitest";
 const html = readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
 const slideIds = [...html.matchAll(/<section class="slide[^"]*" data-slide-id="([^"]+)"/g)].map((m) => m[1]);
 
-describe("livestream deck structure", () => {
-  it("follows the Agora segment: welcome, foundation, CLI recipes, demo, Q&A, close", () => {
+describe("in-person deck structure", () => {
+  it("follows the hands-on flow: setup, foundation, recipes, customization, clinic, close", () => {
     expect(slideIds).toEqual([
-      "welcome", "run-of-show",
+      "welcome", "run-of-show", "room-setup",
       "what-is-agora", "conversational-ai-pipeline", "mllm-pipeline", "compare-code", "two-architectures",
-      "install-cli", "init-recipe", "run-recipe",
-      "live-demo",
+      "install-cli", "discover-recipes", "init-recipe", "run-recipe",
+      "live-demo", "customize-recipe", "test-your-agent",
       "qa", "close"
     ]);
   });
@@ -23,13 +23,15 @@ describe("livestream deck structure", () => {
     expect(slide).not.toMatch(/podcast/i);
   });
 
-  it("labels the cascade with the Gemini stages and a generic TTS", () => {
+  it("labels all three Gemini stages in the cascaded recipe", () => {
     expect(html).toContain("Gemini 3.5 Transcribe Live");
     expect(html).toContain("Gemini 3.6 Flash");
     expect(html).toContain("Voice synthesis");
     expect(html).toContain("Synthesized audio stream");
     expect(html).toContain("Agora SD-RTN®");
-    expect(html).not.toMatch(/MiniMax(?!TTS)/);
+    expect(html).toContain("Gemini 3.8 Flash TTS");
+    expect(html).toContain("GeminiTTS");
+    expect(html).not.toContain("MiniMaxTTS");
   });
 
   it("shows the native loop with SD-RTN underneath and timed in/out paths", () => {

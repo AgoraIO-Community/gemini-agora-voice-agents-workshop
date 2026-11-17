@@ -1,3 +1,4 @@
+import { renderJoinLink } from "./join-link.js";
 import {
   createWorkshopArchive,
   loadWorkshopArchive,
@@ -216,3 +217,5 @@ if (isAudience) {
   const savedHostKey = sessionStorage.getItem("workshop-host-key");
   if (savedHostKey) void connectHost(savedHostKey);
 }
+
+renderJoinLink(document, location, __WORKSHOP_JOIN_URL__);

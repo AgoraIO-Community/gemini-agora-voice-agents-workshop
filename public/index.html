@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3f4">
-  <meta name="description" content="Build Voice Agents with Gemini + Agora: recipes, two live demos, and Q&amp;A from the Agora × Google DeepMind Discord livestream.">
-  <title>Build Voice Agents with Gemini + Agora · Discord Livestream</title>
+  <meta name="description" content="Build Voice Agents with Gemini + Agora: a hands-on workshop with official Gemini recipes, TypeScript, Python, Go, and a build clinic.">
+  <title>Build Voice Agents with Gemini + Agora · In-person Workshop</title>
   <style>
     :root,
     :root[data-theme="light"] {
@@ -166,7 +166,25 @@
       font-weight: 900;
       letter-spacing: 0;
     }
-    body.front-slide-active .join-pill { visibility: hidden; opacity: 0; }
+    /* The join card occupies its own header row on every slide. */
+    .join-pill { border-radius: 14px; padding: 8px 10px; background: var(--panel); }
+    .join-pill-copy { display: grid; gap: 5px; }
+    .join-qr { display: block; width: 100px; height: 100px; flex: none; background: #fff; border-radius: 4px; }
+    .join-pill-url { max-width: min(40vw, 400px); overflow-wrap: anywhere; }
+    .slide:not(.front-slide) { padding-top: 150px !important; align-content: safe center; }
+    .front-slide { padding-top: 0 !important; }
+    .front-content { padding-top: 150px; align-content: safe center; }
+    @media (max-width: 640px) {
+      .topbar { top: 8px; gap: 8px; }
+      .brand-logo { width: 54px; }
+      .join-pill { gap: 6px; padding: 5px; }
+      .join-qr { width: 76px; height: 76px; }
+      .join-pill-label { font-size: 10px; }
+      .join-pill-url { padding: 3px 5px; font-size: 12px; max-width: 48vw; }
+      .slide:not(.front-slide) { padding-top: 112px !important; }
+      .front-content { padding-top: 112px; }
+      .front-content .front-brand { --brand-x: 11px; max-width: 100%; gap: 10px; padding-inline: 12px; }
+    }
     .brand-logo { display: block; width: 86px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .2)); }
     .pill-button,
     .icon-button,
@@ -1632,6 +1650,24 @@
     body.view-audience.terminal-slide-active .terminal-environment-hint { display: inline-flex; }
     .terminal-environment-hint:hover { border-color: var(--accent); color: var(--ink); }
     .terminal-environment-hint kbd { min-width: 19px; padding: 2px 5px; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); color: var(--accent); font-size: 9px; font-weight: 900; text-align: center; }
+    .audience-language { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .audience-language select { min-height: 32px; max-width: 112px; padding: 4px 7px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel); color: var(--ink); font: inherit; }
+    .audience-language select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .audience-language-label { display: none; }
+      body.view-audience .terminal-environment-hint kbd,
+      body.view-audience .terminal-environment-hint span { display: none; }
+      body.view-audience .footer { gap: 6px; }
+    }
+    @media (max-width: 480px) {
+      body.view-audience .footer { height: 76px; display: grid; grid-template-columns: 1fr auto; padding: 5px 12px; }
+      body.view-audience .footer-spacer { display: none; }
+      body.view-audience .audience-language { grid-column: 1; grid-row: 1; }
+      body.view-audience .session-controls { grid-column: 2; grid-row: 1; }
+      body.view-audience .terminal-environment-hint { grid-column: 1; grid-row: 2; justify-self: start; }
+      body.view-audience #counter { grid-column: 2; grid-row: 2; justify-self: end; }
+      body.view-audience .slide { bottom: 76px; }
+    }
     .session-controls { display: inline-flex; align-items: center; gap: 7px; }
     .session-status { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: var(--muted); font: inherit; white-space: nowrap; }
     body.view-host .session-status { cursor: pointer; }
@@ -2126,7 +2162,7 @@
       .workspace-command { clip-path: none; }
     }
 
-    /* Livestream additions */
+    /* Gemini workshop additions */
     /* Size both wordmarks from a shared x-height, then align their x-height centres.
        Agora's SVG viewBox (343 tall) has the x-height at 0–204 with no top padding;
        the Google DeepMind PNG (240 tall) has it at 87–159 with ~48px padding above and below. */
@@ -2165,7 +2201,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
-    <a class="join-pill" href="https://bit.ly/3VfqCSU" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><span class="join-pill-label">Follow along</span><span class="join-pill-url" data-event-field="joinLabel">bit.ly/3VfqCSU</span></a>
+    <a class="join-pill" data-workshop-join href="/" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><img class="join-qr" data-workshop-qr alt="Scan to join the workshop" width="100" height="100"><span class="join-pill-copy"><span class="join-pill-label">Join the workshop</span><span class="join-pill-url" data-workshop-join-label>Open audience view</span></span></a>
   </header>
 
   <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
@@ -2205,40 +2241,50 @@
         <span class="front-brand"><img src="assets/agora-logo-rgb-blue.svg" alt="Agora"><span class="front-brand-x">×</span><img src="assets/google-deepmind-lockup.png" alt="Google DeepMind"></span>
         <hr class="front-rule">
         <div>
-          <p class="front-kicker" data-event-field="kicker">Agora Discord Livestream</p>
+          <p class="front-kicker" data-event-field="kicker">Gemini + Agora · In-person workshop</p>
           <h1 class="front-city">Build Voice Agents with <span class="front-highlight">Gemini + Agora</span></h1>
         </div>
         <div class="front-meta">
-          <span data-event-field="date">Thursday · September 17, 2026</span>
+          <span data-event-field="date">Hands-on · Build, test, and make it yours</span>
         </div>
         <div class="front-access" data-host-only>
-          <a class="front-join-link" href="https://bit.ly/3VfqCSU" target="_blank" rel="noreferrer">Follow the slides <span data-event-field="joinLabel">bit.ly/3VfqCSU</span></a>
+          <a class="front-join-link" data-workshop-join href="/" target="_blank" rel="noreferrer">Follow the slides <span data-workshop-join-label>Open audience view</span></a>
         </div>
       </div>
       <div class="speaker-notes">
-        <p>This deck starts when Google DeepMind hands back. Have it on this slide before their segment ends.</p>
-        <p>Thank the Google speaker, then drop the slide-follow link in chat so viewers can copy commands directly from the audience view.</p>
-        <p>One sentence of framing: everything Google just described is available today through official Agora recipes, and you are about to run two of them.</p>
+        <p>Open this slide as attendees arrive. Point out the join link and QR code; late arrivals can join from any slide.</p>
+        <p>Ask attendees to join on their laptops, connect to venue Wi-Fi, and keep headphones ready. Their own language choice stays local.</p>
+        <p>Today everyone will run an official Gemini recipe, test a real voice conversation, and adapt it to a use case.</p>
       </div>
     </section>
 
-    <section class="slide" data-slide-id="run-of-show" data-title="Agenda" data-section="Welcome" data-cue="0:00">
+    <section class="slide" data-slide-id="run-of-show" data-title="Agenda" data-section="Welcome" data-cue="0:05">
       <p class="eyebrow">Agenda</p>
       <h2>What we’ll <span class="accent">cover.</span></h2>
       <ol class="agenda auto-reveal">
-        <li class="agenda-item"><span class="agenda-step">01</span><div><strong>About Agora</strong><p>The realtime platform connecting people, devices, and AI.</p></div><span class="timing-fragment">0:01 · 1 min</span></li>
-        <li class="agenda-item"><span class="agenda-step">02</span><div><strong>Voice &amp; Conversational AI architectures</strong><p>The cascaded pipeline, the native multimodal pipeline, and both agents side by side in code.</p></div><span class="timing-fragment">0:02 · 2 min</span></li>
-        <li class="agenda-item"><span class="agenda-step">03</span><div><strong>Using Gemini with Agora Conversational AI</strong><p>Official recipes from the Agora CLI: install, initialize, add your Google key, run.</p></div><span class="timing-fragment">0:04 · 2 min</span></li>
-        <li class="agenda-item"><span class="agenda-step">04</span><div><strong>Live demos</strong><p>Cascaded first, then Gemini Live.</p></div><span class="timing-fragment">0:06 · 4 min</span></li>
-        <li class="agenda-item qa"><span class="agenda-step">05</span><div><strong>Q&amp;A</strong><p>Your questions from Discord chat, with the Google and Agora teams. Drop them in any time.</p></div><span class="timing-fragment">0:10 · 36 min</span></li>
+        <li class="agenda-item"><span class="agenda-step">01</span><div><strong>About Agora</strong><p>The realtime platform connecting people, devices, and AI.</p></div><span class="timing-fragment">0:08 · 2 min</span></li>
+        <li class="agenda-item"><span class="agenda-step">02</span><div><strong>Voice &amp; Conversational AI architectures</strong><p>The cascaded pipeline, the native multimodal pipeline, and both agents side by side in code.</p></div><span class="timing-fragment">0:10 · 10 min</span></li>
+        <li class="agenda-item"><span class="agenda-step">03</span><div><strong>Using Gemini with Agora Conversational AI</strong><p>Find a Gemini recipe, sign in, initialize, add your Google key, and run it locally.</p></div><span class="timing-fragment">0:20 · 35 min</span></li>
+        <li class="agenda-item"><span class="agenda-step">04</span><div><strong>Live demos</strong><p>Test your local agent, then customize it with Agora Skills.</p></div><span class="timing-fragment">0:55 · 25 min</span></li>
+        <li class="agenda-item qa"><span class="agenda-step">05</span><div><strong>Q&amp;A</strong><p>Build clinic and questions. Ask for help as you go.</p></div><span class="timing-fragment">1:20 · 8 min</span></li>
       </ol>
       <div class="speaker-notes">
         <p>Rows reveal on their own. Read the five headers, not the descriptions. Keep it under thirty seconds.</p>
-        <p>Press T to see the clock for each block. Tell chat that questions are collected all hour and answered in the Q&amp;A block at the end.</p>
+        <p>Press T to see the clock for each block. Pause at each checkpoint so attendees can catch up. Questions are welcome throughout.</p>
       </div>
     </section>
 
-    <section class="slide compact platform-slide" data-slide-id="what-is-agora" data-title="What is Agora?" data-section="How Agora works" data-cue="0:01">
+    <section class="slide" data-slide-id="room-setup" data-title="Get ready to build" data-section="Hands-on setup" data-cue="0:06">
+      <p class="eyebrow">Before we build</p><h2>Your laptop. Your project. <span class="accent">Your first conversation.</span></h2>
+      <div class="grid">
+        <article class="card"><span class="card-number">01 · Accounts</span><h3>Sign in to Agora and Google</h3><p>Use your own Agora project with Conversational AI enabled and a Google API key with access to the recipe’s Gemini models.</p><a class="meta-chip" href="https://console.agora.io" target="_blank" rel="noreferrer">Agora Console ↗</a><a class="meta-chip" href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">Google AI Studio ↗</a></article>
+        <article class="card"><span class="card-number">02 · Tools</span><h3>TypeScript by default</h3><p>Node.js 22+ and pnpm. Python also needs Python 3.10+ and Bun; Go needs Go 1.23+, pnpm, and Make. Follow your recipe README.</p></article>
+        <article class="card"><span class="card-number">03 · Room setup</span><h3>Wi-Fi and headphones</h3><p>Join the audience view on your laptop. Choose TypeScript, Python, or Go; your browser remembers your choice as slides change.</p></article>
+      </div>
+      <div class="speaker-notes"><p><strong>Show:</strong> Agora Console and the recipe prerequisites. <strong>Say:</strong> every attendee uses their own project and server-side Google key. <strong>Checkpoint:</strong> Wi-Fi, accounts, tools, and headphones ready. <strong>Return:</strong> What is Agora?</p></div>
+    </section>
+
+    <section class="slide compact platform-slide" data-slide-id="what-is-agora" data-title="What is Agora?" data-section="How Agora works" data-cue="0:08">
       <p class="eyebrow">What is Agora?</p>
       <h2>The realtime platform connecting <span class="accent">people, devices, and AI.</span></h2>
       <div class="platform-video">
@@ -2255,10 +2301,10 @@
       </div>
     </section>
 
-    <section class="slide compact cascade-slide" data-slide-id="conversational-ai-pipeline" data-title="The cascading voice pipeline" data-section="How Agora works" data-cue="0:01">
+    <section class="slide compact cascade-slide" data-slide-id="conversational-ai-pipeline" data-title="The cascading voice pipeline" data-section="How Agora works" data-cue="0:10">
       <p class="eyebrow">Agora Conversational AI Engine · with Gemini</p>
       <h2>Speech becomes intelligence—and returns as <span class="accent">realtime voice.</span></h2>
-      <div class="cascade-shell" role="img" aria-label="Cascading voice AI pipeline on Agora SD-RTN. A user device sends an audio stream to Gemini 3.5 Transcribe Live. The transcript goes to Gemini 3.6 Flash. The response text goes to Agora-managed TTS, which publishes synthesized audio back to the user.">
+      <div class="cascade-shell" role="img" aria-label="Cascading voice AI pipeline on Agora SD-RTN. A user device sends an audio stream to Gemini 3.5 Transcribe Live. The transcript goes to Gemini 3.6 Flash. The response text goes to Gemini TTS preview, which publishes synthesized audio back to the user.">
         <div class="cascade-shell-header">
           <strong class="cascade-sdrtn-label">Agora SD-RTN®</strong>
           <small>One managed realtime conversation path</small>
@@ -2287,7 +2333,7 @@
           <div class="cascade-connector"><span class="cascade-connector-label">Response text</span><span class="cascade-connector-line"></span></div>
           <article class="cascade-node tts">
             <span class="cascade-node-type">Voice synthesis</span>
-            <strong>Text-to-speech</strong>
+            <strong>Gemini 3.8 Flash TTS</strong>
             <p>Turns the generated response into natural speech.</p>
             <span class="cascade-node-result">TEXT → AUDIO</span>
           </article>
@@ -2295,14 +2341,14 @@
         <div class="cascade-return" aria-hidden="true"><span class="cascade-return-arrow">←</span><strong>Synthesized audio stream</strong><span>TTS publishes speech back through the Agora Channel to the user.</span></div>
         <div class="cascade-legend" aria-hidden="true"><span>Realtime audio on SD-RTN</span><span>Text handoff inside the cascade</span></div>
       </div>
-      <p class="lede">Two Gemini stages in the cascade. <span class="accent">Agora keeps the conversation moving in realtime.</span></p>
+      <p class="lede">Three Gemini stages in the recipe cascade. <span class="accent">Agora keeps the conversation moving in realtime.</span></p>
       <div class="speaker-notes">
-        <p>Follow the top row left to right: the user publishes audio; Gemini 3.5 Transcribe Live produces the transcript; Gemini 3.6 Flash produces the response; Agora-managed TTS synthesizes speech.</p>
+        <p>Follow the top row left to right: the user publishes audio; Gemini 3.5 Transcribe Live produces the transcript; Gemini 3.6 Flash produces the response; Gemini TTS preview synthesizes speech.</p>
         <p>Then follow the return path: the agent publishes audio back into the same Channel. This is the cascaded recipe you are about to run. Next slide shows the same loop with Gemini Live.</p>
       </div>
     </section>
 
-    <section class="slide compact cascade-slide" data-slide-id="mllm-pipeline" data-title="The native multimodal pipeline" data-section="How Agora works" data-cue="0:02">
+    <section class="slide compact cascade-slide" data-slide-id="mllm-pipeline" data-title="The native multimodal pipeline" data-section="How Agora works" data-cue="0:12">
       <p class="eyebrow">Agora Conversational AI Engine · with Gemini Live</p>
       <h2>One model listens, thinks, and <span class="accent">speaks.</span></h2>
       <div class="cascade-shell native-shell" role="img" aria-label="Native multimodal voice AI loop. The user device sends audio down into Agora SD-RTN, which carries it across to Gemini 3.8 Live. Gemini Live listens, reasons, and speaks as one model, and its audio travels back through SD-RTN to the user device.">
@@ -2338,7 +2384,7 @@
       </div>
     </section>
 
-    <section class="slide compact" data-slide-id="compare-code" data-title="Compare the two agents" data-section="Inside an Agora Agent" data-cue="0:02" data-technical="true">
+    <section class="slide compact" data-slide-id="compare-code" data-title="Compare the two agents" data-section="Inside an Agora Agent" data-cue="0:14" data-technical="true">
       <p class="eyebrow">Selected · <span data-track-field="label"></span></p>
       <h2>Same SDK, same lifecycle. <span class="accent">Swap the builder calls.</span></h2>
       <div class="code-compare">
@@ -2352,12 +2398,12 @@
         </div>
       </div>
       <div class="speaker-notes">
-        <p>The two loops you just saw, in code. Left: three stages chained with <strong>withStt / withLlm / withTts</strong>. Right: one <strong>withMllm(GeminiLive)</strong> call carries the prompt, voice, transcription flags, and server VAD.</p>
+        <p>These are condensed configuration excerpts; the linked recipe includes imports, credentials, helpers, and error handling. The two loops you just saw, in code. Left: three stages chained with <strong>withStt / withLlm / withTts</strong>. Right: one <strong>withMllm(GeminiLive)</strong> call carries the prompt, voice, transcription flags, and server VAD.</p>
         <p>Everything around the builder is identical: client, session, start, stop. That is the point of the SDK. Next slide: pick one and run it.</p>
       </div>
     </section>
 
-    <section class="slide compact" data-slide-id="two-architectures" data-title="Two architectures" data-section="How Agora works" data-cue="0:03">
+    <section class="slide compact" data-slide-id="two-architectures" data-title="Two architectures" data-section="How Agora works" data-cue="0:18">
       <p class="eyebrow">Two ways to put Gemini in the loop</p>
       <h2>Cascaded or native. <span class="accent">Same SDK, same session.</span></h2>
       <div class="code-paths-overview">
@@ -2377,18 +2423,18 @@
         </article>
       </div>
       <div class="meta-row">
-        <a class="meta-chip recipe-link" href="https://recipes.agora.io" target="_blank" rel="noreferrer">Browse recipes.agora.io ↗</a>
+        <a class="meta-chip recipe-link" href="https://recipes.agora.io/?q=gemini#recipes" target="_blank" rel="noreferrer">Browse Gemini recipes ↗</a>
         <span class="meta-chip mono">agora recipes list</span>
         <span class="meta-chip mono" title="Every recipe ships a ready-made prompt for coding agents">agora recipes show &lt;slug&gt; --json → primaryPrompt</span>
         <span class="lede-inline">Selected: <strong class="accent" data-recipe-field="architectureTitle"></strong></span>
       </div>
       <div class="speaker-notes">
-        <p>These are the two architectures the contest qualified. Both are published as official recipes for TypeScript, Python, and Go; every chip links to its recipes.agora.io page. Run <strong>agora recipes list</strong> in the terminal here if you want to show the catalog live. One sentence for the AI-agent crowd: <strong>agora recipes show &lt;slug&gt; --json</strong> exposes a primaryPrompt that points Claude Code, Cursor, or Gemini CLI at the same RECIPE.md.</p>
+        <p>Both architectures are published as official recipes for TypeScript, Python, and Go; every chip links to its recipes.agora.io page. Run <strong>agora recipes list</strong> in the terminal here if you want to show the catalog live. One sentence for the AI-agent crowd: <strong>agora recipes show &lt;slug&gt; --json</strong> exposes a primaryPrompt that points Claude Code, Cursor, or Gemini CLI at the same RECIPE.md.</p>
         <p>Click a card to select the architecture for the CLI slides. Start with <strong>cascaded</strong> so the pipeline slide you just showed maps directly to the code.</p>
       </div>
     </section>
 
-    <section class="slide command-highlight-slide" data-slide-id="install-cli" data-title="Get the Agora CLI" data-section="Agora CLI" data-cue="0:04" data-technical="true">
+    <section class="slide command-highlight-slide" data-slide-id="install-cli" data-title="Get the Agora CLI" data-section="Agora CLI" data-cue="0:25" data-technical="true">
       <p class="eyebrow">Install once</p>
       <h2>Install the CLI. <span class="accent">Sign in once.</span></h2>
       <div class="terminal workspace-terminal install-cli-terminal">
@@ -2405,12 +2451,21 @@
         <a class="meta-chip" href="https://agoraio.github.io/cli/install.html" target="_blank" rel="noreferrer">Windows and other install paths ↗</a>
       </div>
       <div class="speaker-notes">
-        <p>One install command, then <strong>agora login</strong> opens the browser sign-in and returns to the terminal. Already done on the presenter machine; mention it, do not run it live.</p>
+        <p>One install command, then <strong>agora login</strong> opens the browser sign-in and returns to the terminal. Let attendees complete browser sign-in. Check everyone can return to an authenticated terminal.</p>
         <p>Recipe-backed init needs CLI 0.2.9 or newer; existing installs run <strong>agora upgrade</strong>. Init reuses your default Agora project or creates one with RTC, RTM, and ConvoAI enabled.</p>
       </div>
     </section>
 
-    <section class="slide" data-slide-id="init-recipe" data-title="Initialize the recipe" data-section="Agora CLI" data-cue="0:04" data-technical="true">
+    <section class="slide" data-slide-id="discover-recipes" data-title="Find your Gemini recipe" data-section="Agora Recipes" data-cue="0:30" data-technical="true">
+      <p class="eyebrow">Browse · inspect · initialize</p><h2>Start with the <span class="accent">Gemini recipe catalog.</span></h2>
+      <p class="lede"><a href="https://recipes.agora.io/?q=gemini#recipes" target="_blank" rel="noreferrer">Open recipes.agora.io → Gemini ↗</a>. Pick cascaded or native, then your language. Read the prerequisites and source before you run it.</p>
+      <div class="terminal"><div class="terminal-bar"><span class="terminal-title">CLI recipe discovery</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="recipeDiscoveryCommand">Copy</button><pre id="recipeDiscoveryCommand">agora recipes list --type ai
+agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
+      <p class="lede">The example uses TypeScript. Substitute the exact slug from your selected recipe; the next slide generates the matching init command.</p>
+      <div class="speaker-notes"><p><strong>Show:</strong> the filtered catalog, then the TypeScript recipe’s Implementation guide, Source on GitHub, and Prompt &amp; CLI panel. Show how Copy Recipe prompt hands the source guide to a coding assistant. <strong>Say:</strong> list and show are read-only; init creates the project. <strong>Checkpoint:</strong> each attendee can name their architecture and recipe slug. <strong>Return:</strong> Initialize the recipe.</p></div>
+    </section>
+
+    <section class="slide" data-slide-id="init-recipe" data-title="Initialize the recipe" data-section="Agora CLI" data-cue="0:35" data-technical="true">
       <p class="eyebrow">Selected · <span data-recipe-field="architectureLabel"></span> · <span data-track-field="label"></span></p>
       <h2>Ask the CLI for the <span class="accent">official recipe.</span></h2>
       <div class="command-steps architecture-toggle" role="tablist" aria-label="Architecture">
@@ -2424,12 +2479,12 @@
       <p class="lede" data-recipe-field="note"></p>
       <div class="meta-row"><a class="meta-chip recipe-link" data-recipe-link="recipe" href="#" target="_blank" rel="noreferrer">View recipe ↗</a><a class="github-button" data-recipe-link="github" href="#" target="_blank" rel="noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a></div>
       <div class="speaker-notes">
-        <p>One command clones the recipe, binds it to your Agora project, and writes the Agora credentials. Switch the language from the <strong>H</strong> panel; the toggle above switches the architecture.</p>
-        <p>Run this live once for the cascaded path. Both demo apps are already running from pre-initialized copies.</p>
+        <p>One command clones the recipe, binds it to your Agora project, and writes the Agora credentials. The presenter uses the <strong>H</strong> panel; attendees use their own language selector. The toggle above switches the architecture.</p>
+        <p>Run this live once for the cascaded path. Wait for attendees to finish initialization before moving to setup. Keep a prepared checkout ready as a fallback.</p>
       </div>
     </section>
 
-    <section class="slide" data-slide-id="run-recipe" data-title="Run the recipe" data-section="Agora CLI" data-cue="0:05" data-technical="true">
+    <section class="slide" data-slide-id="run-recipe" data-title="Run the recipe" data-section="Agora CLI" data-cue="0:40" data-technical="true">
       <p class="eyebrow">Selected · <span data-recipe-field="architectureLabel"></span> · <span data-track-field="label"></span></p>
       <h2>Install. Add one key. <span class="accent">Run.</span></h2>
       <div class="command-steps quickstart-steps" role="tablist" aria-label="Recipe commands">
@@ -2442,14 +2497,14 @@
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span id="quickstartCommandLabel" class="terminal-title">Terminal</span></div>
         <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="quickstartCommand">Copy</button><pre id="quickstartCommand" class="quickstart-command"></pre></div>
       </div>
-      <div class="meta-row"><span class="status-chip">Tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Agora credentials already written by init</span><span class="status-chip">One Google key · every Gemini stage · server-side only</span><span class="status-chip">TTS is Agora-managed · no third-party key</span></div>
+      <div class="meta-row"><span class="status-chip">Tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Agora credentials already written by init</span><span class="status-chip">One Google key · every Gemini stage · server-side only</span><span class="status-chip">Gemini TTS preview · same Google key</span></div>
       <div class="speaker-notes">
         <p>Only one command shows at a time. The init step already wrote the Agora App ID and Certificate into the recipe’s env file, so the Google API key is the only manual edit.</p>
-        <p>Never show the environment file on stream.</p>
+        <p>Keep environment files off the projector. Check that each attendee has their own Google key and Agora project.</p>
       </div>
     </section>
 
-    <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:06">
+    <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:55">
       <div class="demo-head">
         <div>
           <p class="eyebrow">Live demo</p>
@@ -2471,37 +2526,55 @@
         </article>
       </div>
       <div class="speaker-notes">
-        <p><strong>Before starting:</strong> headphones on, Discord audio routed to the stream. The demo loads in this slide for you only; viewers get a self-service link and nothing starts on their side.</p>
+        <p><strong>Before starting:</strong> headphones on and room audio checked. The demo loads in this slide for you only; viewers get a self-service link and nothing starts on their side.</p>
         <p>Cascaded first (about two minutes): press <strong>Start Conversation</strong>, ask Ada one question, point at the transcript and the per-stage latency panel.</p>
         <p>Then press <strong>H</strong> and switch to <strong>B · Gemini Live</strong>: the frame reloads with that architecture. Same question, then switch to extended thinking and show the slider.</p>
-        <p>Tell chat the demo link is on their screen and stays live after the stream. <strong>Fallback:</strong> if a call fails, open the demo in a new tab or play the recorded happy path and keep moving.</p>
+        <p>Invite attendees to test locally in two waves if the room is noisy. <strong>Fallback:</strong> if a call fails, open the demo in a new tab or play the recorded happy path and keep moving.</p>
       </div>
     </section>
 
-    <section class="slide centered" data-slide-id="qa" data-title="Q&amp;A" data-section="Q&amp;A" data-cue="0:10">
+    <section class="slide" data-slide-id="customize-recipe" data-title="Make the recipe yours" data-section="Agora Skills" data-cue="1:05" data-technical="true">
+      <p class="eyebrow">Keep a working reference first</p><h2>One use case. <span class="accent">One useful change.</span></h2>
+      <p class="lede">After your untouched recipe works, open a separate project copy in your coding assistant. Install Agora Skills in that workspace, then describe the conversation you want to build.</p>
+      <div class="terminal"><div class="terminal-bar"><span class="terminal-title">Project terminal</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="skillsCommand">Copy</button><pre id="skillsCommand">npx skills add agoraio/skills</pre></div></div>
+      <div class="prompt-card"><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button><pre id="customizePrompt">Use Agora Skills and the Gemini recipes at https://recipes.agora.io/?q=gemini#recipes to adapt this project for [your use case]. Keep this project's language and Gemini architecture. Help me run and test one real voice conversation.</pre></div>
+      <div class="speaker-notes"><p><strong>Show:</strong> the project-scoped Skills install and your coding assistant. <strong>Checkpoint:</strong> attendees replace the use case and name a conversation to test. Refresh the assistant session if needed. Keep the untouched recipe as a reference. <strong>Return:</strong> Test your agent.</p></div>
+    </section>
+
+    <section class="slide" data-slide-id="test-your-agent" data-title="Test your agent" data-section="Build clinic" data-cue="1:15">
+      <p class="eyebrow">Local success is the finish line</p><h2>Have the conversation <span class="accent">you designed.</span></h2>
+      <div class="grid">
+        <article class="card"><span class="card-number">01 · Speak</span><h3>Run your local app</h3><p>Allow the microphone, start a conversation, and ask one question from your use case. Use headphones.</p></article>
+        <article class="card"><span class="card-number">02 · Observe</span><h3>Check the actual result</h3><p>Listen to the response and inspect the transcript. Try an interruption and one unexpected question. Identify simulated actions clearly.</p></article>
+        <article class="card"><span class="card-number">03 · Improve</span><h3>Fix one thing</h3><p>Show a helper your blocker or refine the instructions. Stop the conversation when finished. Tunnels and cloud deployment are optional.</p></article>
+      </div>
+      <div class="speaker-notes"><p>Split the room into two testing waves if needed. Ask for one working conversation and one improvement. Diagnose account and runtime problems before changing code. Protect time for a local success; skip optional deployment.</p></div>
+    </section>
+
+    <section class="slide centered" data-slide-id="qa" data-title="Q&amp;A" data-section="Q&amp;A" data-cue="1:20">
       <div>
-        <p class="eyebrow">Q&amp;A <span class="timing-fragment">0:10 – 0:46</span></p>
-        <h2>Your questions. <span class="accent">Ask in Discord chat.</span></h2>
-        <p class="lede">Anything from the Gemini segment, the Agora demos, or realtime voice in general. The host reads them out; both teams answer.</p>
+        <p class="eyebrow">Q&amp;A <span class="timing-fragment">1:20 – 1:28</span></p>
+        <h2>Your questions. <span class="accent">Let’s build together.</span></h2>
+        <p class="lede">Bring your setup blocker, code question, or use case. Show one conversation that works and one thing you want to improve.</p>
       </div>
       <div class="speaker-notes">
-        <p>Read each question aloud before answering so the recording makes sense. Alternate between the Google speaker and Agora where a question fits both.</p>
-        <p>If chat is slow, seed it: full-duplex interaction and back-channeling, or what Gemini 3.6 Flash's speed means for cascaded versus end-to-end speech. Leave two minutes for the close.</p>
+        <p>Ask attendees to demonstrate their local result. Route individual setup blockers to a support helper while keeping the room moving.</p>
+        <p>If questions are slow, seed them: full-duplex interaction and back-channeling, or what Gemini 3.6 Flash's speed means for cascaded versus end-to-end speech. Leave two minutes for the close.</p>
       </div>
     </section>
 
-    <section class="slide centered" data-slide-id="close" data-title="Thank you" data-section="Close" data-cue="0:46">
+    <section class="slide centered" data-slide-id="close" data-title="Thank you" data-section="Close" data-cue="1:28">
       <div>
         <p class="eyebrow">Agora × Google DeepMind</p>
         <h2>Thank you <span class="accent">for joining.</span></h2>
-        <p class="lede">Both recipe repositories are linked in chat, and the recording publishes this week. Keep the questions coming in the event channel.</p>
+        <p class="lede">Keep your working recipe as a reference. Continue with the Gemini catalog, the recipe README, and the Agora community.</p>
         <div class="meta-row" style="margin-top:24px; justify-content:center">
-          <span class="status-chip success">recipes.agora.io</span>
-          <span class="status-chip">Event channel open Sept 17–18</span>
+          <a class="status-chip success" href="https://recipes.agora.io/?q=gemini#recipes" target="_blank" rel="noreferrer">Gemini recipe catalog ↗</a>
+          <a class="status-chip" href="https://discord.gg/rX3f5pqZ3s" target="_blank" rel="noreferrer">Join the Agora community ↗</a>
         </div>
       </div>
       <div class="speaker-notes">
-        <p>Thank the Google speaker and everyone in chat. Remind them the hour was recorded. Point to recipes.agora.io and the event channel, which stays open for follow-up questions.</p>
+        <p>Thank everyone for building. Ask them to stop active conversations and local servers, and share the recipe catalog and community for follow-up.</p>
       </div>
     </section>
   </main>
@@ -2516,6 +2589,12 @@
     <button id="terminalEnvironmentHint" class="terminal-environment-hint" type="button" title="Switch the terminal environment (O)">
       <strong id="audienceTerminalEnvironmentLabel">Mac terminal</strong><span>·</span><kbd>O</kbd><span>to switch</span>
     </button>
+    <label class="audience-language" data-audience-only for="audienceTrackSelect">
+      <span class="audience-language-label">Code</span>
+      <select id="audienceTrackSelect" aria-label="Code language (saved on this device)" title="Your code language is saved on this device">
+        <option value="nextjs">TypeScript</option><option value="python">Python</option><option value="go">Go</option>
+      </select>
+    </label>
     <span id="sessionControls" class="session-controls" data-connection="idle" aria-live="polite">
       <button id="sessionStatus" class="session-status" type="button">Connecting…</button>
       <button id="followHostButton" class="session-button" type="button" aria-pressed="true" hidden>Following host</button>
@@ -2541,7 +2620,7 @@
         <div class="setting"><label for="architectureSelect">Architecture</label><select id="architectureSelect"><option value="cascaded">A · Cascaded · Gemini ASR + 3.6 Flash</option><option value="mllm">B · Native · Gemini 3.8 Live</option></select></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="nextjs">TypeScript · default</option><option value="python">Python</option><option value="go">Go</option></select></div>
       </div>
-      <p class="host-network-note">Architecture and track drive the CLI, run, code-comparison, and demo slides. Selections sync to the audience view.</p>
+      <p class="host-network-note">Architecture and track drive the CLI, run, code-comparison, and demo slides. Architecture syncs to the audience; each participant chooses their own code language.</p>
     </div>
     <div class="host-overlay-bottom">
       <div class="host-overlay-shortcuts"><strong>Shortcuts:</strong> H controls · N notes · T timings · O terminal OS · ← → slides · F full screen · ? help. Selections stay on this device.</div>
@@ -2577,12 +2656,12 @@
       var isAudience = VIEW_MODE === "audience";
       document.body.classList.add("view-" + VIEW_MODE);
       document.documentElement.setAttribute("data-view", VIEW_MODE);
-      if (isAudience) document.title = "Audience · Agora × Gemini Livestream";
+      if (isAudience) document.title = "Audience · Agora × Gemini Workshop";
 
       var EVENT = {
-        kicker: "Agora Discord Livestream",
-        date: "Thursday · September 17, 2026",
-        joinLabel: "bit.ly/3VfqCSU"
+        kicker: "Gemini + Agora · In-person workshop",
+        date: "Hands-on · Build, test, and make it yours",
+        joinLabel: "Open audience view"
       };
 
       var ARCHITECTURES = {
@@ -2615,7 +2694,7 @@
             run: "pnpm dev",
             url: "http://localhost:3000",
             file: "app/api/invite-agent/route.ts",
-            code: "import {\n  AgoraClient, Agent, Gemini, GeminiSTT, MiniMaxTTS,\n} from 'agora-agents';\n\nconst agent = new Agent({\n  client, instructions: ADA_PROMPT, greeting: GREETING,\n  advancedFeatures: { enable_rtm: true, enable_tools: true },\n})\n  .withStt(new GeminiSTT({\n    apiKey: googleApiKey, languageCodes: ['en-US'],\n  }))\n  .withLlm(new Gemini({\n    apiKey: googleApiKey, model: 'gemini-3.6-flash',\n  }))\n  .withTts(new MiniMaxTTS({\n    model: 'speech_2_6_turbo',\n    voiceId: 'English_captivating_female1',\n  }));\n\nconst session = agent.createSession({\n  channel, agentUid, remoteUids,\n});\nconst agentId = await session.start();",
+            code: "import {\n  AgoraClient, Agent, Gemini, GeminiSTT, GeminiTTS,\n} from 'agora-agents';\n\nconst agent = new Agent({\n  client, instructions: ADA_PROMPT, greeting: GREETING,\n  advancedFeatures: { enable_rtm: true, enable_tools: true },\n})\n  .withStt(new GeminiSTT({\n    apiKey: googleApiKey, languageCodes: ['en-US'],\n  }))\n  .withLlm(new Gemini({\n    apiKey: googleApiKey, model: 'gemini-3.6-flash',\n  }))\n  .withTts(new GeminiTTS({\n    apiKey: googleApiKey, model: 'gemini-3.8-flash-tts',\n    voice: 'Puck',\n  }));\n\nconst session = agent.createSession({\n  channel, agentUid, remoteUids,\n});\nconst agentId = await session.start();",
             highlightLines: [2, 9, 12, 13, 15]
           },
           python: {
@@ -2628,7 +2707,7 @@
             run: "bun run dev",
             url: "http://localhost:3000",
             file: "server/src/agent.py",
-            code: "from agora_agent.agentkit import Agent as AgoraAgent\nfrom agora_agent.agentkit.preview import GeminiSTT\nfrom agora_agent.agentkit.vendors import Gemini, MiniMaxTTS\n\nstt = GeminiSTT(api_key=google_api_key, language_codes=[\"en-US\"])\nllm = Gemini(api_key=google_api_key, model=\"gemini-3.6-flash\")\ntts = MiniMaxTTS(model=\"speech_2_6_turbo\",\n                 voice_id=\"English_captivating_female1\")\n\nagora_agent = AgoraAgent(\n    client=self.client,\n    instructions=ADA_PROMPT,\n    greeting=self.greeting,\n    advanced_features={\"enable_rtm\": True, \"enable_tools\": True},\n).with_stt(stt).with_llm(llm).with_tts(tts)\n\nsession = agora_agent.create_async_session(\n    channel=channel_name, agent_uid=str(agent_uid),\n    remote_uids=[str(user_uid)],\n)\nagent_id = await session.start()",
+            code: "from agora_agent.agentkit import Agent as AgoraAgent\nfrom agora_agent.agentkit.preview import GeminiSTT, GeminiTTS\nfrom agora_agent.agentkit.vendors import Gemini\n\nstt = GeminiSTT(api_key=google_api_key, language_codes=[\"en-US\"])\nllm = Gemini(api_key=google_api_key, model=\"gemini-3.6-flash\")\ntts = GeminiTTS(api_key=google_api_key,\n                model=\"gemini-3.8-flash-tts\", voice=\"Puck\")\n\nagora_agent = AgoraAgent(\n    client=self.client,\n    instructions=ADA_PROMPT,\n    greeting=self.greeting,\n    advanced_features={\"enable_rtm\": True, \"enable_tools\": True},\n).with_stt(stt).with_llm(llm).with_tts(tts)\n\nsession = agora_agent.create_async_session(\n    channel=channel_name, agent_uid=str(agent_uid),\n    remote_uids=[str(user_uid)],\n)\nagent_id = await session.start()",
             highlightLines: [2, 3, 5, 6, 7, 15]
           },
           go: {
@@ -2641,7 +2720,7 @@
             run: "make dev",
             url: "http://localhost:3000",
             file: "server/agent.go",
-            code: "agent := agentkit.NewAgent(\n  client,\n  agentkit.WithInstructions(adaPrompt),\n  agentkit.WithGreeting(s.greeting),\n).\n  WithStt(vendors.NewGeminiSTT(vendors.GeminiSTTOptions{\n    APIKey: s.googleAPIKey, LanguageCodes: []string{\"en-US\"},\n  })).\n  WithLlm(vendors.NewGemini(vendors.GeminiOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.6-flash\",\n  })).\n  WithTts(vendors.NewMiniMaxTTS(vendors.MiniMaxTTSOptions{\n    Model: \"speech_2_6_turbo\",\n    VoiceID: \"English_captivating_female1\",\n  }))\n\nsession := agent.CreateSession(agentkit.CreateSessionOptions{\n  Channel: channelName, AgentUID: agentUID,\n  RemoteUIDs: remoteUIDs,\n})\nagentID, err := session.Start(ctx)",
+            code: "agent := agentkit.NewAgent(\n  client,\n  agentkit.WithInstructions(adaPrompt),\n  agentkit.WithGreeting(s.greeting),\n).\n  WithStt(vendors.NewGeminiSTT(vendors.GeminiSTTOptions{\n    APIKey: s.googleAPIKey, LanguageCodes: []string{\"en-US\"},\n  })).\n  WithLlm(vendors.NewGemini(vendors.GeminiOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.6-flash\",\n  })).\n  WithTts(vendors.NewGeminiTTS(vendors.GeminiTTSOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.8-flash-tts\",\n    Voice: \"Puck\",\n  }))\n\nsession := agent.CreateSession(agentkit.CreateSessionOptions{\n  Channel: channelName, AgentUID: agentUID,\n  RemoteUIDs: remoteUIDs,\n})\nagentID, err := session.Start(ctx)",
             highlightLines: [6, 9, 10, 12]
           }
         },
@@ -2732,10 +2811,13 @@
         terminalEnvironment: Object.keys(TERMINAL_ENVIRONMENTS)
       };
       function savedEnum(key, storageKey) {
-        var value = localStorage.getItem(storageKey);
+        var value;
+        try { value = localStorage.getItem(storageKey); } catch (_) { return DEFAULTS[key]; }
         return SHARED_CONFIG_ENUMS[key].indexOf(value) === -1 ? DEFAULTS[key] : value;
       }
-      var savedTrack = savedEnum("track", "agora-v2-track");
+      var AUDIENCE_TRACK_KEY = "agora-gemini-audience-track";
+      var audienceTrack = savedEnum("track", AUDIENCE_TRACK_KEY);
+      var savedTrack = isAudience ? audienceTrack : savedEnum("track", "agora-v2-track");
       var state = {
         architecture: savedEnum("architecture", "agora-v2-architecture"),
         track: savedTrack,
@@ -2745,9 +2827,10 @@
         showTimings: false,
         quickstartStep: "enter"
       };
-      var audienceTerminalEnvironmentOverride = isAudience
-        ? localStorage.getItem("agora-v2-audience-terminal-environment")
-        : null;
+      var audienceTerminalEnvironmentOverride = null;
+      try {
+        if (isAudience) audienceTerminalEnvironmentOverride = localStorage.getItem("agora-v2-audience-terminal-environment");
+      } catch (_) { /* Keep the default when browser storage is unavailable. */ }
       if (!Object.prototype.hasOwnProperty.call(TERMINAL_ENVIRONMENTS, audienceTerminalEnvironmentOverride)) {
         audienceTerminalEnvironmentOverride = null;
       } else {
@@ -2950,11 +3033,13 @@
           document.querySelectorAll('[data-recipe-link="' + key + '"]').forEach(function (node) { node.href = links[key]; });
         });
         document.getElementById("initCommand").textContent = initCommandFor(state.architecture, state.track);
+        document.getElementById("recipeDiscoveryCommand").textContent = "agora recipes list --type ai\nagora recipes show " + selected.slug;
         renderAgentCode("cascadedCode", cascaded, TRACKS[state.track].language);
         renderAgentCode("mllmCode", mllm, TRACKS[state.track].language);
         renderDemo();
         document.getElementById("architectureSelect").value = state.architecture;
         document.getElementById("trackSelect").value = state.track;
+        document.getElementById("audienceTrackSelect").value = state.track;
         document.querySelectorAll("[data-architecture-choice]").forEach(function (button) {
           button.classList.toggle("active", button.getAttribute("data-architecture-choice") === state.architecture);
         });
@@ -3107,12 +3192,15 @@
         if (!isAudience || !snapshot || snapshot.version !== 1 || !snapshot.config) return false;
         SHARED_CONFIG_KEYS.forEach(function (key) {
           if (!Object.prototype.hasOwnProperty.call(snapshot.config, key)) return;
+          if (key === "track" || key === "packageManager") return;
           if (key === "terminalEnvironment" && audienceTerminalEnvironmentOverride) return;
           var value = snapshot.config[key];
           if (typeof value !== typeof DEFAULTS[key]) return;
           if (SHARED_CONFIG_ENUMS[key] && SHARED_CONFIG_ENUMS[key].indexOf(value) === -1) return;
           state[key] = value;
         });
+        state.track = audienceTrack;
+        state.packageManager = packageManagerForTrack(audienceTrack);
         if (Object.prototype.hasOwnProperty.call(slideIndexById, snapshot.slideId)) {
           previous = current;
           current = slideIndexById[snapshot.slideId];
@@ -3214,6 +3302,18 @@
         state.architecture = event.target.value;
         renderAll();
       });
+      function setAudienceTrack(track) {
+        if (!isAudience || !Object.prototype.hasOwnProperty.call(TRACKS, track)) return false;
+        audienceTrack = track;
+        state.track = track;
+        state.packageManager = packageManagerForTrack(track);
+        try { localStorage.setItem(AUDIENCE_TRACK_KEY, track); } catch (_) { /* Keep the choice for this visit. */ }
+        renderAll();
+        return true;
+      }
+      document.getElementById("audienceTrackSelect").addEventListener("change", function (event) {
+        setAudienceTrack(event.target.value);
+      });
       document.getElementById("trackSelect").addEventListener("change", function (event) {
         state.track = event.target.value;
         state.packageManager = packageManagerForTrack(state.track);
@@ -3228,7 +3328,7 @@
       document.getElementById("resetButton").addEventListener("click", function () {
         Object.keys(DEFAULTS).forEach(function (key) { state[key] = DEFAULTS[key]; });
         state.showTimings = false;
-        renderAll(); showToast("Livestream defaults restored");
+        renderAll(); showToast("Workshop defaults restored");
       });
       document.addEventListener("keydown", function (event) {
         var tag = event.target && event.target.tagName;

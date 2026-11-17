@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Talk to Ada | Gemini + Agora',
   description:
-    'Live voice-agent demo from the Build Voice Agents with Gemini + Agora livestream: switch between the cascaded pipeline and Gemini Live.',
+    'Live voice-agent demo from the Build Voice Agents with Gemini + Agora workshop: switch between the cascaded pipeline and Gemini Live.',
   icons: { icon: [{ url: '/favicon.ico' }] },
 };
 
