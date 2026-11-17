@@ -2302,6 +2302,31 @@
       body.view-host.front-slide-active .access-join strong { font-size: 16px; }
       body.view-host.front-slide-active .slide { bottom: 194px; }
     }
+
+    /* Compact presenter footer; information remains secondary to the slide. */
+    .presenter-access { height: 72px; padding: 5px 28px; gap: 20px; background: #fff; border-top-color: #dde4ea; }
+    .access-wifi { gap: 28px; }
+    .access-wifi > div, .access-join > span { gap: 4px; }
+    .access-wifi span, .access-join small { font-size: 9px; letter-spacing: .06em; font-weight: 650; color: #607386; }
+    .access-wifi strong { font-size: 17px; font-weight: 650; }
+    .access-join { gap: 14px; }
+    .access-join strong { font-size: 20px; font-weight: 650; }
+    .access-join img { width: 62px; height: 62px; border-radius: 0; }
+    body.view-host .slide { bottom: 114px; }
+    body.view-host.front-slide-active .presenter-access { height: 88px; padding-block: 6px; }
+    body.view-host.front-slide-active .access-join img { width: 76px; height: 76px; }
+    body.view-host.front-slide-active .access-join strong { font-size: 23px; }
+    body.view-host.front-slide-active .slide { bottom: 130px; }
+    @media (max-width: 760px) {
+      .presenter-access, body.view-host.front-slide-active .presenter-access { height: 96px; padding: 6px 14px; }
+      .access-wifi { gap: 6px; }
+      .access-wifi strong { font-size: 13px; }
+      .access-wifi span { font-size: 8px; }
+      .access-join { gap: 4px; }
+      .access-join strong, body.view-host.front-slide-active .access-join strong { font-size: 13px; }
+      .access-join img, body.view-host.front-slide-active .access-join img { width: 62px; height: 62px; }
+      body.view-host .slide, body.view-host.front-slide-active .slide { bottom: 138px; }
+    }
   </style>
 </head>
 <body>
