@@ -12,7 +12,7 @@ This is a 90-minute hands-on workshop. Adjust the relative times to the event; n
 | 35–55 | Initialize and run the recipe | An untouched local app starts a real voice conversation |
 | 55–65 | Compare demos and inspect the code | Identify the provider configuration and start/stop lifecycle |
 | 65–75 | Agora Skills and a custom use case | Separate working copy, project-scoped Skills, one concrete conversation to build |
-| 75–88 | Local testing, build clinic, Q&A | Demonstrate one working conversation and improve one thing |
+| 75–88 | Local testing, build clinic, Questions during the build | Demonstrate one working conversation and improve one thing |
 | 88–90 | Close | Stop active sessions and servers; share catalog and community |
 
 ## Before attendees arrive
@@ -22,7 +22,7 @@ This is a 90-minute hands-on workshop. Adjust the relative times to the event; n
 - Confirm Node.js 22+ and pnpm for TypeScript, Python 3.10+ and Bun for Python, or Go 1.23+, pnpm, and Make for Go. Each recipe README is the source of truth.
 - Have a short fallback recording for both architectures. Check projector audio and headphones.
 - The presenter displays `bit.ly/4fDSxTQ`; the QR encodes the full Gemini workshop URL directly. Configure `joinUrl` and `qrUrl` in `workshop-join.json` (or `WORKSHOP_JOIN_URL` / `WORKSHOP_QR_URL`), rebuild, and scan the generated QR. The join card appears on presenter slides only, with a larger welcome treatment. Rehearsals with `?channel=...` use that same channel in the join QR.
-- Assign a helper to account/CLI setup and another to code/Skills questions when possible. Display venue Wi-Fi separately before starting.
+- Assign a helper to account/CLI setup and another to code/Skills questions when possible. Press **H**, expand **Venue Wi-Fi**, and enter the network name and password for the projected opening slide. Both start empty. The network is saved on this device; the password is saved only in this tab’s session. Neither is broadcast or archived. Clear the fields or use **Reset defaults** after the event.
 
 ## Host and audience controls
 
@@ -68,3 +68,7 @@ Pause audience sharing on the computer and advance a slide during rehearsal: pho
 - Skills blocked: check the workspace and selected installation scope, then refresh the coding-assistant session.
 - Late arrival: point to the persistent join QR and language selector. Pair them with a helper for accounts and initialization.
 - Time slipping: protect the untouched recipe, one local conversation, and build-clinic time. Skip optional deployment and extra demo variations.
+
+## Projector layout
+
+Use `/host` on the projector. The opening slide groups the join QR, Bitly link, and venue Wi-Fi; other presenter slides retain the compact join card. The audience view intentionally hides joining details. Slide 4 uses the video as the background with readable overlays. Rehearse at the projector’s native resolution (the layout is checked at 1024×768 and 1280×720). Questions and troubleshooting happen during the build-along; there is no separate build-together slide.

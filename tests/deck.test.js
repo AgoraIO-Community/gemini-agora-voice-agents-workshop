@@ -11,15 +11,15 @@ describe("in-person deck structure", () => {
       "what-is-agora", "conversational-ai-pipeline", "mllm-pipeline", "compare-code", "two-architectures",
       "install-cli", "discover-recipes", "init-recipe", "run-recipe",
       "live-demo", "customize-recipe", "test-your-agent",
-      "qa", "close"
+      "close"
     ]);
   });
 
-  it("opens with an agenda that ends on Q&A and matches the slide order", () => {
+  it("opens with a build-along agenda matching the slide order", () => {
     const slide = html.slice(html.indexOf('data-slide-id="run-of-show"'), html.indexOf('data-slide-id="what-is-agora"'));
     const steps = [...slide.matchAll(/<li class="agenda-item[^"]*">.*?<strong>(.*?)<\/strong>/g)].map((m) => m[1]);
-    expect(steps).toEqual(["About Agora", "Voice &amp; Conversational AI architectures", "Using Gemini with Agora Conversational AI", "Live demos", "Q&amp;A"]);
-    expect(slide).toContain('class="agenda-item qa"');
+    expect(steps).toEqual(["About Agora", "Voice &amp; Conversational AI architectures", "Using Gemini with Agora Conversational AI", "Live demos"]);
+    expect(slideIds).not.toContain("qa");
     expect(slide).not.toMatch(/podcast/i);
   });
 
@@ -82,7 +82,7 @@ describe("in-person deck structure", () => {
   });
 
   it("embeds the demo for the host only and gives the audience a self-service link", () => {
-    const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="qa"'));
+    const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="customize-recipe"'));
     expect(slide).toMatch(/<div class="demo-embed" data-host-only>\s*<iframe id="demoFrame"[^>]*allow="microphone; autoplay"/);
     expect(slide).not.toMatch(/<iframe[^>]*\ssrc=/);
     expect(slide).toMatch(/<div class="demo-invite" data-audience-only>/);

@@ -72,6 +72,10 @@ Viewers use `/`, or `/?channel=...` when the host supplies an override. Before t
 - **Following host** switches to independent browsing; **Return to live** applies the newest host snapshot.
 - After the first host snapshot, the browser saves a safe local copy of the architecture, track, theme, and terminal choices so the deck can be reopened later with no host present. No credentials are ever included.
 
+## Venue Wi-Fi
+
+In **H → Venue Wi-Fi**, enter the venue network and password to show them on the host’s opening slide. Empty fields hide the details. The network name persists locally; the password persists only for the current tab’s session. These details are excluded from audience snapshots, saved workshop copies, and phone notes. **Reset defaults** clears both.
+
 ## Phone presenter notes
 
 Open `/host-notes` on your phone and enter the same workshop channel and host password. The **H** panel includes a phone-notes link and copy button for the current channel. This is the same read-only companion as the studio workshop: it shows the current slide’s notes, timing, next slide, and the desktop-demo instructions written in those notes; slide control stays on the presenter’s computer.
@@ -83,7 +87,7 @@ Notes keep following when audience sharing is paused. Returning from another pho
 The live-demo slide behaves differently per view:
 
 - **Host:** the slide embeds `/demo?embed=1` in a frame that follows the architecture selected in the **H** panel. Switching architecture reloads the frame. Nothing loads until the slide is shown, and the frame unloads when the host moves on.
-- **Audience:** the slide shows a self-service card with the public `/demo` link. Nothing starts on a viewer's device until they open it, so they can come back to that slide after the Q&A and try both architectures themselves.
+- **Audience:** the slide shows a self-service card with the public `/demo` link. Nothing starts on a viewer's device until they open it, so they can come back to that slide after the workshop and try both architectures themselves.
 
 Every demo session runs an agent on the Agora project's credentials with a 30-second idle timeout and a one-hour cap. Open `/demo` directly on any device to try it outside the deck.
 

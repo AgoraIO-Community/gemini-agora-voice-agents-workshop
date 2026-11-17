@@ -351,40 +351,28 @@
     .front-wifi-item span { color: rgba(255, 255, 255, .72); font-size: 11px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .front-wifi-item strong { overflow-wrap: anywhere; color: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(17px, 1.55vw, 22px); line-height: 1.2; }
 
-    .platform-video {
-      position: relative;
-      width: min(680px, 100%);
-      height: auto;
-      aspect-ratio: 16 / 9;
-      margin: 0 auto;
-      overflow: hidden;
-      border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
-      border-radius: 14px;
-      background: #000;
-      box-shadow: var(--shadow-float);
+    .slide.platform-slide { padding: 0 !important; overflow: auto; isolation: isolate; background: #031523; color: #fff; }
+    .platform-slide .platform-video { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; background: #031523; }
+    .platform-slide .platform-video iframe { position: absolute; top: 50%; left: 50%; width: max(100%, calc((100vh - 42px) * 16 / 9)); height: max(100%, calc(100vw * 9 / 16)); transform: translate(-50%, -50%); border: 0; pointer-events: none; }
+    .platform-slide::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(1, 10, 21, .76), rgba(1, 10, 21, .3) 48%, rgba(1, 10, 21, .88)); }
+    .platform-slide .platform-content { min-height: 100%; display: grid; grid-template-rows: auto minmax(30px, 1fr) auto auto; gap: 20px; padding: 150px clamp(28px, 4vw, 64px) 24px; }
+    .platform-slide .platform-heading .eyebrow { color: #68e4ff; font-size: 16px; margin: 0 0 10px; }
+    .platform-slide h2 { max-width: 1080px; margin: 0; font-size: clamp(38px, 4.4vw, 62px); line-height: 1.04; text-wrap: balance; text-shadow: 0 2px 18px #001020; }
+    .platform-slide h2 .accent { color: #68e4ff; }
+    .platform-slide .platform-cards { grid-row: 3; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .platform-slide .platform-cards .card { padding: 22px; background: rgba(2, 20, 36, .94); border: 1px solid rgba(104, 228, 255, .55); border-radius: 12px; box-shadow: 0 6px 26px #00102066; }
+    .platform-slide .platform-cards .card-number { color: #68e4ff; font-size: 14px; }
+    .platform-slide .platform-cards h3 { color: #fff; font-size: clamp(23px, 2.2vw, 30px); line-height: 1.1; margin: 10px 0; }
+    .platform-slide .platform-cards p { color: #e5f1fa; font-size: clamp(17px, 1.65vw, 22px); line-height: 1.35; margin: 0; }
+    .platform-slide .platform-proof { grid-row: 4; margin: 0; color: #fff; font-size: clamp(17px, 1.7vw, 23px); font-weight: 650; text-align: center; }
+    .platform-slide .platform-proof strong { color: #68e4ff; font-weight: 900; }
+    body.view-audience .platform-slide .platform-content { padding-top: 74px; }
+    @media (max-width: 640px) {
+      .platform-slide .platform-content { padding: 112px 18px 24px; gap: 16px; }
+      .platform-slide .platform-cards { grid-template-columns: 1fr; gap: 12px; }
+      .platform-slide .platform-cards .card { padding: 18px; }
+      .platform-slide h2 { font-size: 36px; }
     }
-    .platform-slide h2 { max-width: 1000px; font-size: clamp(30px, 3.5vw, 48px); line-height: .98; }
-    .platform-slide .platform-video { --video-h: clamp(160px, 30vh, 340px); height: var(--video-h); width: min(100%, calc(var(--video-h) * 16 / 9)); aspect-ratio: auto; align-self: start; }
-    .platform-slide .grid .card p { font-size: 13px; }
-    .platform-slide .grid .card h3 { font-size: 18px; }
-    .platform-slide .platform-proof { margin-top: -6px; }
-    .platform-video iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      pointer-events: none;
-    }
-    .platform-proof {
-      width: min(680px, 100%);
-      margin: -10px auto 0;
-      color: var(--muted);
-      font-size: clamp(15px, 1.45vw, 21px);
-      font-weight: 650;
-      text-align: center;
-    }
-    .platform-proof strong { color: var(--accent); font-weight: 900; }
     .eyebrow {
       margin: 0;
       color: var(--accent);
@@ -2209,6 +2197,58 @@
     .code-compare .code-panel { min-height: 360px; max-height: 58vh; padding: 18px; }
     .code-compare .code-panel pre { font-size: clamp(11px, .95vw, 14px); line-height: 1.55; white-space: pre; }
     @media (max-width: 960px) { .code-compare { grid-template-columns: 1fr; } }
+
+    @media (min-width: 761px) and (max-height: 800px) {
+      body.view-host .slide:not(.front-slide):not(.platform-slide) { padding-left: 28px; padding-right: 28px; padding-bottom: 20px; gap: 16px; }
+      body.view-host .code-compare .code-panel { min-height: 0; max-height: calc(100vh - 440px); }
+    }
+
+    /* Arrival slide: title and practical joining details share one clear grid. */
+    body.front-slide-active .topbar { display: none; }
+    .front-slide { background: #f3f6fa; overflow: auto; }
+    .front-slide .front-shade { display: none; }
+    body.view-host.front-slide-active .front-content,
+    body.view-audience .front-content { padding: 40px 0; }
+    .front-slide .front-content { width: calc(100% - 80px); max-width: 1440px; min-height: 100%; height: auto; grid-template-columns: minmax(0, 1fr) minmax(280px, 32%); align-items: center; align-content: center; gap: 48px; color: #10263b; }
+    .welcome-main { min-width: 0; }
+    .front-slide .front-brand { --brand-x: 15px; padding: 0; background: transparent; box-shadow: none; border-radius: 0; margin-bottom: 38px; gap: 14px; }
+    .front-slide .front-kicker { color: #416477; font-size: 14px; letter-spacing: .15em; margin: 0 0 18px; }
+    .front-slide .front-city { color: #10263b; font-size: clamp(48px, 5.7vw, 86px); line-height: 1.05; letter-spacing: -.055em; text-shadow: none; font-weight: 800; }
+    .front-slide .front-highlight { background: none; color: #087da6; }
+    .welcome-description { font-size: clamp(20px, 2vw, 28px); line-height: 1.4; color: #526679; margin: 26px 0; }
+    .welcome-tracks { display: flex; gap: 10px; }
+    .welcome-tracks span { border: 1px solid #c6d5df; border-radius: 6px; padding: 7px 13px; color: #345267; font-size: 15px; font-weight: 650; }
+    .welcome-arrival { width: 100%; padding: 26px; background: #102b40; color: #fff; border-radius: 20px; }
+    .welcome-step { margin: 0 0 16px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: #a8d6e4; }
+    .welcome-join { display: flex; align-items: center; flex-direction: column; gap: 16px; text-decoration: none; color: #fff; }
+    .welcome-qr { width: min(100%, 240px); height: auto; aspect-ratio: 1; display: block; border-radius: 8px; background: #fff; }
+    .welcome-join span { font: 750 clamp(21px, 2.1vw, 30px)/1.2 ui-monospace, monospace; white-space: nowrap; }
+    .welcome-hint { margin: 14px 0 0; font-size: 14px; line-height: 1.4; color: #c2d4df; text-align: center; }
+    .welcome-wifi { border-top: 1px solid #406075; margin-top: 22px; padding-top: 20px; }
+    .welcome-wifi[hidden] { display: none; }
+    .welcome-wifi > div { display: grid; gap: 3px; margin-top: 10px; }
+    .welcome-wifi div span { color: #abc3d3; font-size: 12px; }
+    .welcome-wifi strong { font-size: 20px; line-height: 1.2; overflow-wrap: anywhere; }
+    body.view-audience .front-slide .front-content { grid-template-columns: 1fr; }
+    @media (min-width: 761px) and (max-height: 740px) {
+      .front-slide .front-content { gap: 32px; width: calc(100% - 64px); }
+      body.view-host.front-slide-active .front-content { padding: 24px 0; }
+      .front-slide .front-brand { margin-bottom: 24px; }
+      .welcome-arrival { padding: 20px; }
+      .welcome-qr { width: 190px; }
+      .welcome-wifi { margin-top: 16px; padding-top: 14px; }
+      .welcome-description { margin: 22px 0; }
+    }
+    @media (max-width: 760px) {
+      .front-slide .front-content { width: calc(100% - 40px); grid-template-columns: 1fr; gap: 30px; }
+      body.view-host.front-slide-active .front-content, body.view-audience .front-content { padding: 28px 0; }
+      .front-slide .front-brand { --brand-x: 10px; margin-bottom: 28px; gap: 10px; }
+      .front-slide .front-city { font-size: clamp(42px, 9vw, 60px); }
+      .welcome-description { font-size: 20px; margin: 20px 0; }
+      .welcome-arrival { padding: 24px; }
+      .welcome-qr { width: 200px; }
+      .welcome-join span { font-size: 25px; }
+    }
   </style>
 </head>
 <body>
@@ -2251,15 +2291,26 @@
     <section class="slide front-slide" data-slide-id="welcome" data-title="Welcome" data-section="Welcome" data-cue="0:00">
       <div class="front-shade" aria-hidden="true"></div>
       <div class="front-content">
-        <span class="front-brand"><img src="assets/agora-logo-rgb-blue.svg" alt="Agora"><span class="front-brand-x">×</span><img src="assets/google-deepmind-lockup.png" alt="Google DeepMind"></span>
-        <hr class="front-rule">
-        <div>
-          <p class="front-kicker" data-event-field="kicker">Gemini + Agora · In-person workshop</p>
-          <h1 class="front-city">Build Voice Agents with <span class="front-highlight">Gemini + Agora</span></h1>
+        <div class="welcome-main">
+          <span class="front-brand"><img src="assets/agora-logo-rgb-blue.svg" alt="Agora"><span class="front-brand-x">×</span><img src="assets/google-deepmind-lockup.png" alt="Google DeepMind"></span>
+          <p class="front-kicker" data-event-field="kicker">Hands-on workshop</p>
+          <h1 class="front-city">Build voice agents<br>with <span class="front-highlight">Gemini + Agora.</span></h1>
+          <p class="welcome-description">From your first conversation<br>to an agent of your own.</p>
+          <div class="welcome-tracks"><span>TypeScript</span><span>Python</span><span>Go</span></div>
         </div>
-        <div class="front-meta">
-          <span data-event-field="date">Hands-on · Build, test, and make it yours</span>
-        </div>
+        <aside class="welcome-arrival" data-host-only aria-label="Join the workshop">
+          <p class="welcome-step">01 / Follow along</p>
+          <a class="welcome-join" data-workshop-join href="/" target="_blank" rel="noreferrer">
+            <img data-workshop-qr class="welcome-qr" alt="Scan to join the workshop" width="224" height="224">
+            <span data-workshop-join-label>bit.ly/4fDSxTQ</span>
+          </a>
+          <p class="welcome-hint">Scan with your phone or open on your laptop.</p>
+          <div id="frontWifiDetails" class="welcome-wifi" hidden>
+            <p class="welcome-step">02 / Connect to Wi-Fi</p>
+            <div><span>Network</span><strong id="frontWifiName"></strong></div>
+            <div><span>Password</span><strong id="frontWifiPassword"></strong></div>
+          </div>
+        </aside>
       </div>
       <div class="speaker-notes">
         <p>Open this slide as attendees arrive. Point out the join link and QR code; late arrivals can join from any slide.</p>
@@ -2276,7 +2327,6 @@
         <li class="agenda-item"><span class="agenda-step">02</span><div><strong>Voice &amp; Conversational AI architectures</strong><p>The cascaded pipeline, the native multimodal pipeline, and both agents side by side in code.</p></div><span class="timing-fragment">0:10 · 10 min</span></li>
         <li class="agenda-item"><span class="agenda-step">03</span><div><strong>Using Gemini with Agora Conversational AI</strong><p>Find a Gemini recipe, sign in, initialize, add your Google key, and run it locally.</p></div><span class="timing-fragment">0:20 · 35 min</span></li>
         <li class="agenda-item"><span class="agenda-step">04</span><div><strong>Live demos</strong><p>Test your local agent, then customize it with Agora Skills.</p></div><span class="timing-fragment">0:55 · 25 min</span></li>
-        <li class="agenda-item qa"><span class="agenda-step">05</span><div><strong>Q&amp;A</strong><p>Build clinic and questions. Ask for help as you go.</p></div><span class="timing-fragment">1:20 · 8 min</span></li>
       </ol>
       <div class="speaker-notes">
         <p>Rows reveal on their own. Read the five headers, not the descriptions. Keep it under thirty seconds.</p>
@@ -2295,17 +2345,21 @@
     </section>
 
     <section class="slide compact platform-slide" data-slide-id="what-is-agora" data-title="What is Agora?" data-section="How Agora works" data-cue="0:08">
-      <p class="eyebrow">What is Agora?</p>
-      <h2>The realtime platform connecting <span class="accent">people, devices, and AI.</span></h2>
-      <div class="platform-video">
-        <iframe title="Discover unrivaled reliability and quality with Agora’s Real-Time Network" loading="lazy" src="https://player.vimeo.com/video/988623383?background=1" width="100%" height="120%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-cookiecategory="7"></iframe>
+      <div class="platform-video" aria-hidden="true">
+        <iframe title="Discover unrivaled reliability and quality with Agora’s Real-Time Network" tabindex="-1" loading="lazy" src="https://player.vimeo.com/video/988623383?background=1" allow="autoplay; fullscreen" allowfullscreen data-cookiecategory="7"></iframe>
       </div>
-      <div class="grid">
-        <article class="card"><span class="card-number">Realtime media</span><h3>Voice, video, and live streaming</h3><p>Agora Channels create the shared live space where participants can hear, see, and respond to one another.</p></article>
-        <article class="card"><span class="card-number">Global delivery</span><h3>Built for conversations that feel immediate</h3><p>Agora’s software-defined realtime network routes live media for quality, reliability, and scale.</p></article>
-        <article class="card"><span class="card-number">Conversational AI</span><h3>Agents become realtime participants</h3><p>Agora orchestrates voice agents that can join a Channel, listen, reason, speak, and respond on demand.</p></article>
+      <div class="platform-content">
+        <div class="platform-heading">
+          <p class="eyebrow">What is Agora?</p>
+          <h2>The realtime platform connecting <span class="accent">people, devices, and AI.</span></h2>
+        </div>
+        <div class="platform-cards">
+          <article class="card"><span class="card-number">Realtime media</span><h3>Voice, video, and live streaming</h3><p>Channels give people and agents a shared space to hear, see, and respond.</p></article>
+          <article class="card"><span class="card-number">Global delivery</span><h3>Conversations that feel immediate</h3><p>Agora’s realtime network delivers live media with quality, reliability, and scale.</p></article>
+          <article class="card"><span class="card-number">Conversational AI</span><h3>Agents join the conversation</h3><p>Voice agents join a Channel to listen, reason, speak, and respond.</p></article>
+        </div>
+        <p class="platform-proof">Powering <strong>1 Trillion minutes</strong> of live voice and video per year.</p>
       </div>
-      <p class="platform-proof">Powering <strong>1 Trillion minutes</strong> of live voice and video streams per year.</p>
       <div class="speaker-notes">
         <p>Thirty seconds. Channels are the shared space, SD-RTN delivers the media, and the Conversational AI Engine brings Gemini into that space as a participant.</p>
       </div>
@@ -2529,7 +2583,7 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         <article class="card demo-invite-card">
           <span class="card-number">Self-service</span>
           <h3>Try it yourself, on your device</h3>
-          <p>The same demo the host is running. Pick <strong>A · Cascaded</strong> or <strong>B · Gemini Live</strong>, allow your microphone, and talk to Ada. Come back to this slide any time, including after the Q&amp;A.</p>
+          <p>The same demo the host is running. Pick <strong>A · Cascaded</strong> or <strong>B · Gemini Live</strong>, allow your microphone, and talk to Ada. Come back to this slide any time, throughout the build-along.</p>
           <div class="meta-row">
             <a class="primary-button demo-invite-button" data-demo-link target="_blank" rel="noreferrer" href="/demo">Open the demo ↗</a>
           </div>
@@ -2559,18 +2613,6 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         <article class="card"><span class="card-number">03 · Improve</span><h3>Fix one thing</h3><p>Show a helper your blocker or refine the instructions. Stop the conversation when finished. Tunnels and cloud deployment are optional.</p></article>
       </div>
       <div class="speaker-notes"><p>Split the room into two testing waves if needed. Ask for one working conversation and one improvement. Diagnose account and runtime problems before changing code. Protect time for a local success; skip optional deployment.</p></div>
-    </section>
-
-    <section class="slide centered" data-slide-id="qa" data-title="Q&amp;A" data-section="Q&amp;A" data-cue="1:20">
-      <div>
-        <p class="eyebrow">Q&amp;A <span class="timing-fragment">1:20 – 1:28</span></p>
-        <h2>Your questions. <span class="accent">Let’s build together.</span></h2>
-        <p class="lede">Bring your setup blocker, code question, or use case. Show one conversation that works and one thing you want to improve.</p>
-      </div>
-      <div class="speaker-notes">
-        <p>Ask attendees to demonstrate their local result. Route individual setup blockers to a support helper while keeping the room moving.</p>
-        <p>If questions are slow, seed them: full-duplex interaction and back-channeling, or what Gemini 3.6 Flash's speed means for cascaded versus end-to-end speech. Leave two minutes for the close.</p>
-      </div>
     </section>
 
     <section class="slide centered" data-slide-id="close" data-title="Thank you" data-section="Close" data-cue="1:28">
@@ -2630,6 +2672,14 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         <div class="setting"><label for="architectureSelect">Architecture</label><select id="architectureSelect"><option value="cascaded">A · Cascaded · Gemini ASR + 3.6 Flash</option><option value="mllm">B · Native · Gemini 3.8 Live</option></select></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="nextjs">TypeScript · default</option><option value="python">Python</option><option value="go">Go</option></select></div>
       </div>
+      <details class="host-wifi-settings">
+        <summary>Venue Wi-Fi · Opening slide only</summary>
+        <div class="host-control-grid">
+          <div class="setting"><label for="wifiNameInput">Wi-Fi name</label><input id="wifiNameInput" type="text" autocomplete="off" placeholder="Venue network"></div>
+          <div class="setting"><label for="wifiPasswordInput">Wi-Fi password</label><input id="wifiPasswordInput" type="text" autocomplete="off" placeholder="Network password"></div>
+        </div>
+        <p class="host-network-note">Projected on the opening slide. Network stays on this device; password stays in this tab. Neither is shared with audience browsers.</p>
+      </details>
       <p class="host-network-note">Architecture and track drive the CLI, run, code-comparison, and demo slides. Architecture syncs to the audience; each participant chooses their own code language.</p>
     </div>
     <div class="host-overlay-bottom">
@@ -2897,6 +2947,43 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         localStorage.setItem("agora-v2-theme", state.theme);
         localStorage.setItem("agora-v2-terminal-environment", state.terminalEnvironment);
         scheduleHostStateChange();
+      }
+
+      // Venue access is presenter-local, outside shared snapshots and archives.
+      function setupVenueWifi() {
+        var panel = document.getElementById("frontWifiDetails");
+        var nameInput = document.getElementById("wifiNameInput");
+        var passwordInput = document.getElementById("wifiPasswordInput");
+        if (isAudience) {
+          panel.hidden = true;
+          return { reset: function () {} };
+        }
+        var network = "";
+        var password = "";
+        try { network = localStorage.getItem("agora-v2-wifi-name") || ""; } catch (_) {}
+        try { password = sessionStorage.getItem("agora-v2-wifi-password") || ""; } catch (_) {}
+        function render() {
+          nameInput.value = network;
+          passwordInput.value = password;
+          document.getElementById("frontWifiName").textContent = network.trim() || "Not provided";
+          document.getElementById("frontWifiPassword").textContent = password.trim() || "Not provided";
+          panel.hidden = !network.trim() && !password.trim();
+        }
+        function save() {
+          try {
+            if (network) localStorage.setItem("agora-v2-wifi-name", network);
+            else localStorage.removeItem("agora-v2-wifi-name");
+          } catch (_) {}
+          try {
+            if (password) sessionStorage.setItem("agora-v2-wifi-password", password);
+            else sessionStorage.removeItem("agora-v2-wifi-password");
+          } catch (_) {}
+          render();
+        }
+        nameInput.addEventListener("input", function (event) { network = event.target.value; save(); });
+        passwordInput.addEventListener("input", function (event) { password = event.target.value; save(); });
+        render();
+        return { reset: function () { network = ""; password = ""; save(); } };
       }
 
       function showToast(message) {
@@ -3352,6 +3439,7 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       document.getElementById("resetButton").addEventListener("click", function () {
         Object.keys(DEFAULTS).forEach(function (key) { state[key] = DEFAULTS[key]; });
         state.showTimings = false;
+        venueWifi.reset();
         renderAll(); showToast("Workshop defaults restored");
       });
       document.addEventListener("keydown", function (event) {
@@ -3394,6 +3482,7 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         setAudienceHashEnabled: setAudienceHashEnabled
       });
 
+      var venueWifi = setupVenueWifi();
       renderAll();
     }());
   </script>
