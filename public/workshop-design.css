@@ -1,10 +1,10 @@
 /* Adapted from AgoraIO-Community/12-days-of-ai-voice-agents/design.
-   Brand blue remains #00C2FF. Small links use the specified accessible #006B8F. */
+   Brand blue remains #00C2FF. All blue accents use the official Agora color. */
 :root, :root[data-theme="light"] {
   --brand-blue: #00C2FF;
   --bg: #F7F6F2; --bg-soft: #F7F6F2; --panel: #FFFFFF; --panel-soft: #F7F6F2;
   --ink: #17181C; --muted: #5B5E67; --faint: #5B5E67; --line: #DCDDD8; --input: #5B5E67;
-  --accent: #006B8F; --accent-ink: #FFFFFF; --accent-soft: rgba(0,194,255,.08);
+  --accent: #00C2FF; --accent-ink: #FFFFFF; --accent-soft: rgba(0,194,255,.08);
   --success: #087C59; --danger: #C53626; --warning: #7042C2;
   --glass: rgba(247,246,242,.96); --card-glass: #FFFFFF;
   --code-bg: #FFFFFF; --code-ink: #17181C; --glow: transparent;

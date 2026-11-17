@@ -144,4 +144,4 @@ The pre-workshop online deck is preserved at commit `4b7489b` on [`archive/onlin
 
 ## Visual system
 
-`public/workshop-design.css` adapts the [Voice Agent Workshop design system](https://github.com/AgoraIO-Community/12-days-of-ai-voice-agents/tree/main/design): paper/white/ink surfaces, Agora blue `#00C2FF`, accessible small-link blue `#006B8F`, editorial typography, restrained outlines, and a subtle 32px grid. Font stacks follow its Inter/Arial and IBM Plex Mono/Courier New fallbacks; no external font requests are needed. Existing presenter theme controls remain available. Official partner logos retain their colors.
+`public/workshop-design.css` adapts the [Voice Agent Workshop design system](https://github.com/AgoraIO-Community/12-days-of-ai-voice-agents/tree/main/design): paper/white/ink surfaces, Agora blue `#00C2FF` for all blue accents, editorial typography, restrained outlines, and a subtle 32px grid. Font stacks follow its Inter/Arial and IBM Plex Mono/Courier New fallbacks; no external font requests are needed. Existing presenter theme controls remain available. Official partner logos retain their colors.
