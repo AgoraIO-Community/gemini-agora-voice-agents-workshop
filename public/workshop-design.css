@@ -225,3 +225,7 @@ body.front-slide-active .topbar .brand { display: none; }
 [data-slide-id="close"] .status-chip { font-size: 17px; }
 
 .front-slide .front-brand img[alt="Agora"] { height: calc(var(--brand-x) * 2.5); translate: 0 calc(var(--brand-x) * .2); }
+
+/* Agenda branding uses the official Agora cyan. */
+[data-slide-id="run-of-show"] .agenda-step,
+[data-slide-id="run-of-show"] .eyebrow { color: var(--brand-blue); }
