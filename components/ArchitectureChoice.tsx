@@ -10,7 +10,7 @@ export function ArchitectureChoice({ architecture, onArchitectureChange, disable
 }) {
   return (
     <div className="mt-6 w-full text-left">
-      <span className="text-sm font-medium text-white">Choose how the agent is built</span>
+      <span className="demo-label text-foreground">Choose how the agent is built</span>
       <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2" role="group" aria-label="Agent architecture">
         {ARCHITECTURE_IDS.map((id) => {
           const choice = ARCHITECTURES[id];
@@ -22,8 +22,8 @@ export function ArchitectureChoice({ architecture, onArchitectureChange, disable
               disabled={disabled}
               aria-pressed={active}
               onClick={() => onArchitectureChange(id)}
-              className={`rounded-lg border px-3 py-3 text-left text-sm transition-colors disabled:opacity-60 ${
-                active ? 'border-primary bg-primary/15 text-white' : 'border-[#444] text-muted-foreground hover:border-white'
+              className={`demo-choice rounded-md border px-3 py-3 text-left text-sm transition-colors disabled:opacity-60 ${
+                active ? 'border-primary bg-primary/15 text-foreground' : 'border-border text-muted-foreground hover:border-foreground'
               }`}
             >
               <span className="block text-xs font-semibold uppercase tracking-wide text-primary">{choice.letter} · {choice.label}</span>

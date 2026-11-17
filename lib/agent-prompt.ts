@@ -4,7 +4,7 @@ import type { Architecture } from './demo';
 // The pipeline line changes with the architecture so Ada describes herself accurately.
 export function adaPrompt(architecture: Architecture): string {
   const pipeline = architecture === 'cascaded'
-    ? '- This demo uses Gemini for ASR and Gemini 3.6 Flash as the LLM, with Gemini 3.8 Flash TTS for speech synthesis'
+    ? '- This demo uses Gemini for ASR and Gemini 4 Hydrogen as the LLM, with Gemini 3.8 Flash TTS for speech synthesis'
     : '- This demo runs on Gemini 3.8 Live, a native multimodal model that listens and speaks directly';
   return `You are **Ada**, an agentic developer advocate from **Agora**. You help developers understand and build with Agora's Conversational AI platform.
 

@@ -25,7 +25,7 @@ describe("in-person deck structure", () => {
 
   it("labels all three Gemini stages in the cascaded recipe", () => {
     expect(html).toContain("Gemini 3.5 Transcribe Live");
-    expect(html).toContain("Gemini 3.6 Flash");
+    expect(html).toContain("Gemini 4 Hydrogen");
     expect(html).toContain("Voice synthesis");
     expect(html).toContain("Synthesized audio stream");
     expect(html).toContain("Agora SD-RTN®");
@@ -116,17 +116,17 @@ describe("in-person deck structure", () => {
       expect(types("const agent = new Agent({", "typescript")).toEqual([
         "keyword:const", "punct:=", "keyword:new", "type:Agent", "punct:({"
       ]);
-      expect(types("  apiKey: googleApiKey, model: 'gemini-3.6-flash', // note", "typescript")).toEqual([
-        "key:apiKey", "punct::", "punct:,", "key:model", "punct::", "string:'gemini-3.6-flash'", "punct:,", "comment:// note"
+      expect(types("  apiKey: googleApiKey, model: 'gemini-4-hydrogen', // note", "typescript")).toEqual([
+        "key:apiKey", "punct::", "punct:,", "key:model", "punct::", "string:'gemini-4-hydrogen'", "punct:,", "comment:// note"
       ]);
       expect(types("advancedFeatures: { enable_rtm: true },", "typescript")).toContain("number:true");
       expect(types("const agentId = await session.start();", "typescript")).toContain("fn:start");
     });
 
     it("tokenizes Python: kwargs as keys, literals, hash comments, no // comments", () => {
-      expect(types('llm = Gemini(api_key=key, model="gemini-3.6-flash")  # llm', "python")).toEqual([
+      expect(types('llm = Gemini(api_key=key, model="gemini-4-hydrogen")  # llm', "python")).toEqual([
         "key:llm", "punct:=", "type:Gemini", "punct:(", "key:api_key", "punct:=", "punct:,", "key:model", "punct:=",
-        'string:"gemini-3.6-flash"', "punct:)", "comment:# llm"
+        'string:"gemini-4-hydrogen"', "punct:)", "comment:# llm"
       ]);
       expect(types("from agora_agent.agentkit import Agent as AgoraAgent", "python")).toEqual([
         "keyword:from", "punct:.", "keyword:import", "type:Agent", "keyword:as", "type:AgoraAgent"
@@ -139,8 +139,8 @@ describe("in-person deck structure", () => {
       expect(types("agent := agentkit.NewAgent(", "go")).toEqual([
         "punct::=", "punct:.", "type:NewAgent", "punct:("
       ]);
-      expect(types('    APIKey: s.googleAPIKey, Model: "gemini-3.6-flash",', "go")).toEqual([
-        "key:APIKey", "punct::", "punct:.", "punct:,", "key:Model", "punct::", 'string:"gemini-3.6-flash"', "punct:,"
+      expect(types('    APIKey: s.googleAPIKey, Model: "gemini-4-hydrogen",', "go")).toEqual([
+        "key:APIKey", "punct::", "punct:.", "punct:,", "key:Model", "punct::", 'string:"gemini-4-hydrogen"', "punct:,"
       ]);
       expect(types("TranscribeAgent: boolPtr(true),", "go")).toEqual([
         "key:TranscribeAgent", "punct::", "fn:boolPtr", "punct:(", "number:true", "punct:),"

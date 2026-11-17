@@ -53,7 +53,7 @@ Pause audience sharing on the computer and advance a slide during rehearsal: pho
 ## Recipe details and boundaries
 
 - Use individual attendee Agora projects and Google keys. Gemini recipe stages use the server-side Google API key; do not suggest Agora-managed keys replace it.
-- The current cascaded recipes use GeminiSTT → Gemini 3.6 Flash → Gemini 3.8 Flash TTS preview. Native recipes use Gemini Live. The condensed code comparison omits application setup; use linked source files for full implementation.
+- The workshop cascaded path uses GeminiSTT → Gemini 4 Hydrogen → Gemini 3.8 Flash TTS preview. After cloning a cascaded recipe, change its Gemini LLM model to `gemini-4-hydrogen` if the upstream source still selects an earlier model. Leave ASR and TTS selections unchanged. Native recipes use Gemini Live. The condensed code comparison omits application setup; use linked source files for full implementation.
 - `recipes list` and `recipes show` are read-only. `init --recipe` creates a project from the selected recipe. The selected language determines the matching Gemini recipe, whose README determines runtime and commands.
 - Save a Git commit of the working cascaded baseline, then extend the same project with Agora Skills and the matching native recipe. Do not initialize a second app. Keep one voice UI, Agora channel, transcript, and start/stop lifecycle. Validate architecture server-side and retain the matching session for cleanup. Adapt a use case only after both paths work.
 - Local voice conversations in both modes are required; tunnels and deployment are optional. Test in two waves if the room is noisy.

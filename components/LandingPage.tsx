@@ -2,7 +2,6 @@
 
 import { useState, useRef, Suspense, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import type { RTMClient } from 'agora-rtm';
 import type {
   AgoraTokenData,
@@ -220,7 +219,7 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
   };
 
   return (
-    <div className={`relative flex h-dvh min-h-screen flex-col bg-background text-foreground ${showConversation ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+    <div className={`demo-shell relative flex min-h-screen flex-col text-foreground ${showConversation ? 'h-dvh overflow-hidden' : 'overflow-y-auto'}`}>
       {/* Hero shell: either shows the pre-call CTA or swaps in the live conversation experience. */}
       <div
         className={`flex min-h-0 flex-1 flex-col ${
@@ -281,30 +280,11 @@ export default function LandingPage({ initialArchitecture, embed = false }: Land
       </div>
 
       {/* Persistent attribution footer for the pre-call and in-call views (hidden when framed by the deck). */}
-      {!embed && <footer className="fixed bottom-0 right-0 z-40 py-4 pr-4 md:py-6 md:pr-6">
-        <div className="flex items-center justify-end gap-2 text-muted-foreground">
-          <span className="text-xs font-medium tracking-wide uppercase">
-            Powered by
-          </span>
-          <a
-            href="https://agora.io/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
-            aria-label="Visit Agora's website"
-          >
-            <Image
-              src="/agora-logo-rgb-blue.svg"
-              alt="Agora"
-              width={86}
-              height={24}
-              priority
-              className="h-6 w-auto hover:opacity-80 transition-opacity translate-y-1"
-            />
-            <span className="sr-only">Agora</span>
-          </a>
-        </div>
+      {!embed && <footer className="demo-attribution flex shrink-0 items-center justify-between gap-4 px-4 py-3 text-xs text-muted-foreground sm:px-6">
+        <span className="demo-label">Gemini + Agora / Voice workshop</span>
+        <a href="/" className="shrink-0 underline underline-offset-4 hover:text-foreground">Workshop slides ↗</a>
       </footer>}
+
     </div>
   );
 }

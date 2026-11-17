@@ -43,6 +43,13 @@ describe("embedded recipe providers and lifecycle routes", () => {
   it("configures the verified Gemini speech pipeline and its preview gate", () => {
     const config = cascadedAgent(client, "test-google-key").config;
     expect(config.stt).toMatchObject({ vendor: "gemini" });
+    expect(config.llm).toMatchObject({ style: "gemini", params: { model: "gemini-4-hydrogen" } });
+    const llmUrl = new URL(config.llm!.url!);
+    expect(llmUrl.origin).toBe("https://generativelanguage.googleapis.com");
+    expect(llmUrl.pathname).toBe("/v1beta/models/gemini-4-hydrogen:streamGenerateContent");
+    expect(llmUrl.searchParams.get("alt")).toBe("sse");
+    expect(config.llm!.params).toEqual({ model: "gemini-4-hydrogen" });
+    expect(ARCHITECTURES.cascaded.stages[1].label).toBe("Gemini 4 Hydrogen");
     expect(config.tts).toMatchObject({
       vendor: "gemini",
       params: { api_key: "test-google-key", model: "gemini-3.8-flash-tts", voice: "Puck", style: "warm and reassuring" }

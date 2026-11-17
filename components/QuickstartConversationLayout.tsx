@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import Image from 'next/image';
+import { WorkshopPartners } from './WorkshopPartners';
 import { Button } from '@/components/ui/button';
 
 type QuickstartConversationLayoutProps = {
@@ -23,15 +23,9 @@ export function QuickstartConversationLayout({
 }: QuickstartConversationLayoutProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col text-left">
-      <header className="flex shrink-0 flex-col gap-4 border-b border-border px-4 py-4 md:h-[76px] md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
-        <div className="flex min-w-0 items-center gap-3">
-          <Image
-            src="/agora-logo-mark.svg"
-            alt="Agora"
-            width={40}
-            height={40}
-            className="h-10 w-10 shrink-0 object-contain"
-          />
+      <header className="demo-call-header flex shrink-0 flex-col gap-4 border-b border-border px-4 py-4 md:min-h-[96px] md:flex-row md:items-center md:justify-between md:px-6 md:py-0">
+        <div className="flex min-w-0 flex-wrap items-center gap-4">
+          <WorkshopPartners />
           <div className="flex min-w-0 flex-col justify-center gap-1">
             <span className="truncate text-lg font-semibold leading-none tracking-[-0.025em] text-foreground">
               Agora Conversational AI

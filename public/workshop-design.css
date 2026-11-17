@@ -66,12 +66,29 @@ pre, code, .terminal-body, .terminal-title, .eyebrow, .card-number, .agenda-step
 .code-fn, .code-key { color: var(--accent); }
 .code-string { color: var(--success); }
 .agent-code-line.highlighted .code-punct { color: var(--ink); }
-.platform-slide { background: #17181C; }
-.platform-slide .platform-video { background: #17181C; }
-.platform-slide h2 .accent, .platform-slide .platform-heading .eyebrow,
-.platform-slide .platform-cards .card-number, .platform-slide .platform-proof strong { color: var(--brand-blue); }
-.platform-slide .platform-cards .card { background: rgba(23,24,28,.91); border-color: var(--brand-blue); box-shadow: none; }
-.platform-slide::after { background: linear-gradient(180deg, rgba(23,24,28,.65), rgba(23,24,28,.1) 48%, rgba(23,24,28,.6)); }
+/* Editorial explanation on the left; video is a contained, independent panel. */
+.slide.platform-slide { display: block; background: var(--bg); color: var(--ink); overflow: auto; }
+.platform-slide::after { display: none; }
+.platform-slide .platform-content, body.view-host .platform-slide .platform-content { display: grid; height: 100%; min-height: 0; grid-template-rows: auto minmax(0, 1fr); padding: 74px 28px 20px; gap: 24px; }
+.platform-slide .platform-heading .eyebrow { color: var(--muted); font-size: 13px; font-weight: 500; }
+.platform-slide h2 { color: var(--ink); font-size: clamp(32px, 3.4vw, 46px); line-height: 1.08; text-shadow: none; max-width: 1100px; text-wrap: initial; }
+.platform-slide h2 .accent { color: var(--ink); }
+.platform-body { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(0, 1.2fr); align-items: center; gap: 32px; min-height: 0; }
+.platform-slide .platform-cards { display: grid; grid-template-columns: 1fr; grid-row: auto; gap: 12px; }
+.platform-slide .platform-cards .card { padding: 14px 18px; background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--brand-blue); border-radius: 8px; box-shadow: none; }
+.platform-slide .platform-cards .card-number { color: var(--muted); font-size: 11px; }
+.platform-slide .platform-cards h3 { color: var(--ink); font-size: 21px; line-height: 1.15; margin: 6px 0; }
+.platform-slide .platform-cards p { color: var(--muted); font-size: 16px; line-height: 1.35; }
+.platform-media { margin: 0; min-width: 0; }
+.platform-slide .platform-video { position: relative; inset: auto; z-index: auto; width: 100%; height: auto; aspect-ratio: 16/9; background: #17181C; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
+.platform-slide .platform-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; transform: none; border: 0; pointer-events: auto; }
+.platform-slide .platform-proof { margin: 14px 0 0; text-align: left; color: var(--muted); font-size: 16px; line-height: 1.4; }
+.platform-slide .platform-proof strong { color: var(--ink); }
+@media (max-width: 760px) {
+  .platform-slide .platform-content, body.view-host .platform-slide .platform-content { height: auto; padding: 74px 20px 24px; }
+  .platform-body { grid-template-columns: 1fr; gap: 20px; }
+  .platform-slide .platform-cards { grid-template-columns: 1fr; }
+}
 .cascade-slide { --cascade-audio: #00C2FF; --cascade-text: #B99AFF; }
 .cascade-shell, .native-loop { background: #17181C; box-shadow: none; }
 @media (max-width: 760px) { .front-slide::before { display: none; } }
@@ -79,11 +96,11 @@ pre, code, .terminal-body, .terminal-title, .eyebrow, .card-number, .agenda-step
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-/* Official partner artwork, with matching optical letter height. */
+/* Official partner artwork, with a stronger Agora presence. */
 .front-slide .front-brand { --brand-x: 24px; gap: 20px; padding: 0 14px; }
 .topbar .brand { --partner-x: 13px; display: inline-flex; gap: 13px; padding: 0 10px; border-radius: 4px; background: #FFFFFF; }
 body.front-slide-active .topbar .brand { display: none; }
-.topbar .brand-logo { width: auto; height: calc(var(--partner-x) * 1.68); translate: 0 calc(var(--partner-x) * .38); filter: none; }
+.topbar .brand-logo { width: auto; height: calc(var(--partner-x) * 2.5); translate: 0 calc(var(--partner-x) * .2); filter: none; }
 .partner-deepmind { display: block; width: auto; height: calc(var(--partner-x) * 3.33); }
 .partner-separator { color: #5B5E67; font: 400 20px/1 Arial, sans-serif; }
 @media (max-width: 760px) {
@@ -97,16 +114,114 @@ body.front-slide-active .topbar .brand { display: none; }
 .code-path-card p { font-size: 18px; line-height: 1.4; }
 .code-path-card .code-path-label { color: var(--ink); font-size: 13px; }
 .copy-button { color: var(--ink); background: var(--panel); border: 1px solid var(--input); }
-[data-slide-id="customize-recipe"] { grid-template-rows: auto auto auto auto minmax(0, auto) auto; }
-[data-slide-id="customize-recipe"] .terminal { min-height: 88px; }
-[data-slide-id="customize-recipe"] .terminal-bar { padding: 7px 16px; }
-[data-slide-id="customize-recipe"] .terminal-body { min-height: 0; padding: 12px 18px; }
-[data-slide-id="customize-recipe"] .terminal-body pre { margin: 0; font-size: 18px; line-height: 1.3; }
-[data-slide-id="customize-recipe"] .prompt-card { min-height: 0; max-height: 190px; padding: 18px; }
-[data-slide-id="customize-recipe"] .prompt-card pre { margin: 0; font-size: 14px; line-height: 1.5; }
-[data-slide-id="customize-recipe"] .lede { font-size: 20px; line-height: 1.35; }
-[data-slide-id="customize-recipe"] h2 { font-size: clamp(32px, 4vw, 48px); }
-body.view-host [data-slide-id="customize-recipe"] { gap: 10px; }
-[data-slide-id="customize-recipe"] .terminal { min-height: 72px; }
-[data-slide-id="customize-recipe"] .prompt-card { max-height: 150px; }
 .slide:not(.platform-slide) h2 .accent { color: var(--ink); }
+
+/* Diagram boards and developer surfaces: paper, semantic ink, and outlined signals. */
+:root { --diagram-review: #7042C2; --diagram-review-soft: rgba(112,66,194,.08); }
+:root[data-theme="dark"] { --diagram-review: #B99AFF; --diagram-review-soft: rgba(185,154,255,.10); }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] { --diagram-review: #B99AFF; --diagram-review-soft: rgba(185,154,255,.10); }
+}
+.cascade-slide { --cascade-audio: var(--brand-blue); --cascade-text: var(--diagram-review); }
+.cascade-shell {
+  border: 1px solid var(--line); border-radius: 12px; color: var(--ink); box-shadow: none;
+  background-color: var(--bg);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.native-loop { background: transparent; box-shadow: none; }
+.cascade-shell-header, .loop-band-header { color: var(--ink); }
+.cascade-shell-header small, .loop-band-header small, .cascade-legend span,
+.cascade-node-type, .cascade-node p, .cascade-return span:last-child { color: var(--muted); }
+.cascade-node, .cascade-node.device, .cascade-node.llm, .cascade-node.mllm {
+  color: var(--ink); background: var(--panel); border: 2px solid var(--brand-blue);
+  border-radius: 10px; box-shadow: none;
+}
+.cascade-node.device { border-color: var(--ink); }
+.cascade-node.llm, .cascade-node.mllm { border-color: var(--diagram-review); }
+.cascade-node-type { font-family: var(--font-mono); font-size: 11px; letter-spacing: .035em; font-weight: 500; }
+.cascade-node p { font-size: 14px; line-height: 1.4; }
+.cascade-node-result { color: var(--accent); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0; }
+.cascade-node.llm .cascade-node-result, .cascade-node.mllm .cascade-node-result { color: var(--diagram-review); }
+.cascade-connector, .cascade-connector.audio, .loop-seg { color: var(--ink); box-shadow: none; }
+.cascade-connector-label { color: var(--ink); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0; }
+.cascade-connector-line, .cascade-connector-line::after, .cascade-sdrtn-label::before,
+.cascade-return::after, .loop-dot { box-shadow: none; }
+.cascade-connector-line::after { background: var(--brand-blue); }
+.cascade-return { background: var(--panel); color: var(--ink); border: 1px solid var(--brand-blue); border-radius: 8px; }
+.cascade-return strong, .cascade-return span:last-child { font-size: 12px; letter-spacing: 0; }
+.cascade-legend span { font-size: 11px; font-weight: 500; }
+.loop-band { background: var(--panel); border: 2px solid var(--brand-blue); border-radius: 10px; box-shadow: none; }
+.loop-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0; }
+.loop-label.in { color: var(--accent); }
+.loop-label.out { color: var(--diagram-review); }
+/* Preserve the sequence, replacing luminous pulses with flat board highlights. */
+@keyframes cascade-node-asr { 0%,16%,31%,100% { background: var(--panel); } 19%,25% { background: color-mix(in srgb, var(--brand-blue) 15%, var(--panel)); } }
+@keyframes cascade-node-llm { 0%,38%,53%,100% { background: var(--panel); } 41%,47% { background: color-mix(in srgb, var(--diagram-review) 12%, var(--panel)); } }
+@keyframes cascade-node-tts { 0%,60%,75%,100% { background: var(--panel); } 63%,69% { background: color-mix(in srgb, var(--brand-blue) 15%, var(--panel)); } }
+@keyframes cascade-node-device { 0%,1%,100% { background: color-mix(in srgb, var(--brand-blue) 15%, var(--panel)); } 8%,96% { background: var(--panel); } }
+@keyframes loop-node-model { 0%,40%,62%,100% { background: var(--panel); } 46%,56% { background: color-mix(in srgb, var(--diagram-review) 12%, var(--panel)); } }
+@keyframes loop-node-device { 0%,2%,100% { background: color-mix(in srgb, var(--brand-blue) 15%, var(--panel)); } 8%,94% { background: var(--panel); } }
+@keyframes loop-label-in { 0%,50%,100% { opacity: .7; } 4%,46% { opacity: 1; } }
+@keyframes loop-label-out { 0%,50%,100% { opacity: .7; } 54%,96% { opacity: 1; } }
+.workspace-launch-slide, .command-highlight-slide { background: var(--bg); }
+.workspace-launch-slide::before, .command-highlight-slide::before { color: color-mix(in srgb, var(--ink) 5%, transparent); }
+.workspace-terminal { border-color: var(--line); box-shadow: none; }
+.workspace-terminal .terminal-title, .terminal-title { color: var(--muted); }
+.workspace-terminal .terminal-body {
+  background-color: var(--panel);
+  background-image: linear-gradient(color-mix(in srgb, var(--line) 50%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 50%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.terminal pre, .code-panel pre, .recipes-output pre, .prompt-card pre { font-family: var(--font-mono); }
+.terminal-bar, .code-compare-header { background: var(--panel-soft); }
+.terminal-dot, .terminal-dot:nth-child(2), .terminal-dot:nth-child(3) { background: var(--line); border: 1px solid var(--muted); }
+.terminal-dot:first-child { background: var(--brand-blue); border-color: var(--brand-blue); }
+.code-compare-panel.mllm-path { --path-color: var(--diagram-review); --path-soft: var(--diagram-review-soft); }
+.code-compare-panel .code-path-label { color: var(--ink); }
+.code-keyword, .code-number { color: var(--diagram-review); }
+.agent-code-line::before { color: var(--muted); }
+@media (min-width: 901px) and (max-width: 1280px) {
+  .cascade-pipeline { grid-template-columns: minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr); gap: 8px; }
+  .cascade-shell { padding: 16px; }
+  .cascade-node { padding: 14px 12px 38px; }
+  .cascade-node-result { inset-inline: 12px; }
+  .cascade-node strong { font-size: 20px; }
+  .cascade-shell-header small, .loop-band-header small { font-size: 10px; letter-spacing: .025em; }
+  .loop-lane { height: 60px; padding-top: 4px; }
+  .loop-label.in { top: 0; }
+  .loop-label.out { top: 40px; }
+}
+@media (min-width: 901px) and (max-width: 1280px) and (max-height: 800px) {
+  body.view-host .slide.cascade-slide:not(.front-slide):not(.platform-slide) { gap: 12px; }
+}
+
+/* Build instructions stay beside a full-height, independently scrollable prompt. */
+[data-slide-id="customize-recipe"] { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-rows: minmax(0, 1fr); align-content: stretch; align-items: stretch; column-gap: 28px !important; }
+[data-slide-id="customize-recipe"] .customize-instructions { min-width: 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+[data-slide-id="customize-recipe"] .customize-instructions > * { margin: 0; }
+[data-slide-id="customize-recipe"] h2 { font-size: clamp(32px, 3.5vw, 46px); line-height: 1.08; }
+[data-slide-id="customize-recipe"] .lede { font-size: 20px; line-height: 1.4; }
+[data-slide-id="customize-recipe"] .terminal { min-height: 0; flex: none; }
+[data-slide-id="customize-recipe"] .terminal-bar { padding: 9px 16px; }
+[data-slide-id="customize-recipe"] .terminal-body { min-height: 0; padding: 18px; padding-top: 44px; }
+[data-slide-id="customize-recipe"] .terminal-body pre { margin: 0; font-size: 18px; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere; }
+[data-slide-id="customize-recipe"] .customize-prompt { display: flex; flex-direction: column; min-width: 0; min-height: 0; max-height: none; height: 100%; padding: 0; overflow: hidden; }
+[data-slide-id="customize-recipe"] .customize-prompt-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--panel-soft); flex: none; }
+[data-slide-id="customize-recipe"] .customize-prompt-header strong { font-size: 16px; }
+[data-slide-id="customize-recipe"] .customize-prompt-header .copy-button { position: static; }
+[data-slide-id="customize-recipe"] .customize-prompt pre { flex: 1; min-height: 0; margin: 0; padding: 20px; overflow: auto; font-size: 16px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 760px) {
+  [data-slide-id="customize-recipe"] { grid-template-columns: 1fr; grid-template-rows: auto auto; }
+  [data-slide-id="customize-recipe"] .customize-instructions { gap: 16px; }
+  [data-slide-id="customize-recipe"] .customize-prompt { height: auto; min-height: 320px; max-height: 70vh; }
+  [data-slide-id="customize-recipe"] .customize-prompt pre { font-size: 14px; }
+}
+/* Projector-readable supporting copy without changing the access footer. */
+.agenda-item p { font-size: 17px; }
+.agenda-item strong { font-size: 24px; }
+[data-slide-id="room-setup"] .card p, [data-slide-id="test-your-agent"] .card p { font-size: 18px; }
+[data-slide-id="run-recipe"] .terminal-body pre { font-size: 24px; }
+[data-slide-id="close"] .status-chip { font-size: 17px; }
+
+.front-slide .front-brand img[alt="Agora"] { height: calc(var(--brand-x) * 2.5); translate: 0 calc(var(--brand-x) * .2); }

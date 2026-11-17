@@ -1,5 +1,6 @@
 'use client';
 
+import { WorkshopPartners } from './WorkshopPartners';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ModelChoice, type DemoModel, type ThinkingLevel } from './ModelChoice';
@@ -30,18 +31,12 @@ export function QuickstartPreCallCard({
   onThinkingLevelChange,
 }: QuickstartPreCallCardProps) {
   return (
-    <div
-      className="m-auto flex w-[min(92vw,42rem)] animate-fade-up flex-col items-center rounded-[20px] border border-[#2b2b2b] px-10 py-8 text-center shadow-[0_10px_24px_rgba(0,0,0,0.28)]"
-      style={{
-        backgroundImage:
-          'linear-gradient(164.988deg, rgba(54,54,54,0.2) 1.0596%, rgba(0,0,0,0) 96.089%), linear-gradient(90deg, rgb(16,16,16) 0%, rgb(16,16,16) 100%)',
-      }}
-    >
-      <h1 className="text-[28px] font-medium leading-[1.2] text-white">
-        Say hello to Ada
-      </h1>
-      <p className="mt-[14px] text-sm font-medium leading-6 text-muted-foreground">
-        One voice agent on Agora, built two ways with Gemini. Pick one, then start talking.
+    <div className="demo-precall m-auto flex w-[min(92vw,42rem)] animate-fade-up flex-col items-center px-8 py-7 text-center">
+      <WorkshopPartners />
+      <p className="demo-label mb-3 mt-6 text-muted-foreground">Voice agents / Live playground</p>
+      <h1 className="text-foreground">One app. Two ways to talk.</h1>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">
+        Meet Ada. Compare the cascaded pipeline with Gemini Live, then start a conversation.
       </p>
 
       <ArchitectureChoice architecture={architecture} onArchitectureChange={onArchitectureChange} disabled={isLoading} />
@@ -53,7 +48,7 @@ export function QuickstartPreCallCard({
       <Button
         onClick={onStartConversation}
         disabled={isLoading}
-        className="mt-6 h-10 w-full rounded-lg border border-primary bg-primary text-sm font-medium text-black hover:border-white hover:bg-white hover:text-black disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-black"
+        className="mt-6 h-11 w-full rounded-md border border-primary bg-primary text-sm font-semibold text-primary-foreground hover:border-foreground hover:bg-primary disabled:opacity-60"
         aria-label={
           isLoading
             ? 'Starting conversation with AI agent'

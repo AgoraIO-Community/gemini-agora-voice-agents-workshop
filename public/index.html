@@ -2412,20 +2412,24 @@
     </section>
 
     <section class="slide compact platform-slide" data-slide-id="what-is-agora" data-title="What is Agora?" data-section="How Agora works" data-cue="0:08">
-      <div class="platform-video" aria-hidden="true">
-        <iframe title="Discover unrivaled reliability and quality with Agora’s Real-Time Network" tabindex="-1" loading="lazy" src="https://player.vimeo.com/video/988623383?background=1" allow="autoplay; fullscreen" allowfullscreen data-cookiecategory="7"></iframe>
-      </div>
       <div class="platform-content">
         <div class="platform-heading">
           <p class="eyebrow">What is Agora?</p>
-          <h2>The realtime platform connecting <span class="accent">people, devices, and AI.</span></h2>
+          <h2>The realtime platform for <span class="accent">people, devices, and AI.</span></h2>
         </div>
-        <div class="platform-cards">
-          <article class="card"><span class="card-number">Realtime media</span><h3>Voice, video &amp; streaming</h3><p>A shared Channel for people and agents.</p></article>
-          <article class="card"><span class="card-number">Global delivery</span><h3>Realtime, worldwide</h3><p>Reliable, low-latency media at global scale.</p></article>
-          <article class="card"><span class="card-number">Conversational AI</span><h3>Voice agents, connected</h3><p>Listen, reason, and respond in the Channel.</p></article>
+        <div class="platform-body">
+          <div class="platform-cards">
+            <article class="card"><span class="card-number">01 / Realtime media</span><h3>Voice, video &amp; streaming</h3><p>A shared Channel for people and agents.</p></article>
+            <article class="card"><span class="card-number">02 / Global delivery</span><h3>Realtime, worldwide</h3><p>Reliable, low-latency media at global scale.</p></article>
+            <article class="card"><span class="card-number">03 / Conversational AI</span><h3>Voice agents, connected</h3><p>Listen, reason, and respond in the Channel.</p></article>
+          </div>
+          <figure class="platform-media">
+            <div class="platform-video">
+              <iframe title="Discover unrivaled reliability and quality with Agora’s Real-Time Network" loading="lazy" src="https://player.vimeo.com/video/988623383?background=1" allow="autoplay; fullscreen" allowfullscreen data-cookiecategory="7"></iframe>
+            </div>
+            <figcaption class="platform-proof"><strong>1 trillion minutes</strong> of live voice and video per year.</figcaption>
+          </figure>
         </div>
-        <p class="platform-proof">Powering <strong>1 Trillion minutes</strong> of live voice and video per year.</p>
       </div>
       <div class="speaker-notes">
         <p>Thirty seconds. Channels are the shared space, SD-RTN delivers the media, and the Conversational AI Engine brings Gemini into that space as a participant.</p>
@@ -2435,7 +2439,7 @@
     <section class="slide compact cascade-slide" data-slide-id="conversational-ai-pipeline" data-title="The cascading voice pipeline" data-section="How Agora works" data-cue="0:10">
       <p class="eyebrow">Agora Conversational AI Engine · with Gemini</p>
       <h2>Speech becomes intelligence—and returns as <span class="accent">realtime voice.</span></h2>
-      <div class="cascade-shell" role="img" aria-label="Cascading voice AI pipeline on Agora SD-RTN. A user device sends an audio stream to Gemini 3.5 Transcribe Live. The transcript goes to Gemini 3.6 Flash. The response text goes to Gemini TTS preview, which publishes synthesized audio back to the user.">
+      <div class="cascade-shell" role="img" aria-label="Cascading voice AI pipeline on Agora SD-RTN. A user device sends an audio stream to Gemini 3.5 Transcribe Live. The transcript goes to Gemini 4 Hydrogen. The response text goes to Gemini TTS preview, which publishes synthesized audio back to the user.">
         <div class="cascade-shell-header">
           <strong class="cascade-sdrtn-label">Agora SD-RTN®</strong>
           <small>One managed realtime conversation path</small>
@@ -2457,7 +2461,7 @@
           <div class="cascade-connector"><span class="cascade-connector-label">Transcript text</span><span class="cascade-connector-line"></span></div>
           <article class="cascade-node llm">
             <span class="cascade-node-type">Language model</span>
-            <strong>Gemini 3.6 Flash</strong>
+            <strong>Gemini 4 Hydrogen</strong>
             <p>Reasons over context and generates the response.</p>
             <span class="cascade-node-result">UNDERSTAND → RESPOND</span>
           </article>
@@ -2474,7 +2478,7 @@
       </div>
       <p class="lede">Three Gemini stages in the recipe cascade. <span class="accent">Agora keeps the conversation moving in realtime.</span></p>
       <div class="speaker-notes">
-        <p>Follow the top row left to right: the user publishes audio; Gemini 3.5 Transcribe Live produces the transcript; Gemini 3.6 Flash produces the response; Gemini TTS preview synthesizes speech.</p>
+        <p>Follow the top row left to right: the user publishes audio; Gemini 3.5 Transcribe Live produces the transcript; Gemini 4 Hydrogen produces the response; Gemini TTS preview synthesizes speech.</p>
         <p>Then follow the return path: the agent publishes audio back into the same Channel. This is the cascaded recipe you are about to run. Next slide shows the same loop with Gemini Live.</p>
       </div>
     </section>
@@ -2540,7 +2544,7 @@
       <div class="code-paths-overview">
         <article class="code-path-card architecture-card">
           <span class="code-path-label">Path A · Cascaded</span>
-          <h3>Gemini ASR → Gemini 3.6 Flash → TTS</h3>
+          <h3>Gemini ASR → Gemini 4 Hydrogen → TTS</h3>
           <p>Each stage is a swappable vendor. You get transcripts, per-stage latency, tool calling, and full control of every model choice.</p>
           <div class="meta-row"><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-nextjs" target="_blank" rel="noreferrer">gemini-agora-voice-agents-nextjs</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-python" target="_blank" rel="noreferrer">…-python</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-go" target="_blank" rel="noreferrer">…-go</a></div>
         </article>
@@ -2612,20 +2616,22 @@
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span id="quickstartCommandLabel" class="terminal-title">Terminal</span></div>
         <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="quickstartCommand">Copy</button><pre id="quickstartCommand" class="quickstart-command"></pre></div>
       </div>
-      <div class="meta-row"><span class="status-chip">Tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Agora credentials already written by init</span><span class="status-chip">One Google key · every Gemini stage · server-side only</span><span class="status-chip">Gemini TTS preview · same Google key</span></div>
+      <div class="meta-row"><span class="status-chip">Tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Agora credentials already written by init</span><span class="status-chip">One Google key · every Gemini stage · server-side only</span><span class="status-chip">Set the LLM model to <code>gemini-4-hydrogen</code></span></div>
       <div class="speaker-notes">
         <p>Only one command shows at a time. The init step already wrote the Agora App ID and Certificate into the recipe’s env file, so the Google API key is the only manual edit.</p>
-        <p>Checkpoint: hear a cascaded reply, then stop the conversation. Save a Git commit of this working baseline before adding Gemini Live. Continue in this same project folder. Keep environment files off the projector.</p>
+        <p>If the cloned recipe uses an earlier LLM, set its Gemini LLM model to <code>gemini-4-hydrogen</code>; keep its ASR and TTS configuration. Checkpoint: hear a cascaded reply, then stop the conversation. Save a Git commit of this working baseline before adding Gemini Live. Continue in this same project folder. Keep environment files off the projector.</p>
       </div>
     </section>
 
     <section class="slide compact" data-slide-id="customize-recipe" data-title="Add Gemini Live to the same app" data-section="Build both architectures" data-cue="0:55" data-technical="true">
+      <div class="customize-instructions">
       <p class="eyebrow">One project · <span data-track-field="label"></span></p>
       <h2>Add Gemini Live. <span class="accent">Keep the same app.</span></h2>
-      <p class="lede">Save your working baseline, then open this project in your coding assistant. Install Agora Skills and copy the prompt below.</p>
+      <p class="lede">Save your working baseline, then open this project in your coding assistant. Install Agora Skills, then copy the prompt into your assistant.</p>
       <div class="terminal"><div class="terminal-bar"><span class="terminal-title">Inside gemini-voice-agent</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="skillsCommand">Copy</button><pre id="skillsCommand">npx skills add agoraio/skills</pre></div></div>
-      <div class="prompt-card"><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button><pre id="customizePrompt"></pre></div>
       <div class="meta-row"><a class="meta-chip" data-recipe-link="cascadedRecipe" href="#" target="_blank" rel="noreferrer">Cascaded source ↗</a><a class="meta-chip" data-recipe-link="mllmRecipe" href="#" target="_blank" rel="noreferrer">Gemini Live source ↗</a></div>
+      </div>
+      <div class="prompt-card customize-prompt"><div class="customize-prompt-header"><strong>Build prompt</strong><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button></div><pre id="customizePrompt"></pre></div>
       <div class="speaker-notes"><p><strong>Show:</strong> commit the working cascaded baseline, install Skills in this project, and give the assistant the language-specific prompt. <strong>Say:</strong> use the native recipe as a reference; add its GeminiLive provider to our existing app instead of creating another app. Preserve the voice UI, channel, transcript, credentials, and start/stop lifecycle.</p><p><strong>Checkpoint:</strong> one app offers both architectures. Stop the active conversation before switching, retain the matching server session for cleanup, and validate the requested architecture server-side. Keep Google credentials server-side. <strong>Return:</strong> compare with the combined live demo, then test both paths locally.</p></div>
     </section>
 
@@ -2732,7 +2738,7 @@
         <button class="icon-button" type="button" data-close-drawer="hostDrawer" aria-label="Close host controls">×</button>
       </div>
       <div class="host-control-grid">
-        <div class="setting"><label for="architectureSelect">Architecture</label><select id="architectureSelect"><option value="cascaded">A · Cascaded · Gemini ASR + 3.6 Flash</option><option value="mllm">B · Native · Gemini 3.8 Live</option></select></div>
+        <div class="setting"><label for="architectureSelect">Architecture</label><select id="architectureSelect"><option value="cascaded">A · Cascaded · Gemini ASR + 4 Hydrogen</option><option value="mllm">B · Native · Gemini 3.8 Live</option></select></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="nextjs">TypeScript · default</option><option value="python">Python</option><option value="go">Go</option></select></div>
       </div>
       <details class="host-wifi-settings">
@@ -2790,7 +2796,7 @@
       };
 
       var ARCHITECTURES = {
-        cascaded: { label: "Cascaded", title: "A · Cascaded · Gemini ASR → Gemini 3.6 Flash → TTS", dir: "gemini-voice-agent" },
+        cascaded: { label: "Cascaded", title: "A · Cascaded · Gemini ASR → Gemini 4 Hydrogen → TTS", dir: "gemini-voice-agent" },
         mllm: { label: "Native multimodal", title: "B · Native · Gemini 3.8 Live end to end", dir: "gemini-live-agent" }
       };
 
@@ -2819,7 +2825,7 @@
             run: "pnpm dev",
             url: "http://localhost:3000",
             file: "app/api/invite-agent/route.ts",
-            code: "import {\n  AgoraClient, Agent, Gemini, GeminiSTT, GeminiTTS,\n} from 'agora-agents';\n\nconst agent = new Agent({\n  client, instructions: ADA_PROMPT, greeting: GREETING,\n  advancedFeatures: { enable_rtm: true, enable_tools: true },\n})\n  .withStt(new GeminiSTT({\n    apiKey: googleApiKey, languageCodes: ['en-US'],\n  }))\n  .withLlm(new Gemini({\n    apiKey: googleApiKey, model: 'gemini-3.6-flash',\n  }))\n  .withTts(new GeminiTTS({\n    apiKey: googleApiKey, model: 'gemini-3.8-flash-tts',\n    voice: 'Puck',\n  }));\n\nconst session = agent.createSession({\n  channel, agentUid, remoteUids,\n});\nconst agentId = await session.start();",
+            code: "import {\n  AgoraClient, Agent, Gemini, GeminiSTT, GeminiTTS,\n} from 'agora-agents';\n\nconst agent = new Agent({\n  client, instructions: ADA_PROMPT, greeting: GREETING,\n  advancedFeatures: { enable_rtm: true, enable_tools: true },\n})\n  .withStt(new GeminiSTT({\n    apiKey: googleApiKey, languageCodes: ['en-US'],\n  }))\n  .withLlm(new Gemini({\n    apiKey: googleApiKey, model: 'gemini-4-hydrogen',\n  }))\n  .withTts(new GeminiTTS({\n    apiKey: googleApiKey, model: 'gemini-3.8-flash-tts',\n    voice: 'Puck',\n  }));\n\nconst session = agent.createSession({\n  channel, agentUid, remoteUids,\n});\nconst agentId = await session.start();",
             highlightLines: [2, 9, 12, 13, 15]
           },
           python: {
@@ -2832,7 +2838,7 @@
             run: "bun run dev",
             url: "http://localhost:3000",
             file: "server/src/agent.py",
-            code: "from agora_agent.agentkit import Agent as AgoraAgent\nfrom agora_agent.agentkit.preview import GeminiSTT, GeminiTTS\nfrom agora_agent.agentkit.vendors import Gemini\n\nstt = GeminiSTT(api_key=google_api_key, language_codes=[\"en-US\"])\nllm = Gemini(api_key=google_api_key, model=\"gemini-3.6-flash\")\ntts = GeminiTTS(api_key=google_api_key,\n                model=\"gemini-3.8-flash-tts\", voice=\"Puck\")\n\nagora_agent = AgoraAgent(\n    client=self.client,\n    instructions=ADA_PROMPT,\n    greeting=self.greeting,\n    advanced_features={\"enable_rtm\": True, \"enable_tools\": True},\n).with_stt(stt).with_llm(llm).with_tts(tts)\n\nsession = agora_agent.create_async_session(\n    channel=channel_name, agent_uid=str(agent_uid),\n    remote_uids=[str(user_uid)],\n)\nagent_id = await session.start()",
+            code: "from agora_agent.agentkit import Agent as AgoraAgent\nfrom agora_agent.agentkit.preview import GeminiSTT, GeminiTTS\nfrom agora_agent.agentkit.vendors import Gemini\n\nstt = GeminiSTT(api_key=google_api_key, language_codes=[\"en-US\"])\nllm = Gemini(api_key=google_api_key, model=\"gemini-4-hydrogen\")\ntts = GeminiTTS(api_key=google_api_key,\n                model=\"gemini-3.8-flash-tts\", voice=\"Puck\")\n\nagora_agent = AgoraAgent(\n    client=self.client,\n    instructions=ADA_PROMPT,\n    greeting=self.greeting,\n    advanced_features={\"enable_rtm\": True, \"enable_tools\": True},\n).with_stt(stt).with_llm(llm).with_tts(tts)\n\nsession = agora_agent.create_async_session(\n    channel=channel_name, agent_uid=str(agent_uid),\n    remote_uids=[str(user_uid)],\n)\nagent_id = await session.start()",
             highlightLines: [2, 3, 5, 6, 7, 15]
           },
           go: {
@@ -2845,7 +2851,7 @@
             run: "make dev",
             url: "http://localhost:3000",
             file: "server/agent.go",
-            code: "agent := agentkit.NewAgent(\n  client,\n  agentkit.WithInstructions(adaPrompt),\n  agentkit.WithGreeting(s.greeting),\n).\n  WithStt(vendors.NewGeminiSTT(vendors.GeminiSTTOptions{\n    APIKey: s.googleAPIKey, LanguageCodes: []string{\"en-US\"},\n  })).\n  WithLlm(vendors.NewGemini(vendors.GeminiOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.6-flash\",\n  })).\n  WithTts(vendors.NewGeminiTTS(vendors.GeminiTTSOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.8-flash-tts\",\n    Voice: \"Puck\",\n  }))\n\nsession := agent.CreateSession(agentkit.CreateSessionOptions{\n  Channel: channelName, AgentUID: agentUID,\n  RemoteUIDs: remoteUIDs,\n})\nagentID, err := session.Start(ctx)",
+            code: "agent := agentkit.NewAgent(\n  client,\n  agentkit.WithInstructions(adaPrompt),\n  agentkit.WithGreeting(s.greeting),\n).\n  WithStt(vendors.NewGeminiSTT(vendors.GeminiSTTOptions{\n    APIKey: s.googleAPIKey, LanguageCodes: []string{\"en-US\"},\n  })).\n  WithLlm(vendors.NewGemini(vendors.GeminiOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-4-hydrogen\",\n  })).\n  WithTts(vendors.NewGeminiTTS(vendors.GeminiTTSOptions{\n    APIKey: s.googleAPIKey, Model: \"gemini-3.8-flash-tts\",\n    Voice: \"Puck\",\n  }))\n\nsession := agent.CreateSession(agentkit.CreateSessionOptions{\n  Channel: channelName, AgentUID: agentUID,\n  RemoteUIDs: remoteUIDs,\n})\nagentID, err := session.Start(ctx)",
             highlightLines: [6, 9, 10, 12]
           }
         },

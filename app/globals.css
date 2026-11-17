@@ -2,145 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light theme (default). Dark tokens apply when the OS prefers dark mode. */
+/* The demo shares the workshop's paper, ink, and Agora cyan palette. */
 :root {
   color-scheme: light;
-
-  /* --- Agora light token set --- */
-
-  /* Backgrounds */
-  --background:       220 20% 98%;
-  --surface:          220 18% 96%;
-  --surface-elevated: 220 16% 94%;
-
-  /* Semantic surface aliases */
-  --card:             0 0% 100%;
-  --card-foreground:  220 25% 12%;
-  --popover:          0 0% 100%;
-  --popover-foreground: 220 25% 12%;
-  --muted:            220 14% 94%;
-
-  /* Borders / inputs */
-  --border:           220 13% 88%;
-  --input:            220 13% 88%;
-
-  /* Foreground */
-  --foreground:       220 25% 12%;
-  --muted-foreground: 220 10% 42%;
-
-  /* Brand — Agora cyan */
-  --primary:            194 100% 42%;
-  --primary-foreground: 220 25% 12%;
-
-  /* Secondary — quiet surface-level control */
-  --secondary:            220 14% 94%;
-  --secondary-foreground: 220 25% 12%;
-
-  /* Accent — same hue as primary */
-  --accent:            194 100% 42%;
-  --accent-foreground: 220 25% 12%;
-
-  /* Destructive — end call, error states only */
-  --destructive:            0 72% 52%;
-  --destructive-foreground: 0 0% 100%;
-
-  /* Focus ring */
-  --ring: 194 100% 42%;
-
-  /* Radius base (8px) */
-  --radius: 0.5rem;
-
-  /* Charts */
-  --chart-1: 194 100% 42%;
-  --chart-2: 220 10% 45%;
-  --chart-3: 220 10% 35%;
-  --chart-4: 0 72% 52%;
-  --chart-5: 150 50% 40%;
-
-  /* Sidebar */
-  --sidebar-background:         0 0% 100%;
-  --sidebar-foreground:         220 25% 12%;
-  --sidebar-primary:            194 100% 42%;
-  --sidebar-primary-foreground: 220 25% 12%;
-  --sidebar-accent:             220 14% 94%;
-  --sidebar-accent-foreground:  220 25% 12%;
-  --sidebar-border:             220 13% 88%;
-  --sidebar-ring:               194 100% 42%;
-
-  /*
-   * AgentVisualizer: same order as dark — cool/primary at bar bottom, soft mid, purple at top.
-   * Light: blue ≈ cyan role; dark: overridden below (cyan → soft → purple).
-   */
-  --viz-stop-1: 225 92% 50%;
-  --viz-stop-2: 220 14% 78%;
-  --viz-stop-3: 285 58% 48%;
-
-  /* Font */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --brand-blue: #00C2FF;
+  --paper: #F7F6F2;
+  --ink: #17181C;
+  --link: #006B8F;
+  --background: 48.00000 23.80952% 95.88235%;
+  --surface: 48.00000 23.80952% 95.88235%;
+  --surface-elevated: 0.00000 0.00000% 100.00000%;
+  --card: 0.00000 0.00000% 100.00000%;
+  --card-foreground: 228.00000 9.80392% 10.00000%;
+  --popover: 0.00000 0.00000% 100.00000%;
+  --popover-foreground: 228.00000 9.80392% 10.00000%;
+  --muted: 48.00000 14.28571% 93.13725%;
+  --border: 72.00000 6.84932% 85.68627%;
+  --input: 225.00000 6.18557% 38.03922%;
+  --foreground: 228.00000 9.80392% 10.00000%;
+  --muted-foreground: 225.00000 6.18557% 38.03922%;
+  --primary: 194.35294 100.00000% 50.00000%;
+  --primary-foreground: 228.00000 9.80392% 10.00000%;
+  --secondary: 48.00000 23.80952% 95.88235%;
+  --secondary-foreground: 228.00000 9.80392% 10.00000%;
+  --accent: 194.35294 100.00000% 50.00000%;
+  --accent-foreground: 228.00000 9.80392% 10.00000%;
+  --destructive: 6.03774 67.65957% 46.07843%;
+  --destructive-foreground: 0.00000 0.00000% 100.00000%;
+  --ring: 195.10490 100.00000% 28.03922%;
+  --chart-1: 194.35294 100.00000% 50.00000%;
+  --chart-2: 225.00000 6.18557% 38.03922%;
+  --chart-3: 228.00000 9.80392% 10.00000%;
+  --chart-4: 6.03774 67.65957% 46.07843%;
+  --chart-5: 161.89655 87.87879% 25.88235%;
+  --viz-stop-1: 195.10490 100.00000% 28.03922%;
+  --viz-stop-2: 194.35294 100.00000% 50.00000%;
+  --viz-stop-3: 194.35294 100.00000% 50.00000%;
+  --radius: .5rem;
+  --font-sans: Inter, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    /* --- Agora dark token set --- */
-
-    --background:       220 14% 5%;
-    --surface:          220 12% 9%;
-    --surface-elevated: 220 10% 13%;
-
-    --card:             220 12% 9%;
-    --card-foreground:  220 15% 95%;
-    --popover:          220 10% 13%;
-    --popover-foreground: 220 15% 95%;
-    --muted:            220 12% 9%;
-
-    --border:           220 10% 18%;
-    --input:            220 10% 18%;
-
-    --foreground:       220 15% 95%;
-    --muted-foreground: 220 10% 50%;
-
-    --primary:            194 100% 50%;
-    --primary-foreground: 220 14% 5%;
-
-    --secondary:            220 10% 13%;
-    --secondary-foreground: 220 15% 95%;
-
-    --accent:            194 100% 50%;
-    --accent-foreground: 220 14% 5%;
-
-    --destructive:            0 72% 58%;
-    --destructive-foreground: 0 0% 100%;
-
-    --ring: 194 100% 50%;
-
-    --chart-1: 194 100% 50%;
-    --chart-2: 220 10% 60%;
-    --chart-3: 220 10% 40%;
-    --chart-4: 0 72% 58%;
-    --chart-5: 150 60% 45%;
-
-    --sidebar-background:         220 12% 9%;
-    --sidebar-foreground:         220 15% 95%;
-    --sidebar-primary:            194 100% 50%;
-    --sidebar-primary-foreground: 220 14% 5%;
-    --sidebar-accent:             220 10% 13%;
-    --sidebar-accent-foreground:  220 15% 95%;
-    --sidebar-border:             220 10% 18%;
-    --sidebar-ring:               194 100% 50%;
-
-    /* Agent visualizer accent ramp used by the current conversation UI. */
-    --viz-stop-1: 194 100% 58%;
-    --viz-stop-2: 215 42% 72%;
-    --viz-stop-3: 272 62% 72%;
-  }
+body { margin: 0; font-family: var(--font-sans); color: var(--ink); background: var(--paper); }
+:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
+.demo-shell {
+  background-color: var(--paper);
+  background-image: linear-gradient(#DCDDD84D 1px, transparent 1px), linear-gradient(90deg, #DCDDD84D 1px, transparent 1px);
+  background-size: 32px 32px;
 }
-
-body {
-  font-family: var(--font-sans);
-  color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
+.demo-shell h1, .demo-shell h2 { letter-spacing: -.035em; }
+.demo-shell .text-primary { color: var(--link); }
+.demo-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
+.demo-precall { background: #FFFFFF; border: 1px solid #DCDDD8; border-top: 3px solid var(--brand-blue); border-radius: 8px; box-shadow: none; }
+.demo-precall h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.12; font-weight: 650; }
+.demo-choice { border-radius: 6px; box-shadow: none; }
+.demo-choice[aria-pressed="true"] { border-color: var(--ink); background: #00C2FF0F; box-shadow: inset 3px 0 0 var(--brand-blue); }
+.demo-choice:hover:not(:disabled) { border-color: var(--ink); }
+.demo-call-header { background: #FFFFFF; border-top: 3px solid var(--brand-blue); }
+.demo-transcript { background: #FFFFFF; border-radius: 8px; }
+.demo-partners { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.demo-partners img { object-fit: contain; height: auto; }
+.demo-partners span { color: #5B5E67; font-size: 16px; font-weight: 400; }
+.demo-partners .demo-agora-logo { width: 115px; }
+.demo-partners .demo-google-logo { width: 124px; }
+.demo-call-header .demo-partners .demo-agora-logo { width: 86px; }
+.demo-call-header .demo-partners .demo-google-logo { width: 94px; }
+.demo-attribution { border-top: 1px solid #DCDDD8; background: var(--paper); }
+@media (max-width: 639px) {
+  .demo-precall { padding: 24px 20px; }
+  .demo-call-header .demo-partners { gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up { animation: none !important; }
 }
 
 /* --- Entry animations --- */

@@ -45,7 +45,7 @@ export function QuickstartTranscriptPanel({
 
   return (
     <section
-      className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-2xl border border-border bg-card/20"
+      className="demo-transcript flex h-full min-h-0 w-full flex-col overflow-hidden rounded-lg border border-border bg-card/20"
       aria-label="Transcription panel"
     >
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4">
@@ -60,7 +60,7 @@ export function QuickstartTranscriptPanel({
         className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-4"
       >
         {messages.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-center text-sm text-muted-foreground">
+          <div className="demo-transcript flex h-full items-center justify-center text-center text-sm text-muted-foreground">
             Start speaking to see the live transcript here.
           </div>
         ) : (
@@ -82,8 +82,8 @@ export function QuickstartTranscriptPanel({
                 <div
                   className={`max-w-full whitespace-pre-wrap rounded-xl border px-3 py-2 text-sm leading-6 ${
                     isAgent
-                      ? 'border-[#2f2f2f] bg-[#212121] text-[#e7e7e7]'
-                      : 'border-[#d7d7d7] bg-[#fdfcfb] text-black'
+                      ? 'border-border bg-background text-foreground'
+                      : 'border-primary/40 bg-primary/10 text-foreground'
                   }`}
                 >
                   {text || '...'}

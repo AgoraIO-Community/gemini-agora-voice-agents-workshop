@@ -47,7 +47,7 @@ export function QuickstartPipelineMetrics({
                 /
               </span>
             )}
-            <span className="rounded-md border border-border bg-transparent px-2 py-0.5 text-xs font-semibold leading-4 text-foreground shadow-sm">
+            <span className="rounded-md border border-border bg-transparent px-2 py-0.5 font-mono text-xs font-normal leading-4 text-foreground shadow-none">
               {step.label}
               {metric && (
                 <span

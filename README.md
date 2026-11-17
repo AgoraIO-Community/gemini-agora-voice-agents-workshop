@@ -3,7 +3,7 @@
 This is the presentation website and live demo for the *Build Voice Agents with Gemini + Agora* in-person workshop, packaged as one Next.js app:
 
 - **The deck** (`public/index.html`) is a static page the host and audience share. A small browser bundle adds Agora Signaling so attendees follow the slides in sync; `/api/rtm-token` mints their short-lived RTM tokens.
-- **The demo** (`/demo`) is one voice-agent UI with an architecture switch: **A · Cascaded** (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or **B · Gemini Live** (native multimodal, with the extended-thinking model and thinking-level slider). `/api/invite-agent` builds whichever agent is asked for; the UI and API are merged from the two official recipes, `gemini-agora-voice-agents-nextjs` and `agora-gemini-mllm-nextjs`.
+- **The demo** (`/demo`) is one voice-agent UI with an architecture switch: **A · Cascaded** (Gemini ASR → Gemini 4 Hydrogen → Gemini TTS preview) or **B · Gemini Live** (native multimodal, with the extended-thinking model and thinking-level slider). `/api/invite-agent` builds whichever agent is asked for; the UI and API are merged from the two official recipes, `gemini-agora-voice-agents-nextjs` and `agora-gemini-mllm-nextjs`.
 
 ## Local setup
 
@@ -47,7 +47,7 @@ Overrides are normalized to lowercase URL-safe names; spaces become hyphens. Nam
 
 Press `H` and select:
 
-- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide introduces both implementations; use host controls to advance from the cascaded build to Gemini Live.
+- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 4 Hydrogen → Gemini TTS preview) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide introduces both implementations; use host controls to advance from the cascaded build to Gemini Live.
 - **Code track** — TypeScript (default), Python, or Go.
 - Light, dark, or system theme.
 
@@ -58,6 +58,8 @@ The language selection drives the cascaded starter commands and both recipe refe
 | TypeScript | `gemini-agora-voice-agents-nextjs` | `agora-gemini-mllm-nextjs` |
 | Python | `gemini-agora-voice-agents-python` | `agora-gemini-mllm-python` |
 | Go | `gemini-agora-voice-agents-go` | `agora-gemini-mllm-go` |
+
+The workshop uses **Gemini 4 Hydrogen** (`gemini-4-hydrogen`) for the cascaded LLM. After cloning a cascaded recipe, set its Gemini LLM model to `gemini-4-hydrogen` in `app/api/invite-agent/route.ts` (TypeScript), `server/src/agent.py` (Python), or `server/agent.go` (Go). Upstream recipes may still select an earlier model. Keep the separate ASR, TTS, and Gemini Live model settings unchanged. The embedded demo and all three slide snippets already use Hydrogen.
 
 The recipe data lives in the `RECIPES` object in `public/index.html`. Update it there if a recipe README changes its setup or run commands.
 
@@ -114,7 +116,7 @@ The deck adapts the setup checkpoints, CLI recipe discovery, Skills customizatio
 
 Use the [Gemini catalog](https://recipes.agora.io/?q=gemini#recipes) as the source for both architectures. Initialize the cascaded recipe in the selected language, run a conversation, and commit that working baseline. Install Agora Skills in the same project and copy the language-specific combined-app prompt. It adds GeminiLive from the matching native recipe to the existing UI, Agora channel, transcript, and start/stop lifecycle, with an architecture switch. Test a real conversation, interruption, stop, and restart in both modes before adapting a use case. One app with both paths is the finish line; deployment is optional.
 
-Recipe setup commands and condensed agent excerpts were checked against all six official repository READMEs and agent sources on November 17, 2026. The cascaded recipes now use Gemini TTS preview (`gemini-3.8-flash-tts`) with the same server-side Google API key. The linked repositories contain complete runnable implementations; slide excerpts omit app plumbing and helpers.
+Recipe setup commands and the source agent implementations were checked against all six official repository READMEs and agent sources on November 17, 2026. The cascaded recipes now use Gemini TTS preview (`gemini-3.8-flash-tts`) with the same server-side Google API key. The linked repositories contain complete runnable implementations; slide excerpts omit app plumbing and helpers and apply the workshop’s Hydrogen LLM selection. [Google’s Hydrogen migration guide](https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen#migrate-from-gemini-3-8-flash) documents the supported model and request changes. This demo leaves thinking at the provider default (`high`), sends no sampling overrides, and sets no output-token cap. The thinking slider applies only to Gemini Live extended thinking.
 
 ## Deployment
 

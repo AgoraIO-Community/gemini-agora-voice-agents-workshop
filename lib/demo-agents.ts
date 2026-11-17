@@ -16,7 +16,7 @@ const SHARED_AGENT_OPTIONS = {
   },
 } as const;
 
-// A · Cascaded: GeminiSTT → Gemini 3.6 Flash → Gemini TTS (preview).
+// A · Cascaded: GeminiSTT → Gemini 4 Hydrogen → Gemini TTS (preview).
 export function cascadedAgent(client: AgoraClient, googleApiKey: string): Agent {
   const instructions = adaPrompt('cascaded');
   return new Agent({
@@ -47,7 +47,8 @@ export function cascadedAgent(client: AgoraClient, googleApiKey: string): Agent 
     }))
     .withLlm(new Gemini({
       apiKey: googleApiKey,
-      model: 'gemini-3.6-flash',
+      model: 'gemini-4-hydrogen',
+      // Keep Hydrogen's provider-default thinking; no legacy sampling overrides.
       systemMessages: [{ parts: [{ text: instructions }], role: 'user' }],
       greetingMessage: GREETING,
       failureMessage: 'Please wait a moment.',
