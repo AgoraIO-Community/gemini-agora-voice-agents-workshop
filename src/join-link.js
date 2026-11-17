@@ -17,13 +17,14 @@ export function resolveJoinUrl(configuredUrl, location) {
   return normalizeJoinUrl(configuredUrl) || directUrl;
 }
 
-export async function renderJoinLink(document, location, configuredUrl) {
+export async function renderJoinLink(document, location, configuredUrl, configuredQrUrl = "") {
   const url = resolveJoinUrl(configuredUrl, location);
   document.querySelectorAll("[data-workshop-join]").forEach((link) => { link.href = url; });
   document.querySelectorAll("[data-workshop-join-label]").forEach((label) => {
     label.textContent = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   });
-  const dataUrl = await QRCode.toDataURL(url, {
+  const qrUrl = resolveJoinUrl(configuredQrUrl, location);
+  const dataUrl = await QRCode.toDataURL(qrUrl, {
     errorCorrectionLevel: "M", margin: 4, scale: 8,
     color: { dark: "#000000", light: "#ffffff" }
   });

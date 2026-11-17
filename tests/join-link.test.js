@@ -19,7 +19,7 @@ describe("workshop join link and QR destination", () => {
   });
 });
 
-it("renders the same destination in every join link, label, and QR", async () => {
+it("renders the short link but encodes the full audience URL in the QR", async () => {
   const links = [{}, {}];
   const labels = [{}, {}];
   const images = [{}];
@@ -28,8 +28,8 @@ it("renders the same destination in every join link, label, and QR", async () =>
     "[data-workshop-join-label]": labels,
     "[data-workshop-qr]": images
   })[selector] };
-  await renderJoinLink(document, location, "https://bit.ly/gemini-inperson");
+  await renderJoinLink(document, location, "https://bit.ly/gemini-inperson", "https://gemini.example/");
   expect(links.every((link) => link.href === "https://bit.ly/gemini-inperson")).toBe(true);
   expect(labels.every((label) => label.textContent === "bit.ly/gemini-inperson")).toBe(true);
-  expect(images[0].src).toBe("data:image/png;base64,https://bit.ly/gemini-inperson");
+  expect(images[0].src).toBe("data:image/png;base64,https://gemini.example/");
 });

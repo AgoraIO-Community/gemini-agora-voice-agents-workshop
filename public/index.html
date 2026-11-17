@@ -134,7 +134,8 @@
       text-transform: uppercase;
       transition: opacity .18s ease, visibility .18s ease;
     }
-    body.front-slide-active .brand { visibility: hidden; opacity: 0; }
+    body.front-slide-active .brand { display: none; }
+    body.front-slide-active .topbar { justify-content: flex-end; }
     .topbar { justify-content: space-between; }
     .join-pill {
       display: inline-flex;
@@ -174,6 +175,13 @@
     .slide:not(.front-slide) { padding-top: 150px !important; align-content: safe center; }
     .front-slide { padding-top: 0 !important; }
     .front-content { padding-top: 150px; align-content: safe center; }
+    body.view-host.front-slide-active .join-qr { width: 160px; height: 160px; }
+    body.view-host.front-slide-active .join-pill { gap: 18px; padding: 12px; }
+    body.view-host.front-slide-active .join-pill-label { font-size: 15px; }
+    body.view-host.front-slide-active .join-pill-url { font-size: 26px; }
+    body.view-host.front-slide-active .front-content { padding-top: 220px; }
+    body.view-audience .slide:not(.front-slide) { padding-top: 72px !important; }
+    body.view-audience .front-content { padding-top: 24px; }
     @media (max-width: 640px) {
       .topbar { top: 8px; gap: 8px; }
       .brand-logo { width: 54px; }
@@ -183,6 +191,11 @@
       .join-pill-url { padding: 3px 5px; font-size: 12px; max-width: 48vw; }
       .slide:not(.front-slide) { padding-top: 112px !important; }
       .front-content { padding-top: 112px; }
+      body.view-host.front-slide-active .join-qr { width: 116px; height: 116px; }
+      body.view-host.front-slide-active .join-pill { gap: 8px; padding: 8px; }
+      body.view-host.front-slide-active .join-pill-label { font-size: 11px; }
+      body.view-host.front-slide-active .join-pill-url { font-size: 18px; }
+      body.view-host.front-slide-active .front-content { padding-top: 164px; }
       .front-content .front-brand { --brand-x: 11px; max-width: 100%; gap: 10px; padding-inline: 12px; }
     }
     .brand-logo { display: block; width: 86px; height: auto; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .2)); }
@@ -2201,7 +2214,7 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
-    <a class="join-pill" data-workshop-join href="/" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><img class="join-qr" data-workshop-qr alt="Scan to join the workshop" width="100" height="100"><span class="join-pill-copy"><span class="join-pill-label">Join the workshop</span><span class="join-pill-url" data-workshop-join-label>Open audience view</span></span></a>
+    <a class="join-pill" data-host-only data-workshop-join href="/" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><img class="join-qr" data-workshop-qr alt="Scan to join the workshop" width="100" height="100"><span class="join-pill-copy"><span class="join-pill-label">Join the workshop</span><span class="join-pill-url" data-workshop-join-label>Open audience view</span></span></a>
   </header>
 
   <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
@@ -2246,9 +2259,6 @@
         </div>
         <div class="front-meta">
           <span data-event-field="date">Hands-on · Build, test, and make it yours</span>
-        </div>
-        <div class="front-access" data-host-only>
-          <a class="front-join-link" data-workshop-join href="/" target="_blank" rel="noreferrer">Follow the slides <span data-workshop-join-label>Open audience view</span></a>
         </div>
       </div>
       <div class="speaker-notes">
@@ -2625,6 +2635,8 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
     <div class="host-overlay-bottom">
       <div class="host-overlay-shortcuts"><strong>Shortcuts:</strong> H controls · N notes · T timings · O terminal OS · ← → slides · F full screen · ? help. Selections stay on this device.</div>
       <div class="host-overlay-actions">
+        <a id="hostNotesLink" class="secondary-button" href="/host-notes" target="_blank" rel="noreferrer">Open phone notes</a>
+        <button id="copyHostNotesLink" class="secondary-button" type="button">Copy phone link</button>
         <button id="resetButton" class="secondary-button" type="button">Reset defaults</button>
         <button class="primary-button" type="button" data-close-drawer="hostDrawer">Done</button>
       </div>
@@ -3145,6 +3157,18 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         notesContent.innerHTML = source ? source.innerHTML : "<p>No presenter notes for this slide.</p>";
       }
 
+      function getPresenterSnapshot() {
+        renderNotes();
+        return {
+          version: 1, slideId: currentSlideId(),
+          title: slides[current].getAttribute("data-title") || "",
+          position: current + 1, total: slides.length,
+          timing: slides[current].getAttribute("data-cue") || "",
+          notesHtml: notesContent.innerHTML,
+          nextTitle: slides[current + 1] ? slides[current + 1].getAttribute("data-title") || "" : ""
+        };
+      }
+
       function renderSlide() {
         slides.forEach(function (slide, index) {
           slide.classList.toggle("active", index === current);
@@ -3363,6 +3387,7 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         mode: VIEW_MODE,
         stateChangeEvent: "workshop:statechange",
         getSnapshot: getWorkshopSnapshot,
+        getPresenterSnapshot: getPresenterSnapshot,
         applySnapshot: applyWorkshopSnapshot,
         applyArchivedSnapshot: applyArchivedWorkshopSnapshot,
         goToSlideId: goToSlideId,

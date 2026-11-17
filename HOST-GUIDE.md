@@ -21,7 +21,7 @@ This is a 90-minute hands-on workshop. Adjust the relative times to the event; n
 - Prepare your Agora and Google accounts, a working recipe checkout, the embedded demo, terminal, editor, and coding assistant. Keep environment files and credentials off the projector.
 - Confirm Node.js 22+ and pnpm for TypeScript, Python 3.10+ and Bun for Python, or Go 1.23+, pnpm, and Make for Go. Each recipe README is the source of truth.
 - Have a short fallback recording for both architectures. Check projector audio and headphones.
-- Configure the new Bitly link using `workshop-join.json` or `WORKSHOP_JOIN_URL`, rebuild, and scan the generated QR. The persistent header appears on every slide. Rehearsals with `?channel=...` use that same channel in the join QR.
+- The presenter displays `bit.ly/4fDSxTQ`; the QR encodes the full Gemini workshop URL directly. Configure `joinUrl` and `qrUrl` in `workshop-join.json` (or `WORKSHOP_JOIN_URL` / `WORKSHOP_QR_URL`), rebuild, and scan the generated QR. The join card appears on presenter slides only, with a larger welcome treatment. Rehearsals with `?channel=...` use that same channel in the join QR.
 - Assign a helper to account/CLI setup and another to code/Skills questions when possible. Display venue Wi-Fi separately before starting.
 
 ## Host and audience controls
@@ -31,6 +31,12 @@ Participants open the root workshop URL. The presenter opens `/host` and enters 
 Press **H** to choose the architecture, presenter code track, theme, and terminal label. Press **N** for speaker notes. Notes use Show, Say, Checkpoint, and Return handoffs for the key desktop demonstrations. Press **T** for relative timing cues.
 
 Audience members select TypeScript, Python, or Go in their own view. TypeScript is the initial default. Their browser remembers the choice locally across slides and reloads; a presenter track change does not replace it. The host still controls the shared architecture and slide. **Following host** lets attendees browse independently; **Return to live** catches up. Late arrivals receive the current slide after the trusted host connects.
+
+## Phone companion
+
+From **H**, open or copy the phone-notes link. On your phone, open `/host-notes`, enter the same channel and host password, and select **Open notes**. Keep slide controls on the computer; the phone is a read-only view of the current notes, relative timing, and next slide.
+
+Pause audience sharing on the computer and advance a slide during rehearsal: phone notes must continue following. Switch to another phone app and back; the companion reconnects and requests the latest notes. Use **Reconnect** if needed. A full page reload asks for the password again. The page marks its notes stale if the host leaves or the connection drops.
 
 ## Desktop demonstration handoffs
 

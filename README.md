@@ -72,6 +72,12 @@ Viewers use `/`, or `/?channel=...` when the host supplies an override. Before t
 - **Following host** switches to independent browsing; **Return to live** applies the newest host snapshot.
 - After the first host snapshot, the browser saves a safe local copy of the architecture, track, theme, and terminal choices so the deck can be reopened later with no host present. No credentials are ever included.
 
+## Phone presenter notes
+
+Open `/host-notes` on your phone and enter the same workshop channel and host password. The **H** panel includes a phone-notes link and copy button for the current channel. This is the same read-only companion as the studio workshop: it shows the current slide’s notes, timing, next slide, and the desktop-demo instructions written in those notes; slide control stays on the presenter’s computer.
+
+Notes keep following when audience sharing is paused. Returning from another phone app reconnects and requests the current slide; **Reconnect** retries manually. The phone uses its own notes identity so it does not replace the desktop host’s connection. Its password stays in memory and must be entered again after reloading the page.
+
 ## Live demo
 
 The live-demo slide behaves differently per view:
@@ -94,7 +100,7 @@ The selected `Testing` project currently reports token enforcement as disabled i
 
 ## Workshop join link and QR
 
-The header keeps the audience join link and a QR code visible on every slide, including the welcome, demo, and closing slides. Configure the new Bitly link in `workshop-join.json` (`{"joinUrl":"https://bit.ly/your-link"}`), or set `WORKSHOP_JOIN_URL` for the build. Rebuild to generate `public/workshop-join-qr.svg` for printing or sharing. The committed configuration currently uses `https://gemini-agora-voice-agents-workshop.vercel.app/` until the new Bitly link is available. If `joinUrl` is empty, the deck uses the current deployment’s audience URL. Rehearsal channel overrides are preserved in the direct join link and QR.
+The presenter header shows `bit.ly/4fDSxTQ` and a QR code on every slide. Neither appears in the audience view. `workshop-join.json` configures `joinUrl` for the clickable short link and `qrUrl` for the full audience URL encoded in the QR (`https://gemini-agora-voice-agents-workshop.vercel.app/`). Build-time overrides are `WORKSHOP_JOIN_URL` and `WORKSHOP_QR_URL`. Rebuild to generate `public/workshop-join-qr.svg` for printing or sharing. Rehearsal channel overrides use the direct audience URL with the matching channel for both destinations.
 
 The run slide has no separate Agora env step: `agora init --recipe` writes the Agora credentials. When cloning manually, follow the selected recipe README’s environment setup instead. Add the Google key to `.env.local` for TypeScript or `server/.env.local` for Python/Go, and keep it server-side.
 

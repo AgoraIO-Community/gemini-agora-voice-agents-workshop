@@ -13,6 +13,8 @@ pnpm-debug.log*
 node_modules/
 public/assets/workshop-session.js
 public/assets/workshop-session.js.map
+public/assets/host-notes.js
+public/assets/host-notes.js.map
 coverage/
 .vercel
 

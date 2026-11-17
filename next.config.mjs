@@ -11,6 +11,7 @@ const nextConfig = {
         { source: '/', destination: '/index.html' },
         { source: '/host', destination: '/host.html' },
         { source: '/audience', destination: '/audience.html' },
+        { source: '/host-notes', destination: '/host-notes.html' },
       ],
     };
   },

@@ -1,3 +1,4 @@
+import { setupHostNotesLink } from "./host-notes-link.js";
 import { renderJoinLink } from "./join-link.js";
 import {
   createWorkshopArchive,
@@ -218,4 +219,5 @@ if (isAudience) {
   if (savedHostKey) void connectHost(savedHostKey);
 }
 
-renderJoinLink(document, location, __WORKSHOP_JOIN_URL__);
+if (!isAudience) setupHostNotesLink({ document, location, sessionId: activeSessionId });
+if (!isAudience) renderJoinLink(document, location, __WORKSHOP_JOIN_URL__, __WORKSHOP_QR_URL__);
