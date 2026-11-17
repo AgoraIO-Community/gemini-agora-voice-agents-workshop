@@ -229,3 +229,9 @@ body.front-slide-active .topbar .brand { display: none; }
 /* Agenda branding uses the official Agora cyan. */
 [data-slide-id="run-of-show"] .agenda-step,
 [data-slide-id="run-of-show"] .eyebrow { color: var(--brand-blue); }
+
+[data-slide-id="room-setup"] h2 { font-size: clamp(30px, 3.8vw, 48px); }
+.setup-languages { margin: 0; display: grid; gap: 18px; }
+.setup-languages div + div { border-top: 1px solid var(--line); padding-top: 14px; }
+.setup-languages dt { color: var(--ink); font-weight: 700; font-size: 21px; }
+.setup-languages dd { margin: 5px 0 0; color: var(--muted); font-size: 18px; line-height: 1.4; }
