@@ -7,12 +7,12 @@ This is a 90-minute hands-on workshop. Adjust the relative times to the event; n
 | Minutes | Segment | Checkpoint |
 | --- | --- | --- |
 | 0–8 | Welcome, agenda, room setup | Audience view joined, accounts ready, headphones on |
-| 8–20 | Agora and the two Gemini architectures | Attendees choose cascaded or native and recognize the session lifecycle |
+| 8–20 | Agora and the two Gemini architectures | Attendees understand both paths and their shared session lifecycle |
 | 20–35 | CLI login and Gemini recipe discovery | Each attendee identifies their recipe slug and runtime prerequisites |
 | 35–55 | Initialize and run the recipe | An untouched local app starts a real voice conversation |
-| 55–65 | Compare demos and inspect the code | Identify the provider configuration and start/stop lifecycle |
-| 65–75 | Agora Skills and a custom use case | Separate working copy, project-scoped Skills, one concrete conversation to build |
-| 75–88 | Local testing, build clinic, Questions during the build | Demonstrate one working conversation and improve one thing |
+| 55–70 | Add Gemini Live with Agora Skills | One project with both architectures and a safe pre-call switch |
+| 70–75 | Compare the combined demo | Recognize the same UI and start/stop flow for both paths |
+| 75–88 | Local testing, build clinic, Questions during the build | Test a real conversation, interruption, stop, and restart in both modes |
 | 88–90 | Close | Stop active sessions and servers; share catalog and community |
 
 ## Before attendees arrive
@@ -43,21 +43,20 @@ Pause audience sharing on the computer and advance a slide during rehearsal: pho
 | Slide | Show and say | Checkpoint and return |
 | --- | --- | --- |
 | `room-setup` | Agora Console, Google AI Studio, recipe prerequisites | Accounts and headphones ready; return to Agora introduction |
-| `install-cli` | Official installation docs, then `agora login` | Authenticated terminal; return to recipe discovery |
-| `discover-recipes` | Filtered Gemini catalog, selected recipe’s **Implementation guide**, **Source on GitHub**, and **Prompt & CLI** panel, `agora recipes list --type ai`, `agora recipes show <slug>` | Attendees know architecture, slug, language; return to initialization |
-| `init-recipe` | Copy and run the selected recipe’s generated command | Initialization completes; return to run steps |
-| `run-recipe` | Enter folder, install, configure Google key privately, run | Local browser conversation succeeds before customization |
-| `live-demo` | Cascaded and native conversations; transcript and latency | Identify the architectural difference; return to customization |
-| `customize-recipe` | Separate working copy, `npx skills add agoraio/skills`, short use-case prompt | Project-scoped Skills loaded; return to test slide |
-| `test-your-agent` | One concrete conversation and its actual outcome | Fix one issue; stop the conversation afterward |
+| `install-cli` | Official installation docs, then `agora login` | Authenticated terminal; return to cascaded initialization |
+| `init-recipe` | Initialize the cascaded recipe in the attendee’s language | One project created; return to run steps |
+| `run-recipe` | Enter folder, install, configure Google key privately, run | Cascaded conversation succeeds; commit the working baseline |
+| `customize-recipe` | In the same project: install Skills and copy the language-specific combined-app prompt | Gemini Live added alongside Cascaded; one UI, channel, transcript, and lifecycle |
+| `live-demo` | Compare cascaded and native in the combined reference demo | Return to testing both paths in the attendee’s app |
+| `test-your-agent` | Test the same question, interruption, stop, and restart in both modes | No cascaded regression; switching stops the old agent; one active session |
 
 ## Recipe details and boundaries
 
 - Use individual attendee Agora projects and Google keys. Gemini recipe stages use the server-side Google API key; do not suggest Agora-managed keys replace it.
 - The current cascaded recipes use GeminiSTT → Gemini 3.6 Flash → Gemini 3.8 Flash TTS preview. Native recipes use Gemini Live. The condensed code comparison omits application setup; use linked source files for full implementation.
 - `recipes list` and `recipes show` are read-only. `init --recipe` creates a project from the selected recipe. The selected language determines the matching Gemini recipe, whose README determines runtime and commands.
-- Keep the first working recipe unchanged. Customize a separate copy with Agora Skills. If a generated app simulates an action, say so explicitly.
-- A local voice conversation is required; tunnels and deployment are optional. Test in two waves if the room is noisy.
+- Save a Git commit of the working cascaded baseline, then extend the same project with Agora Skills and the matching native recipe. Do not initialize a second app. Keep one voice UI, Agora channel, transcript, and start/stop lifecycle. Validate architecture server-side and retain the matching session for cleanup. Adapt a use case only after both paths work.
+- Local voice conversations in both modes are required; tunnels and deployment are optional. Test in two waves if the room is noisy.
 - Never leave a conversation running while switching architectures, closing the workshop, or packing up.
 
 ## Recovery
@@ -67,7 +66,7 @@ Pause audience sharing on the computer and advance a slide during rehearsal: pho
 - Live demo fails: open `/demo` in a new tab or play the prepared fallback, then continue the local build.
 - Skills blocked: check the workspace and selected installation scope, then refresh the coding-assistant session.
 - Late arrival: point to the persistent join QR and language selector. Pair them with a helper for accounts and initialization.
-- Time slipping: protect the untouched recipe, one local conversation, and build-clinic time. Skip optional deployment and extra demo variations.
+- Time slipping: protect the working baseline, both architecture tests, and build-clinic time. Skip optional deployment and extra demo variations.
 
 ## Projector layout
 

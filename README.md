@@ -47,11 +47,11 @@ Overrides are normalized to lowercase URL-safe names; spaces become hyphens. Nam
 
 Press `H` and select:
 
-- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide also selects this when a card is clicked.
+- **Architecture** — `A · Cascaded` (Gemini ASR → Gemini 3.6 Flash → Gemini TTS preview) or `B · Native` (Gemini 3.8 Live end to end). The two-architectures slide introduces both implementations; use host controls to advance from the cascaded build to Gemini Live.
 - **Code track** — TypeScript (default), Python, or Go.
 - Light, dark, or system theme.
 
-Architecture and track drive the `agora init --recipe` command, the run steps, the side-by-side code comparison, and the live-demo slide. Every command and code snippet comes from the recipe repositories:
+The language selection drives the cascaded starter commands and both recipe references. Everyone initializes one cascaded app, saves a working baseline, then uses the matching native recipe to add Gemini Live to that same app. The host architecture selection controls the reference demo; it never changes the starter into a second app. Code excerpts come from these recipe repositories:
 
 | | Cascaded | Native (MLLM) |
 | --- | --- | --- |
@@ -112,7 +112,7 @@ The run slide has no separate Agora env step: `agora init --recipe` writes the A
 
 The deck adapts the setup checkpoints, CLI recipe discovery, Skills customization, and build clinic from `1_studio-agents-cli-workshop`. It keeps the Gemini workshop’s cascaded/native comparison and embedded demo. See [HOST-GUIDE.md](HOST-GUIDE.md) for a suggested 90-minute run of show and presenter handoffs. The schedule is relative; no venue or event date is assumed.
 
-Start at the [Gemini catalog](https://recipes.agora.io/?q=gemini#recipes), inspect the selected recipe with `agora recipes show <slug>`, initialize it, and get an untouched local conversation working. Then install Agora Skills in a separate project copy and adapt one use case. Local voice success is the finish line; deployment is optional.
+Use the [Gemini catalog](https://recipes.agora.io/?q=gemini#recipes) as the source for both architectures. Initialize the cascaded recipe in the selected language, run a conversation, and commit that working baseline. Install Agora Skills in the same project and copy the language-specific combined-app prompt. It adds GeminiLive from the matching native recipe to the existing UI, Agora channel, transcript, and start/stop lifecycle, with an architecture switch. Test a real conversation, interruption, stop, and restart in both modes before adapting a use case. One app with both paths is the finish line; deployment is optional.
 
 Recipe setup commands and condensed agent excerpts were checked against all six official repository READMEs and agent sources on November 17, 2026. The cascaded recipes now use Gemini TTS preview (`gemini-3.8-flash-tts`) with the same server-side Google API key. The linked repositories contain complete runnable implementations; slide excerpts omit app plumbing and helpers.
 
@@ -127,7 +127,7 @@ The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-ag
 3. Open `/host` and an audience browser on the same channel. Choose Python or Go in the audience view, advance slides, change the host track, and reload; the attendee’s language must stay selected.
 4. Scan the join QR from the welcome, code, demo, and closing slides. Verify the new short link reaches this workshop’s audience view. Test a late join while the presenter is already on a later slide.
 5. Run both embedded demo architectures with headphones. Prepare a short fallback recording, account setup help, and separate CLI/build support owners.
-6. Rehearse the Skills install and one custom conversation. Test the projector layout and mobile audience view; protect time for the build clinic.
+6. Rehearse the Skills install and combined-app prompt in the same cascaded project. Verify the switch stops the previous agent and both architectures still work. Test the projector layout and mobile audience view; protect time for the build clinic.
 
 ## First-party command references
 
@@ -139,3 +139,7 @@ The repository is linked to the Vercel project `agora-gdxe/gemini-agora-voice-ag
 ## Preserved online version
 
 The pre-workshop online deck is preserved at commit `4b7489b` on [`archive/online-workshop-2026-11-17`](https://github.com/AgoraIO-Community/gemini-agora-voice-agents-workshop/tree/archive/online-workshop-2026-11-17). The in-person version stays on `main` and deploys to the existing Gemini workshop Vercel project. The separate studio workshop is unchanged.
+
+## Visual system
+
+`public/workshop-design.css` adapts the [Voice Agent Workshop design system](https://github.com/AgoraIO-Community/12-days-of-ai-voice-agents/tree/main/design): paper/white/ink surfaces, Agora blue `#00C2FF`, accessible small-link blue `#006B8F`, editorial typography, restrained outlines, and a subtle 32px grid. Font stacks follow its Inter/Arial and IBM Plex Mono/Courier New fallbacks; no external font requests are needed. Existing presenter theme controls remain available. Official partner logos retain their colors.

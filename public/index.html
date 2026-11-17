@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f3f4">
+  <meta name="theme-color" content="#F7F6F2">
   <meta name="description" content="Build Voice Agents with Gemini + Agora: a hands-on workshop with official Gemini recipes, TypeScript, Python, Go, and a build clinic.">
   <title>Build Voice Agents with Gemini + Agora · In-person Workshop</title>
   <style>
@@ -19,7 +19,7 @@
       --panel-soft: #e8e4e3;
       --line: #d0cecd;
       --input: #ddd9d8;
-      --accent: #08488a;
+      --accent: #006B8F;
       --accent-ink: #ffffff;
       --accent-soft: rgba(8, 72, 138, .09);
       --success: #147a4a;
@@ -27,7 +27,7 @@
       --danger: #e7000b;
       --glass: rgba(245, 243, 244, .9);
       --card-glass: rgba(255, 255, 255, .9);
-      --code-bg: #111820;
+      --code-bg: #17181C;
       --code-ink: #edf5fb;
       --glow: rgba(8, 72, 138, .1);
       --shadow: 0 8px 24px rgba(10, 10, 10, .08);
@@ -243,7 +243,7 @@
       display: block;
       padding: 0;
       overflow: hidden;
-      background: #031523;
+      background: #17181C;
       isolation: isolate;
     }
     .front-event-image,
@@ -284,7 +284,7 @@
     .front-rule {
       width: min(190px, 24vw);
       height: 2px;
-      background: linear-gradient(90deg, #17c8ef, #b171ff);
+      background: linear-gradient(90deg, #00C2FF, #b171ff);
       border: 0;
       margin: 0;
     }
@@ -330,8 +330,8 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
       backdrop-filter: blur(10px);
     }
-    .front-join-link span { color: #49d8f3; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 900; }
-    .front-join-link:hover { border-color: #49d8f3; background: rgba(3, 34, 53, .78); }
+    .front-join-link span { color: #00C2FF; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 900; }
+    .front-join-link:hover { border-color: #00C2FF; background: rgba(3, 34, 53, .78); }
     .front-access { display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px; }
     .front-wifi {
       display: grid;
@@ -351,21 +351,21 @@
     .front-wifi-item span { color: rgba(255, 255, 255, .72); font-size: 11px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
     .front-wifi-item strong { overflow-wrap: anywhere; color: #fff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(17px, 1.55vw, 22px); line-height: 1.2; }
 
-    .slide.platform-slide { display: block; padding: 0 !important; overflow: auto; isolation: isolate; background: #031523; color: #fff; }
-    .platform-slide .platform-video { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; background: #031523; }
+    .slide.platform-slide { display: block; padding: 0 !important; overflow: auto; isolation: isolate; background: #17181C; color: #fff; }
+    .platform-slide .platform-video { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; z-index: -2; background: #17181C; }
     .platform-slide .platform-video iframe { position: absolute; top: 50%; left: 50%; width: max(100%, calc((100vh - 42px) * 16 / 9)); height: max(100%, calc(100vw * 9 / 16)); transform: translate(-50%, -50%); border: 0; pointer-events: none; }
     .platform-slide::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(1, 10, 21, .76), rgba(1, 10, 21, .3) 48%, rgba(1, 10, 21, .88)); }
     .platform-slide .platform-content { height: 100%; min-height: 100%; display: grid; grid-template-rows: auto minmax(30px, 1fr) auto auto; gap: 20px; padding: 150px clamp(28px, 4vw, 64px) 24px; }
-    .platform-slide .platform-heading .eyebrow { color: #68e4ff; font-size: 16px; margin: 0 0 10px; }
-    .platform-slide h2 { max-width: 1080px; margin: 0; font-size: clamp(38px, 4.4vw, 62px); line-height: 1.04; text-wrap: balance; text-shadow: 0 2px 18px #001020; }
-    .platform-slide h2 .accent { color: #68e4ff; }
+    .platform-slide .platform-heading .eyebrow { color: #5B5E67; font-size: 16px; margin: 0 0 10px; }
+    .platform-slide h2 { max-width: 1080px; margin: 0; font-size: clamp(38px, 4.4vw, 62px); line-height: 1.04; text-wrap: balance; text-shadow: 0 2px 18px #17181C; }
+    .platform-slide h2 .accent { color: #5B5E67; }
     .platform-slide .platform-cards { grid-row: 3; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-    .platform-slide .platform-cards .card { padding: 14px 18px; background: rgba(2, 20, 36, .94); border: 1px solid rgba(104, 228, 255, .55); border-radius: 12px; box-shadow: 0 6px 26px #00102066; }
-    .platform-slide .platform-cards .card-number { color: #68e4ff; font-size: 11px; }
+    .platform-slide .platform-cards .card { padding: 14px 18px; background: rgba(2, 20, 36, .94); border: 1px solid rgba(104, 228, 255, .55); border-radius: 12px; box-shadow: 0 6px 26px #17181C66; }
+    .platform-slide .platform-cards .card-number { color: #5B5E67; font-size: 11px; }
     .platform-slide .platform-cards h3 { color: #fff; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.15; margin: 7px 0; }
     .platform-slide .platform-cards p { color: #e5f1fa; font-size: clamp(16px, 1.35vw, 18px); line-height: 1.3; margin: 0; }
     .platform-slide .platform-proof { grid-row: 4; margin: 0; color: #fff; font-size: clamp(17px, 1.7vw, 23px); font-weight: 650; text-align: center; }
-    .platform-slide .platform-proof strong { color: #68e4ff; font-weight: 900; }
+    .platform-slide .platform-proof strong { color: #5B5E67; font-weight: 900; }
     body.view-audience .platform-slide .platform-content { padding-top: 74px; }
     @media (max-width: 640px) {
       .platform-slide .platform-content { height: auto; padding: 112px 18px 24px; gap: 16px; }
@@ -932,7 +932,7 @@
     .arch-node p { margin: 8px 0 0; color: var(--muted); line-height: 1.45; }
     .arch-arrow { color: var(--accent); font-size: 30px; font-weight: 900; text-align: center; }
 
-    .cascade-slide { --cascade-audio: #14c9ee; --cascade-text: #a982ff; gap: 11px; }
+    .cascade-slide { --cascade-audio: #00C2FF; --cascade-text: #a982ff; gap: 11px; }
     .cascade-slide h2 { max-width: 1050px; font-size: clamp(32px, 3.7vw, 52px); line-height: .98; }
     .cascade-slide > .lede { max-width: 1120px; font-size: clamp(16px, 1.45vw, 20px); line-height: 1.35; }
     .cascade-shell {
@@ -943,7 +943,7 @@
       background:
         radial-gradient(circle at 12% 10%, rgba(20, 201, 238, .15), transparent 32%),
         radial-gradient(circle at 82% 100%, rgba(169, 130, 255, .14), transparent 34%),
-        linear-gradient(145deg, #061725, #030a12);
+        linear-gradient(145deg, #17181C, #17181C);
       box-shadow: var(--shadow-float);
       color: #f7fbff;
     }
@@ -1084,7 +1084,7 @@
       border-radius: 13px;
       background:
         radial-gradient(ellipse at center, rgba(0, 194, 255, .13), transparent 58%),
-        linear-gradient(135deg, #061523, #03080f);
+        linear-gradient(135deg, #17181C, #17181C);
       box-shadow: var(--shadow);
     }
     .connection-graphic canvas { display: block; width: 100%; height: 100%; }
@@ -1122,8 +1122,8 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #20d5f3;
-      box-shadow: 0 0 12px #20d5f3;
+      background: #00C2FF;
+      box-shadow: 0 0 12px #00C2FF;
     }
     .connection-annotation.agent::before { background: #b06bff; box-shadow: 0 0 12px #b06bff; }
     .connection-annotation.route-active { opacity: 1; border-color: rgba(255, 255, 255, .35); box-shadow: 0 0 18px rgba(255, 255, 255, .08); }
@@ -1155,8 +1155,8 @@
       width: 19px;
       height: 19px;
       border-radius: 50%;
-      background: #20d5f3;
-      color: #02111f;
+      background: #00C2FF;
+      color: #17181C;
       font-size: 9px;
       font-weight: 950;
     }
@@ -1549,17 +1549,17 @@
     .code-panel { padding: 24px; overflow: auto; background: var(--code-bg); color: var(--code-ink); }
     .code-panel pre { font-family: ui-monospace, monospace; font-size: clamp(12px, 1.15vw, 16px); line-height: 1.65; white-space: pre-wrap; }
     .agent-code-line { display: block; position: relative; min-height: 1.65em; margin-inline: -10px; padding: 0 10px 0 48px; border-left: 2px solid transparent; }
-    .agent-code-line::before { content: attr(data-line); position: absolute; left: 11px; width: 24px; color: #597181; font-size: .76em; text-align: right; }
+    .agent-code-line::before { content: attr(data-line); position: absolute; left: 11px; width: 24px; color: #5B5E67; font-size: .76em; text-align: right; }
     .agent-code-line.highlighted { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent); color: #f2fbff; }
     .agent-code-line.highlighted::before { color: var(--accent); }
-    .code-comment { color: #7e9aab; font-style: italic; }
+    .code-comment { color: #5B5E67; font-style: italic; }
     .code-keyword { color: #c99cff; }
     .code-type { color: #ffd479; }
-    .code-fn { color: #82b8ff; }
-    .code-key { color: #7fd6ff; }
+    .code-fn { color: #5B5E67; }
+    .code-key { color: #5B5E67; }
     .code-string { color: #a9e6be; }
     .code-number { color: #ff9e7a; }
-    .code-punct { color: #8ea3b2; }
+    .code-punct { color: #5B5E67; }
     .agent-code-line.highlighted .code-punct { color: #b6c7d3; }
 
     .prompt-layout { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: stretch; }
@@ -2180,7 +2180,7 @@
     .meta-chip.recipe-link { border-color: var(--accent); color: var(--accent); font-weight: 800; }
     .lede-inline { margin-left: auto; align-self: center; color: var(--muted); font-size: 14px; }
     .recipes-output a { color: inherit; text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent); }
-    .front-highlight { background: linear-gradient(90deg, #17c8ef, #b171ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .front-highlight { background: linear-gradient(90deg, #00C2FF, #b171ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .code-path-card.mllm-path, .code-compare-panel.mllm-path { --path-color: #8d62e8; --path-soft: rgba(141, 98, 232, .12); }
     .architecture-card { display: flex; flex-direction: column; }
     .architecture-card .meta-row { margin-top: 12px; }
@@ -2209,22 +2209,22 @@
     .front-slide .front-shade { display: none; }
     body.view-host.front-slide-active .front-content,
     body.view-audience .front-content { padding: 40px 0; }
-    .front-slide .front-content { width: calc(100% - 80px); max-width: 1440px; min-height: 100%; height: auto; grid-template-columns: minmax(0, 1fr) minmax(280px, 32%); align-items: center; align-content: center; gap: 48px; color: #10263b; }
+    .front-slide .front-content { width: calc(100% - 80px); max-width: 1440px; min-height: 100%; height: auto; grid-template-columns: minmax(0, 1fr) minmax(280px, 32%); align-items: center; align-content: center; gap: 48px; color: #17181C; }
     .welcome-main { min-width: 0; }
     .front-slide .front-brand { --brand-x: 15px; padding: 0; background: transparent; box-shadow: none; border-radius: 0; margin-bottom: 38px; gap: 14px; }
-    .front-slide .front-kicker { color: #416477; font-size: 14px; letter-spacing: .15em; margin: 0 0 18px; }
-    .front-slide .front-city { color: #10263b; font-size: clamp(48px, 5.7vw, 86px); line-height: 1.05; letter-spacing: -.055em; text-shadow: none; font-weight: 800; }
-    .front-slide .front-highlight { background: none; color: #087da6; }
-    .welcome-description { font-size: clamp(20px, 2vw, 28px); line-height: 1.4; color: #526679; margin: 26px 0; }
+    .front-slide .front-kicker { color: #5B5E67; font-size: 14px; letter-spacing: .15em; margin: 0 0 18px; }
+    .front-slide .front-city { color: #17181C; font-size: clamp(48px, 5.7vw, 86px); line-height: 1.05; letter-spacing: -.055em; text-shadow: none; font-weight: 800; }
+    .front-slide .front-highlight { background: none; color: #006B8F; }
+    .welcome-description { font-size: clamp(20px, 2vw, 28px); line-height: 1.4; color: #5B5E67; margin: 26px 0; }
     .welcome-tracks { display: flex; gap: 10px; }
-    .welcome-tracks span { border: 1px solid #c6d5df; border-radius: 6px; padding: 7px 13px; color: #345267; font-size: 15px; font-weight: 650; }
-    .welcome-arrival { width: 100%; padding: 26px; background: #102b40; color: #fff; border-radius: 20px; }
-    .welcome-step { margin: 0 0 16px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: #a8d6e4; }
+    .welcome-tracks span { border: 1px solid #c6d5df; border-radius: 6px; padding: 7px 13px; color: #5B5E67; font-size: 15px; font-weight: 650; }
+    .welcome-arrival { width: 100%; padding: 26px; background: #17181C; color: #fff; border-radius: 20px; }
+    .welcome-step { margin: 0 0 16px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: #5B5E67; }
     .welcome-join { display: flex; align-items: center; flex-direction: column; gap: 16px; text-decoration: none; color: #fff; }
     .welcome-qr { width: min(100%, 240px); height: auto; aspect-ratio: 1; display: block; border-radius: 8px; background: #fff; }
     .welcome-join span { font: 750 clamp(21px, 2.1vw, 30px)/1.2 ui-monospace, monospace; white-space: nowrap; }
     .welcome-hint { margin: 14px 0 0; font-size: 14px; line-height: 1.4; color: #c2d4df; text-align: center; }
-    .welcome-wifi { border-top: 1px solid #406075; margin-top: 22px; padding-top: 20px; }
+    .welcome-wifi { border-top: 1px solid #5B5E67; margin-top: 22px; padding-top: 20px; }
     .welcome-wifi[hidden] { display: none; }
     .welcome-wifi > div { display: grid; gap: 3px; margin-top: 10px; }
     .welcome-wifi div span { color: #abc3d3; font-size: 12px; }
@@ -2251,13 +2251,13 @@
     }
 
     /* One shared access strip, separated from the slide content. */
-    .presenter-access { position: fixed; z-index: 25; bottom: 42px; left: 0; right: 0; height: 104px; padding: 8px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #f3f6fa; color: #102b40; border-top: 1px solid #d1dce5; }
+    .presenter-access { position: fixed; z-index: 25; bottom: 42px; left: 0; right: 0; height: 104px; padding: 8px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #f3f6fa; color: #17181C; border-top: 1px solid #d1dce5; }
     .access-wifi { display: flex; align-items: center; gap: 36px; min-width: 0; }
     .access-wifi[hidden] { display: none; }
     .access-wifi > div { display: grid; gap: 7px; min-width: 0; }
-    .access-wifi span, .access-join small { font-size: 10px; letter-spacing: .12em; font-weight: 750; color: #587184; }
+    .access-wifi span, .access-join small { font-size: 10px; letter-spacing: .12em; font-weight: 750; color: #5B5E67; }
     .access-wifi strong { font-size: clamp(17px, 1.9vw, 24px); line-height: 1.1; overflow-wrap: anywhere; }
-    .access-join { display: flex; align-items: center; gap: 22px; color: #102b40; text-decoration: none; margin-left: auto; flex: none; }
+    .access-join { display: flex; align-items: center; gap: 22px; color: #17181C; text-decoration: none; margin-left: auto; flex: none; }
     .access-join > span { display: grid; gap: 7px; }
     .access-join strong { font: 750 clamp(18px, 2vw, 26px)/1.1 ui-monospace, monospace; }
     .access-join img { display: block; width: 84px; height: 84px; background: #fff; border-radius: 4px; }
@@ -2307,7 +2307,7 @@
     .presenter-access { height: 72px; padding: 5px 28px; gap: 20px; background: #fff; border-top-color: #dde4ea; }
     .access-wifi { gap: 28px; }
     .access-wifi > div, .access-join > span { gap: 4px; }
-    .access-wifi span, .access-join small { font-size: 9px; letter-spacing: .06em; font-weight: 650; color: #607386; }
+    .access-wifi span, .access-join small { font-size: 9px; letter-spacing: .06em; font-weight: 650; color: #5B5E67; }
     .access-wifi strong { font-size: 17px; font-weight: 650; }
     .access-join { gap: 14px; }
     .access-join strong { font-size: 20px; font-weight: 650; }
@@ -2328,10 +2328,11 @@
       body.view-host .slide, body.view-host.front-slide-active .slide { bottom: 138px; }
     }
   </style>
+  <link rel="stylesheet" href="/workshop-design.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
+    <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"><span class="partner-separator" aria-hidden="true">×</span><img class="partner-deepmind" src="assets/google-deepmind-lockup.png" alt="Google DeepMind"></div>
 
   </header>
 
@@ -2392,10 +2393,10 @@
         <li class="agenda-item"><span class="agenda-step">01</span><div><strong>About Agora</strong><p>The realtime platform connecting people, devices, and AI.</p></div><span class="timing-fragment">0:08 · 2 min</span></li>
         <li class="agenda-item"><span class="agenda-step">02</span><div><strong>Voice &amp; Conversational AI architectures</strong><p>The cascaded pipeline, the native multimodal pipeline, and both agents side by side in code.</p></div><span class="timing-fragment">0:10 · 10 min</span></li>
         <li class="agenda-item"><span class="agenda-step">03</span><div><strong>Using Gemini with Agora Conversational AI</strong><p>Find a Gemini recipe, sign in, initialize, add your Google key, and run it locally.</p></div><span class="timing-fragment">0:20 · 35 min</span></li>
-        <li class="agenda-item"><span class="agenda-step">04</span><div><strong>Live demos</strong><p>Test your local agent, then customize it with Agora Skills.</p></div><span class="timing-fragment">0:55 · 25 min</span></li>
+        <li class="agenda-item"><span class="agenda-step">04</span><div><strong>Live demos</strong><p>Add Gemini Live with Skills, then test both paths in one app.</p></div><span class="timing-fragment">0:55 · 25 min</span></li>
       </ol>
       <div class="speaker-notes">
-        <p>Rows reveal on their own. Read the five headers, not the descriptions. Keep it under thirty seconds.</p>
+        <p>Rows reveal on their own. Read the four headers, not the descriptions. Keep it under thirty seconds.</p>
         <p>Press T to see the clock for each block. Pause at each checkpoint so attendees can catch up. Questions are welcome throughout.</p>
       </div>
     </section>
@@ -2529,38 +2530,34 @@
       </div>
       <div class="speaker-notes">
         <p>These are condensed configuration excerpts; the linked recipe includes imports, credentials, helpers, and error handling. The two loops you just saw, in code. Left: three stages chained with <strong>withStt / withLlm / withTts</strong>. Right: one <strong>withMllm(GeminiLive)</strong> call carries the prompt, voice, transcription flags, and server VAD.</p>
-        <p>Everything around the builder is identical: client, session, start, stop. That is the point of the SDK. Next slide: pick one and run it.</p>
+        <p>Everything around the builder is identical: client, session, start, stop. That is the point of the SDK. Next we’ll walk through both architectures, starting with the cascade.</p>
       </div>
     </section>
 
     <section class="slide compact" data-slide-id="two-architectures" data-title="Two architectures" data-section="How Agora works" data-cue="0:18">
       <p class="eyebrow">Two ways to put Gemini in the loop</p>
-      <h2>Cascaded or native. <span class="accent">Same SDK, same session.</span></h2>
+      <h2>Cascaded and native. <span class="accent">We’ll build both.</span></h2>
       <div class="code-paths-overview">
-        <article class="code-path-card architecture-card" data-architecture-card="cascaded">
+        <article class="code-path-card architecture-card">
           <span class="code-path-label">Path A · Cascaded</span>
           <h3>Gemini ASR → Gemini 3.6 Flash → TTS</h3>
           <p>Each stage is a swappable vendor. You get transcripts, per-stage latency, tool calling, and full control of every model choice.</p>
           <div class="meta-row"><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-nextjs" target="_blank" rel="noreferrer">gemini-agora-voice-agents-nextjs</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-python" target="_blank" rel="noreferrer">…-python</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/gemini-agora-voice-agents-go" target="_blank" rel="noreferrer">…-go</a></div>
-          <button class="secondary-button architecture-select" type="button" data-architecture-choice="cascaded">Use this path</button>
         </article>
-        <article class="code-path-card mllm-path architecture-card" data-architecture-card="mllm">
+        <article class="code-path-card mllm-path architecture-card">
           <span class="code-path-label">Path B · Native multimodal</span>
           <h3>Gemini 3.8 Live end to end</h3>
           <p>One <span class="mono">GeminiLive</span> provider handles speech in and speech out. No separate ASR or TTS stage; optional extended thinking.</p>
           <div class="meta-row"><a class="meta-chip mono" href="https://recipes.agora.io/recipes/agora-gemini-mllm-nextjs" target="_blank" rel="noreferrer">agora-gemini-mllm-nextjs</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/agora-gemini-mllm-python" target="_blank" rel="noreferrer">…-python</a><a class="meta-chip mono" href="https://recipes.agora.io/recipes/agora-gemini-mllm-go" target="_blank" rel="noreferrer">…-go</a></div>
-          <button class="secondary-button architecture-select" type="button" data-architecture-choice="mllm">Use this path</button>
         </article>
       </div>
       <div class="meta-row">
         <a class="meta-chip recipe-link" href="https://recipes.agora.io/?q=gemini#recipes" target="_blank" rel="noreferrer">Browse Gemini recipes ↗</a>
-        <span class="meta-chip mono">agora recipes list</span>
         <span class="meta-chip mono" title="Every recipe ships a ready-made prompt for coding agents">agora recipes show &lt;slug&gt; --json → primaryPrompt</span>
-        <span class="lede-inline">Selected: <strong class="accent" data-recipe-field="architectureTitle"></strong></span>
       </div>
       <div class="speaker-notes">
-        <p>Both architectures are published as official recipes for TypeScript, Python, and Go; every chip links to its recipes.agora.io page. Run <strong>agora recipes list</strong> in the terminal here if you want to show the catalog live. One sentence for the AI-agent crowd: <strong>agora recipes show &lt;slug&gt; --json</strong> exposes a primaryPrompt that points Claude Code, Cursor, or Gemini CLI at the same RECIPE.md.</p>
-        <p>Click a card to select the architecture for the CLI slides. Start with <strong>cascaded</strong> so the pipeline slide you just showed maps directly to the code.</p>
+        <p>Both architectures are published as official recipes for TypeScript, Python, and Go; every chip links to its recipes.agora.io page. Open the Gemini catalog and the linked recipe’s implementation guide before initializing. One sentence for the AI-agent crowd: <strong>agora recipes show &lt;slug&gt; --json</strong> exposes a primaryPrompt that points Claude Code, Cursor, or Gemini CLI at the same RECIPE.md.</p>
+        <p>Initialize the cascaded recipe once, then use the matching native recipe to add Gemini Live to the same app. Compare both architectures through one UI.</p>
       </div>
     </section>
 
@@ -2586,22 +2583,10 @@
       </div>
     </section>
 
-    <section class="slide" data-slide-id="discover-recipes" data-title="Find your Gemini recipe" data-section="Agora Recipes" data-cue="0:30" data-technical="true">
-      <p class="eyebrow">Browse · inspect · initialize</p><h2>Start with the <span class="accent">Gemini recipe catalog.</span></h2>
-      <p class="lede"><a href="https://recipes.agora.io/?q=gemini#recipes" target="_blank" rel="noreferrer">Open recipes.agora.io → Gemini ↗</a>. Pick cascaded or native, then your language. Read the prerequisites and source before you run it.</p>
-      <div class="terminal"><div class="terminal-bar"><span class="terminal-title">CLI recipe discovery</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="recipeDiscoveryCommand">Copy</button><pre id="recipeDiscoveryCommand">agora recipes list --type ai
-agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
-      <p class="lede">The example uses TypeScript. Substitute the exact slug from your selected recipe; the next slide generates the matching init command.</p>
-      <div class="speaker-notes"><p><strong>Show:</strong> the filtered catalog, then the TypeScript recipe’s Implementation guide, Source on GitHub, and Prompt &amp; CLI panel. Show how Copy Recipe prompt hands the source guide to a coding assistant. <strong>Say:</strong> list and show are read-only; init creates the project. <strong>Checkpoint:</strong> each attendee can name their architecture and recipe slug. <strong>Return:</strong> Initialize the recipe.</p></div>
-    </section>
-
     <section class="slide" data-slide-id="init-recipe" data-title="Initialize the recipe" data-section="Agora CLI" data-cue="0:35" data-technical="true">
-      <p class="eyebrow">Selected · <span data-recipe-field="architectureLabel"></span> · <span data-track-field="label"></span></p>
-      <h2>Ask the CLI for the <span class="accent">official recipe.</span></h2>
-      <div class="command-steps architecture-toggle" role="tablist" aria-label="Architecture">
-        <button class="choice-button" type="button" data-architecture-choice="cascaded">A · Cascaded · Gemini ASR + 3.6 Flash</button>
-        <button class="choice-button" type="button" data-architecture-choice="mllm">B · Native · Gemini 3.8 Live</button>
-      </div>
+      <p class="eyebrow">Baseline · Cascaded · <span data-track-field="label"></span></p>
+      <h2>Start one app from the <span class="accent">cascaded recipe.</span></h2>
+      <p class="lede">Get the cascaded path working first. Then add Gemini Live to this same app.</p>
       <div class="terminal">
         <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-title">Terminal</span></div>
         <div class="terminal-body"><button class="copy-button" type="button" data-copy-target="initCommand">Copy</button><pre id="initCommand"></pre></div>
@@ -2609,14 +2594,14 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       <p class="lede" data-recipe-field="note"></p>
       <div class="meta-row"><a class="meta-chip recipe-link" data-recipe-link="recipe" href="#" target="_blank" rel="noreferrer">View recipe ↗</a><a class="github-button" data-recipe-link="github" href="#" target="_blank" rel="noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a></div>
       <div class="speaker-notes">
-        <p>One command clones the recipe, binds it to your Agora project, and writes the Agora credentials. The presenter uses the <strong>H</strong> panel; attendees use their own language selector. The toggle above switches the architecture.</p>
+        <p>One command clones the recipe, binds it to your Agora project, and writes the Agora credentials. The presenter uses the <strong>H</strong> panel; attendees use their own language selector. Everyone starts from the cascaded recipe; the later prompt adds native voice to the same project.</p>
         <p>Run this live once for the cascaded path. Wait for attendees to finish initialization before moving to setup. Keep a prepared checkout ready as a fallback.</p>
       </div>
     </section>
 
     <section class="slide" data-slide-id="run-recipe" data-title="Run the recipe" data-section="Agora CLI" data-cue="0:40" data-technical="true">
-      <p class="eyebrow">Selected · <span data-recipe-field="architectureLabel"></span> · <span data-track-field="label"></span></p>
-      <h2>Install. Add one key. <span class="accent">Run.</span></h2>
+      <p class="eyebrow">Baseline · Cascaded · <span data-track-field="label"></span></p>
+      <h2>Run the baseline. <span class="accent">Keep it working.</span></h2>
       <div class="command-steps quickstart-steps" role="tablist" aria-label="Recipe commands">
         <button class="choice-button active" type="button" data-command-scope="quickstart" data-command-step="enter">1 · Enter project</button>
         <button class="choice-button" type="button" data-command-scope="quickstart" data-command-step="install">2 · Set up</button>
@@ -2630,11 +2615,21 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       <div class="meta-row"><span class="status-chip">Tooling · <strong data-package-field="label"></strong></span><span class="status-chip success">Agora credentials already written by init</span><span class="status-chip">One Google key · every Gemini stage · server-side only</span><span class="status-chip">Gemini TTS preview · same Google key</span></div>
       <div class="speaker-notes">
         <p>Only one command shows at a time. The init step already wrote the Agora App ID and Certificate into the recipe’s env file, so the Google API key is the only manual edit.</p>
-        <p>Keep environment files off the projector. Check that each attendee has their own Google key and Agora project.</p>
+        <p>Checkpoint: hear a cascaded reply, then stop the conversation. Save a Git commit of this working baseline before adding Gemini Live. Continue in this same project folder. Keep environment files off the projector.</p>
       </div>
     </section>
 
-    <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="0:55">
+    <section class="slide compact" data-slide-id="customize-recipe" data-title="Add Gemini Live to the same app" data-section="Build both architectures" data-cue="0:55" data-technical="true">
+      <p class="eyebrow">One project · <span data-track-field="label"></span></p>
+      <h2>Add Gemini Live. <span class="accent">Keep the same app.</span></h2>
+      <p class="lede">Save your working baseline, then open this project in your coding assistant. Install Agora Skills and copy the prompt below.</p>
+      <div class="terminal"><div class="terminal-bar"><span class="terminal-title">Inside gemini-voice-agent</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="skillsCommand">Copy</button><pre id="skillsCommand">npx skills add agoraio/skills</pre></div></div>
+      <div class="prompt-card"><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button><pre id="customizePrompt"></pre></div>
+      <div class="meta-row"><a class="meta-chip" data-recipe-link="cascadedRecipe" href="#" target="_blank" rel="noreferrer">Cascaded source ↗</a><a class="meta-chip" data-recipe-link="mllmRecipe" href="#" target="_blank" rel="noreferrer">Gemini Live source ↗</a></div>
+      <div class="speaker-notes"><p><strong>Show:</strong> commit the working cascaded baseline, install Skills in this project, and give the assistant the language-specific prompt. <strong>Say:</strong> use the native recipe as a reference; add its GeminiLive provider to our existing app instead of creating another app. Preserve the voice UI, channel, transcript, credentials, and start/stop lifecycle.</p><p><strong>Checkpoint:</strong> one app offers both architectures. Stop the active conversation before switching, retain the matching server session for cleanup, and validate the requested architecture server-side. Keep Google credentials server-side. <strong>Return:</strong> compare with the combined live demo, then test both paths locally.</p></div>
+    </section>
+
+    <section class="slide demo-slide" data-slide-id="live-demo" data-title="Live demo" data-section="Live demo" data-cue="1:10">
       <div class="demo-head">
         <div>
           <p class="eyebrow">Live demo</p>
@@ -2663,20 +2658,12 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       </div>
     </section>
 
-    <section class="slide" data-slide-id="customize-recipe" data-title="Make the recipe yours" data-section="Agora Skills" data-cue="1:05" data-technical="true">
-      <p class="eyebrow">Keep a working reference first</p><h2>One use case. <span class="accent">One useful change.</span></h2>
-      <p class="lede">After your untouched recipe works, open a separate project copy in your coding assistant. Install Agora Skills in that workspace, then describe the conversation you want to build.</p>
-      <div class="terminal"><div class="terminal-bar"><span class="terminal-title">Project terminal</span></div><div class="terminal-body"><button class="copy-button" type="button" data-copy-target="skillsCommand">Copy</button><pre id="skillsCommand">npx skills add agoraio/skills</pre></div></div>
-      <div class="prompt-card"><button class="copy-button" type="button" data-copy-target="customizePrompt">Copy prompt</button><pre id="customizePrompt">Use Agora Skills and the Gemini recipes at https://recipes.agora.io/?q=gemini#recipes to adapt this project for [your use case]. Keep this project's language and Gemini architecture. Help me run and test one real voice conversation.</pre></div>
-      <div class="speaker-notes"><p><strong>Show:</strong> the project-scoped Skills install and your coding assistant. <strong>Checkpoint:</strong> attendees replace the use case and name a conversation to test. Refresh the assistant session if needed. Keep the untouched recipe as a reference. <strong>Return:</strong> Test your agent.</p></div>
-    </section>
-
     <section class="slide" data-slide-id="test-your-agent" data-title="Test your agent" data-section="Build clinic" data-cue="1:15">
-      <p class="eyebrow">Local success is the finish line</p><h2>Have the conversation <span class="accent">you designed.</span></h2>
+      <p class="eyebrow">Local success is the finish line</p><h2>Test both paths in <span class="accent">your one app.</span></h2>
       <div class="grid">
-        <article class="card"><span class="card-number">01 · Speak</span><h3>Run your local app</h3><p>Allow the microphone, start a conversation, and ask one question from your use case. Use headphones.</p></article>
-        <article class="card"><span class="card-number">02 · Observe</span><h3>Check the actual result</h3><p>Listen to the response and inspect the transcript. Try an interruption and one unexpected question. Identify simulated actions clearly.</p></article>
-        <article class="card"><span class="card-number">03 · Improve</span><h3>Fix one thing</h3><p>Show a helper your blocker or refine the instructions. Stop the conversation when finished. Tunnels and cloud deployment are optional.</p></article>
+        <article class="card"><span class="card-number">01 · Speak</span><h3>Run your local app</h3><p>Start with Cascaded, ask a question, and stop the conversation. Switch to Gemini Live in the same app and ask the same question. Use headphones.</p></article>
+        <article class="card"><span class="card-number">02 · Observe</span><h3>Check the actual result</h3><p>Check both replies and transcripts. Try an interruption on each path. Verify switching stops the old agent and starting again creates just one session.</p></article>
+        <article class="card"><span class="card-number">03 · Improve</span><h3>Fix one thing</h3><p>Fix any regression in the cascaded baseline. Once both paths work, adapt one use case. Stop the conversation when finished. Deployment is optional.</p></article>
       </div>
       <div class="speaker-notes"><p>Split the room into two testing waves if needed. Ask for one working conversation and one improvement. Diagnose account and runtime problems before changing code. Protect time for a local success; skip optional deployment.</p></div>
     </section>
@@ -2921,6 +2908,15 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
 
       function initCommandFor(architecture, track) {
         return "agora init " + ARCHITECTURES[architecture].dir + " --recipe " + recipeFor(architecture, track).slug;
+      }
+
+      function combinedAppPromptFor(track) {
+        var baseline = recipeFor("cascaded", track);
+        var native = recipeFor("mllm", track);
+        return "Use Agora Skills to extend this working " + TRACKS[track].label + " app with both voice architectures.\n"
+          + "Cascaded reference: " + recipeUrl(baseline.slug) + "\n"
+          + "Native reference: " + recipeUrl(native.slug) + "\n"
+          + "Keep the cascaded baseline working. Add GeminiLive from the native recipe to this same app, UI, Agora channel, transcript, and start/stop lifecycle; do not create a second app. Add a Cascaded / Gemini Live switch before connecting. Stop the active session before switching; retain the matching server session for cleanup. Validate architecture server-side and keep Google keys server-side. Run the app and verify a real conversation, interruption, stop, and restart in BOTH modes.";
       }
 
       function packageManagerForTrack(track) {
@@ -3186,7 +3182,7 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       function renderRecipe() {
         state.packageManager = packageManagerForTrack(state.track);
         var architecture = ARCHITECTURES[state.architecture];
-        var selected = recipe();
+        var selected = recipeFor("cascaded", state.track);
         var cascaded = recipeFor("cascaded", state.track);
         var mllm = recipeFor("mllm", state.track);
         setText('[data-track-field="label"]', TRACKS[state.track].label);
@@ -3207,8 +3203,8 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         Object.keys(links).forEach(function (key) {
           document.querySelectorAll('[data-recipe-link="' + key + '"]').forEach(function (node) { node.href = links[key]; });
         });
-        document.getElementById("initCommand").textContent = initCommandFor(state.architecture, state.track);
-        document.getElementById("recipeDiscoveryCommand").textContent = "agora recipes list --type ai\nagora recipes show " + selected.slug;
+        document.getElementById("initCommand").textContent = initCommandFor("cascaded", state.track);
+        document.getElementById("customizePrompt").textContent = combinedAppPromptFor(state.track);
         renderAgentCode("cascadedCode", cascaded, TRACKS[state.track].language);
         renderAgentCode("mllmCode", mllm, TRACKS[state.track].language);
         renderDemo();
@@ -3227,8 +3223,8 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
       var QUICKSTART_STEPS = ["enter", "install", "key", "run"];
 
       function commandFor(step) {
-        var entry = recipe();
-        if (step === "enter") return "cd " + ARCHITECTURES[state.architecture].dir;
+        var entry = recipeFor("cascaded", state.track);
+        if (step === "enter") return "cd " + ARCHITECTURES.cascaded.dir;
         if (step === "install") return entry.setup;
         if (step === "key") return "# add to " + entry.keyFile + "\n" + entry.keyVar + "=your_google_api_key";
         return entry.run;

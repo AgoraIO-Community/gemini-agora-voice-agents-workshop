@@ -9,8 +9,8 @@ describe("in-person deck structure", () => {
     expect(slideIds).toEqual([
       "welcome", "run-of-show", "room-setup",
       "what-is-agora", "conversational-ai-pipeline", "mllm-pipeline", "compare-code", "two-architectures",
-      "install-cli", "discover-recipes", "init-recipe", "run-recipe",
-      "live-demo", "customize-recipe", "test-your-agent",
+      "install-cli", "init-recipe", "run-recipe",
+      "customize-recipe", "live-demo", "test-your-agent",
       "close"
     ]);
   });
@@ -82,7 +82,7 @@ describe("in-person deck structure", () => {
   });
 
   it("embeds the demo for the host only and gives the audience a self-service link", () => {
-    const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="customize-recipe"'));
+    const slide = html.slice(html.indexOf('data-slide-id="live-demo"'), html.indexOf('data-slide-id="test-your-agent"'));
     expect(slide).toMatch(/<div class="demo-embed" data-host-only>\s*<iframe id="demoFrame"[^>]*allow="microphone; autoplay"/);
     expect(slide).not.toMatch(/<iframe[^>]*\ssrc=/);
     expect(slide).toMatch(/<div class="demo-invite" data-audience-only>/);
@@ -108,7 +108,7 @@ describe("in-person deck structure", () => {
 
     it("defines a colour for every token class the tokenizer emits", () => {
       for (const cls of ["comment", "string", "number", "keyword", "type", "fn", "key", "punct"]) {
-        expect(html).toMatch(new RegExp(`\\.code-${cls} \\{ color: #[0-9a-f]{6}`));
+        expect(html).toMatch(new RegExp(`\\.code-${cls} \\{ color: #[0-9a-fA-F]{6}`));
       }
     });
 
