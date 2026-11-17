@@ -22,7 +22,7 @@ This is a 90-minute hands-on workshop. Adjust the relative times to the event; n
 - Confirm Node.js 22+ and pnpm for TypeScript, Python 3.10+ and Bun for Python, or Go 1.23+, pnpm, and Make for Go. Each recipe README is the source of truth.
 - Have a short fallback recording for both architectures. Check projector audio and headphones.
 - The presenter displays `bit.ly/4fDSxTQ`; the QR encodes the full Gemini workshop URL directly. Configure `joinUrl` and `qrUrl` in `workshop-join.json` (or `WORKSHOP_JOIN_URL` / `WORKSHOP_QR_URL`), rebuild, and scan the generated QR. The join card appears on presenter slides only, with a larger welcome treatment. Rehearsals with `?channel=...` use that same channel in the join QR.
-- Assign a helper to account/CLI setup and another to code/Skills questions when possible. Press **H**, expand **Venue Wi-Fi**, and enter the network name and password for the projected opening slide. Both start empty. The network is saved on this device; the password is saved only in this tab’s session. Neither is broadcast or archived. Clear the fields or use **Reset defaults** after the event.
+- Assign a helper to account/CLI setup and another to code/Skills questions when possible. Press **H**, expand **Venue Wi-Fi**, and enter the network name and password for the projected presenter footer. Both start empty. The network is saved on this device; the password is saved only in this tab’s session. Neither is broadcast or archived. Clear the fields or use **Reset defaults** after the event.
 
 ## Host and audience controls
 
@@ -71,4 +71,4 @@ Pause audience sharing on the computer and advance a slide during rehearsal: pho
 
 ## Projector layout
 
-Use `/host` on the projector. The opening slide groups the join QR, Bitly link, and venue Wi-Fi; other presenter slides retain the compact join card. The audience view intentionally hides joining details. Slide 4 uses the video as the background with readable overlays. Rehearse at the projector’s native resolution (the layout is checked at 1024×768 and 1280×720). Questions and troubleshooting happen during the build-along; there is no separate build-together slide.
+Use `/host` on the projector. The presenter footer groups the join QR, Bitly link, and venue Wi-Fi; it remains visible on every presenter slide, with a larger QR and link on the welcome slide. The audience view intentionally hides joining details. Slide 4 uses the video as the background with readable overlays. Rehearse at the projector’s native resolution (the layout is checked at 1024×768 and 1280×720). Questions and troubleshooting happen during the build-along; there is no separate build-together slide.

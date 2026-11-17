@@ -74,7 +74,7 @@ Viewers use `/`, or `/?channel=...` when the host supplies an override. Before t
 
 ## Venue Wi-Fi
 
-In **H → Venue Wi-Fi**, enter the venue network and password to show them on the host’s opening slide. Empty fields hide the details. The network name persists locally; the password persists only for the current tab’s session. These details are excluded from audience snapshots, saved workshop copies, and phone notes. **Reset defaults** clears both.
+In **H → Venue Wi-Fi**, enter the venue network and password to show them on the host’s presenter footer. Empty fields hide the details. The network name persists locally; the password persists only for the current tab’s session. These details are excluded from audience snapshots, saved workshop copies, and phone notes. **Reset defaults** clears both.
 
 ## Phone presenter notes
 
@@ -104,7 +104,7 @@ The selected `Testing` project currently reports token enforcement as disabled i
 
 ## Workshop join link and QR
 
-The presenter header shows `bit.ly/4fDSxTQ` and a QR code on every slide. Neither appears in the audience view. `workshop-join.json` configures `joinUrl` for the clickable short link and `qrUrl` for the full audience URL encoded in the QR (`https://gemini-agora-voice-agents-workshop.vercel.app/`). Build-time overrides are `WORKSHOP_JOIN_URL` and `WORKSHOP_QR_URL`. Rebuild to generate `public/workshop-join-qr.svg` for printing or sharing. Rehearsal channel overrides use the direct audience URL with the matching channel for both destinations.
+The presenter footer shows `bit.ly/4fDSxTQ` and a QR code on every slide. Neither appears in the audience view. `workshop-join.json` configures `joinUrl` for the clickable short link and `qrUrl` for the full audience URL encoded in the QR (`https://gemini-agora-voice-agents-workshop.vercel.app/`). Build-time overrides are `WORKSHOP_JOIN_URL` and `WORKSHOP_QR_URL`. Rebuild to generate `public/workshop-join-qr.svg` for printing or sharing. Rehearsal channel overrides use the direct audience URL with the matching channel for both destinations.
 
 The run slide has no separate Agora env step: `agora init --recipe` writes the Agora credentials. When cloning manually, follow the selected recipe README’s environment setup instead. Add the Google key to `.env.local` for TypeScript or `server/.env.local` for Python/Go, and keep it server-side.
 

@@ -2249,12 +2249,65 @@
       .welcome-qr { width: 200px; }
       .welcome-join span { font-size: 25px; }
     }
+
+    /* One shared access strip, separated from the slide content. */
+    .presenter-access { position: fixed; z-index: 25; bottom: 42px; left: 0; right: 0; height: 104px; padding: 8px 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: #f3f6fa; color: #102b40; border-top: 1px solid #d1dce5; }
+    .access-wifi { display: flex; align-items: center; gap: 36px; min-width: 0; }
+    .access-wifi[hidden] { display: none; }
+    .access-wifi > div { display: grid; gap: 7px; min-width: 0; }
+    .access-wifi span, .access-join small { font-size: 10px; letter-spacing: .12em; font-weight: 750; color: #587184; }
+    .access-wifi strong { font-size: clamp(17px, 1.9vw, 24px); line-height: 1.1; overflow-wrap: anywhere; }
+    .access-join { display: flex; align-items: center; gap: 22px; color: #102b40; text-decoration: none; margin-left: auto; flex: none; }
+    .access-join > span { display: grid; gap: 7px; }
+    .access-join strong { font: 750 clamp(18px, 2vw, 26px)/1.1 ui-monospace, monospace; }
+    .access-join img { display: block; width: 84px; height: 84px; background: #fff; border-radius: 4px; }
+    body.view-host .slide { bottom: 146px; }
+    body.view-host .slide:not(.front-slide):not(.platform-slide) { padding-top: 74px !important; }
+    body.view-host .platform-slide .platform-content { padding-top: 74px; padding-bottom: 18px; gap: 14px; }
+    body.view-host .topbar { top: 20px; }
+    body.view-host .code-compare .code-panel { max-height: calc(100vh - 462px); }
+    .footer { box-shadow: none; border-top: 1px solid #d1dce5; }
+    @media (min-width: 761px) and (max-height: 800px) {
+      .welcome-qr { width: 200px; }
+      body.view-host.front-slide-active .front-content { padding: 24px 0; }
+      .front-slide .front-brand { margin-bottom: 24px; }
+      .welcome-description { margin: 22px 0; }
+    }
+    @media (max-width: 760px) {
+      .presenter-access { height: 136px; padding: 8px 14px; gap: 12px; }
+      .access-wifi { display: grid; gap: 8px; }
+      .access-wifi > div { gap: 3px; }
+      .access-wifi span, .access-join small { font-size: 8px; }
+      .access-wifi strong { font-size: 14px; }
+      .access-join { gap: 8px; flex-direction: column-reverse; }
+      .access-join > span { gap: 4px; }
+      .access-join strong { font-size: 14px; }
+      .access-join small { display: none; }
+      .access-join img { width: 76px; height: 76px; }
+      body.view-host .slide { bottom: 178px; }
+    }
+    @media print { .presenter-access { display: none !important; } }
+
+    /* The opening uses the same access footer at a larger scale, without duplicate QR cards. */
+    .front-slide .front-content { grid-template-columns: 1fr; }
+    .front-slide .front-city { max-width: 1100px; font-size: clamp(54px, 6.6vw, 94px); }
+    body.view-host.front-slide-active .presenter-access { height: 160px; padding-block: 10px; }
+    body.view-host.front-slide-active .access-join img { width: 140px; height: 140px; }
+    body.view-host.front-slide-active .access-join strong { font-size: clamp(24px, 2.8vw, 36px); }
+    body.view-host.front-slide-active .slide { bottom: 202px; }
+    @media (max-width: 760px) {
+      .front-slide .front-city { font-size: clamp(42px, 9vw, 60px); }
+      body.view-host.front-slide-active .presenter-access { height: 152px; }
+      body.view-host.front-slide-active .access-join img { width: 100px; height: 100px; }
+      body.view-host.front-slide-active .access-join strong { font-size: 16px; }
+      body.view-host.front-slide-active .slide { bottom: 194px; }
+    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><img class="brand-logo" src="assets/agora-logo-rgb-blue.svg" alt="Agora"></div>
-    <a class="join-pill" data-host-only data-workshop-join href="/" target="_blank" rel="noreferrer" title="Open the audience view to follow along"><img class="join-qr" data-workshop-qr alt="Scan to join the workshop" width="100" height="100"><span class="join-pill-copy"><span class="join-pill-label">Join the workshop</span><span class="join-pill-url" data-workshop-join-label>Open audience view</span></span></a>
+
   </header>
 
   <section id="audienceWaiting" class="audience-waiting" aria-live="polite" aria-label="Waiting for the workshop host">
@@ -2298,19 +2351,7 @@
           <p class="welcome-description">From your first conversation<br>to an agent of your own.</p>
           <div class="welcome-tracks"><span>TypeScript</span><span>Python</span><span>Go</span></div>
         </div>
-        <aside class="welcome-arrival" data-host-only aria-label="Join the workshop">
-          <p class="welcome-step">01 / Follow along</p>
-          <a class="welcome-join" data-workshop-join href="/" target="_blank" rel="noreferrer">
-            <img data-workshop-qr class="welcome-qr" alt="Scan to join the workshop" width="224" height="224">
-            <span data-workshop-join-label>bit.ly/4fDSxTQ</span>
-          </a>
-          <p class="welcome-hint">Scan with your phone or open on your laptop.</p>
-          <div id="frontWifiDetails" class="welcome-wifi" hidden>
-            <p class="welcome-step">02 / Connect to Wi-Fi</p>
-            <div><span>Network</span><strong id="frontWifiName"></strong></div>
-            <div><span>Password</span><strong id="frontWifiPassword"></strong></div>
-          </div>
-        </aside>
+
       </div>
       <div class="speaker-notes">
         <p>Open this slide as attendees arrive. Point out the join link and QR code; late arrivals can join from any slide.</p>
@@ -2634,6 +2675,16 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
   <button class="nav-zone prev" type="button" aria-label="Previous slide"></button>
   <button class="nav-zone next" type="button" aria-label="Next slide"></button>
 
+  <aside class="presenter-access" data-host-only aria-label="Workshop access">
+    <div id="frontWifiDetails" class="access-wifi" hidden>
+      <div><span>WI-FI NETWORK</span><strong id="frontWifiName"></strong></div>
+      <div><span>PASSWORD</span><strong id="frontWifiPassword"></strong></div>
+    </div>
+    <a class="access-join" data-workshop-join href="/" target="_blank" rel="noreferrer">
+      <span><small>FOLLOW THE WORKSHOP</small><strong data-workshop-join-label>bit.ly/4fDSxTQ</strong></span>
+      <img data-workshop-qr alt="Scan to join the workshop" width="84" height="84">
+    </a>
+  </aside>
   <footer class="footer">
     <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
     <span id="footerTitle" class="footer-title">Welcome</span>
@@ -2673,12 +2724,12 @@ agora recipes show gemini-agora-voice-agents-nextjs</pre></div></div>
         <div class="setting"><label for="trackSelect">Code track</label><select id="trackSelect"><option value="nextjs">TypeScript · default</option><option value="python">Python</option><option value="go">Go</option></select></div>
       </div>
       <details class="host-wifi-settings">
-        <summary>Venue Wi-Fi · Opening slide only</summary>
+        <summary>Venue Wi-Fi · Every presenter slide</summary>
         <div class="host-control-grid">
           <div class="setting"><label for="wifiNameInput">Wi-Fi name</label><input id="wifiNameInput" type="text" autocomplete="off" placeholder="Venue network"></div>
           <div class="setting"><label for="wifiPasswordInput">Wi-Fi password</label><input id="wifiPasswordInput" type="text" autocomplete="off" placeholder="Network password"></div>
         </div>
-        <p class="host-network-note">Projected on the opening slide. Network stays on this device; password stays in this tab. Neither is shared with audience browsers.</p>
+        <p class="host-network-note">Shown in the footer on every presenter slide. Network stays on this device; password stays in this tab. Neither is shared with audience browsers.</p>
       </details>
       <p class="host-network-note">Architecture and track drive the CLI, run, code-comparison, and demo slides. Architecture syncs to the audience; each participant chooses their own code language.</p>
     </div>
