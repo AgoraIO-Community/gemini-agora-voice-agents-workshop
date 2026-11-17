@@ -235,3 +235,7 @@ body.front-slide-active .topbar .brand { display: none; }
 .setup-languages div + div { border-top: 1px solid var(--line); padding-top: 14px; }
 .setup-languages dt { color: var(--ink); font-weight: 700; font-size: 21px; }
 .setup-languages dd { margin: 5px 0 0; color: var(--muted); font-size: 18px; line-height: 1.4; }
+
+[data-slide-id="room-setup"] .card { display: flex; flex-direction: column; }
+.setup-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 22px; }
+.setup-card-actions .meta-chip { margin: 0; }
